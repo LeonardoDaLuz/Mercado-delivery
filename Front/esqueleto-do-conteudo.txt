@@ -1,0 +1,165 @@
+Paginas
+    Inicial
+        Jumbotron/carrossel
+            Propagandas
+        Ofertas do dia carrossel
+        Ofertas da semana carrossel
+        Bloco Categorias
+        Footer
+            Lista
+                Institucional
+                SAC
+                Trabalhe conosco
+                Categorias
+                Ofertas do dia
+                Ofertas da semana
+            Redes sociais
+            Logotipo
+    Página do produto
+        Fotos
+        Nome
+        preço
+        Descrição
+        Adicionar
+        Like
+    Carrinho
+    Entrar
+    Cadastrar
+    Minha conta
+    Mudar senha
+    Endereços
+    Sair
+    Listar produtos aleatorios
+    Busca de produtos
+        ordenar por
+    Ofertas do dia
+    Ofertas da semana
+    Pagina de produtos por Categorias
+        Comprar na loja
+
+
+Ofertas do dia
+Categorias
+    Açougue           
+        Aves
+        Bovinos
+        Linguiça
+        Secas, Salgadas ou Defumadas
+        Suínos
+    Alimentos
+        Azeites e Molhos
+        Biscoitos e Salgadinhos
+        Cafés
+        Chocolate
+        Coberturas e Confeitos
+        Conservas e Enlatados
+        Creme de Leite e Nata
+        Doces e Geleias
+        Farinha, Farofas e Preparos
+        Fermentos
+        Importados
+        Integrais Naturais
+        Leites e Matinais
+        Massas e Sopas
+        Mercearia
+        Óleos
+        Orgânicos
+        Sobremesas e Bolos
+        Temperos, Sais e Condimentos
+        Torradas
+    bazar
+        Automotivos
+        Bicicletas
+        Brinquedos e utilidades infantis
+        Casa e Utilidades
+        Churrasco
+        Chuveiros e torneiras
+        Descartáveis
+        Esportes e lazer
+        Ferragens e Ferramentas
+        Floricultura e Jardinagem
+        Jarras e garrafas térmicas
+        Limpeza
+        Organização
+        Panelas e assadeiras
+        Pet Shop
+    Bebidas
+        Achocolatados e Instantâneos
+        Água de Coco
+        Águas
+        Cervejas
+        Chás
+        Destilados
+        Energéticos e Isotônicos
+        Refrigerantes
+        Sucos e Refrescos
+        Vinhos e Espumantes
+    congelados e pereciveis
+        Alimentos Congelados
+        Defumados e embutidos
+        Frios
+        Hambúrguer
+        Iogurtes e Bebidas Lácteas
+        Manteigas
+        Margarinas
+        Peixes
+        Pizzas
+        Queijos e Laticínios
+        Salgados
+        Salsichas
+        Sorvetes
+    Eletro
+        Climatizadores
+        Cuidados pessoais
+        Eletroportáteis para cozinha
+        Eletroportáteis para limpeza
+        Fogões
+        Fornos
+        Informática
+        Lavadoras e secadoras
+        Refrigeradores
+        Telefonia
+        TVs e acessórios
+    Frutas, verduras e legumes
+        Frutas
+        Ovos
+        Verduras e legumes
+    Padaria e confeitaria
+        Pães e Folhados
+        Panetones e Colombas
+        Rotisseria
+        Tortas e Bolos
+    Limpeza
+        Banheiro
+        Cozinha
+        Inseticidas e Repelentes
+        Lustra Móveis e Cia
+        Roupas
+    Perfumaria e higiene
+        Acessórios
+        Barba e Depilação
+        Cabelos
+        Corpo
+        Higiene Bucal
+        Higiene Infantil
+        Higiene Íntima
+        Papel Higiênico
+        Protetores Solares
+    Textil
+        Calçados
+        Cama, Mesa e Banho
+        Pijamas e roupa íntima
+        Roupas em Geral  
+Ofertas da semana
+Promoção ambev
+Ofertas para você
+Sabor da sorte
+Semana do consumidor
+Sorte doce
+Institucional
+    Nossa história
+    O Condor e seu fundador
+Fale conosco
+    SAC
+    Trabalhe conosco
+    Disque-denuncia
