@@ -1,0 +1,78 @@
+#side-bar {
+    background-color: rgba(0, 0, 0, 0);
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+#side-bar.show {
+    pointer-events: all;
+    background-color: rgba(0, 0, 0, 0.5);
+    animation: side-bar-fade-in 0.2s ease-out;
+}
+
+#side-bar.hide {
+    pointer-events: none;
+    background-color: rgba(0, 0, 0, 0);
+    animation: side-bar-fade-out 0.2s ease-out;
+}
+
+
+#side-bar>ul {
+    background-color: white;    
+    display: block;
+    flex-grow: 5;   
+    transform: translateX(-100%);
+    overflow-y: scroll;
+    margin: 0;
+}
+
+#side-bar.show>ul {
+    transform: translateX(0%);
+    animation: side-bar-ul-show 0.2s ease-out;
+    
+}
+
+#side-bar.hide>ul {
+    transform: translateX(-100%);
+    animation: side-bar-ul-hide 0.2s ease-out;
+}
+ @keyframes side-bar-fade-in {
+     from {
+         background-color: rgba(0, 0, 0, 0);;
+     }
+     to {
+         background-color: rgba(0, 0, 0, 0.5);;
+     }
+ }
+
+ @keyframes side-bar-fade-out {
+    from {
+        background-color: rgba(0, 0, 0, 0.5);;
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0);;
+    }
+}
+
+@keyframes side-bar-ul-show {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0%);
+    }
+  }
+  
+  @keyframes side-bar-ul-hide {
+    from {
+        transform: translateX(0%);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+  }

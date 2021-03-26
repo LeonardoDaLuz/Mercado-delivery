@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+font name: Rosario-BoldItalic
+font link: http://www.omnibus-type.com/fonts/rosario/
+font author: Omnibus Type
+font author site: http://www.omnibus-type.com/
+Slogan Font: Renner-Thin.otf
+
+icon designer: faisalovers
+icon designer link: /muhammadfaisal40
+        
+{"bg":"#EFF5E9","icon-gradient-0":"#666C35","icon-gradient-1":"#77D636","font":"#213210","slogan":"#354624"}
+      

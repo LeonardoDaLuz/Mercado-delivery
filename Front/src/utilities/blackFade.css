@@ -1,0 +1,15 @@
+.black-fade {
+    display: none;
+    position: fixed;
+    top:0px;
+    width: 100%;
+    height: 100%;
+    background-color: indianred;
+    opacity: 0.5;
+    z-index: 500;
+}
+
+.black-fade.show {
+    display: block;
+    opacity: 0.5;
+}
