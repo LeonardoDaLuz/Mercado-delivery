@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 
+global.db = require('../db');
 /**
  * Module dependencies.
  */
 
-var app = require('../app');
+var app = require('../app2');
 var debug = require('debug')('work:server');
 var http = require('http');
 
