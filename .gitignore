@@ -2,6 +2,8 @@
 
 # dependencies
 
+/Back/public/img/
+/Back/public/img/**
 **/mongodb_database
 **/node_modules
 /node_modules

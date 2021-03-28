@@ -9,7 +9,6 @@ export default class Sidebar extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
         this.atribuiDisparadorDoSidebar("sidebar-toogler");
 
         SwipeInput.onDirection({ x: -25, y: 0 }, () => { this.closeSidebar() });

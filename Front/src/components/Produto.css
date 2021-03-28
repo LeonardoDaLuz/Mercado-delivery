@@ -1,0 +1,66 @@
+.quadro-de-foto {
+    background-color: rgb(255, 255, 255);
+    flex-shrink: 1;
+    flex-grow: 1;
+    width: 226px;
+    flex-basis: 426px;
+    border-radius: 10px;
+}
+
+.quadro-de-foto img {
+    max-width: 100%;
+    height: auto;
+}
+
+.quadro-comprar {
+    flex-basis: 426px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(164, 164, 164);
+    border-radius: 5px;
+    margin: 0 0 0 20px;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: auto;
+}
+.quadro-comprar span {
+    color: green;
+    font-weight: 700;
+}
+
+.preco {
+    color: rgb(2, 157, 2);
+    font-size: 45px;
+    font-weight: 700;
+}
+.preco::before {
+    content: "R$";
+    font-size: 15px;
+    color: black;
+}
+.bread {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 14px;
+}
+.teste {
+    font-size: 24px;
+    word-wrap:initial;
+}
+.bread ol {
+    padding-left: 0;
+}
+
+.bread li {
+    display: inline-block;
+    margin: 0 5px 0 5px;
+
+}
+
+.bread li:not(:first-child)::before {
+    content: ">";
+    font-weight: 1000;
+    left: -5px;
+    position: relative;
+    color: rgb(1, 155, 1);
+}
+

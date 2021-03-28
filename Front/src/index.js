@@ -12,7 +12,7 @@ import easyOutline from './easyOutline';
 import LoremIpsum from './LoremIpsum';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
-
+import Produto from './components/Produto';
 
 easyOutline();
 
@@ -23,7 +23,7 @@ ReactDOM.render(
   <Header />
   <Sidebar tooglerId='sidebar-toogler' />
   <BarraCategorias />
-  <LoremIpsum />
+  <Produto />
   </div>
 
   ,
