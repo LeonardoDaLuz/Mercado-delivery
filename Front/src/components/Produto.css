@@ -14,15 +14,16 @@
 
 .quadro-comprar {
     flex-basis: 426px;
+    flex-grow: 1;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(164, 164, 164);
     border-radius: 5px;
-    margin: 0 0 0 20px;
+
     padding: 20px;
     text-align: left;
     margin-bottom: auto;
 }
-.quadro-comprar span {
+.quadro-comprar .green-text {
     color: green;
     font-weight: 700;
 }
@@ -31,12 +32,20 @@
     color: rgb(2, 157, 2);
     font-size: 45px;
     font-weight: 700;
+    float: right;
 }
 .preco::before {
     content: "R$";
     font-size: 15px;
     color: black;
 }
+
+.like {
+    color: red;
+    font-size: 30px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .bread {
     display: inline-block;
     font-weight: 700;

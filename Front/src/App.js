@@ -8,6 +8,7 @@ import {
   useParams
 } from "react-router-dom";
 import "../node_modules/bootstrap/scss/bootstrap.scss";
+import './fonts/glyphicons-halflings-regular.ttf';
 import "./teste.scss";
 
 export default function App() {
