@@ -27,12 +27,14 @@
     color: green;
     font-weight: 700;
 }
+.preco-bloco {
 
+}
 .preco {
     color: rgb(2, 157, 2);
     font-size: 45px;
     font-weight: 700;
-    float: right;
+
 }
 .preco::before {
     content: "R$";
@@ -40,19 +42,29 @@
     color: black;
 }
 
+.cep {
+    max-width: 200px;
+}
 .like {
     color: red;
-    font-size: 30px;
+    font-size: 60px;
     font-family: Arial, Helvetica, sans-serif;
-}
+    line-height: 50px;
+    flex-grow: 1;
+    text-align: right;
 
+
+}
+.quantidade {
+    flex-basis: 120px;
+}
 .bread {
     display: inline-block;
     font-weight: 700;
     font-size: 14px;
 }
 .teste {
-    font-size: 24px;
+    font-size: 16px;
     word-wrap:initial;
 }
 .bread ol {

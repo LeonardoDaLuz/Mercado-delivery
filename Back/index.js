@@ -6,6 +6,8 @@ const { NetworkAuthenticationRequire } = require('http-errors');
 const cors = require('cors');
 global.db = require('./db');
 
+//Load json
+
 var app = express();
 
 app.use(express.static('public'));
@@ -21,10 +23,12 @@ app.get("/", function (req, resp) {
 });
 
 app.get("/produtos", function (req, resp) {
+    console.log(produtosColecao[803])
     resp.json(produtosColecao);
 });
 
 app.get("/produto/:id", function (req, resp) {
+    console.log(produtosColecao[req.params.id].descricao)
     resp.json(produtosColecao[req.params.id]);
 });
 
