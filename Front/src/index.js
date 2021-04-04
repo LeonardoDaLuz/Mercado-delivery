@@ -13,6 +13,7 @@ import LoremIpsum from './LoremIpsum';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
 import Produto from './components/Produto';
+import Footer from './components/Footer';
 
 easyOutline();
 
@@ -24,6 +25,7 @@ ReactDOM.render(
   <Sidebar tooglerId='sidebar-toogler' />
   <BarraCategorias />
   <Produto />
+  <Footer />
   </div>
 
   ,

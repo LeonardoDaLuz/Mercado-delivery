@@ -2,6 +2,8 @@
     position: sticky;
     top: 0;
     background-color: white;
+    padding: 10px 0px;
+    z-index: 100;
 }
 
 

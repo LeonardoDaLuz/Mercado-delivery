@@ -33,7 +33,7 @@ export default class Header extends Component {
                         <a className="navbar-logo" href="google.com"></a>
                         <form className="flex-grow-1 d-flex align-items-center">
                             <input className="form-control flex-grow-1" />
-                            <button className="btn btn-outline-success flex-grow-1 ml-1" type="submit">Search</button>
+                            <button className="btn btn-outline-success flex-grow-1 ml-1" type="submit">Buscar</button>
                         </form>
                         <button id="sidebar-toogler" className="navbar-toggler d-lg-none" onClick={() => this.openSideBar()} type="button" >
                             <span className="navbar-toggler-icon"></span>
