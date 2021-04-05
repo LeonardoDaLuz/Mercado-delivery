@@ -108,4 +108,11 @@
 
 .descricao-pg-produto {
  margin: 25px 10px 20px 10px;
+ text-align: justify;
 }
+
+
+.descricao-pg-produto div {
+
+    text-align: justify;
+   }

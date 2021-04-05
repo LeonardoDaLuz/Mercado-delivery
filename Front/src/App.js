@@ -11,33 +11,28 @@ import "../node_modules/bootstrap/scss/bootstrap.scss";
 import './fonts/glyphicons-halflings-regular.ttf';
 import "./teste.scss";
 
+import Header from './components/Header';
+import BarraCategorias from './components/BarraCategorias';
+import Sidebar from './components/Sidebar';
+import Produto from './components/Produto';
+import Produtos from './components/Produtos';
+import Footer from './components/Footer';
+
+
 export default function App() {
   return (
     <Router>
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-          <li>
-            <Link to="/topics">Topics</Link>
-          </li>
-        </ul>
-
+        <Header />
+        <Sidebar tooglerId='sidebar-toogler' />
+        <BarraCategorias />
         <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/topics">
-            <Topics />
-          </Route>
-          <Route path="/">
-            <Home />
+          <Route path="/produto/:id" component={Produto} />
+          <Route path="/produtos">
+            <Produtos />
           </Route>
         </Switch>
+        <Footer />
       </div>
     </Router>
   );

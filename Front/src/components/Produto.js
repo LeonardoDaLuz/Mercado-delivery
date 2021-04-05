@@ -1,12 +1,22 @@
 import react, { Component } from 'react';
 import configs from '../configs';
 import like from './svg/heart-black.svg';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
+
 import './Produto.css';
 
 export default class Produto extends Component {
 
     constructor() {
         super();
+     
+
         this.state = {
             produto: {
                 titulo: '',
@@ -17,18 +27,20 @@ export default class Produto extends Component {
     }
     componentDidMount() {
 
-        fetch('http://localhost:3001/produto/804')
+
+        fetch('http://localhost:3001/produto/'+this.props.match.params.id)
             .then(T => T.json())
             .then(p => {
                 this.setState({ produto: p })
-                console.log(p)
+                //console.log(p)
             })
     }
 
     render() {
+        console.log("");
         var breadLis = this.state.produto.categorias.map(function (cat) {
             return (
-                <li>
+                <li key={cat}>
                     {cat}
                 </li>
             );
@@ -36,45 +48,49 @@ export default class Produto extends Component {
         var excerpt = this.state.produto.descricao;
         if (excerpt != null) {
             excerpt = excerpt.substring(0, 150);
-            console.log(excerpt);
+            //console.log(excerpt);
             var splited = excerpt.split(' ');
-            console.log(splited);
+            //console.log(splited);
             splited.splice(splited.length - 1, 1)
 
             excerpt = splited.join(' ');
-            excerpt += "...<a href='#descricao' class='d-inline-block'>ver mais</a>";
-            console.log(excerpt);
+            excerpt += "...<a href='#descricao' className='d-inline-block'>ver mais</a>";
+            //console.log(excerpt);
         }
 
         return (
             <div className="container-lg px-2 produto-page">
-                <nav class='bread mx-2 mt-4' aria-label="breadcrumb">
+                <nav className='bread mx-2 mt-4' aria-label="breadcrumb">
                     <ol>
                         <li>Home</li>
                         {breadLis}
                     </ol>
                 </nav>
 
-                <div class='row flex-wrap'>
-                    <div class='quadro-de-foto mx-2'>
+                <div className='row flex-wrap'>
+                    <div className='quadro-de-foto mx-2'>
                         <img src={configs.imgsPath + this.state.produto.img} />
                     </div>
+                    
+
+
+                    
                     <div className="quadro-comprar mb-auto mx-2">
                         <div className="titulo-produto row">
-                            <h1 class="h3 col">{this.state.produto.titulo}   </h1>
+                            <h1 className="h3 col">{this.state.produto.titulo}   </h1>
                             <span className="like pr-3 col-auto">♥</span>
                         </div>
 
                         <div className="row">
                             <div className="quantidade flex-basis-150 col-auto">
-                                <label for="exampleInputEmail1">Quantidade:</label>
+                                <label htmlFor="quantidade">Quantidade:</label>
                                 <div className=" input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon1">-</button>
+                                    <div className="input-group-prepend">
+                                        <button className="btn btn-outline-secondary" type="button" id="button-addon1">-</button>
                                     </div>
-                                    <input type="text" id="quantidade" class="form-control text-center" placeholder="" value='1' aria-label="Recipient's username" aria-describedby="button-addon2" />
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
+                                    <input type="text" id="quantidade" className="form-control text-center" placeholder="" value='1' aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                    <div className="input-group-append">
+                                        <button className="btn btn-outline-secondary" type="button" id="button-addon2">+</button>
                                     </div>
                                 </div>
                             </div>
@@ -86,13 +102,13 @@ export default class Produto extends Component {
                         </div>
 
                         <div className="calcular-frete row">
-                            <label className="col-12" for="inlineFormInputGroup">Calcular frete:</label>
-                            <div class="col">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <div class="input-group-text">CEP</div>
+                            <label className="col-12" htmlFor="inlineFormInputGroup">Calcular frete:</label>
+                            <div className="col">
+                                <div className="input-group mb-2">
+                                    <div className="input-group-prepend">
+                                        <div className="input-group-text">CEP</div>
                                     </div>
-                                    <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="00000-000" />
+                                    <input type="text" className="form-control" id="inlineFormInputGroup" placeholder="00000-000" />
                                 </div>
                             </div>
                             <div className="row col">
@@ -112,6 +128,9 @@ export default class Produto extends Component {
                             <button className="btn btn-success ml-2 col">Adicionar ao carrinho</button>
                         </div>
                     </div>
+
+
+
 
                     <div className="descricao-pg-produto">
                         <div className=''><h3 >Descrição do produto</h3></div>

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link, BrowserRouter } from 'react-router-dom';
 import Home from './components/Home';
 import About from './components/About';
 import Contact from './components/Contact';
@@ -17,21 +17,18 @@ import Footer from './components/Footer';
 
 easyOutline();
 
-
-console.log( window.onmousemove);
 ReactDOM.render(
-  <div>
-  <Header />
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+  , document.getElementById('root')
+);
+
+
+/*  <Header />
   <Sidebar tooglerId='sidebar-toogler' />
   <BarraCategorias />
   <Produto />
   <Footer />
-  </div>
-
-  ,
-  document.getElementById('root')
-);
-
-
-
+  */
 
