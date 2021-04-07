@@ -8,8 +8,6 @@ import {
   useParams
 } from "react-router-dom";
 import "../node_modules/bootstrap/scss/bootstrap.scss";
-import './fonts/glyphicons-halflings-regular.ttf';
-import "./teste.scss";
 
 import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';

@@ -1,0 +1,42 @@
+.produto-card {
+    padding-bottom: 25px;
+
+}
+.produto-card button {
+    border: 0px solid;
+    color: white;
+    font-size: 24px;
+    width: 55px;
+    text-align: center;
+}
+
+.produto-card .add {
+    background-color: rgb(2, 204, 59);
+    border-radius: 0px 15px 15px 0px;
+}
+
+.produto-card .rem {
+    background-color: rgb(137, 137, 137);
+    border-radius: 15px 0px 0px 15px;
+}
+.produto-card .quant-number {
+    width: 55px;
+    text-align:center;
+    vertical-align: middle;
+    line-height: 45px;
+    border: 1px solid rgb(196, 196, 196);
+    background-color: rgb(236, 236, 236);
+}
+
+
+
+.preco-pg-lista {
+    text-align: right;
+    margin-bottom: 15px;
+    margin-right: 15px;
+}
+
+.preco-pg-lista .riscado {
+    color: grey;
+    text-decoration: line-through; 
+}

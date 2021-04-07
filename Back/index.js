@@ -1,39 +1,59 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 const { response } = require('./app2');
-var produtosColecao = require('./produtos.json');
+var produtosColecao = null //require('./produtos.json');
 const { NetworkAuthenticationRequire } = require('http-errors');
 const cors = require('cors');
-global.db = require('./db');
 
-//Load json
+main();
 
-var app = express();
+async function main() {
 
-app.use(express.static('public'));
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use ((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*" );
-    app.use(cors());
-    next();
-});
-app.get("/", function (req, resp) {
-    global.db.findAll("customers", (err, doc)=> resp.json(doc));
-});
+    global.db = await require('./db')();
+    var app = express();
 
-app.get("/produtos", function (req, resp) {
-    console.log(produtosColecao[803])
-    resp.json(produtosColecao);
-});
+    app.use(express.static('public'));
+    app.use(express.urlencoded({ extended: true }));
+    app.use(express.json());
+    app.use((req, res, next) => {
+        res.header("Access-Control-Allow-Origin", "*");
+        app.use(cors());
+        next();
+    });
 
-app.get("/produto/:id", function (req, resp) {
-    console.log(produtosColecao[req.params.id].descricao)
-    resp.json(produtosColecao[req.params.id]);
-});
+    app.get('/importaprodutosjson', (req, resp) => {
+        (async () => {
 
-app.post('/insert', (req, res)=> {
-    res.json(req.body);
-})
+            let algunsProd = produtosColecao;
+            let result = null;
+            for (let prod of algunsProd) {
+                let newIndex = await global.db.GetAutoIncrementIndex("produtos");
+                let bosta = newIndex.countIndex + 1;
+                prod.codigo = bosta;
+                console.log(prod.codigo)
+                result = await global.db.insert("produtos", prod);
+                await global.db.AddAutoIncrementIndex("produtos");
+            }
 
-app.listen(3001, () => console.log("Servidor rodando"));
+            resp.json(result);
+        }
+        )();
+    })
+
+    app.get("/produtos/:from/:to", async function (req, resp) {
+        produtosColecao = await global.db.listaProdutos(req.params.from,req.params.to);
+        resp.json(produtosColecao);
+    });
+
+    app.get("/produto/:id", async function (req, resp) {
+        let produto = await global.db.getProduto(req.params.id);
+        console.log(produto)
+        resp.json(produto);
+    });
+
+    app.post('/insert', (req, res) => {
+        res.json(req.body);
+    })
+
+    app.listen(3001, () => console.log("Servidor rodando"));
+}
