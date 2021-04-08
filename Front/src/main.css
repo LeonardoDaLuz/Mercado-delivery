@@ -1,6 +1,8 @@
 body {
   /*overflow-x: hidden;*/
   background-color: rgb(244, 244, 244);
+/* background-color: rgb(120, 120, 120);*/
+  min-height: 100%;
 }
 
 .noscroll {

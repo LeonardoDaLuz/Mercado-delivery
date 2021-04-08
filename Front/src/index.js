@@ -14,6 +14,7 @@ import Sidebar from './components/Sidebar';
 import Produto from './components/Produto';
 import Footer from './components/Footer';
 
+
 easyOutline();
 
 ReactDOM.render(

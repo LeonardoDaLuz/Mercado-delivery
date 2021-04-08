@@ -5,6 +5,7 @@ import {
   Route,
   Link,
   useRouteMatch,
+  IndexRoute,
   useParams
 } from "react-router-dom";
 import "../node_modules/bootstrap/scss/bootstrap.scss";
@@ -15,6 +16,8 @@ import Sidebar from './components/Sidebar';
 import Produto from './components/Produto';
 import Produtos from './components/Produtos';
 import Footer from './components/Footer';
+import waitForSeconds from './utilities/waitForSeconds';
+import Mathf from './utilities/Mathf';
 
 
 export default function App() {
@@ -24,11 +27,10 @@ export default function App() {
         <Header />
         <Sidebar tooglerId='sidebar-toogler' />
         <BarraCategorias />
+
         <Switch>
           <Route path="/produto/:id" component={Produto} />
-          <Route path="/produtos">
-            <Produtos />
-          </Route>
+          <Route path="/produtos" component={Produtos} />
         </Switch>
         <Footer />
       </div>

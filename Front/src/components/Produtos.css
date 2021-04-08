@@ -1,7 +1,32 @@
+.produtos-page {
+    min-height: 1000px;
+  
+}
+.produtos-page ul {
+padding: 0px;
+}
 .produto-card {
     padding-bottom: 25px;
 
 }
+.produto-card h5{
+    font-size: 14px;
+    margin-bottom: 5px;
+
+}
+
+.produto-card .riscado {
+    color: grey;
+    text-decoration: line-through; 
+    font-size: 14px;
+    line-height: 12px;
+}
+
+.produto-card .preco{
+    font-size: 20px;
+
+}
+
 .produto-card button {
     border: 0px solid;
     color: white;
@@ -25,18 +50,13 @@
     vertical-align: middle;
     line-height: 45px;
     border: 1px solid rgb(196, 196, 196);
-    background-color: rgb(236, 236, 236);
+   /* background-color: rgb(236, 236, 236);*/
 }
 
 
 
 .preco-pg-lista {
     text-align: right;
-    margin-bottom: 15px;
-    margin-right: 15px;
+    margin: -0px 15px 15px 0pc
 }
 
-.preco-pg-lista .riscado {
-    color: grey;
-    text-decoration: line-through; 
-}

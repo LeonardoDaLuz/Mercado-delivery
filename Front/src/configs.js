@@ -1,5 +1,5 @@
 var configs = {
-    imgsPath: 'https://static.clubeextra.com.br/',
+    imgsPath: 'http://localhost:3001/',
     
 }
 
