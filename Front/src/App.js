@@ -10,7 +10,7 @@ import {
 } from "react-router-dom";
 
 import "../node_modules/bootstrap/scss/bootstrap.scss";
-import './css/app.css';
+import './css/App.css';
 
 import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';

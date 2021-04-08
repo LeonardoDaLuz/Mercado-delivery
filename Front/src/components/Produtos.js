@@ -158,7 +158,7 @@ class ProdutoCard extends Component {
             z-index: 100;
             box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.333);
             background-color: white;
-         
+            animation: adicao-carrinho-fade-in 1s ease-out;
             `;
         }
         console.log(rect);

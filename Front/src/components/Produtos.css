@@ -60,8 +60,12 @@
 
 @keyframes adicao-carrinho-fade-in {
     0% {
-        box-shadow: 0px 0px 15px rgba(0, 0, 0, 0);
+        opacity: 0;
         transform: scale(1);
+    }
+    15% {
+        opacity: 1;
+      
     }
     50% {
         box-shadow: 0px 20px 15px rgba(0, 0, 0, 0.333);

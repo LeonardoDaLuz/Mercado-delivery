@@ -26,7 +26,7 @@ export default class Header extends Component {
 
     render() {
         return (
-            <nav className="header">
+            <header className="header">
                 <div className="container-lg px-0">
                     <div className="d-flex navbar-light align-items-center">
                         <a className="navbar-logo" href="google.com"></a>
@@ -45,7 +45,7 @@ export default class Header extends Component {
                         </ul>
                     </div>
                 </div>                
-            </nav >
+            </header >
         );
     }
 }
