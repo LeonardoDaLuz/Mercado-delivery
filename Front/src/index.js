@@ -23,12 +23,3 @@ ReactDOM.render(
   </BrowserRouter>
   , document.getElementById('root')
 );
-
-
-/*  <Header />
-  <Sidebar tooglerId='sidebar-toogler' />
-  <BarraCategorias />
-  <Produto />
-  <Footer />
-  */
-

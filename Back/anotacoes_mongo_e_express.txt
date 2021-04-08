@@ -1,0 +1,2 @@
+o mongo db precisa ser inicializado, há um bat na pasta mongodb_database que ta fazendo isso.
+OBS: o objetivo não é o back, por isso está o mais simples possivel

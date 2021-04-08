@@ -87,7 +87,7 @@ export default class Produtos extends Component {
 class ProdutoCard extends Component {
     render() {
         console.log(this.props.index);
-        return (
+        return ( 
 
             <li key={this.props.index} className="produto-card card col-3 justify-content-between">
                 <img data-chroma-key="#FFFFFF" src={configs.imgsPath + this.props.produto.img} />
@@ -115,29 +115,7 @@ class ProdutoCard extends Component {
         console.log();
         let img = e.target.parentElement.parentElement.querySelector("img");
 
-        /*
-        function getBase64Image(imgUrl) {
-            return new Promise(resolve => {
-                var img = new Image();
-                img.src = imgUrl;
-                img.setAttribute('crossOrigin', 'anonymous');
-                img.onload = (() => {
-                    var canvas = document.createElement("canvas");
-                    canvas.width = img.width;
-                    canvas.height = img.height;
-                    var ctx = canvas.getContext("2d");
-                    ctx.drawImage(img, 0, 0);
-                    var dataURL = canvas.toDataURL("image/png");
-                    //console.log('UgetBase64Image.dataURL ', dataURL);
-                    resolve(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
-                });
-            });
-        }
 
-        var os = await getBase64Image(img.src);*/
-
-        //img.crossOrigin = "anonymous";
-        // makeChroma(img);
 
         let rect = img.getBoundingClientRect();
         let _img = document.createElement("img")
@@ -178,6 +156,9 @@ class ProdutoCard extends Component {
             top: ${position.top}px;
             left: ${position.left}px;
             z-index: 100;
+            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.333);
+            background-color: white;
+         
             `;
         }
         console.log(rect);

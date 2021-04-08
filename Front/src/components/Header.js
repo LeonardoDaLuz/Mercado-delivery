@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import logo from '../UI-Imgs/LogoAlpha.png';
 import carrinhoImg from '../UI-Imgs/Carrinho32px.png'
-import '../main.css';
 import './Header.css';
 
 

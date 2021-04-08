@@ -19,6 +19,11 @@ async function getProduto(codigo) {
     return produto;
 }
 
+async function getCarrinho(conta) {
+    let produto = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
+    return produto;
+}
+
 async function listaProdutos(from, to, criterio = {}) {
     let produtos = await global.conn.collection("produtos").find(criterio).toArray();
     return produtos.slice(from, to);
@@ -48,5 +53,5 @@ module.exports = (async () => {
             process.exit();
         });
 
-    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos }
+    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho }
 });

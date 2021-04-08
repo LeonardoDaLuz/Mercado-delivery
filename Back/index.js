@@ -26,14 +26,6 @@ async function main() {
         next();
       });
 
-      /*
-
-    app.use((req, res, next) => {
-        res.header("Access-Control-Allow-Origin", "*");
-        app.use(cors());
-        next();
-    });*/
-
     app.get('/importaprodutosjson', (req, resp) => {
         (async () => {
 
@@ -52,6 +44,11 @@ async function main() {
         }
         )();
     })
+
+    app.get("/carrinho", async function (req, resp) {
+      let carrinho=await global.db.getCarrinho(0);
+        resp.json(carrinho);
+    });
 
     app.get("/produtos/:from/:to", async function (req, resp) {
         produtosColecao = await global.db.listaProdutos(req.params.from,req.params.to);
