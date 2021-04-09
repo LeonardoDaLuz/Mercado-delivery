@@ -18,11 +18,29 @@ export default class Carrinho {
     }
 
     quantosForamAdicionadosAoCarrinho(id) {
-        let quantidade = this.parent.state.carrinhoData.produtos[id];
-        if(quantidade==undefined)
+        let registroProduto = this.parent.state.carrinhoData.produtos[id];
+
+        if(registroProduto==undefined)
             return 0;
         
-        return quantidade;
+        return registroProduto.quantidade;
+    }
+
+    custoTotalNoCarrinho() {
+        let custo = 0;
+        for(var key in this.parent.state.carrinhoData.produtos) {
+            let prod = this.parent.state.carrinhoData.produtos[key];
+            custo += (prod.data.preco*prod.quantidade);
+        }
+        return custo.toFixed(2);
+    }
+    
+    quantosTemProdutosNoCarrinho() {
+        let qty = 0;
+        for(var key in this.parent.state.carrinhoData.produtos) {
+            qty += this.parent.state.carrinhoData.produtos[key].quantidade;
+        }
+        return qty;
     }
 
     async adicionarAoCarrinho(id, quantidade) {

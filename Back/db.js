@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient;
+const ObjectId = require("mongodb").ObjectID;
 
 function findAll(collection, callback) {
     global.conn.collection(collection).find({}).toArray(callback);
@@ -19,29 +20,36 @@ async function getProduto(codigo) {
     return produto;
 }
 
+async function getProduto2(objectId) {
+    let produto = await global.conn.collection("produtos").findOne({ _id: new ObjectId(objectId) });
+    return produto;
+}
+
 async function getCarrinho(conta) {
     let produto = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
     return produto;
 }
 
-async function addProduto(conta, produto, quantidade, callback) {
+async function addProdutoNoCarrinho(conta, produto, quantidade, callback) {
     let carrinho = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
 
     if (carrinho == null)
         return null;
 
-    if (carrinho.produtos[produto] === undefined) {
-        carrinho.produtos[produto] = parseInt(quantidade);
-    } else {
-        carrinho.produtos[produto] += parseInt(quantidade);
-    }
+    let produtos = carrinho.produtos;
 
-    if (carrinho.produtos[produto] < 0)
-        carrinho.produtos[produto] = 0;
+    if (produtos[produto] === undefined) {
+        produtos[produto] = { quantidade: parseInt(quantidade), preco: 25 }
+    } else {
+        produtos[produto].quantidade += parseInt(quantidade);
+        if (produtos[produto].quantidade < 1)
+            delete produtos[produto];
+
+    }
 
     let resp = await global.conn.collection("carrinhos").updateOne({ conta: parseInt(conta) },
         {
-            $set: { produtos: carrinho.produtos }
+            $set: { produtos: produtos }
         }
     );
 
@@ -80,5 +88,5 @@ module.exports = (async () => {
             process.exit();
         });
 
-    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProduto }
+    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProdutoNoCarrinho, getProduto2 }
 });

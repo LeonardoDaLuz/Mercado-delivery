@@ -47,14 +47,28 @@ async function main() {
 
     app.get("/carrinho", async function (req, resp) {
         let carrinho = await global.db.getCarrinho(0);
+        await loadCarrinhoProductDatas(carrinho);
         resp.json(carrinho);
     });
 
+    async function loadCarrinhoProductDatas(carrinho) {
+
+        for(var key in carrinho.produtos) {
+            let prod = carrinho.produtos[key];
+            prod.data = await global.db.getProduto2(key);
+        }
+        return carrinho;
+    }
+
     app.post("/carrinho/addproduto/:id/:quantidade", async function (req, resp) {
-        let carrinho = await global.db.addProduto(0, req.params.id, req.params.quantidade);
+        let carrinho = await global.db.addProdutoNoCarrinho(0, req.params.id, req.params.quantidade);
+        
         if(carrinho==null ) {
             resp.status(400).send('failed');
+            return;
         }
+
+        await loadCarrinhoProductDatas(carrinho);        
         resp.json(carrinho);
     });
 

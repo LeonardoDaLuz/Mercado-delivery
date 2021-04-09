@@ -41,7 +41,7 @@ export default class Header extends Component {
                             <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Crie sua conta</li>
                             <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Entre</li>
                             <li className="d-none d-lg-block flex-grow-1 mx-3 nav-item">Compras</li>
-                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><img src={carrinhoImg} /></a></li>
+                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><div className="quantidade">{this.props.carrinho.quantosTemProdutosNoCarrinho()}</div><img src={carrinhoImg} /><div className="custo">R$ {this.props.carrinho.custoTotalNoCarrinho()}</div></a></li>
                         </ul>
                     </div>
                 </div>                
