@@ -24,34 +24,33 @@ export default class Produtos extends Component {
             ]
         }
     }
+
     componentDidMount() {
         this.ligarInfiniteLoader();
     }
 
     async ligarInfiniteLoader() {
-        l(1);
+
         while (document.body.clientHeight < window.innerHeight) {
             if (!this.loading) {
-                l(2);
+
                 this.loading = true;
-                await this.loadMaisProdutos();
+                await this.carregarMaisProdutos();
                 await window.waitForSeconds(0.5);
                 this.loading = false;
             }
         }
         window.addEventListener("scroll", async (e) => {
             if (!this.loading && window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
-                l(4);
+
                 this.loading = true;
-                await this.loadMaisProdutos();
+                await this.carregarMaisProdutos();
                 this.loading = false;
             }
         });
     }
 
-    async loadMaisProdutos() {
-        l(3);
-        l(this.state.produtos.length + "/" + this.state.produtos.length + 1);
+    async carregarMaisProdutos() {
         await fetch("http://localhost:3001/produtos/" + this.state.produtos.length + "/" + (this.state.produtos.length + 12))
             .then(x => x.json())
             .then(data => {
@@ -61,12 +60,11 @@ export default class Produtos extends Component {
     }
 
     render() {
-
         if (this.state.produtos.length == 0)
             return (<div></div>);
 
         let produtoCards = this.state.produtos.map((p, index) => {
-            return <ProdutoCard produto={p} key={index} />
+            return <ProdutoCard produto={p} key={index} carrinho={this.props.carrinho} />
         })
         return (
             <section className="container-lg px-2 produtos-page">
@@ -86,63 +84,69 @@ export default class Produtos extends Component {
 
 class ProdutoCard extends Component {
     render() {
-        console.log(this.props.index);
-        return ( 
-
+        let quantidade = this.props.carrinho.quantosForamAdicionadosAoCarrinho(this.props.produto._id);
+        return (
             <li key={this.props.index} className="produto-card card col-3 justify-content-between">
                 <img data-chroma-key="#FFFFFF" src={configs.imgsPath + this.props.produto.img} />
 
                 <h5>{this.props.produto.titulo}</h5>
                 <div className="preco-pg-lista">
-                    <div className="riscado">R$ 10,50</div>
-                    <div className="preco">9,50</div>
+                    <div className="riscado">R$ {(this.props.produto.preco * 1.1).toFixed(2)}</div>
+                    <div className="preco">{this.props.produto.preco}</div>
                 </div>
 
-                <div className="row justify-content-center">
-                    <button className="rem" type="button">-</button>
-                    <div className="quant-number">0</div>
-                    <button className="add" type="button" onClick={this.animarAdicao}>+</button>
+                <div className="row justify-content-center" >
+                    <button className="rem" type="button" disabled={quantidade < 1 ? true : false} onClick={(e) => { this.props.carrinho.adicionarAoCarrinho(this.props.produto._id, -1); this.animarAdicao(e,-1) }}
+                    >-</button>
+                    <div className="quant-number">{quantidade}</div>
+                    <button className="add" type="button" onClick={(e) => { this.props.carrinho.adicionarAoCarrinho(this.props.produto._id, 1); this.animarAdicao(e) }}>+</button>
                 </div>
             </li>
         );
-
-
     }
 
-
-
-    async animarAdicao(e) {
-        console.log();
+    async animarAdicao(e, dir=1) {
         let img = e.target.parentElement.parentElement.querySelector("img");
+        let carrinho = document.querySelector("#carrinho");
+        this.animacaoFromTo(img, img, carrinho, dir);
+    }
 
+    async animacaoFromTo(img, from, to, dir = 1) {
 
+        //   let rect = img.getBoundingClientRect();
+        let fromRect = from.getBoundingClientRect();
+        let toRect = to.getBoundingClientRect();
 
-        let rect = img.getBoundingClientRect();
         let _img = document.createElement("img")
         _img.src = img.src;
+        _img.classList.add('fromToAnimated')
 
-        let position = {
-            left: rect.left,
-            top: rect.top,
-            width: rect.width,
-            height: rect.height
+        let updatePosition = {
+            left: fromRect.left,
+            top: fromRect.top,
+            width: fromRect.width,
+            height: fromRect.height
         }
+
+        SetStyles();
 
         UpdatePosition();
 
         document.body.append(_img);
-        let carrinho = document.querySelector("#carrinho");
-        let carrinhoRect = carrinho.getBoundingClientRect();
+
 
         let duracao = 1;
         let time = 0;
         while (time < duracao) {
             await window.waitForEndOfFrame();
             time += 0.016;
-            position.left = window.mathf.smoothStep(rect.left, carrinhoRect.left, time / duracao);
-            position.top = window.mathf.smoothStep(rect.top, carrinhoRect.top, time / duracao);
-            position.width = window.mathf.sphereLerp(rect.width, 15, time / duracao);
-            position.height = window.mathf.sphereLerp(rect.height, 15, time / duracao);
+            toRect = to.getBoundingClientRect();
+            fromRect = from.getBoundingClientRect();
+            let progress = dir == 1 ? time / duracao : (duracao - time) / duracao;
+            updatePosition.left = window.mathf.smoothStep(fromRect.left, toRect.left, progress);
+            updatePosition.top = window.mathf.smoothStep(fromRect.top, toRect.top, progress);
+            updatePosition.width = window.mathf.sphereLerp(fromRect.width, toRect.width, progress);
+            updatePosition.height = window.mathf.sphereLerp(fromRect.height, toRect.height, progress);
             UpdatePosition();
         }
 
@@ -150,17 +154,56 @@ class ProdutoCard extends Component {
 
         function UpdatePosition() {
             _img.style = `
-            width: ${position.width}px;
-            height: ${position.height}px;
-            position: fixed;
-            top: ${position.top}px;
-            left: ${position.left}px;
-            z-index: 100;
-            box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.333);
-            background-color: white;
-            animation: adicao-carrinho-fade-in 1s ease-out;
+            width: ${updatePosition.width}px;
+            height: ${updatePosition.height}px;
+            top: ${updatePosition.top}px;
+            left: ${updatePosition.left}px;
             `;
         }
-        console.log(rect);
+
+        function SetStyles() {
+
+            let style = document.getElementById("animation_product_add");
+
+            if(style==undefined) {
+                style = document.createElement("style");
+                style.id='animation_product_add';
+                document.body.append(style);
+
+                style.innerHTML = `
+
+                .fromToAnimated {
+                    position: fixed;
+                    z-index: 100;
+                    box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.333);
+                    background-color: white;
+                    animation: adicao-carrinho-fade-in 1.1s ease-out;
+                }
+
+                @keyframes adicao-carrinho-fade-in {
+                    0% {
+                        opacity: 0;
+                        transform: scale(1);
+                    }
+                    15% {
+                        opacity: 1;
+                      
+                    }
+                    50% {
+                        box-shadow: 0px 20px 15px rgba(0, 0, 0, 0.333);
+                        transform: scale(1.3);
+                    }
+
+                    100% {
+                        box-shadow: 0px 20px 15px rgba(0, 0, 0, 0.333);
+                        transform: scale(1);
+                 
+                    }
+                }`;
+            }
+           
+        }
+
     }
+
 }

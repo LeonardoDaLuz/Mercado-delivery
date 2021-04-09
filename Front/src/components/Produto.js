@@ -14,8 +14,7 @@ import './Produto.css';
 export default class Produto extends Component {
 
     constructor() {
-        super();
-     
+        super();     
 
         this.state = {
             produto: {
@@ -26,8 +25,6 @@ export default class Produto extends Component {
         }
     }
     componentDidMount() {
-
-
         fetch('http://localhost:3001/produto/'+this.props.match.params.id)
             .then(T => T.json())
             .then(p => {

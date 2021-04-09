@@ -24,6 +24,33 @@ async function getCarrinho(conta) {
     return produto;
 }
 
+async function addProduto(conta, produto, quantidade, callback) {
+    let carrinho = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
+
+    if (carrinho == null)
+        return null;
+
+    if (carrinho.produtos[produto] === undefined) {
+        carrinho.produtos[produto] = parseInt(quantidade);
+    } else {
+        carrinho.produtos[produto] += parseInt(quantidade);
+    }
+
+    if (carrinho.produtos[produto] < 0)
+        carrinho.produtos[produto] = 0;
+
+    let resp = await global.conn.collection("carrinhos").updateOne({ conta: parseInt(conta) },
+        {
+            $set: { produtos: carrinho.produtos }
+        }
+    );
+
+    if (resp.result.nModified == 0)
+        return null;
+
+    return carrinho;
+}
+
 async function listaProdutos(from, to, criterio = {}) {
     let produtos = await global.conn.collection("produtos").find(criterio).toArray();
     return produtos.slice(from, to);
@@ -53,5 +80,5 @@ module.exports = (async () => {
             process.exit();
         });
 
-    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho }
+    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProduto }
 });

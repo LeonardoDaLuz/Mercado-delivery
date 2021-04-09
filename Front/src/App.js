@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,23 +20,37 @@ import Produtos from './components/Produtos';
 import Footer from './components/Footer';
 import waitForSeconds from './utilities/waitForSeconds';
 import Mathf from './utilities/Mathf';
+import Carrinho from './classes/Carrinho';
 
+export default class App extends Component {
 
-export default function App() {
+  constructor() {
+    super();
+    this.state = { carrinhoData: {} }
+    this.carrinho = new Carrinho(this); //inicia o carrinho, carrega os dados remotos e fornece metodos para interagir com o carrinho
+  }
 
-  
-  return (
-    <Router>
-      <div>
-        <Header />
-        <Sidebar tooglerId='sidebar-toogler' />
-        <BarraCategorias />
-        <Switch>
-          <Route path="/produto/:id" component={Produto} />
-          <Route path="/produtos" component={Produtos} />
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
-  );
+  render() {
+    //co nsole.log(this.state.carrinhoData);
+ 
+    return (
+      <Router>
+        <div>
+            <Header carrinho={this.carrinho} />
+            <Sidebar tooglerId='sidebar-toogler' />
+            <BarraCategorias />
+            <Switch>
+              <Route path="/produto/:id" component={Produto} />
+              <Route path="/produtos" >
+                <Produtos carrinho={this.carrinho}/>
+              </Route>
+            </Switch>
+            <Footer />
+        </div>
+      </Router >
+    );
+  }
+
+  /* <button onClick={this.log.bind(this)}>kjj</button> */
 }
+
