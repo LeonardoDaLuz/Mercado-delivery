@@ -11,7 +11,6 @@ import {
 import l from '../utilities/log';
 
 import './Produtos.css';
-import ProdutoModal from './ProdutoModal';
 import moveElementFromTo from '../utilities/moveElementFromTo';
 
 export default class Produtos extends Component {

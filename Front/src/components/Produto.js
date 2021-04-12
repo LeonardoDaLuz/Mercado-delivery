@@ -44,25 +44,12 @@ export default withRouter(class Produto extends Component {
         let quantidadeAdicionado = loja.carrinho.quantosForamAdicionadosAoCarrinho(this.state.produto._id);
         let produto = this.state.produto;
         console.log(produto);
-        var breadLis = this.state.produto.categorias.map(function (cat) {
-            return (
-                <li key={cat}>
-                    {cat}
-                </li>
-            );
-        });
 
 
         return (
             <div className="container-lg px-2 produto-page">
-
-                <nav className='bread mx-2 mt-4' aria-label="breadcrumb">
-                    <ol>
-                        <li>Home</li>
-                        {breadLis}
-                    </ol>
-                </nav>
-                <div className='row flex-wrap'>
+                <BreadCumbs produto={this.state.produto} />
+                <div className='row'>
                     <div className='quadro-de-foto mx-2'>
                         <img src={configs.imgsPath + produto.img} />
                     </div>
@@ -77,9 +64,9 @@ export default withRouter(class Produto extends Component {
                                 <label htmlFor="quantidade">Quantidade:</label>
                                 <div className=" input-group mb-2">
                                     <div className="input-group-prepend">
-                                        <button className="btn btn-outline-secondary" type="button" disabled={quantidadeAdicionado < 1 ? true : false} onClick={(e) => { loja.carrinho.adicionarAoCarrinho(produto._id, -1); this.animarAdicao(e,-1) }}>-</button>
+                                        <button className="btn btn-outline-secondary" type="button" disabled={quantidadeAdicionado < 1 ? true : false} onClick={(e) => { loja.carrinho.adicionarAoCarrinho(produto._id, -1); this.animarAdicao(e, -1) }}>-</button>
                                     </div>
-                                    <input className="form-control text-center" placeholder="" value={quantidadeAdicionado} aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(e)=> loja.carrinho.editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value) }/>
+                                    <input className="form-control text-center" placeholder="" value={quantidadeAdicionado} aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(e) => loja.carrinho.editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value)} />
                                     <div className="input-group-append">
                                         <button className="btn btn-outline-secondary" type="button" id="button-addon2" onClick={(e) => { loja.carrinho.adicionarAoCarrinho(produto._id, 1); this.animarAdicao(e) }}>+</button>
                                     </div>
@@ -113,13 +100,27 @@ export default withRouter(class Produto extends Component {
         );
     }
 
-    
+
     async animarAdicao(e, dir = 1) {
         let img = document.querySelector(".quadro-de-foto img");
         let carrinho = document.querySelector("#carrinho");
         moveElementFromTo(img, img, carrinho, dir);
     }
 })
+
+function BreadCumbs(props) {
+
+    var breadLis = props.produto.categorias.map(function (cat) { return (<li key={cat}>{cat}</li>); });
+
+    return (
+        <nav className='bread mx-2 mt-4' aria-label="breadcrumb">
+            <ol>
+                <li>Home</li>
+                {breadLis}
+            </ol>
+        </nav>
+    )
+}
 
 /*
 
