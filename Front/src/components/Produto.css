@@ -99,6 +99,13 @@
 .cep {}
 
 .like {
+    color: rgb(125, 125, 125);
+    font-size: 60px;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 50px;
+}
+
+.like.true {
     color: red;
     font-size: 60px;
     font-family: Arial, Helvetica, sans-serif;

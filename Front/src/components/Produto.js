@@ -28,7 +28,7 @@ export default withRouter(class Produto extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props);
+       
         fetch('http://localhost:3001/produto2/' + this.props.match.params.id)
             .then(T => T.json())
             .then(p => {
@@ -43,8 +43,7 @@ export default withRouter(class Produto extends Component {
         let loja = this.props.loja;
 
         let produto = this.state.produto;
-        console.log(produto);
-
+    
 
         return (
             <div className="container-lg px-2 produto-page">
@@ -95,11 +94,13 @@ function QuadroComprar(props) {
         moveElementFromTo(img, img, carrinho, dir);
     }
 
+    let liked = produto.likes !== undefined && produto.likes.includes(0);
+
     return (
         <div className="quadro-comprar">
             <div>
                 <h1>{produto.titulo}   </h1>
-                <span className="like">♥</span>
+                <span className={"like "+liked}>♥</span>
             </div>
             <div>
                 <div className="quantidade">

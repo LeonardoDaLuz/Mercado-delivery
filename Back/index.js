@@ -50,10 +50,10 @@ async function main() {
             let carrinho = await global.db.getCarrinho(0);
             await loadCarrinhoProductDatas(carrinho);
             resp.json(carrinho);
-        } catch(e) {
+        } catch (e) {
             resp.stats(400).send(e);
         }
-    }); 
+    });
 
     async function loadCarrinhoProductDatas(carrinho) {
 
@@ -112,6 +112,31 @@ async function main() {
 
     app.post('/insert', (req, res) => {
         res.json(req.body);
+    })
+
+    app.post('/like/:conta/:objId',async (req, res) => {
+
+        let conta = parseInt(req.params.conta)
+        let produto = await global.db.getProdutoPorObjId(req.params.objId);
+
+        if (produto.likes === undefined) {
+           produto.likes = [];
+        }
+
+        let index = produto.likes.indexOf(conta);
+        if (index == -1) {
+            produto.likes.push(conta)
+        } else{
+            produto.likes.splice(index, 1);
+        }
+        
+        let update = await global.db.updateProduto(req.params.objId, produto);
+
+        if(update)
+            res.json(produto)
+        else
+            res.status(400).send('failed');
+
     })
 
     app.listen(3001, () => console.log("Servidor rodando"));

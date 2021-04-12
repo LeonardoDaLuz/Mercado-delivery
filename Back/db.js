@@ -31,6 +31,12 @@ async function getCarrinho(conta) {
     return produto;
 }
 
+async function updateProduto(objectId, doc) {
+   
+    let resp = await global.conn.collection("produtos").updateOne({ _id: new ObjectId(objectId) }, { $set: doc });
+    return resp.result.nModified == 1;
+}
+
 async function addProdutoNoCarrinho(conta, produto, quantidade, callback) {
     quantidade = parseInt(quantidade);
     if (isNaN(quantidade))
@@ -130,6 +136,6 @@ module.exports = (async () => {
 
     return {
         findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProdutoNoCarrinho, getProdutoPorObjId,
-        editarQuantidadeDoProdutoAoCarrinho
+        editarQuantidadeDoProdutoAoCarrinho, updateProduto
     }
 });
