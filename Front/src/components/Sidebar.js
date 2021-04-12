@@ -8,9 +8,9 @@ export default class Sidebar extends Component {
         super(props);
     }
 
+    
     componentDidMount() {
         this.atribuiDisparadorDoSidebar("sidebar-toogler");
-
         SwipeInput.onDirection({ x: -25, y: 0 }, () => { this.closeSidebar() });
     }
 
@@ -24,7 +24,7 @@ export default class Sidebar extends Component {
 
     openSidebar(open) {
         let element = document.getElementById('side-bar');
-        document.body.classList.add("noscroll");
+        //document.body.classList.add("noscroll");
         element.classList.add("show");
         if (element.classList.contains('hide'))
             element.classList.remove('hide');
@@ -32,8 +32,8 @@ export default class Sidebar extends Component {
 
     closeSidebar(open) {
         let element = document.getElementById('side-bar');
-        if (document.body.classList.contains('noscroll')) {
-            document.body.classList.remove("noscroll");
+        if (element.classList.contains('show')) {
+            //document.body.classList.remove("noscroll");
             element.classList.remove("show");
             element.classList.add("hide")
         } 

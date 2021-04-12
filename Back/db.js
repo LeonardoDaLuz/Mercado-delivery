@@ -20,7 +20,8 @@ async function getProduto(codigo) {
     return produto;
 }
 
-async function getProduto2(objectId) {
+async function getProdutoPorObjId(objectId) {
+
     let produto = await global.conn.collection("produtos").findOne({ _id: new ObjectId(objectId) });
     return produto;
 }
@@ -31,6 +32,10 @@ async function getCarrinho(conta) {
 }
 
 async function addProdutoNoCarrinho(conta, produto, quantidade, callback) {
+    quantidade = parseInt(quantidade);
+    if (isNaN(quantidade))
+        quantidade = 0;
+
     let carrinho = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
 
     if (carrinho == null)
@@ -39,13 +44,13 @@ async function addProdutoNoCarrinho(conta, produto, quantidade, callback) {
     let produtos = carrinho.produtos;
 
     if (produtos[produto] === undefined) {
-        produtos[produto] = { quantidade: parseInt(quantidade), preco: 25 }
+        produtos[produto] = { quantidade: quantidade, preco: 25 }
     } else {
-        produtos[produto].quantidade += parseInt(quantidade);
-        if (produtos[produto].quantidade < 1)
-            delete produtos[produto];
-
+        produtos[produto].quantidade += quantidade;
     }
+
+    if (produtos[produto].quantidade < 1)
+        delete produtos[produto];
 
     let resp = await global.conn.collection("carrinhos").updateOne({ conta: parseInt(conta) },
         {
@@ -58,6 +63,41 @@ async function addProdutoNoCarrinho(conta, produto, quantidade, callback) {
 
     return carrinho;
 }
+
+async function editarQuantidadeDoProdutoAoCarrinho(conta, produto, quantidade, callback) {
+    quantidade = parseInt(quantidade);
+    if (isNaN(quantidade))
+        quantidade = 0;
+
+    let carrinho = await global.conn.collection("carrinhos").findOne({ conta });
+
+    if (carrinho == null)
+        return null;
+
+    let produtos = carrinho.produtos;
+
+    if (quantidade > 0) {
+        if (produtos[produto] === undefined) {
+            produtos[produto] = { quantidade, preco: 25 }
+        } else {
+            produtos[produto].quantidade = quantidade;
+        }
+    } else {
+        delete produtos[produto];
+    }
+
+    let resp = await global.conn.collection("carrinhos").updateOne({ conta },
+        {
+            $set: { produtos: produtos }
+        }
+    );
+
+    if (resp.result.nModified == 0)
+        return null;
+
+    return carrinho;
+}
+
 
 async function listaProdutos(from, to, criterio = {}) {
     let produtos = await global.conn.collection("produtos").find(criterio).toArray();
@@ -88,5 +128,8 @@ module.exports = (async () => {
             process.exit();
         });
 
-    return { findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProdutoNoCarrinho, getProduto2 }
+    return {
+        findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProdutoNoCarrinho, getProdutoPorObjId,
+        editarQuantidadeDoProdutoAoCarrinho
+    }
 });

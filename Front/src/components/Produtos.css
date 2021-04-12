@@ -2,6 +2,11 @@
     min-height: 1000px;
 }
 
+.produtos-page img {
+    width: 100%;
+}
+
+
 .produtos-page ul {
     padding: 0px;
 }

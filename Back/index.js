@@ -46,29 +46,50 @@ async function main() {
     })
 
     app.get("/carrinho", async function (req, resp) {
-        let carrinho = await global.db.getCarrinho(0);
-        await loadCarrinhoProductDatas(carrinho);
-        resp.json(carrinho);
-    });
+        try {
+            let carrinho = await global.db.getCarrinho(0);
+            await loadCarrinhoProductDatas(carrinho);
+            resp.json(carrinho);
+        } catch(e) {
+            resp.stats(400).send(e);
+        }
+    }); 
 
     async function loadCarrinhoProductDatas(carrinho) {
 
-        for(var key in carrinho.produtos) {
+        for (var key in carrinho.produtos) {
             let prod = carrinho.produtos[key];
-            prod.data = await global.db.getProduto2(key);
+            prod.data = await global.db.getProdutoPorObjId(key);
         }
+
         return carrinho;
     }
 
     app.post("/carrinho/addproduto/:id/:quantidade", async function (req, resp) {
+
+        //tem que colocar um filtro aqui pra ele n deixar add um produto com id invalido senao vai crashar
         let carrinho = await global.db.addProdutoNoCarrinho(0, req.params.id, req.params.quantidade);
-        
-        if(carrinho==null ) {
+
+        if (carrinho == null) {
             resp.status(400).send('failed');
             return;
         }
 
-        await loadCarrinhoProductDatas(carrinho);        
+        await loadCarrinhoProductDatas(carrinho);
+        resp.json(carrinho);
+    });
+
+    app.post("/carrinho/modificarQuantidadeProduto/:objId/:quantidade", async function (req, resp) {
+
+        //tem que colocar um filtro aqui pra ele n deixar add um produto com id invalido senao vai crashar
+        let carrinho = await global.db.editarQuantidadeDoProdutoAoCarrinho(0, req.params.objId, req.params.quantidade);
+
+        if (carrinho == null) {
+            resp.status(400).send('failed');
+            return;
+        }
+
+        await loadCarrinhoProductDatas(carrinho);
         resp.json(carrinho);
     });
 
@@ -79,6 +100,12 @@ async function main() {
 
     app.get("/produto/:id", async function (req, resp) {
         let produto = await global.db.getProduto(req.params.id);
+        console.log(produto)
+        resp.json(produto);
+    });
+    //http://localhost:3001/carrinho/modificarQuantidadeProduto/
+    app.get("/produto2/:id", async function (req, resp) {
+        let produto = await global.db.getProdutoPorObjId(req.params.id);
         console.log(produto)
         resp.json(produto);
     });

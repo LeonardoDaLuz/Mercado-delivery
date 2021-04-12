@@ -6,23 +6,7 @@ import './Header.css';
 
 export default class Header extends Component {
 
-    collapse(querySelector) {
-        let element = document.querySelector(querySelector);
-        element.classList.toggle("show");
-        if (element.classList.contains('d-none')) {
-            element.classList.remove('d-none')
-        }
-    }
 
-    openSideBar() {
-        let element = document.querySelector('#side-bar');
-        document.body.classList.add("noscroll");
-        element.classList.add("show");
-    }
-
-    closeSideBar() {
-
-    }
 
     render() {
         return (
@@ -34,14 +18,14 @@ export default class Header extends Component {
                             <input className="form-control flex-grow-1" />
                             <button className="btn btn-outline-success flex-grow-1 ml-1" type="submit">Buscar</button>
                         </form>
-                        <button id="sidebar-toogler" className="navbar-toggler d-lg-none" onClick={() => this.openSideBar()} type="button" >
+                        <button id="sidebar-toogler" className="navbar-toggler d-lg-none" type="button" >
                             <span className="navbar-toggler-icon"></span>
                         </button>
                         <ul className="d-flex px-2 align-items-center m-0">
                             <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Crie sua conta</li>
                             <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Entre</li>
                             <li className="d-none d-lg-block flex-grow-1 mx-3 nav-item">Compras</li>
-                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><div className="quantidade">{this.props.carrinho.quantosTemProdutosNoCarrinho()}</div><img src={carrinhoImg} /><div className="custo">R$ {this.props.carrinho.custoTotalNoCarrinho()}</div></a></li>
+                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><div className="quantidade">{this.props.loja.carrinho.quantosTemProdutosNoCarrinho()}</div><img src={carrinhoImg} /><div className="custo">R$ {this.props.loja.carrinho.custoTotalNoCarrinho()}</div></a></li>
                         </ul>
                     </div>
                 </div>                
