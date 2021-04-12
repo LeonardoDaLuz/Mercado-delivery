@@ -11,15 +11,14 @@ import {
 
 import "../node_modules/bootstrap/scss/bootstrap.scss";
 import './css/App.css';
-
+import './utilities/waitForSeconds';
+import './utilities/Mathf';
 import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
-import Produto from './components/Produto';
+import Produto from './components/Produto.js';
 import Produtos from './components/Produtos';
 import Footer from './components/Footer';
-import waitForSeconds from './utilities/waitForSeconds';
-import Mathf from './utilities/Mathf';
 import Loja from './classes/Loja';
 
 export default class App extends Component {
@@ -29,14 +28,8 @@ export default class App extends Component {
     this.loja = new Loja(this);
   }
 
-
-  componentDidMount() {
-    //this.loja.carregaLocalizacaoCliente.bind(this)();
-  }
-
   render() {
-    //co nsole.log(this.state.carrinhoData);
-
+ 
     return (
       <Router>
         <div>
