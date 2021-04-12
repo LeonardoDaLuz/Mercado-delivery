@@ -28,22 +28,21 @@ export default withRouter(class Produto extends Component {
     }
 
     componentDidMount() {
-       
+        this.props.loja.carregaProduto(this.props.match.params.id);
+        /*
         fetch('http://localhost:3001/produto2/' + this.props.match.params.id)
             .then(T => T.json())
             .then(p => {
                 this.setState({ produto: p })
                 //console.log(p)
-            });
+            });*/
     }
 
 
     render() {
 
         let loja = this.props.loja;
-
-        let produto = this.state.produto;
-    
+        let produto = loja.state.produtoCarregado;    
 
         return (
             <div className="container-lg px-2 produto-page">
@@ -63,7 +62,7 @@ export default withRouter(class Produto extends Component {
 
 function BreadCumbs(props) {
 
-    var breadLis = props.produto.categorias.map(function (cat) { return (<li key={cat}>{cat}</li>); });
+    var breadLis = props.produto.categorias.map(function (cat, index) { return (<li key={index}>{cat}</li>); });
 
     return (
         <nav className='bread mx-2 mt-4' aria-label="breadcrumb">
@@ -100,7 +99,7 @@ function QuadroComprar(props) {
         <div className="quadro-comprar">
             <div>
                 <h1>{produto.titulo}   </h1>
-                <span className={"like "+liked}>♥</span>
+                <button className={"like "+liked} onClick={()=>loja.likeProduto(produto._id)}>♥</button>
             </div>
             <div>
                 <div className="quantidade">
