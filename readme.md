@@ -1,3 +1,6 @@
 <h1>Mercado delivery</h1>
-<p>work in progress</p>
-<img src="https://github.com/LeonardoDaLuz/MQG-Gerador-de-Questoes-De-Matematica/blob/main/demonstracao/GifDemonstracaoGeracaoDeQuestoes3.gif?raw=true" />
+<p>work in progress...</p>
+<p>infinite load</p>
+<img src="https://github.com/LeonardoDaLuz/Mercado-delivery/blob/main/outros/1617826996071.gif?raw=true" />
+<p>Add ao carrinho</p>
+<img src="https://github.com/LeonardoDaLuz/Mercado-delivery/blob/main/outros/1617934562914.gif?raw=true" />
