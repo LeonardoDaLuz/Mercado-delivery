@@ -14,7 +14,8 @@ export default class Loja {
                 titulo: '',
                 categorias: [],
                 descricao: '',
-            }
+            },
+            categorias: {}
         }
 
         this.setState = parent.setState.bind(parent);
@@ -69,5 +70,14 @@ export default class Loja {
                 frete
             });
         });
+    }
+
+    carregaCategorias() {
+
+        fetch(`http://localhost:3001/calculaCategoria`)
+            .then(T => T.json())
+            .then(p => {
+                this.setState({ categorias: p })
+            });
     }
 }

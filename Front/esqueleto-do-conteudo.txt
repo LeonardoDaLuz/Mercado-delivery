@@ -1,3 +1,23 @@
+pg todos os produtos OK
+pg produtos por Categorias
+pg produto OK
+pg inserir/atualizar produto
+pg login
+pg cadastro
+pg Carrinho
+pg home
+    carrossel
+    ofertas do dia
+    ofertas da semana
+pg admin
+    pg gerenciar usuarios
+        pg editar usuario
+    pg gerenciar produto
+    pg gerenciar pedidos
+pg pedidos cliente
+
+
+
 Paginas
     Inicial
         Jumbotron/carrossel

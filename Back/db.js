@@ -1,8 +1,8 @@
 const MongoClient = require("mongodb").MongoClient;
 const ObjectId = require("mongodb").ObjectID;
 
-function findAll(collection, callback) {
-    global.conn.collection(collection).find({}).toArray(callback);
+async function findAll(collection) {
+    return await global.conn.collection(collection).find({}).toArray();
 }
 
 async function GetAutoIncrementIndex(collection) {

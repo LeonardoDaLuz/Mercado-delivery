@@ -18,6 +18,7 @@ import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
 import Produto from './components/Produto.js';
 import Produtos from './components/Produtos';
+import ProdutosPorCategoria from './components/ProdutosPorCategoria';
 import Footer from './components/Footer';
 import Loja from './classes/Loja';
 
@@ -46,6 +47,11 @@ export default class App extends Component {
             <Route path="/produtos" >
               <Produtos loja={this.loja} />
             </Route>
+            <Route path="/categoria" >
+              <ProdutosPorCategoria loja={this.loja} />
+            </Route>
+
+            
           </Switch>
           <Footer />
         </div>

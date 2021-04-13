@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var produtosColecao = null //require('./produtos.json');
 const { NetworkAuthenticationRequire } = require('http-errors');
 const cors = require('cors');
+var consign = require('consign'); 
 
 main();
 
@@ -25,6 +26,10 @@ async function main() {
 
         next();
     });
+
+    consign()
+    .include('routes') //incorpora todo codigo dentro dessa pasta, para dentro do app.
+    .into(app);
 
     app.get('/importaprodutosjson', (req, resp) => {
         (async () => {
