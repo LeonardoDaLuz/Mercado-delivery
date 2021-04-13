@@ -47,10 +47,9 @@ export default class App extends Component {
             <Route path="/produtos" >
               <Produtos loja={this.loja} />
             </Route>
-            <Route path="/categoria" >
+            <Route path="/categoria/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
               <ProdutosPorCategoria loja={this.loja} />
             </Route>
-
             
           </Switch>
           <Footer />

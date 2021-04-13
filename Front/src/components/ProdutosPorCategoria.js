@@ -6,14 +6,14 @@ import {
     Switch,
     Route,
     Link,
-    useParams
+    withRouter
 } from "react-router-dom";
 import l from '../utilities/log';
 
 import './ProdutosPorCategoria.css';
 import moveElementFromTo from '../utilities/moveElementFromTo';
 
-export default class ProdutosPorCategoria extends Component {
+export default withRouter(class ProdutosPorCategoria extends Component {
 
     constructor() {
         super();
@@ -82,48 +82,72 @@ export default class ProdutosPorCategoria extends Component {
 
         );
     }
-}
-class Categorias extends Component {
+})
+let Categorias = withRouter(class Categorias extends Component {
 
     constructor() {
         super();
 
-        this.ConvertePropertiesParaLi=this.ConvertePropertiesParaLi.bind(this);
+        this.ConvertePropertiesParaLi = this.obtemListaAPartirDaCategoria.bind(this);
     }
     componentDidMount() {
         this.props.loja.carregaCategorias();
     }
 
-    
-    ConvertePropertiesParaLi(objeto) {
 
-        if(objeto=={}||objeto===undefined)
-            return "";
- 
-        let cv = this.ConvertePropertiesParaLi;    
+    obtemListaAPartirDaCategoria(objeto) {
+
+        let path = this.props.location.pathname;
+        if (path[path.length - 1] != '/')
+            path += '/';
+
         let resultado = Object.keys(objeto).map(function (key, index) {
-         
-            return <li>{key}<ul>{cv(objeto[key])}</ul></li>;
+
+            let id = key;
+            let link = Object.keys(objeto[key]).length > 0 ? <Link to={path + key}>{key}</Link> : "";
+            return <li>{link}</li>;
         });
 
         return resultado;
     }
 
+    selecionaSubcategoria(categorias) {
+        let path = this.props.match.params;
+        let current = categorias;
+        for (let key in path) {
+            if (path[key] !== undefined) {
+                current = current[path[key]];
+            } else {
+                break;
+            }
+        }
+        return current;
+    }
+
+    obterCaminhoCategoriaAcima() {
+        let path = this.props.location.pathname;
+        let splitedPath = path.split('/');
+        splitedPath.pop();
+        return splitedPath.join('/');
+    }
+
     render() {
         let categorias = this.props.loja.state.categorias;
-        console.log(this.props.loja.state.categorias);
+        let isRoot = this.props.match.params.cat1 === undefined;
+        let categoriaSelecionada = this.selecionaSubcategoria(categorias);
+        let CategoriaLista = this.obtemListaAPartirDaCategoria(categoriaSelecionada);
 
-        let CategoriaLis = this.ConvertePropertiesParaLi(categorias);
+        return (
+            <aside className="categorias col-3">
 
-
-        return (<aside className="categorias col-3">
-            <ul>
-                {CategoriaLis}
-            </ul>
-        </aside>
+                {!isRoot && <Link to={this.obterCaminhoCategoriaAcima()}>Voltar</Link>}
+                <ul>
+                    {CategoriaLista}
+                </ul>
+            </aside>
         )
     }
-}
+})
 
 class ProdutoCard extends Component {
     render() {

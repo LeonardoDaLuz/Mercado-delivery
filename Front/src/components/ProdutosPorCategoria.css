@@ -1,3 +1,36 @@
 .categorias ul {
+    position: relative;
+    background-color: white;
+}
+.categorias ul button {
+    position: relative;
+    background-color: white;
+}
+
+
+.categorias ul ul {
     margin-left: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.categorias ul ul button {
+    background-color: rgb(118, 199, 141);
+}
+
+.categorias ul ul ul button {
+    background-color: rgb(81, 159, 103);
+}
+
+.categorias ul ul ul ul button {
+    background-color: rgb(61, 126, 80);
+}
+
+.categorias button {
+    width: 100%;
+    border: none;
+}
+
+.hide {
+    display: none;
 }
