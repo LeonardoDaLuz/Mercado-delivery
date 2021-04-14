@@ -100,7 +100,7 @@ let Categorias = withRouter(class Categorias extends Component {
         let resultado = keys.map(function (key, index) {
 
             let id = key;
-            let link = Object.keys(objeto[key]).length > 0 ? <Link to={path + key} onClick={() => { loja.reiniciaListaDeProdutos(path + key, 12) }}>{key}</Link> : key;
+            let link = <Link to={path + key} onClick={() => { loja.reiniciaListaDeProdutos(path + key, 12) }}>{key}</Link>;
             return <li>{link}</li>;
         });
 
