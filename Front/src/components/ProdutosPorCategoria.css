@@ -1,36 +1,19 @@
-.categorias ul {
+.categorias {
+    padding: 20px 20px 25px 0px;
+}
+.categorias .lista {
     position: relative;
-    background-color: white;
+    background-color: rgb(228, 228, 228);
+    margin-top: 20px;
+    border-radius: 5px;
+    padding: 10px;
 }
-.categorias ul button {
-    position: relative;
-    background-color: white;
-}
+.categorias a {
 
+    color: rgb(72, 72, 72);
 
-.categorias ul ul {
-    margin-left: 10px;
-    border-radius: 10px;
-    overflow: hidden;
 }
 
-.categorias ul ul button {
-    background-color: rgb(118, 199, 141);
-}
-
-.categorias ul ul ul button {
-    background-color: rgb(81, 159, 103);
-}
-
-.categorias ul ul ul ul button {
-    background-color: rgb(61, 126, 80);
-}
-
-.categorias button {
-    width: 100%;
-    border: none;
-}
-
-.hide {
-    display: none;
+.produtos-page {
+    align-items: flex-start;
 }

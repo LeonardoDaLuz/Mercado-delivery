@@ -1,27 +1,27 @@
 {
   "files": {
-    "main.css": "/static/css/main.38ab29f9.chunk.css",
-    "main.js": "/static/js/main.08103dd5.chunk.js",
-    "main.js.map": "/static/js/main.08103dd5.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.652af644.js",
-    "runtime-main.js.map": "/static/js/runtime-main.652af644.js.map",
-    "static/css/2.aeaa2a60.chunk.css": "/static/css/2.aeaa2a60.chunk.css",
-    "static/js/2.0cc728ae.chunk.js": "/static/js/2.0cc728ae.chunk.js",
-    "static/js/2.0cc728ae.chunk.js.map": "/static/js/2.0cc728ae.chunk.js.map",
-    "static/js/3.4004601f.chunk.js": "/static/js/3.4004601f.chunk.js",
-    "static/js/3.4004601f.chunk.js.map": "/static/js/3.4004601f.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/2.aeaa2a60.chunk.css.map": "/static/css/2.aeaa2a60.chunk.css.map",
-    "static/css/main.38ab29f9.chunk.css.map": "/static/css/main.38ab29f9.chunk.css.map",
-    "static/js/2.0cc728ae.chunk.js.LICENSE.txt": "/static/js/2.0cc728ae.chunk.js.LICENSE.txt",
-    "static/media/LogoAlpha.03b851c4.png": "/static/media/LogoAlpha.03b851c4.png",
-    "static/media/main.css": "/static/media/LogoExtended48px.e13fa416.png"
+    "main.css": "./static/css/main.3e9249e4.chunk.css",
+    "main.js": "./static/js/main.77e80666.chunk.js",
+    "main.js.map": "./static/js/main.77e80666.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.3d5c14cd.js",
+    "runtime-main.js.map": "./static/js/runtime-main.3d5c14cd.js.map",
+    "static/css/2.aeaa2a60.chunk.css": "./static/css/2.aeaa2a60.chunk.css",
+    "static/js/2.99ac6364.chunk.js": "./static/js/2.99ac6364.chunk.js",
+    "static/js/2.99ac6364.chunk.js.map": "./static/js/2.99ac6364.chunk.js.map",
+    "index.html": "./index.html",
+    "static/css/2.aeaa2a60.chunk.css.map": "./static/css/2.aeaa2a60.chunk.css.map",
+    "static/css/main.3e9249e4.chunk.css.map": "./static/css/main.3e9249e4.chunk.css.map",
+    "static/js/2.99ac6364.chunk.js.LICENSE.txt": "./static/js/2.99ac6364.chunk.js.LICENSE.txt",
+    "static/media/LogoAlpha.03b851c4.png": "./static/media/LogoAlpha.03b851c4.png",
+    "static/media/App.css": "./static/media/LogoExtended48px.e13fa416.png",
+    "static/media/heart-black.38aa1780.svg": "./static/media/heart-black.38aa1780.svg",
+    "static/media/logomono-white.19a8eb44.png": "./static/media/logomono-white.19a8eb44.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.652af644.js",
+    "static/js/runtime-main.3d5c14cd.js",
     "static/css/2.aeaa2a60.chunk.css",
-    "static/js/2.0cc728ae.chunk.js",
-    "static/css/main.38ab29f9.chunk.css",
-    "static/js/main.08103dd5.chunk.js"
+    "static/js/2.99ac6364.chunk.js",
+    "static/css/main.3e9249e4.chunk.css",
+    "static/js/main.77e80666.chunk.js"
   ]
 }

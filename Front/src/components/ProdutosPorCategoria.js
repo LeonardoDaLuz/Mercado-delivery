@@ -1,10 +1,9 @@
 import react, { Component } from 'react';
+//import { CSSTransition } from 'react-transition-group';
 import configs from '../configs';
 import like from './svg/heart-black.svg';
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
     withRouter
 } from "react-router-dom";
@@ -12,33 +11,25 @@ import l from '../utilities/log';
 
 import './ProdutosPorCategoria.css';
 import moveElementFromTo from '../utilities/moveElementFromTo';
+import Breadcumb from "./Breadcumb";
 
 export default withRouter(class ProdutosPorCategoria extends Component {
-
-    constructor() {
-        super();
-
-        this.loading = false;
-        this.state = {
-            produtos: [
-            ]
-        }
-    }
-
 
     componentDidMount() {
         this.ligarInfiniteLoader();
     }
 
     async ligarInfiniteLoader() {
-        await this.carregarMaisProdutos();
+        let loja = this.props.loja;
+        let path = this.props.location.pathname;
+        await loja.carregarMaisProdutos(path, 12);
         await window.waitForSeconds(0.5);
 
         while (document.body.clientHeight < window.innerHeight) {
             if (!this.loading) {
 
                 this.loading = true;
-                await this.carregarMaisProdutos();
+                await loja.carregarMaisProdutos(path, 12);
                 await window.waitForSeconds(0.5);
                 this.loading = false;
             }
@@ -48,26 +39,14 @@ export default withRouter(class ProdutosPorCategoria extends Component {
             if (!this.loading && window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
 
                 this.loading = true;
-                await this.carregarMaisProdutos();
+                await loja.carregarMaisProdutos(path, 12);
                 this.loading = false;
             }
         });
     }
 
-    async carregarMaisProdutos() {
-        await fetch("http://localhost:3001/produtos/" + this.state.produtos.length + "/" + (this.state.produtos.length + 12))
-            .then(x => x.json())
-            .then(data => {
-                let oldProdutos = this.state.produtos;
-                this.setState({ produtos: oldProdutos.concat(data) });
-            })
-    }
-
     render() {
-
-
-
-        let produtoCards = this.state.produtos.map((p, index) => {
+        let produtoCards = this.props.loja.state.listaProdutos.map((p, index) => {
             return <ProdutoCard produto={p} key={index} carrinho={this.props.loja.carrinho} />
         })
         return (
@@ -83,17 +62,32 @@ export default withRouter(class ProdutosPorCategoria extends Component {
         );
     }
 })
+
 let Categorias = withRouter(class Categorias extends Component {
 
-    constructor() {
-        super();
 
-        this.ConvertePropertiesParaLi = this.obtemListaAPartirDaCategoria.bind(this);
+    render() {
+        let isRoot = this.props.match.params.cat1 === undefined;
+        let categoriaSelecionada = this.selecionaSubcategoria(this.props.loja.state.categorias);
+        let CategoriaLista = this.obtemListaAPartirDaCategoria(categoriaSelecionada);
+        let caminhoAcima = this.caminho().caminhoAcima;
+        console.log("teste");
+        return (
+            <aside className="categorias col-3">
+                {!isRoot &&
+                    <Breadcumb path={caminhoAcima} loja={this.props.loja} />
+                }
+                <h3>{this.caminho().ultimaCategoria}</h3>           
+                    {CategoriaLista}
+
+
+            </aside>
+        )
     }
+
     componentDidMount() {
         this.props.loja.carregaCategorias();
     }
-
 
     obtemListaAPartirDaCategoria(objeto) {
 
@@ -101,52 +95,48 @@ let Categorias = withRouter(class Categorias extends Component {
         if (path[path.length - 1] != '/')
             path += '/';
 
-        let resultado = Object.keys(objeto).map(function (key, index) {
+        let loja = this.props.loja;
+        let keys =  Object.keys(objeto);
+        let resultado = keys.map(function (key, index) {
 
             let id = key;
-            let link = Object.keys(objeto[key]).length > 0 ? <Link to={path + key}>{key}</Link> : "";
+            let link = Object.keys(objeto[key]).length > 0 ? <Link to={path + key} onClick={() => { loja.reiniciaListaDeProdutos(path + key, 12) }}>{key}</Link> : key;
             return <li>{link}</li>;
         });
 
-        return resultado;
+        
+
+        return keys.length==0?<></>:<ul className="lista">{resultado}</ul>;
     }
 
     selecionaSubcategoria(categorias) {
         let path = this.props.match.params;
-        let current = categorias;
+        let newCategorias = categorias;
+
         for (let key in path) {
-            if (path[key] !== undefined) {
-                current = current[path[key]];
+            if (path[key] !== undefined && newCategorias[path[key]] !== undefined) {
+                newCategorias = newCategorias[path[key]];
             } else {
                 break;
             }
         }
-        return current;
+        return newCategorias;
     }
 
-    obterCaminhoCategoriaAcima() {
+    caminho() {
         let path = this.props.location.pathname;
         let splitedPath = path.split('/');
-        splitedPath.pop();
-        return splitedPath.join('/');
+        //splitedPath.pop();
+        let ultimaCategoria = splitedPath.pop();
+
+        ultimaCategoria=ultimaCategoria=="produtos"?"Todos":ultimaCategoria;
+
+        return {
+            ultimaCategoria,
+            caminhoAcima: splitedPath.join('/')            
+        }
     }
 
-    render() {
-        let categorias = this.props.loja.state.categorias;
-        let isRoot = this.props.match.params.cat1 === undefined;
-        let categoriaSelecionada = this.selecionaSubcategoria(categorias);
-        let CategoriaLista = this.obtemListaAPartirDaCategoria(categoriaSelecionada);
-
-        return (
-            <aside className="categorias col-3">
-
-                {!isRoot && <Link to={this.obterCaminhoCategoriaAcima()}>Voltar</Link>}
-                <ul>
-                    {CategoriaLista}
-                </ul>
-            </aside>
-        )
-    }
 })
 
 class ProdutoCard extends Component {

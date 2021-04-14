@@ -3,19 +3,23 @@ const { resolveInclude } = require('ejs');
 var express = require('express');
 
 module.exports = (app) => {
+
+    /*
     app.get("/produtos/:from/:to", async function (req, resp) {
         produtosColecao = await global.db.listaProdutos(req.params.from, req.params.to);
         resp.json(produtosColecao);
-    });
+    });*/
 
-    app.get("/produtos/categoria/:from/:to/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?", async function (req, resp) { //obtem lista com os produtos, filtrado por categorias
+    app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:from/:to", async function (req, resp) { //obtem lista com os produtos, filtrado por categorias
 
+        console.log(req.params);
         let query = {}
 
-        Object.keys(req.params).forEach((key, index)=> {
-            if(index>1) {
+        let keys = Object.keys(req.params);
+        keys.forEach((key, index)=> {
+            if(index< keys.length-2) {
                 if(req.params[key]!==undefined) {
-                    query["categorias."+(index-2)] = req.params[key];
+                    query["categorias."+(index)] = req.params[key];
                 }
             }
         })

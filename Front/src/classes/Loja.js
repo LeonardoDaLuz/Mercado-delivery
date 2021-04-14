@@ -9,6 +9,7 @@ export default class Loja {
             localizacaoLoja: { lat: -25.5187973, long: -48.5325122 },
             localizacaoCliente: { lat: 0, long: 0 },
             frete: 0,
+            listaProdutos: [],
             produtoCarregado: {
                 _id: -1,
                 titulo: '',
@@ -47,7 +48,7 @@ export default class Loja {
 
     likeProduto(id) {
         let conta = 0;
-        fetch(`http://localhost:3001/like/${conta}/${id}`, { method: 'POST'})
+        fetch(`http://localhost:3001/like/${conta}/${id}`, { method: 'POST' })
             .then(T => T.json())
             .then(p => {
                 this.setState({ produtoCarregado: p })
@@ -80,4 +81,24 @@ export default class Loja {
                 this.setState({ categorias: p })
             });
     }
+
+    reiniciaListaDeProdutos(path, quantidade =12) {
+        this.setState({ listaProdutos: [] });
+        this.carregarMaisProdutos(path, quantidade, 0);
+    }
+
+    async carregarMaisProdutos(path, quantidade=12, aPartirDe=this.state.listaProdutos.length) {
+
+        if (path[path.length - 1] !== "/")
+            path += "/";
+
+        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade);
+        await fetch(url)
+            .then(x => x.json())
+            .then(data => {
+                let oldProdutos = this.state.listaProdutos;
+                this.setState({ listaProdutos: oldProdutos.concat(data) });
+            })
+    }
+
 }

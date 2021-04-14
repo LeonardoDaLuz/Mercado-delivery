@@ -2,10 +2,12 @@
   "name": "mercado-delivery",
   "version": "0.1.0",
   "private": true,
+  "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
     "@testing-library/user-event": "^12.8.3",
+    "@types/react-transition-group": "^1.1.6",
     "bootstrap": "^4.6.0",
     "jquery": "^3.6.0",
     "node-sass": "^5.0.0",
@@ -15,6 +17,7 @@
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-transition-group": "^1.2.1",
     "web-vitals": "^1.1.1"
   },
   "scripts": {

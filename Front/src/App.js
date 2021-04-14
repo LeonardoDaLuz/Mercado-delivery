@@ -3,10 +3,7 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
-  useRouteMatch,
-  IndexRoute,
-  useParams
+  withRouter
 } from "react-router-dom";
 
 import "../node_modules/bootstrap/scss/bootstrap.scss";
@@ -22,7 +19,7 @@ import ProdutosPorCategoria from './components/ProdutosPorCategoria';
 import Footer from './components/Footer';
 import Loja from './classes/Loja';
 
-export default class App extends Component {
+export default withRouter(class App extends Component {
 
   constructor() {
     super();
@@ -44,10 +41,10 @@ export default class App extends Component {
             <Route exact path="/produto2/:id" >
               <Produto loja={this.loja} />
             </Route>
-            <Route path="/produtos" >
+            <Route exact path="/produtos/all" >
               <Produtos loja={this.loja} />
             </Route>
-            <Route path="/categoria/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
+            <Route path="/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
               <ProdutosPorCategoria loja={this.loja} />
             </Route>
             
@@ -59,5 +56,5 @@ export default class App extends Component {
   }
 
   /* <button onClick={this.log.bind(this)}>kjj</button> */
-}
+})
 
