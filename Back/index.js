@@ -98,22 +98,7 @@ async function main() {
         resp.json(carrinho);
     });
 
-    app.get("/produtos/:from/:to", async function (req, resp) {
-        produtosColecao = await global.db.listaProdutos(req.params.from, req.params.to);
-        resp.json(produtosColecao);
-    });
 
-    app.get("/produto/:id", async function (req, resp) {
-        let produto = await global.db.getProduto(req.params.id);
-        console.log(produto)
-        resp.json(produto);
-    });
-    //http://localhost:3001/carrinho/modificarQuantidadeProduto/
-    app.get("/produto2/:id", async function (req, resp) {
-        let produto = await global.db.getProdutoPorObjId(req.params.id);
-        console.log(produto)
-        resp.json(produto);
-    });
 
     app.post('/insert', (req, res) => {
         res.json(req.body);
