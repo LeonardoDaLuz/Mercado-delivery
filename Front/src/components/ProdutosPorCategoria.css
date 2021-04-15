@@ -1,6 +1,7 @@
 .categorias {
     padding: 20px 20px 25px 0px;
 }
+
 .categorias .lista {
     position: relative;
     background-color: rgb(235, 235, 235);
@@ -8,13 +9,33 @@
     border-radius: 5px;
     padding: 10px;
 }
+
 .categorias a {
-
-    color: rgb(72, 72, 72);
-    
-
+    color: rgb(64, 64, 64);
 }
 
 .produtos-page {
     align-items: flex-start;
+}
+
+.categorias .faixa-de-preco {
+    display: flex;
+}
+
+.categorias .faixa-de-preco>input {
+    flex: 1;
+    width: 100%;
+    border-radius: 5px;
+    border: 1px solid rgb(172, 172, 172);
+}
+
+.categorias .faixa-de-preco>button {
+background-color: green;
+color: white;
+border: none;
+padding: 0px 20px;
+border-radius: 5px;
+margin-left: 5px;
+
+    
 }

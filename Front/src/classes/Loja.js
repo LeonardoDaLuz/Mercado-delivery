@@ -16,6 +16,12 @@ export default class Loja {
                 categorias: [],
                 descricao: '',
             },
+            seletorListaDeProdutos: {
+                faixaPreco: {
+                    min: "",
+                    max: ""
+                }
+            },
             categorias: {}
         }
 
@@ -27,6 +33,9 @@ export default class Loja {
 
     get state() {
         return this.parent.state;
+    }
+    get props() {
+        return this.parent.props;
     }
 
     get localizacaoCliente() {
@@ -82,17 +91,20 @@ export default class Loja {
             });
     }
 
-    reiniciaListaDeProdutos(path, quantidade =12) {
+    reiniciaListaDeProdutos(path = this.props.location.pathname, quantidade = 12) {
         this.setState({ listaProdutos: [] });
         this.carregarMaisProdutos(path, quantidade, 0);
     }
 
-    async carregarMaisProdutos(path, quantidade=12, aPartirDe=this.state.listaProdutos.length) {
+    async carregarMaisProdutos(path, quantidade = 12, aPartirDe = this.state.listaProdutos.length) {
 
         if (path[path.length - 1] !== "/")
             path += "/";
 
-        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade);
+        let seletor = this.state.seletorListaDeProdutos;
+        let query = "?minPrice=" + seletor.faixaPreco.min + "&maxPrice=" + seletor.faixaPreco.max;
+
+        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade) + query;
         await fetch(url)
             .then(x => x.json())
             .then(data => {
@@ -101,4 +113,23 @@ export default class Loja {
             })
     }
 
+    updateFaixaPreco() {
+        let obj = this.state.seletorListaDeProdutos;
+        return {
+            min: (e) => {
+                obj.faixaPreco.min = filtraFloat(e.target.value);
+                this.setState({ seletorListaDeProdutos: obj });
+            },
+            max: (e) => {
+                obj.faixaPreco.max = filtraFloat(e.target.value);
+                this.setState({ seletorListaDeProdutos: obj });
+            }
+        }
+    }
+
+}
+
+function filtraFloat(valor) {
+    let val = parseFloat(valor);
+    return val == 0 || isNaN(val) ? "" : val;
 }

@@ -12,6 +12,7 @@ import l from '../utilities/log';
 import './ProdutosPorCategoria.css';
 import moveElementFromTo from '../utilities/moveElementFromTo';
 import Breadcumb from "./Breadcumb";
+import SidebarCategorias from './SidebarCategorias';
 
 export default withRouter(class ProdutosPorCategoria extends Component {
 
@@ -51,7 +52,7 @@ export default withRouter(class ProdutosPorCategoria extends Component {
         })
         return (
             <section className="container-lg px-2 produtos-page d-flex">
-                <Categorias loja={this.props.loja} />
+                <SidebarCategorias loja={this.props.loja} />
                 <div className="col-9">
                     <ul className="row">
                         {produtoCards}
@@ -61,82 +62,6 @@ export default withRouter(class ProdutosPorCategoria extends Component {
 
         );
     }
-})
-
-let Categorias = withRouter(class Categorias extends Component {
-
-
-    render() {
-        let isRoot = this.props.match.params.cat1 === undefined;
-        let categoriaSelecionada = this.selecionaSubcategoria(this.props.loja.state.categorias);
-        let CategoriaLista = this.obtemListaAPartirDaCategoria(categoriaSelecionada);
-        let caminhoAcima = this.caminho().caminhoAcima;
-        console.log("teste");
-        return (
-            <aside className="categorias col-3">
-                {!isRoot &&
-                    <Breadcumb path={caminhoAcima} loja={this.props.loja} />
-                }
-                <h3>{this.caminho().ultimaCategoria}</h3>           
-                    {CategoriaLista}
-
-
-            </aside>
-        )
-    }
-
-    componentDidMount() {
-        this.props.loja.carregaCategorias();
-    }
-
-    obtemListaAPartirDaCategoria(objeto) {
-
-        let path = this.props.location.pathname;
-        if (path[path.length - 1] != '/')
-            path += '/';
-
-        let loja = this.props.loja;
-        let keys =  Object.keys(objeto);
-        let resultado = keys.map(function (key, index) {
-
-            let id = key;
-            let link = <Link to={path + key} onClick={() => { loja.reiniciaListaDeProdutos(path + key, 12) }}>{key}</Link>;
-            return <li>{link}</li>;
-        });
-
-        
-
-        return keys.length==0?<></>:<ul className="lista">{resultado}</ul>;
-    }
-
-    selecionaSubcategoria(categorias) {
-        let path = this.props.match.params;
-        let newCategorias = categorias;
-
-        for (let key in path) {
-            if (path[key] !== undefined && newCategorias[path[key]] !== undefined) {
-                newCategorias = newCategorias[path[key]];
-            } else {
-                break;
-            }
-        }
-        return newCategorias;
-    }
-
-    caminho() {
-        let path = this.props.location.pathname;
-        let splitedPath = path.split('/');
-        //splitedPath.pop();
-        let ultimaCategoria = splitedPath.pop();
-
-        ultimaCategoria=ultimaCategoria=="produtos"?"Todos":ultimaCategoria;
-
-        return {
-            ultimaCategoria,
-            caminhoAcima: splitedPath.join('/')            
-        }
-    }
-
 })
 
 class ProdutoCard extends Component {

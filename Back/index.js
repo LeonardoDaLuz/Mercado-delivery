@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var produtosColecao = null //require('./produtos.json');
 const { NetworkAuthenticationRequire } = require('http-errors');
 const cors = require('cors');
-var consign = require('consign'); 
+var consign = require('consign');
 
 main();
 
@@ -28,8 +28,8 @@ async function main() {
     });
 
     consign()
-    .include('routes') //incorpora todo codigo dentro dessa pasta, para dentro do app.
-    .into(app);
+        .include('routes') //incorpora todo codigo dentro dessa pasta, para dentro do app.
+        .into(app);
 
     app.get('/importaprodutosjson', (req, resp) => {
         (async () => {
@@ -99,30 +99,30 @@ async function main() {
     });
 
 
+    app.get("/:teste?/", async function (req, resp) {
+        console.log(req.query.name);
+        resp.json(req.query)
+    });
 
-    app.post('/insert', (req, res) => {
-        res.json(req.body);
-    })
-
-    app.post('/like/:conta/:objId',async (req, res) => {
+    app.post('/like/:conta/:objId', async (req, res) => {
 
         let conta = parseInt(req.params.conta)
         let produto = await global.db.getProdutoPorObjId(req.params.objId);
 
         if (produto.likes === undefined) {
-           produto.likes = [];
+            produto.likes = [];
         }
 
         let index = produto.likes.indexOf(conta);
         if (index == -1) {
             produto.likes.push(conta)
-        } else{
+        } else {
             produto.likes.splice(index, 1);
         }
-        
+
         let update = await global.db.updateProduto(req.params.objId, produto);
 
-        if(update)
+        if (update)
             res.json(produto)
         else
             res.status(400).send('failed');
