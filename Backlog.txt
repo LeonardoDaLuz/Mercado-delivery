@@ -1,0 +1,27 @@
+Converter para REDUX (parei na implementação dos reducers)
+Usar Redux Saga
+
+Trocar classes por functions
+
+pg todos os produtos OK
+pg produtos por Categorias
+pg produto OK
+pg inserir/atualizar produto
+pg login
+pg cadastro
+pg Carrinho
+pg home
+    carrossel
+    ofertas do dia
+    ofertas da semana
+pg admin
+    pg gerenciar usuarios
+        pg editar usuario
+    pg gerenciar produto
+    pg gerenciar pedidos
+pg pedidos cliente
+
+
+--Milhas Extras:----
+Converter Para Native APP com Web View
+Converter para Next
