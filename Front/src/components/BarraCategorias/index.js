@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './BarraCategorias.css';
+import './style.css';
 
 export default class BarraCategorias extends Component {
     render() {

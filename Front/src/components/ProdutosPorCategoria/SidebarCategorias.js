@@ -5,7 +5,7 @@ import {
     withRouter
 } from "react-router-dom";
 import Breadcumb from "./Breadcumb";
-import './ProdutosPorCategoria.css';
+
 
 export default withRouter(class SidebarCategorias extends Component {
 

@@ -1,13 +1,13 @@
 import react, { Component } from 'react';
 //import { CSSTransition } from 'react-transition-group';
-import configs from '../configs';
+import configs from '@configs';
 
 import {
     BrowserRouter as Router,
     Link,
     withRouter
 } from "react-router-dom";
-import './ProdutosPorCategoria.css';
+import './style.css';
 import moveElementFromTo from '@utils/moveElementFromTo';
 import SidebarCategorias from './SidebarCategorias';
 

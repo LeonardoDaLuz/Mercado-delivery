@@ -3,14 +3,10 @@ import configs from '@configs';
 
 import {
     BrowserRouter as Router,
-    Switch,
-    Route,
     Link,
-    useParams
 } from "react-router-dom";
-import l from '../utils/log';
 
-import './Produtos.css';
+import './style.css';
 import moveElementFromTo from '@utils/moveElementFromTo';
 
 export default class Produtos extends Component {

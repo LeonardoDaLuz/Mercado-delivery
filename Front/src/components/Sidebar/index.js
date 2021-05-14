@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Sidebar.css';
+import './style.css';
 import SwipeInput from '@utils/SwipeInput';
 
 export default class Sidebar extends Component {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import assets from '@assets';
 
-import './Header.css';
+import './style.css';
 
 
 export default class Header extends Component {

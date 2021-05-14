@@ -8,7 +8,7 @@ import {
 
 import "../node_modules/bootstrap/scss/bootstrap.scss";
 import './App.css';
-import Header from './components/Header';
+import Header from './components/Header'; 
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
 import Produto from './components/Produto';
