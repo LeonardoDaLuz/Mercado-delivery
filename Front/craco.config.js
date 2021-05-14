@@ -10,6 +10,7 @@ module.exports = {
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@utils/SwipeInput': path.resolve(__dirname, 'src/utils/SwipeInput'),
       '@actions': path.resolve(__dirname, 'src/store/actions'),
+      '@types': path.resolve(__dirname, 'src/store/types'),
     }
   },
 };

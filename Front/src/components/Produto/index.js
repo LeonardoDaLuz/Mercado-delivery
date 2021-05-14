@@ -1,44 +1,39 @@
-import  { Component } from 'react';
+import { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
-import { carregaProdutos } from '@actions/listaProdutos'
 import { connect } from 'react-redux';
 
 //Sub Components
 import { BreadCumbs } from './BreadCumbs';
-import './style.css';
 import { QuadroDeFotos } from './QuadroDeFotos';
 import { QuadroComprar } from './QuadroComprar';
 import { DescricaoProduto } from './DescricaoProduto';
+
+//Others
+import { carregaProduto } from '@actions/produtos'
+import './style.css';
 
 class Produto extends Component {
 
     constructor() {
         super();
-
-        this.state = {
-            produto: {
-                _id: 5,
-                titulo: '',
-                categorias: [],
-                descricao: '',
-            }
-        }
     }
 
     componentDidMount() {
-        this.props.loja.carregaProduto(this.props.match.params.id);
+        const { carregaProduto } = this.props;
+        carregaProduto(this.props.match.params.id);
     }
 
 
     render() {
 
         let loja = this.props.loja;
-        let produto = loja.state.produtoCarregado;
+        const { carregaProduto, produto } = this.props;
 
         return (
             <div className="container-lg px-2 produto-page">
                 <BreadCumbs produto={produto} />
+                <button onClick={(e) => carregaProduto(this.props.match.params.id)}>AKi</button>
                 <div className='row'>
                     <QuadroDeFotos produto={produto} />
                     <QuadroComprar produto={produto} loja={loja} />
@@ -50,12 +45,12 @@ class Produto extends Component {
 }
 
 const mapStateToProps = store => ({
-    produtos: store.listaProdutos
+    produto: store.produto
 })
 
-const mapDispatchToProps = dispatch => {
-    bindActionCreators({ carregaProdutos: carregaProdutos },);
-}
+const mapDispatchToProps = dispatch => 
+    bindActionCreators({ carregaProduto }, dispatch);
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Produto));
 

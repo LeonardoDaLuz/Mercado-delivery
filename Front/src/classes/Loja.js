@@ -47,7 +47,6 @@ export default class Loja {
     }
 
     carregaProduto(id) {
-
         fetch('http://localhost:3001/produto2/' + id)
             .then(T => T.json())
             .then(p => {
