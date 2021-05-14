@@ -9,6 +9,7 @@ module.exports = {
       '@configs': path.resolve(__dirname, 'src/configs'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@utils/SwipeInput': path.resolve(__dirname, 'src/utils/SwipeInput'),
+      '@actions': path.resolve(__dirname, 'src/store/actions'),
     }
   },
 };

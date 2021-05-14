@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import assets from '@assets';
-
 import './style.css';
-
 
 export default class Header extends Component {
 
@@ -31,13 +29,3 @@ export default class Header extends Component {
         );
     }
 }
-/* <ul >
-                        <li>Inicio</li>
-                        <li>Buscar</li>
-                        <li>Minhas Compras</li>
-                        <li>Favoritos</li>
-                        <li>Ofertas do dia</li>
-                        <li>Minha Conta</li>
-                        <li>Contato</li>
-                    </ul>*/
-

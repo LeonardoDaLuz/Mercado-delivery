@@ -1,8 +1,7 @@
-import react, { Component } from 'react';
-
+import  { Component } from 'react';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
-import { carregaProdutos } from '../../store/actions/listaProdutos'
+import { carregaProdutos } from '@actions/listaProdutos'
 import { connect } from 'react-redux';
 
 //Sub Components
