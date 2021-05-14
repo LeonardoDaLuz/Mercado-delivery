@@ -14,7 +14,7 @@ body {
   flex: 0;
   flex-basis: 64px;
   height: 48px;
-  background-image: url('/src/UI-Imgs/LogoAlpha48px.png');
+  background-image: url('/src/assets/png/LogoAlpha48px.png');
   background-repeat: no-repeat;
   background-position: center;
 
@@ -36,6 +36,6 @@ body {
 @media screen and (min-width: 992px) {
   .navbar-logo {
     flex-basis: 289px;
-    background-image: url('/src/UI-Imgs/LogoExtended48px.png');
+    background-image: url('/src/assets/png/LogoExtended48px.png');
   }
 }

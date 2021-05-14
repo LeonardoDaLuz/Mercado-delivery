@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Footer.css';
-import img from '../UI-Imgs/logomono-white.png';
+import assets from '@assets';
 
 export default class Footer extends Component {
 
@@ -10,7 +10,7 @@ export default class Footer extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col">
-                            <img src={img}/>
+                            <img src={assets.logomonoWhite}/>
                         </div>
                         <div className="col">
                            <ul>

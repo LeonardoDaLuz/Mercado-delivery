@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import logo from '../UI-Imgs/LogoAlpha.png';
-import carrinhoImg from '../UI-Imgs/Carrinho32px.png'
+import assets from '@assets';
+
 import './Header.css';
 
 
@@ -23,7 +23,7 @@ export default class Header extends Component {
                             <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Crie sua conta</li>
                             <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Entre</li>
                             <li className="d-none d-lg-block flex-grow-1 mx-3 nav-item">Compras</li>
-                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><div className="quantidade">{this.props.loja.carrinho.quantosTemProdutosNoCarrinho()}</div><img src={carrinhoImg} /><div className="custo">R$ {this.props.loja.carrinho.custoTotalNoCarrinho()}</div></a></li>
+                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><div className="quantidade">{this.props.loja.carrinho.quantosTemProdutosNoCarrinho()}</div><img src={assets.carrinho} /><div className="custo">R$ {this.props.loja.carrinho.custoTotalNoCarrinho()}</div></a></li>
                         </ul>
                     </div>
                 </div>                

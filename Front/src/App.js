@@ -7,17 +7,17 @@ import {
 } from "react-router-dom";
 
 import "../node_modules/bootstrap/scss/bootstrap.scss";
-import './css/App.css';
-import './utilities/waitForSeconds';
-import './utilities/Mathf';
+import './App.css';
 import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
-import Produto from './components/Produto.js';
+import Produto from './components/Produto';
 import Produtos from './components/Produtos';
 import ProdutosPorCategoria from './components/ProdutosPorCategoria';
 import Footer from './components/Footer';
 import Loja from './classes/Loja';
+
+
 
 export default withRouter(class App extends Component {
 

@@ -2,7 +2,6 @@
 var touchStart = false;
 var touchStartPosition = { x: 0, y: 0 };
 var swipeDirection = { x: 0, y: 0 };
-var minSwipeLength = 50;
 var initialized = false;
 
 export default class SwipeInput {
@@ -41,8 +40,8 @@ export default class SwipeInput {
 
     static startMouseSwipe(e) {   
         touchStart = true;
-        touchStartPosition.x = e.type=="mousedown"?e.clientX: e.touches[0].clientX;
-        touchStartPosition.y = e.type=="mousedown"?e.clientY: e.touches[0].clientY;
+        touchStartPosition.x = e.type==="mousedown"?e.clientX: e.touches[0].clientX;
+        touchStartPosition.y = e.type==="mousedown"?e.clientY: e.touches[0].clientY;
     }
 
     static stop() {
@@ -59,7 +58,7 @@ export default class SwipeInput {
         var arrowFunction = (e) => {
             let confirm = false;
 
-            if (dir.x != 0) {
+            if (dir.x !== 0) {
                 if (dir.x < 0) {
                     if (swipeDirection.x < dir.x)
                         confirm = true;
@@ -69,7 +68,7 @@ export default class SwipeInput {
                 }
             }
 
-            if (dir.y != 0) {
+            if (dir.y !== 0) {
                 if (dir.y < 0) {
                     if (swipeDirection.y < dir.y)
                         confirm = true;

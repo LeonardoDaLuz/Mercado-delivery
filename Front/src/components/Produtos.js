@@ -1,6 +1,6 @@
 import react, { Component } from 'react';
-import configs from '../configs';
-import like from './svg/heart-black.svg';
+import configs from '@configs';
+
 import {
     BrowserRouter as Router,
     Switch,
@@ -8,10 +8,10 @@ import {
     Link,
     useParams
 } from "react-router-dom";
-import l from '../utilities/log';
+import l from '../utils/log';
 
 import './Produtos.css';
-import moveElementFromTo from '../utilities/moveElementFromTo';
+import moveElementFromTo from '@utils/moveElementFromTo';
 
 export default class Produtos extends Component {
 

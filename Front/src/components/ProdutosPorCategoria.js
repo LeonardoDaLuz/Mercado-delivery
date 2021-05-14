@@ -1,17 +1,14 @@
 import react, { Component } from 'react';
 //import { CSSTransition } from 'react-transition-group';
 import configs from '../configs';
-import like from './svg/heart-black.svg';
+
 import {
     BrowserRouter as Router,
     Link,
     withRouter
 } from "react-router-dom";
-import l from '../utilities/log';
-
 import './ProdutosPorCategoria.css';
-import moveElementFromTo from '../utilities/moveElementFromTo';
-import Breadcumb from "./Breadcumb";
+import moveElementFromTo from '@utils/moveElementFromTo';
 import SidebarCategorias from './SidebarCategorias';
 
 export default withRouter(class ProdutosPorCategoria extends Component {
