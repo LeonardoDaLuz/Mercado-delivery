@@ -1,4 +1,4 @@
-import { CARREGA_PRODUTOS_START, CARREGA_PRODUTOS_SUCCESS, CARREGA_PRODUTOS_FAILURE } from '../types'
+import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, CARREGA_PRODUTO_FAILURE } from '../types'
 
 const initialState = {
     _id: 5,
@@ -10,7 +10,7 @@ const initialState = {
 
 const produto = (state = initialState, action) => {
     switch (action.type) {
-        case CARREGA_PRODUTOS_SUCCESS:
+        case CARREGA_PRODUTO_SUCCESS:
             return { ...action.payload};
         default:
             return state;

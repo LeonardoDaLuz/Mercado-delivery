@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 //Sub Components
 import { BreadCumbs } from './BreadCumbs';
 import { QuadroDeFotos } from './QuadroDeFotos';
-import { QuadroComprar } from './QuadroComprar';
+import QuadroComprar from './QuadroComprar';
 import { DescricaoProduto } from './DescricaoProduto';
 
 //Others
@@ -33,7 +33,7 @@ class Produto extends Component {
         return (
             <div className="container-lg px-2 produto-page">
                 <BreadCumbs produto={produto} />
-                <button onClick={(e) => carregaProduto(this.props.match.params.id)}>AKi</button>
+                <button onClick={() => carregaProduto(this.props.match.params.id)}>AKi</button>
                 <div className='row'>
                     <QuadroDeFotos produto={produto} />
                     <QuadroComprar produto={produto} loja={loja} />
@@ -48,7 +48,7 @@ const mapStateToProps = store => ({
     produto: store.produto
 })
 
-const mapDispatchToProps = dispatch => 
+const mapDispatchToProps = dispatch =>
     bindActionCreators({ carregaProduto }, dispatch);
 
 
