@@ -32,8 +32,7 @@ class Produto extends Component {
 
         return (
             <div className="container-lg px-2 produto-page">
-                <BreadCumbs produto={produto} />
-                <button onClick={() => carregaProduto(this.props.match.params.id)}>AKi</button>
+                <BreadCumbs produto={produto} />            
                 <div className='row'>
                     <QuadroDeFotos produto={produto} />
                     <QuadroComprar produto={produto} loja={loja} />

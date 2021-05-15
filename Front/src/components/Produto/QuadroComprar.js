@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
-import { QuadroComprarContainer, Row, Col, LikeButton, BotaoOutline } from './styles';
+import { QuadroComprarContainer, Row, Col, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete } from './styles';
 import { likeProduto } from '@actions/produtos'
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho'
 import { quantosForamAdicionadosAoCarrinho } from '@analyzers/carrinho';
@@ -15,10 +15,15 @@ function QuadroComprar(props) {
     let quantidadeAdicionado = quantosForamAdicionadosAoCarrinho(produto._id);
     let liked = produto.likes !== undefined && produto.likes.includes(0);
     let disabled = quantidadeAdicionado < 1;
-    
+
     useEffect(() => {
         carregarCarrinho();
     }, []);
+
+
+    function removerDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }
+    function adicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e); }
+    function editarQuantidade(e) { editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value); }
 
     return (
         <QuadroComprarContainer>
@@ -30,28 +35,29 @@ function QuadroComprar(props) {
                 <Col style={{ flexBasis: "150px", flexGrow: '0' }}>
                     <label>Quantidade:</label>
                     <Row>
-                        <BotaoOutline disabled={disabled} onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }}>-</BotaoOutline>
-                        <input className="form-control text-center" value={quantidadeAdicionado} onChange={(e) => editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value)} />
-                        <BotaoOutline onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }}>+</BotaoOutline>
+                        <BotaoOutline disabled={disabled} onClick={removerDoCarrinho}>-</BotaoOutline>
+                        <input className="form-control text-center" value={quantidadeAdicionado} onChange={editarQuantidade} />
+                        <BotaoOutline onClick={adicionarAoCarrinho}>+</BotaoOutline>
                     </Row>
                 </Col>
-                <Col className="bloco-preco">
+                <BlocoPreco>
                     <span>{produto.preco}</span><br />
                     <span>Em <b>12x de 35 sem juros</b></span>
-                </Col>
+                </BlocoPreco>
             </Row>
-            <Row className="calcular-frete">
+            <BlocoCalcularFrete>
                 <span>Acima de 100 reais em compras o <b>Frete é grátis!</b><br />
                 Abaixo disso, o frete para sua localização atual é R$ <b>{loja.state.frete.toFixed(2)} </b>
                 </span>
-            </Row>
+            </BlocoCalcularFrete>
             <Row>
-                <button className="botao-azul">Ir para o carrinho</button>
-                <button className="botao-verde" onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }}>Adicionar ao carrinho</button>
+                <BotaoAzul>Ir para o carrinho</BotaoAzul>
+                <BotaoVerde onClick={adicionarAoCarrinho}>Adicionar ao carrinho</BotaoVerde>
             </Row>
         </QuadroComprarContainer>
     );
 }
+
 
 function animarAdicao(e, dir = 1) {
     let fromImg = document.querySelector(".quadro-de-foto img");

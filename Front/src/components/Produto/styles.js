@@ -70,14 +70,14 @@ display: inline-block;
     -webkit-user-select: none;
     user-select: none;
     background-color: transparent;
-    border: 1px solid transparent;
+    border: 1px solid #bfc6cc;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
     border-radius: 0.25rem;
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    box-shadow: rgb(132 141 146 / 50%) 0px 0px 0px 0.2rem;
-    
+
+    cursor: pointer;
     &:hover {
         color: rgb(255, 255, 255);
         background-color: rgb(132, 141, 146);
@@ -86,4 +86,50 @@ display: inline-block;
 
 `;
 
+export const BotaoVerde = styled.button`
+    background-color: rgb(2, 157, 2);
+    border: 0px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    flex-grow: 1;
+    padding: 10px;
+`;
+
+export const BotaoAzul = styled.button`
+    background-color: rgb(36, 87, 208);
+    border: 0px;
+    border-radius: 5px;
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    flex-grow: 1;
+`;
+
+export const BlocoPreco = styled.div`
+
+    text-align: right;
+
+    &>span:nth-child(1) {
+        color: rgb(2, 157, 2);
+        font-size: 45px;
+        font-weight: 700;
+        line-height: 40px;
+    }
+
+    &>span:nth-child(1)::before {
+        color: rgb(2, 157, 2);
+        font-size: 45px;
+        font-weight: 700;
+        margin-bottom: -10px;
+    }
+`;
+
+export const BlocoCalcularFrete = styled.div`
+    white-space: nowrap;
+    margin-bottom: 15px;
+    background-color: rgb(199, 255, 217);
+    margin-top: 10px;
+    border-radius: 7px;
+    padding: 10px;
+`;
 
