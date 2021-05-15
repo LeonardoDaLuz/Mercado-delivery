@@ -1,18 +1,23 @@
 import moveElementFromTo from '@utils/moveElementFromTo';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import React, { useEffect } from 'react'
 
 import { QuadroComprarContainer, Row, Col, LikeButton } from './styles';
 import { likeProduto } from '@actions/produtos'
-import { adicionarProdutoAoCarrinho } from '@actions/carrinho'
-import { getState } from '@analyzers/carrinho';
+import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho'
+import { quantosForamAdicionadosAoCarrinho } from '@analyzers/carrinho';
 
 function QuadroComprar(props) {
 
-    let { produto, likeProduto, adicionarProdutoAoCarrinho } = props;
+    let { produto, likeProduto, carregarCarrinho, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
     let loja = props.loja;
-    let quantidadeAdicionado = loja.carrinho.quantosForamAdicionadosAoCarrinho(produto._id);
+    let quantidadeAdicionado = quantosForamAdicionadosAoCarrinho(produto._id);
     let liked = produto.likes !== undefined && produto.likes.includes(0);
+
+    useEffect(()=> {
+        carregarCarrinho();
+    }, []);
 
     return (
         <QuadroComprarContainer>
@@ -25,8 +30,8 @@ function QuadroComprar(props) {
                     <label>Quantidade:</label>
                     <div className="linha">
                         <button className="btn btn-outline-secondary" disabled={quantidadeAdicionado < 1 ? true : false}
-                            onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, -1); getState(); animarAdicao(e, -1); }}>-</button>
-                        <input className="form-control text-center" value={quantidadeAdicionado} aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(e) => loja.carrinho.editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value)} />
+                            onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }}>-</button>
+                        <input className="form-control text-center" value={quantidadeAdicionado} aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(e) => editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value)} />
                         <button className="btn btn-outline-secondary" onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }}>+</button>
                     </div>
                 </div>
@@ -60,7 +65,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ likeProduto, adicionarProdutoAoCarrinho }, dispatch);
+    bindActionCreators({ likeProduto, adicionarProdutoAoCarrinho, carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(QuadroComprar);
