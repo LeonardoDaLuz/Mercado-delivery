@@ -55,3 +55,35 @@ export const LikeButton = styled.button`
 
 `;
 
+export const Quantidade = styled.div`
+
+    flex-basis: 150px;
+    flex-grow: 0!important;
+`;
+
+export const BotaoOutline = styled.div`
+display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: 0.25rem;
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    box-shadow: rgb(132 141 146 / 50%) 0px 0px 0px 0.2rem;
+    
+    &:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(132, 141, 146);
+        border-color: rgb(150, 140, 125);
+    }
+
+`;
+
+

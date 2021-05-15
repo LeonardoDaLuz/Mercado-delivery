@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
-import { QuadroComprarContainer, Row, Col, LikeButton } from './styles';
+import { QuadroComprarContainer, Row, Col, LikeButton, BotaoOutline } from './styles';
 import { likeProduto } from '@actions/produtos'
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho'
 import { quantosForamAdicionadosAoCarrinho } from '@analyzers/carrinho';
@@ -14,8 +14,9 @@ function QuadroComprar(props) {
     let loja = props.loja;
     let quantidadeAdicionado = quantosForamAdicionadosAoCarrinho(produto._id);
     let liked = produto.likes !== undefined && produto.likes.includes(0);
-
-    useEffect(()=> {
+    let disabled = quantidadeAdicionado < 1;
+    
+    useEffect(() => {
         carregarCarrinho();
     }, []);
 
@@ -26,19 +27,18 @@ function QuadroComprar(props) {
                 <LikeButton className={liked} onClick={() => likeProduto(produto._id)}>♥</LikeButton>
             </Row>
             <Row>
-                <div className="quantidade">
+                <Col style={{ flexBasis: "150px", flexGrow: '0' }}>
                     <label>Quantidade:</label>
-                    <div className="linha">
-                        <button className="btn btn-outline-secondary" disabled={quantidadeAdicionado < 1 ? true : false}
-                            onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }}>-</button>
-                        <input className="form-control text-center" value={quantidadeAdicionado} aria-label="Recipient's username" aria-describedby="button-addon2" onChange={(e) => editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value)} />
-                        <button className="btn btn-outline-secondary" onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }}>+</button>
-                    </div>
-                </div>
-                <div className="bloco-preco">
+                    <Row>
+                        <BotaoOutline disabled={disabled} onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }}>-</BotaoOutline>
+                        <input className="form-control text-center" value={quantidadeAdicionado} onChange={(e) => editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value)} />
+                        <BotaoOutline onClick={(e) => { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }}>+</BotaoOutline>
+                    </Row>
+                </Col>
+                <Col className="bloco-preco">
                     <span>{produto.preco}</span><br />
                     <span>Em <b>12x de 35 sem juros</b></span>
-                </div>
+                </Col>
             </Row>
             <Row className="calcular-frete">
                 <span>Acima de 100 reais em compras o <b>Frete é grátis!</b><br />
