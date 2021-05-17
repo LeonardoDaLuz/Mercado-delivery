@@ -35,16 +35,16 @@ export default withRouter(function SidebarCategorias(props) {
 
     function selecionaSubcategoria(categorias) {
         let path = props.match.params;
-        let newCategorias = categorias;
+        let categoriaCursor = categorias;
 
         for (let key in path) {
-            if (path[key] !== undefined && newCategorias[path[key]] !== undefined) {
-                newCategorias = newCategorias[path[key]];
+            if (path[key] !== undefined && categoriaCursor[path[key]] !== undefined) {
+                categoriaCursor = categoriaCursor[path[key]];
             } else {
                 break;
             }
         }
-        return newCategorias;
+        return categoriaCursor;
     }
 
     function caminho() {

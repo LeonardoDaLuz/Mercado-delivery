@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators, connect } from 'redux';
 import SidebarCategorias from './SidebarCategorias';
@@ -9,53 +9,54 @@ import { Container, ListaDeProdutos } from './styles';
 import assets from '@assets';
 import './style.css';
 
-export default withRouter(class ProdutosPorCategoria extends Component {
+export default withRouter(function ProdutosPorCategoria(props) {
 
-    componentDidMount() {
-        this.ligarInfiniteLoader();
-    }
+    useEffect(()=> {
+        ligarInfiniteLoader();
+    }, [])
 
-    async ligarInfiniteLoader() {
-        let loja = this.props.loja;
-        let path = this.props.location.pathname;
+    async function ligarInfiniteLoader() {
+        let loja = props.loja;
+        let path = props.location.pathname;
+        let loading = false;
         await loja.carregarMaisProdutos(path, 12);
         await window.waitForSeconds(0.5);
 
         while (document.body.clientHeight < window.innerHeight) {
-            if (!this.loading) {
+            if (!loading) {
 
-                this.loading = true;
+                loading = true;
                 await loja.carregarMaisProdutos(path, 12);
                 await window.waitForSeconds(0.5);
-                this.loading = false;
+                loading = false;
             }
         }
 
         window.addEventListener("scroll", async (e) => {
-            if (!this.loading && window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
+            if (!loading && window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
 
-                this.loading = true;
+                loading = true;
                 await loja.carregarMaisProdutos(path, 12);
-                this.loading = false;
+                loading = false;
             }
         });
     }
 
-    render() {
-        let produtoCards = this.props.loja.state.listaProdutos.map((p, index) => {
-            return <ProdutoCard produto={p} key={index} carrinho={this.props.loja.carrinho} />
-        })
-        return (
-            <Container>
-                <SidebarCategorias loja={this.props.loja} />
-                <ListaDeProdutos>
 
-                    {produtoCards}
+    let produtoCards = props.loja.state.listaProdutos.map((p, index) => {
+        return <ProdutoCard produto={p} key={index} carrinho={props.loja.carrinho} />
+    })
+    return (
+        <Container>
+            <SidebarCategorias loja={props.loja} />
+            <ListaDeProdutos>
 
-                </ListaDeProdutos>
-            </Container>
+                {produtoCards}
 
-        );
-    }
+            </ListaDeProdutos>
+        </Container>
+
+    );
+
 })
 
