@@ -80,7 +80,7 @@ export default withRouter(class SidebarCategorias extends Component {
     }
 })
 
-let FaixaDePreco = withRouter(function FaixaDePreco(props) {
+let FaixaDePreco = withRouter((props)=> {
 /*
     let search = new URLSearchParams(props.location.search);
     let min = search.get('minPrice');

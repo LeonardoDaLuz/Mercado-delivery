@@ -61,19 +61,22 @@ export const Preco = styled.div`
     text-align: right;
     margin: -0px 15px 15px 0pc;
 
-    .riscado {
+    &>div:first-child {
         color: grey;
         text-decoration: line-through;
         font-size: 14px;
         line-height: 12px;
     }
 
-    .preco {
+    &>div:last-child {
         font-size: 24px;
+        color: rgb(2, 157, 2);
+        font-weight: 700;
+        margin-bottom: -10px;
     }
 `;
 
-export const AdicionarRemover = styled.div`
+export const AdicionarRemoverDoCarrinho = styled.div`
     display: flex;
     justify-content: center;
 
@@ -84,7 +87,7 @@ export const AdicionarRemover = styled.div`
         width: 55px;
         text-align: center;
     }
-    
+
     &>button:last-child {
         background-color: rgb(2, 204, 59);
         border-radius: 0px 15px 15px 0px;
