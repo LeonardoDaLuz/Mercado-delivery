@@ -9,6 +9,7 @@ import { Container, ListaDeProdutos } from './styles';
 import assets from '@assets';
 import './style.css';
 
+let  loading = false;
 export default withRouter(function ProdutosPorCategoria(props) {
 
     useEffect(()=> {
@@ -18,7 +19,6 @@ export default withRouter(function ProdutosPorCategoria(props) {
     async function ligarInfiniteLoader() {
         let loja = props.loja;
         let path = props.location.pathname;
-        let loading = false;
         await loja.carregarMaisProdutos(path, 12);
         await window.waitForSeconds(0.5);
 
