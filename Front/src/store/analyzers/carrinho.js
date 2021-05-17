@@ -10,7 +10,6 @@ export function getState() {
 
 export function quantosDesseForamAdicionadosAoCarrinho(id) {
 
-
     console.log( store.getState().carrinho);
     let registroProduto = store.getState().carrinho.produtos[id];
 

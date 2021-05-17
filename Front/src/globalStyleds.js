@@ -1,12 +1,21 @@
 import styled from 'styled-components';
 
 export const Row = styled.div`
-display: flex;
+    display: flex;
+    justify-content: ${props => (props.justify===undefined?'flex-start':props.justify)};
+   
 `;
 
 export const Col = styled.div`
-flex-grow: 1;
+    flex-grow: 1;
 `;
+
+export const Col3 = styled.div`
+    flex: 0 0 25%;
+    max-width: 25%;
+`;
+
+
 
 export const ButtonOutline = styled.button`
     cursor: pointer;

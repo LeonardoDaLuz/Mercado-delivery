@@ -1,7 +1,12 @@
 import { Component } from 'react';
 import { withRouter } from "react-router-dom";
+import { bindActionCreators, connect } from 'redux';
 import SidebarCategorias from './SidebarCategorias';
 import { ProdutoCard } from './ProdutoCard';
+import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
+
+import { Container, ListaDeProdutos } from './styles';
+import assets from '@assets';
 import './style.css';
 
 export default withRouter(class ProdutosPorCategoria extends Component {
@@ -41,14 +46,14 @@ export default withRouter(class ProdutosPorCategoria extends Component {
             return <ProdutoCard produto={p} key={index} carrinho={this.props.loja.carrinho} />
         })
         return (
-            <section className="container-lg px-2 produtos-page d-flex">
+            <Container>
                 <SidebarCategorias loja={this.props.loja} />
-                <div className="col-9">
-                    <ul className="row">
-                        {produtoCards}
-                    </ul>
-                </div>
-            </section>
+                <ListaDeProdutos>
+
+                    {produtoCards}
+
+                </ListaDeProdutos>
+            </Container>
 
         );
     }

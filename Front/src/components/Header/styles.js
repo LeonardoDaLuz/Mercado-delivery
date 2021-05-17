@@ -20,7 +20,7 @@ export const ContainerLg = styled.div`
     }
 `;
 
-export const NavbarLogo = styled.div`
+export const NavbarLogo = styled.a`
     flex: 0;
     flex-basis: 64px;
     height: 48px;
@@ -78,7 +78,7 @@ export const Carrinho = styled.a`
 
     position: relative;
     margin-right: 3px;
-    
+
     .quantidade {
         position: absolute;
         top: -15px;

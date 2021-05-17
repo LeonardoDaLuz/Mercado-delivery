@@ -21,13 +21,11 @@ import { connect } from 'react-redux';
     }
 
     render() {
-
-
         return (
             <Header>
                 <ContainerLg>
                     <Row>
-                        <NavbarLogo href="google.com"></NavbarLogo>
+                        <NavbarLogo href="/"></NavbarLogo>
                         <SearchBar>
                             <input/>
                             <ButtonOutline>Buscar</ButtonOutline>
