@@ -1,32 +1,65 @@
 import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
 import assets from '@assets';
-import './style.css';
-import { Header, ContainerLg } from './styles';
+import { carregarCarrinho } from '@actions/carrinho'
 
-export default class Header_ extends Component {
+import { quantosDesseForamAdicionadosAoCarrinho,  quantosProdutosTemNoCarrinho, custoTotalNoCarrinho  } from '@analyzers/carrinho';
+
+import './style.css';
+import { Header, ContainerLg, NavbarLogo, SearchBar, Sandwich, Carrinho } from './styles';
+import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
+import { connect } from 'react-redux';
+
+ class Header_ extends Component {
+
+    componentDidMount(props) {
+
+        let { carregarCarrinho } = this.props;
+        console.log("kct");
+        console.log(carregarCarrinho);
+        carregarCarrinho();
+    }
 
     render() {
+
+
         return (
             <Header>
                 <ContainerLg>
-                    <div className="d-flex navbar-light align-items-center">
-                        <a className="navbar-logo" href="google.com"></a>
-                        <form className="flex-grow-1 d-flex align-items-center">
-                            <input className="form-control flex-grow-1" />
-                            <button className="btn btn-outline-success flex-grow-1 ml-1" type="submit">Buscar</button>
-                        </form>
-                        <button id="sidebar-toogler" className="navbar-toggler d-lg-none" type="button" >
-                            <span className="navbar-toggler-icon"></span>
-                        </button>
-                        <ul className="d-flex px-2 align-items-center m-0">
-                            <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Crie sua conta</li>
-                            <li className="d-none d-lg-block nav-item flex-grow-1 mx-3">Entre</li>
-                            <li className="d-none d-lg-block flex-grow-1 mx-3 nav-item">Compras</li>
-                            <li className="flex-grow-1 mx-0 nav-item"><a id="carrinho" href="google.com"><div className="quantidade">{this.props.loja.carrinho.quantosTemProdutosNoCarrinho()}</div><img src={assets.carrinho} /><div className="custo">R$ {this.props.loja.carrinho.custoTotalNoCarrinho()}</div></a></li>
-                        </ul>
-                    </div>
+                    <Row>
+                        <NavbarLogo href="google.com"></NavbarLogo>
+                        <SearchBar>
+                            <input/>
+                            <ButtonOutline>Buscar</ButtonOutline>
+                        </SearchBar>
+                        <Sandwich id="sidebar-toogler">                           
+                        </Sandwich>
+                        <HorizontalFlexList_Lg>
+                            <li>Crie sua conta</li>
+                            <li>Entre</li>
+                            <li>Compras</li>
+                            <li className="d-block">
+                                <Carrinho id="carrinho" href="#">
+                                    <div className="quantidade">{quantosProdutosTemNoCarrinho()}</div>
+                                    <img src={assets.carrinho} />
+                                    <div className="custo">R$ {custoTotalNoCarrinho()}</div>
+                                </Carrinho>
+                            </li>
+                        </HorizontalFlexList_Lg>
+                    </Row>
                 </ContainerLg>                
             </Header>
         );
     }
 }
+
+
+const mapStateToProps = store=> ({
+    carrinho: store.carrinho
+})
+
+const mapDispatchToProps = dispatch=> 
+    bindActionCreators({ carregarCarrinho }, dispatch);
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header_);

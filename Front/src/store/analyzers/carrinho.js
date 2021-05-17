@@ -8,7 +8,7 @@ export function getState() {
     console.log(store.getState());
 }
 
-export function quantosForamAdicionadosAoCarrinho(id) {
+export function quantosDesseForamAdicionadosAoCarrinho(id) {
 
 
     console.log( store.getState().carrinho);
@@ -19,3 +19,22 @@ export function quantosForamAdicionadosAoCarrinho(id) {
 
     return registroProduto.quantidade;
 }
+
+export function custoTotalNoCarrinho() {
+    let custo = 0;
+    let {carrinho} = store.getState(); 
+    for (var key in carrinho.produtos) {
+        let prod = carrinho.produtos[key];
+        custo += (prod.data.preco * prod.quantidade);
+    }
+    return custo.toFixed(2);
+}
+
+export function quantosProdutosTemNoCarrinho() {
+    let qty = 0;
+    for (var key in store.getState().carrinho.produtos) {
+        qty += store.getState().carrinho.produtos[key].quantidade;
+    }
+    return qty;
+}
+

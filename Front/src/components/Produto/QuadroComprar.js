@@ -6,18 +6,18 @@ import React, { useEffect } from 'react'
 import { QuadroComprarContainer, Row, Col, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete } from './styles';
 import { likeProduto } from '@actions/produtos'
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho'
-import { quantosForamAdicionadosAoCarrinho } from '@analyzers/carrinho';
+import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
 
 function QuadroComprar(props) {
 
     let { produto, likeProduto, carregarCarrinho, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
     let loja = props.loja;
-    let quantidadeAdicionado = quantosForamAdicionadosAoCarrinho(produto._id);
+    let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
     let liked = produto.likes !== undefined && produto.likes.includes(0);
     let disabled = quantidadeAdicionado < 1;
 
     useEffect(() => {
-        carregarCarrinho();
+       // carregarCarrinho();
     }, []);
 
 
