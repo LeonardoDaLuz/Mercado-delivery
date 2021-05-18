@@ -4,7 +4,9 @@ import {
     Link,
     withRouter
 } from "react-router-dom";
+import { Input } from '../../globalStyleds';
 import Breadcumb from "./Breadcumb";
+import { CategoriasAside, FaixaDePrecoForm } from './styles';
 
 
 export default withRouter(function SidebarCategorias(props) {
@@ -21,7 +23,7 @@ export default withRouter(function SidebarCategorias(props) {
 
         let loja = props.loja;
         let keys = Object.keys(objeto);
-        let resultado = keys.map(function (key, index) {
+        let resultado = keys.map((key, index) => {
 
             let id = key;
             let link = <Link to={path + key} onClick={() => { loja.reiniciaListaDeProdutos(path + key, 12) }}>{key}</Link>;
@@ -65,43 +67,37 @@ export default withRouter(function SidebarCategorias(props) {
     let categoriaSelecionada = selecionaSubcategoria(props.loja.state.categorias);
     let CategoriaLista = obtemListaAPartirDaCategoria(categoriaSelecionada);
     let caminhoAcima = caminho().caminhoAcima;
-    console.log("teste");
+
     return (
-        <aside className="categorias col-3">
+        <CategoriasAside>
             {!isRoot &&
                 <Breadcumb path={caminhoAcima} loja={props.loja} />
             }
             <h3>{caminho().ultimaCategoria}</h3>
             {CategoriaLista}
             <FaixaDePreco loja={props.loja} />
-        </aside>
+        </CategoriasAside>
     )
 
 
     
 })
 
-let FaixaDePreco = withRouter((props) => {
-    /*
-        let search = new URLSearchParams(props.location.search);
-        let min = search.get('minPrice');
-        let max = search.get('maxPrice');
-    
-        let s = search.toString()*/
+let FaixaDePreco = withRouter(({ loja }) => {
 
     function updateSearch(e) {
 
     }
 
     function reinicia(e) {
-        e.preventDefault(); props.loja.reiniciaListaDeProdutos();
+        e.preventDefault(); loja.reiniciaListaDeProdutos();
     }
     return (<>
         <h4>Preço</h4>
-        <form className="faixa-de-preco" onSubmit={reinicia}>
-            <input name="minPrice" type="text" className="" placeholder="Mínimo" value={props.loja.state.seletorListaDeProdutos.faixaPreco.min} onChange={props.loja.updateFaixaPreco().min} />-
-            <input type="text" className="" placeholder="Máximo" value={props.loja.state.seletorListaDeProdutos.faixaPreco.max} onChange={props.loja.updateFaixaPreco().max} />
+        <FaixaDePrecoForm onSubmit={reinicia}>
+            <Input placeholder="Mínimo" value={loja.state.seletorListaDeProdutos.faixaPreco.min} onChange={loja.updateFaixaPreco().min} />-
+            <Input placeholder="Máximo" value={loja.state.seletorListaDeProdutos.faixaPreco.max} onChange={loja.updateFaixaPreco().max} />
             <button type="submit">Ir</button>
-        </form>
+        </FaixaDePrecoForm>
     </>)
 });

@@ -2,6 +2,7 @@
 import react, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './Breadcumb.css';
+import { BreadcumbList } from './styles';
 
 export default function BreadCumbs(props) {
 
@@ -19,10 +20,10 @@ export default function BreadCumbs(props) {
     });
 
     return (
-        <nav className='breadcumb' aria-label="breadcrumb">
+        <BreadcumbList>
             <ul>
                 {breadLis}
             </ul>
-        </nav>
+        </BreadcumbList>
     )
 }

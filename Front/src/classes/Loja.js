@@ -112,7 +112,7 @@ export default class Loja {
             })
     }
 
-    updateFaixaPreco() {
+    updateFaixaPreco(e) {
         let obj = this.state.seletorListaDeProdutos;
         return {
             min: (e) => {

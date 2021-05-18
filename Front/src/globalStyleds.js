@@ -72,3 +72,9 @@ export const HorizontalFlexList_Lg = styled(HorizontalFlexList)`
         }
     }
 `;
+
+export const Input  = styled.input.attrs({
+    type: "text"
+})`
+
+`;
