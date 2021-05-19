@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
 import { QuadroComprarContainer, Row, Col, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete } from './styles';
-import { likeProduto } from '@actions/produtos'
-import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho'
+import { likeProduto } from '@actions/produto';
+import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho';
 import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
 
 function QuadroComprar(props) {

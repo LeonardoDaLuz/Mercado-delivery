@@ -3,20 +3,24 @@ import react, { Component } from 'react';
 import { Link } from "react-router-dom";
 import './Breadcumb.css';
 import { BreadcumbList } from './styles';
+import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export default function BreadCumbs(props) {
+function BreadCumbs({ reiniciaListaDeProdutos, path }) {
 
-    let path = props.path.split("/");
+
+    path = path.split("/");
     path.shift();
-    
-    let links = path.map((item, index)=> {
-        let newLink = path.slice(0, index+1).join('/');
-        return "/"+newLink;
+
+    let links = path.map((item, index) => {
+        let newLink = path.slice(0, index + 1).join('/');
+        return "/" + newLink;
     })
     path[0] = "Todos";
     var breadLis = path.map(function (cat, index) {
-        
-        return (<li><Link key={index} to={links[index]} onClick={() => { props.loja.reiniciaListaDeProdutos(links[index], 12) }}>{cat}</Link></li>);
+
+        return (<li><Link key={index} to={links[index]} onClick={() => { reiniciaListaDeProdutos(links[index], 12) }}>{cat}</Link></li>);
     });
 
     return (
@@ -27,3 +31,9 @@ export default function BreadCumbs(props) {
         </BreadcumbList>
     )
 }
+
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ reiniciaListaDeProdutos }, dispatch);
+
+export default connect(null, mapDispatchToProps)(BreadCumbs);

@@ -4,14 +4,19 @@ import configs from '@configs';
 import moveElementFromTo from '@utils/moveElementFromTo';
 import { AdicionarRemoverDoCarrinho, Preco, ProdutoCard_ } from './styles';
 import { Row } from '../../globalStyleds';
+import { adicionarProdutoAoCarrinho } from '../../store/actions/carrinho';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { quantosDesseForamAdicionadosAoCarrinho } from '../../store/analyzers/carrinho';
 
-export function ProdutoCard( { produto, carrinho, index } ) {
+function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
 
-    let quantidade = carrinho.quantosForamAdicionadosAoCarrinho(produto._id);
+    console.log("Updatye");
+    let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
 
-    function RemoverDoCarrinho(e) { carrinho.adicionarAoCarrinho(produto._id, -1); animarAdicao(e, -1) }
+    function RemoverDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1) }
 
-    function AdicionarAoCarrinho(e) { carrinho.adicionarAoCarrinho(produto._id, 1); animarAdicao(e) }
+    function AdicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }
 
     return (
         <ProdutoCard_ key={index}>
@@ -24,9 +29,9 @@ export function ProdutoCard( { produto, carrinho, index } ) {
                 <div>{produto.preco}</div>
             </Preco>
             <AdicionarRemoverDoCarrinho>
-                <button disabled={quantidade < 1} onClick={RemoverDoCarrinho}
+                <button disabled={quantidadeAdicionado < 1} onClick={RemoverDoCarrinho}
                 >-</button>
-                <div>{quantidade}</div>
+                <div>{quantidadeAdicionado}</div>
                 <button onClick={AdicionarAoCarrinho}>+</button>
             </AdicionarRemoverDoCarrinho>
         </ProdutoCard_>
@@ -38,3 +43,12 @@ async function animarAdicao(e, dir = 1) {
     let carrinho = document.querySelector("#carrinho");
     moveElementFromTo(img, img, carrinho, dir);
 }
+
+const mapStateToProps = store => ({  
+    carrinho: store.carrinho
+})
+
+const mapDispatchToProps = dispatch =>
+    bindActionCreators({ adicionarProdutoAoCarrinho }, dispatch);
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProdutoCard);

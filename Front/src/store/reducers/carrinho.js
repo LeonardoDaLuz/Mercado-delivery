@@ -10,6 +10,7 @@ const initialState = {
 };
 
 const carrinho = (state = initialState, action) => {
+
     switch (action.type) {
         case EDITAR_QUANTIDADE_NO_CARRINHO_START:
             return { ...action.payload };

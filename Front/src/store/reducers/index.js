@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import listaProdutos from './listaProdutos';
+import produtos from './produtos';
 import produto from './produto';
 import carrinho from './carrinho';
+import categorias from './categorias';
 
 export default combineReducers({
-    listaProdutos,
+    produtos,
     produto,
-    carrinho
+    carrinho,
+    categorias
 });

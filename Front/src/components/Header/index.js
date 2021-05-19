@@ -14,10 +14,12 @@ import { connect } from 'react-redux';
 
     componentDidMount(props) {
 
-        let { carregarCarrinho } = this.props;
-        console.log("kct");
-        console.log(carregarCarrinho);
+        let { carregarCarrinho, carrinho } = this.props;
+
         carregarCarrinho();
+
+        console.log("--->:");
+        console.log(carrinho)
     }
 
     render() {

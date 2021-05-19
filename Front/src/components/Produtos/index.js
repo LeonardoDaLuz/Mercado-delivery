@@ -1,9 +1,10 @@
 import { Component } from 'react';
 import './style.css';
 import { ProdutoCard } from './ProdutoCard';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-
-export default class Produtos extends Component {
+class Produtos extends Component {
 
     constructor() {
         super();
@@ -70,3 +71,6 @@ export default class Produtos extends Component {
     }
 }
 
+
+
+export default Produtos;

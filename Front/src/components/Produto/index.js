@@ -8,9 +8,8 @@ import { BreadCumbs } from './BreadCumbs';
 import { QuadroDeFotos } from './QuadroDeFotos';
 import QuadroComprar from './QuadroComprar';
 import { DescricaoProduto } from './DescricaoProduto';
-
 //Others
-import { carregaProduto } from '@actions/produtos'
+import { carregaProduto } from '@actions/produto'
 import './style.css';
 
 class Produto extends Component {
