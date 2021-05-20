@@ -163,7 +163,7 @@ export const BreadcumbList = styled.nav`
 export const FaixaDePrecoForm = styled.form`
  
         display: flex;
-    
+    margin-bottom: 20px;
 
     &>input {
         flex: 1;
@@ -180,4 +180,19 @@ export const FaixaDePrecoForm = styled.form`
     border-radius: 5px;
     margin-left: 5px;
     }
+`;
+
+export const OrdemSelectForm = styled.form`
+
+
+    select {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid rgb(172, 172, 172);
+    }
+
+    
+
+
+
 `;

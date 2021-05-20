@@ -14,6 +14,7 @@ import { bindActionCreators } from 'redux';
 import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
 import { filtraFloat } from '../../utils/InputFilters';
 import { FaixaDePreco } from './FaixaDePreco';
+import { Ordem } from './Ordem';
 
 function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categorias, loja, location, match, }) {
 
@@ -79,6 +80,7 @@ function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categor
             <h3>{caminho().ultimaCategoria}</h3>
             {DrawListaAPartirDaCategoria(categoriaSelecionada)}
             <FaixaDePreco loja={loja} />
+            <Ordem/>
         </CategoriasAside>
     )
 
