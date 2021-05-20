@@ -8,5 +8,5 @@ export default combineReducers({
     produtos,
     produto,
     carrinho,
-    categorias
+    categorias 
 });

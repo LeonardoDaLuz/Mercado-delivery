@@ -45,7 +45,7 @@ export default class Loja {
     get localizacaoLoja() {
         return this.parent.state.localizacaoLoja;
     }
-
+/*
     carregaProduto(id) {
         fetch('http://localhost:3001/produto2/' + id)
             .then(T => T.json())
@@ -62,7 +62,7 @@ export default class Loja {
                 this.setState({ produtoCarregado: p })
             });
     }
-
+*/
     carregaLocalizacaoCliente(setState) {
 
         let localizacaoLoja = this.parent.state.localizacaoLoja;
@@ -80,7 +80,7 @@ export default class Loja {
             });
         });
     }
-
+/*
     carregaCategorias() {
 
         fetch(`http://localhost:3001/calculaCategoria`)
@@ -111,7 +111,7 @@ export default class Loja {
                 this.setState({ listaProdutos: oldProdutos.concat(data) });
             })
     }
-
+*/
     updateFaixaPreco(e) {
         let obj = this.state.seletorListaDeProdutos;
         return {

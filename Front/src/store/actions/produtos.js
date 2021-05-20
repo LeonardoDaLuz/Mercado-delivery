@@ -13,7 +13,7 @@ import {
 
 
 
-export const carregaMaisProdutos = (path, quantidade) => {
+export const carregaMaisProdutos = (path, query, quantidade) => {
     return async (dispatch, getState) => {
 
         dispatch({ type: CARREGA_MAIS_PRODUTOS_START });
@@ -26,7 +26,7 @@ export const carregaMaisProdutos = (path, quantidade) => {
         // let seletor = this.state.seletorListaDeProdutos;
         //   let query = "?minPrice=" + seletor.faixaPreco.min + "&maxPrice=" + seletor.faixaPreco.max;
 
-        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade) /*+ query*/;
+        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade) + query;
         await fetch(url)
             .then(x => x.json())
             .then(data => {
@@ -39,9 +39,9 @@ export const carregaMaisProdutos = (path, quantidade) => {
     }
 }
 
-export const reiniciaListaDeProdutos = (path, quantidade) => {
+export const reiniciaListaDeProdutos = (path, query, quantidade) => {
     return async (dispatch, getState) => {
         dispatch({ type: RESETA_LISTA_PRODUTOS });
-        dispatch(carregaMaisProdutos(path, quantidade));
+        dispatch(carregaMaisProdutos(path, query, quantidade));
     }
 }

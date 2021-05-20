@@ -11,7 +11,6 @@ import { quantosDesseForamAdicionadosAoCarrinho } from '../../store/analyzers/ca
 
 function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
 
-    console.log("Updatye");
     let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
 
     function RemoverDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1) }

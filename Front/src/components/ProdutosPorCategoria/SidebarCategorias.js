@@ -1,8 +1,9 @@
-import react, { Component, useEffect } from 'react';
+import react, { Component, useEffect, useState } from 'react';
 import {
     BrowserRouter as Router,
     Link,
-    withRouter
+    withRouter,
+    useHistory
 } from "react-router-dom";
 import { Input } from '../../globalStyleds';
 import { carregaCategorias } from '../../store/actions/categorias';
@@ -11,14 +12,16 @@ import { CategoriasAside, FaixaDePrecoForm } from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
+import { filtraFloat } from '../../utils/InputFilters';
+import { FaixaDePreco } from './FaixaDePreco';
 
-function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categorias, loja, location, match,  }) {
+function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categorias, loja, location, match, }) {
 
-    useEffect(()=> {      
+    useEffect(() => {
         carregaCategorias();
     }, [])
 
-    function obtemListaAPartirDaCategoria(objeto) {
+    function DrawListaAPartirDaCategoria(objeto) {
 
         let path = location.pathname;
         if (path[path.length - 1] != '/')
@@ -28,7 +31,7 @@ function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categor
         let resultado = keys.map((key, index) => {
 
             let id = key;
-            let link = <Link to={path + key} onClick={() => { reiniciaListaDeProdutos(path + key, 12) }}>{key}</Link>;
+            let link = <Link to={path + key + location.search} onClick={() => { reiniciaListaDeProdutos(path + key, location.search, 12) }}>{key}</Link>;
             return <li key={key}>{link}</li>;
         });
 
@@ -67,22 +70,20 @@ function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categor
 
     let isRoot = match.params.cat1 === undefined;
     let categoriaSelecionada = selecionaSubcategoria(categorias);
-    let CategoriaLista = obtemListaAPartirDaCategoria(categoriaSelecionada);
-    let caminhoAcima = caminho().caminhoAcima;
 
     return (
         <CategoriasAside>
             {!isRoot &&
-                <Breadcumb path={caminhoAcima} loja={loja} />
+                <Breadcumb path={caminho().caminhoAcima} loja={loja} />
             }
             <h3>{caminho().ultimaCategoria}</h3>
-            {CategoriaLista}
+            {DrawListaAPartirDaCategoria(categoriaSelecionada)}
             <FaixaDePreco loja={loja} />
         </CategoriasAside>
     )
 
 
-    
+
 }
 
 const mapStateToProps = store => ({
@@ -96,22 +97,3 @@ const mapDispatchToProps = dispatch =>
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SidebarCategorias));
 
-let FaixaDePreco = withRouter(({ loja }) => {
-
-    function updateSearch(e) {
-
-    }
-
-    function reinicia(e) {
-        e.preventDefault(); loja.reiniciaListaDeProdutos();
-    }
-    
-    return (<>
-        <h4>Preço</h4>
-        <FaixaDePrecoForm onSubmit={reinicia}>
-            <Input placeholder="Mínimo" value={loja.state.seletorListaDeProdutos.faixaPreco.min} onChange={loja.updateFaixaPreco().min} />-
-            <Input placeholder="Máximo" value={loja.state.seletorListaDeProdutos.faixaPreco.max} onChange={loja.updateFaixaPreco().max} />
-            <button type="submit">Ir</button>
-        </FaixaDePrecoForm>
-    </>)
-});

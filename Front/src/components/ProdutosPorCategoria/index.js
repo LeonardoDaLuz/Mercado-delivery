@@ -1,5 +1,5 @@
 import { Component, useEffect } from 'react';
-import { withRouter } from "react-router-dom";
+import { useParams, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SidebarCategorias from './SidebarCategorias';
@@ -11,35 +11,41 @@ import assets from '@assets';
 import './style.css';
 import { carregaMaisProdutos } from '../../store/actions/produtos';
 
+
 let loading = false;
+let path = "";
+let query = "";
 
 function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, location }) {
 
+    query = location.search;
+    path = location.pathname;
 
     useEffect(() => {
         ligarInfiniteLoader();
     }, [])
 
+
     async function ligarInfiniteLoader() {
-        let path = location.pathname;
-        await carregaMaisProdutos(path, 12);
+        
+        await carregaMaisProdutos(path, query, 12);
         await window.waitForSeconds(0.5);
 
-        while (document.body.clientHeight < window.innerHeight) {
+        while (document.body.clientHeight < window.innerHeight) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
             if (!loading) {
 
                 loading = true;
-                await carregaMaisProdutos(path, 12);
+                await carregaMaisProdutos(path, query, 12);
                 await window.waitForSeconds(0.5);
                 loading = false;
             }
         }
 
-        window.addEventListener("scroll", async (e) => {
+        window.addEventListener("scroll", async (e) => { //carrega mais produtos a medida que dá scroll (infinite loader)
             if (!loading && window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
 
                 loading = true;
-                await carregaMaisProdutos(path, 12);
+                await carregaMaisProdutos(path, query, 12);
                 loading = false;
             }
         });
@@ -49,6 +55,8 @@ function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, location })
     let produtoCards = produtos.map((p, index) => {
         return <ProdutoCard produto={p} key={index} carrinho={loja.carrinho} />
     })
+
+
     return (
         <Container>
             <SidebarCategorias loja={loja} />
@@ -72,3 +80,5 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators({ carregaMaisProdutos }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProdutosPorCategoria));
+
+ 
