@@ -7,7 +7,7 @@ import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function Ordem_({ location, reiniciaListaDeProdutos })  {
+function Ordem_({ location, reiniciaListaDeProdutos }) {
 
     const history = useHistory();
     const query = new URLSearchParams(location.search);
@@ -15,10 +15,10 @@ function Ordem_({ location, reiniciaListaDeProdutos })  {
     function selectOrdem(e) {
 
         query.set("ordem", e.target.value);
-        history.push(location.pathname +"?" +query.toString());
-        console.log("feoi "+query.toString())
+        history.push(location.pathname + "?" + query.toString());
+        console.log("feoi " + query.toString())
     }
-       return (<>
+    return (<>
         <h4>Ordem</h4>
         <OrdemSelectForm >
             <select name="ordem" id="ordem" onChange={selectOrdem}>
@@ -29,7 +29,7 @@ function Ordem_({ location, reiniciaListaDeProdutos })  {
     </>);
 };
 
-const mapDispatchToProps = (dispatch)=>
-    bindActionCreators({reiniciaListaDeProdutos}, dispatch)
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators({ reiniciaListaDeProdutos }, dispatch)
 
 export const Ordem = connect(null, mapDispatchToProps)(withRouter(Ordem_));
