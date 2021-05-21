@@ -22,6 +22,7 @@ module.exports = (app) => {
 
         let min = filtraFloat(req.query.menorPreco);
         let max = filtraFloat(req.query.maiorPreco);
+        query.preco = { $gte: 0.01};
 
         if (min !== 0 && max !== 0) {
             query.preco = { $gte: filtraFloat(req.query.menorPreco), $lte: filtraFloat(req.query.maiorPreco) }

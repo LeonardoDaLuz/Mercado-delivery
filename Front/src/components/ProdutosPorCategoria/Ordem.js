@@ -7,23 +7,24 @@ import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function Ordem_({ location, reiniciaListaDeProdutos }) {
+function Ordem_({ location }) {
 
     const history = useHistory();
     const query = new URLSearchParams(location.search);
 
+    console.log(query.get('sort'));
     function aplicaOrdem(e) {
 
         query.set("sort", e.target.value);
 
         history.push(location.pathname + "?" + query.toString());
-       // reiniciaListaDeProdutos(location.pathname, query, 12);
+
        
     }
     return (<>
         <h4>Ordem</h4>
         <OrdemSelectForm >
-            <select name="ordem" id="ordem" onChange={aplicaOrdem}>
+            <select name="ordem" id="ordem" value={query.get("sort")} onChange={aplicaOrdem}>
                 <option value="nenhum">Nenhum</option>
                 <option value="menorPreco">Menor Preço</option>
                 <option value="maiorPreco">Maior Preço</option>
