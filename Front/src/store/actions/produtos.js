@@ -39,7 +39,6 @@ export const carregaMaisProdutos = (path, query, quantidade) => {
             }
             )
             .then(data => {
-                console.log(data);
                 dispatch({ type: CARREGA_MAIS_PRODUTOS_SUCCESS, payload: data });
             })
             .catch(err => {

@@ -1,5 +1,5 @@
-import { Component, useEffect } from 'react';
-import { useParams, withRouter } from "react-router-dom";
+import { useEffect } from 'react';
+import { useHistory, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SidebarCategorias from './SidebarCategorias';
@@ -9,25 +9,31 @@ import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
 import { Container, ListaDeProdutos } from './styles';
 import assets from '@assets';
 import './style.css';
-import { carregaMaisProdutos } from '../../store/actions/produtos';
+import { carregaMaisProdutos, reiniciaListaDeProdutos } from '../../store/actions/produtos';
 
 
 let loading = false;
 let path = "";
 let query = "";
 
-function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, location }) {
+function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, reiniciaListaDeProdutos, location, history }) {
 
     query = location.search;
     path = location.pathname;
 
     useEffect(() => {
         ligarInfiniteLoader();
+
+        return history.listen(location => {
+            reiniciaListaDeProdutos(location.pathname, location.search, 12)
+        }
+        );
+
     }, [])
 
 
     async function ligarInfiniteLoader() {
-        
+
         await carregaMaisProdutos(path, query, 12);
         await window.waitForSeconds(0.5);
 
@@ -76,9 +82,9 @@ const mapStateToProps = store => ({
     produtos: store.produtos
 })
 
+
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaMaisProdutos }, dispatch);
+    bindActionCreators({ carregaMaisProdutos, reiniciaListaDeProdutos }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProdutosPorCategoria));
 
- 

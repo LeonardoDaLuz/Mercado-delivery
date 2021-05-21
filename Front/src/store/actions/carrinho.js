@@ -20,7 +20,6 @@ export const carregarCarrinho = (id, quantidade) => {
         let response = await fetch(`http://localhost:3001/carrinho/`, { method: 'GET' });
         if (response.ok) {
             let data = await response.json();
-            console.log(data);
             dispatch({ type: CARREGAR_CARRINHO_SUCCESS, payload: data });
         }
         else {

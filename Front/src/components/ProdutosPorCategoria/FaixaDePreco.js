@@ -13,17 +13,12 @@ function FaixaDePreco_({ location, reiniciaListaDeProdutos }) {
     const [minimo, _setMinimo] = useState(filtraFloat(query.get("menorPreco")));
     const [maximo, _setMaximo] = useState(filtraFloat(query.get("maiorPreco")));
 
-    const setMinimo = (e) => {
-        _setMinimo(filtraFloat(e.target.value));
-    }
+    const setMinimo = (e) => { _setMinimo(filtraFloat(e.target.value)); }
 
-    const setMaximo = (e) => {
-        _setMaximo(filtraFloat(e.target.value));
-    }
-
+    const setMaximo = (e) => { _setMaximo(filtraFloat(e.target.value)); }
 
     let history = useHistory();
-
+ 
     function aplicaFaixaDePreco(e) {
 
         e.preventDefault();
@@ -39,7 +34,7 @@ function FaixaDePreco_({ location, reiniciaListaDeProdutos }) {
             query.delete("maiorPreco")
 
         history.push(location.pathname + "?" + query);
-        reiniciaListaDeProdutos(location.pathname, query, 12);
+       // reiniciaListaDeProdutos(location.pathname, query, 12);
     }
 
     return (<>

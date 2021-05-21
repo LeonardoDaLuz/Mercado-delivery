@@ -17,7 +17,7 @@ function Ordem_({ location, reiniciaListaDeProdutos }) {
         query.set("sort", e.target.value);
 
         history.push(location.pathname + "?" + query.toString());
-        reiniciaListaDeProdutos(location.pathname, query, 12);
+       // reiniciaListaDeProdutos(location.pathname, query, 12);
        
     }
     return (<>

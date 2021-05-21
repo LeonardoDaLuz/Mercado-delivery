@@ -71,7 +71,7 @@ export default class Loja {
             const freteMinimo = 20;
             const custoPorKm = 2.5;
             let distancia = (Math.abs(position.coords.latitude - localizacaoLoja.lat) + Math.abs(position.coords.longitude - localizacaoLoja.long)) * 111.3194444444444;
-            console.log(distancia);
+//            console.log(distancia);
             let frete = Math.max(distancia * custoPorKm, freteMinimo);
 
             setState({

@@ -17,9 +17,6 @@ import { connect } from 'react-redux';
         let { carregarCarrinho, carrinho } = this.props;
 
         carregarCarrinho();
-
-        console.log("--->:");
-        console.log(carrinho)
     }
 
     render() {
