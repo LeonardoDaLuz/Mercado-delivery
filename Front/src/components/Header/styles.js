@@ -36,7 +36,7 @@ export const NavbarLogo = styled.a`
     }
 `
 
-export const SearchBar = styled.div`
+export const SearchBar = styled.form`
     flex-grow: 1;
     display: flex;
     align-items: center;

@@ -24,10 +24,7 @@ function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, reiniciaLis
     useEffect(() => {
         ligarInfiniteLoader();
 
-        return history.listen(location => {
-            reiniciaListaDeProdutos(location.pathname, location.search, 12)
-        }
-        );
+        return history.listen(location => reiniciaListaDeProdutos(location.pathname, location.search, 12));
 
     }, [])
 

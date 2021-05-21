@@ -11,8 +11,9 @@ function Ordem_({ location }) {
 
     const history = useHistory();
     const query = new URLSearchParams(location.search);
+    let sort  = query.get('sort');
+    sort = sort===null?'':sort;
 
-    console.log(query.get('sort')); 
     function aplicaOrdem(e) {
 
         query.set("sort", e.target.value);
@@ -24,7 +25,7 @@ function Ordem_({ location }) {
     return (<>
         <h4>Ordem</h4>
         <OrdemSelectForm >
-            <select name="ordem" id="ordem" value={query.get("sort")} onChange={aplicaOrdem}>
+            <select name="ordem" id="ordem" value={sort} onChange={aplicaOrdem}>
                 <option value="nenhum">Nenhum</option>
                 <option value="menorPreco">Menor Preço</option>
                 <option value="maiorPreco">Maior Preço</option>
