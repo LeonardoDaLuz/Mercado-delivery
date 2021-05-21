@@ -20,24 +20,24 @@ module.exports = (app) => {
         let query = {};
 
 
-        let min = filtraFloat(req.query.minPrice);
-        let max = filtraFloat(req.query.maxPrice);
+        let min = filtraFloat(req.query.menorPreco);
+        let max = filtraFloat(req.query.maiorPreco);
 
         if (min !== 0 && max !== 0) {
-            query.preco = { $gte: filtraFloat(req.query.minPrice), $lte: filtraFloat(req.query.maxPrice) }
+            query.preco = { $gte: filtraFloat(req.query.menorPreco), $lte: filtraFloat(req.query.maiorPreco) }
         }
         else if (min !== 0) {
-            query.preco = { $gte: filtraFloat(req.query.minPrice) }
+            query.preco = { $gte: filtraFloat(req.query.menorPreco) }
         }
         else if (max !== 0) {
-            query.preco = { $lte: filtraFloat(req.query.maxPrice) }
+            query.preco = { $lte: filtraFloat(req.query.maiorPreco) }
         }
 
         let sort = {};
-        if (req.query.order !== undefined) {
-            if (req.query.order == "maiorPreco")
+        if (req.query.sort !== undefined) {
+            if (req.query.sort == "maiorPreco")
                 sort = { preco: -1 };
-            if (req.query.order == "menorPreco")
+            if (req.query.sort == "menorPreco")
                 sort = { preco: 1 };
         }
 
@@ -52,7 +52,10 @@ module.exports = (app) => {
 
         console.log(query);
         produtosColecao = await global.db.listaProdutos(req.params.from, req.params.to, query, sort);
-        resp.json(produtosColecao);
+
+        let statusCode = produtosColecao.length == 0 ? 204 : 200;
+
+        resp.status(statusCode).json(produtosColecao);
     });
 
     app.get("/atualiza-produtos/", async function (req, resp) {

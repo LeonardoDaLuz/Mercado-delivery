@@ -15,21 +15,31 @@ import {
 
 export const carregaMaisProdutos = (path, query, quantidade) => {
     return async (dispatch, getState) => {
-
-        dispatch({ type: CARREGA_MAIS_PRODUTOS_START });
+        //se usar o location.search ou o URLSearchParams ele começa ou não com '?', então este trecho normaliza esta diferença.
+        query = query.toString();
+        if (!query.startsWith('?'))
+            query = '?' + query;
 
         const { produtos } = getState();
         const aPartirDe = produtos.length;
         if (path[path.length - 1] !== "/")
             path += "/";
 
-        // let seletor = this.state.seletorListaDeProdutos;
-        //   let query = "?minPrice=" + seletor.faixaPreco.min + "&maxPrice=" + seletor.faixaPreco.max;
-
+        //Montando a url de pesquisa q será interpretada pelo backend.
         let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade) + query;
+
+        //fazendo as requisições e a emissão os actions.
+        dispatch({ type: CARREGA_MAIS_PRODUTOS_START, payload: url });
         await fetch(url)
-            .then(x => x.json())
+            .then(r => {
+                if (r.status === 204)
+                    console.log("nenhum produto encontrado: " + url);
+
+                return r.json()
+            }
+            )
             .then(data => {
+                console.log(data);
                 dispatch({ type: CARREGA_MAIS_PRODUTOS_SUCCESS, payload: data });
             })
             .catch(err => {

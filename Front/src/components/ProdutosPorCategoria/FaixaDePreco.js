@@ -2,17 +2,16 @@ import { useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
 import { Input } from '../../globalStyleds';
 import { FaixaDePrecoForm } from './styles';
-import { filtraFloat } from '../../utils/InputFilters';
 import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function FaixaDePreco_({ location, reiniciaListaDeProdutos })  {
+function FaixaDePreco_({ location, reiniciaListaDeProdutos }) {
 
     let query = new URLSearchParams(location.search);
 
-    const [minimo, _setMinimo] = useState(filtraFloat(query.get("minPrice")));
-    const [maximo, _setMaximo] = useState(filtraFloat(query.get("maxPrice")));
+    const [minimo, _setMinimo] = useState(filtraFloat(query.get("menorPreco")));
+    const [maximo, _setMaximo] = useState(filtraFloat(query.get("maiorPreco")));
 
     const setMinimo = (e) => {
         _setMinimo(filtraFloat(e.target.value));
@@ -29,22 +28,18 @@ function FaixaDePreco_({ location, reiniciaListaDeProdutos })  {
 
         e.preventDefault();
 
-        let query = "?";
+        if (minimo != "")
+            query.set('menorPreco', filtraFloat(minimo));
+        else
+            query.delete('menorPreco');
 
-        if (minimo != "") {
-            query += "minPrice=" + minimo;
-        }
-        if (maximo != "") {
+        if (maximo != "")
+            query.set("maiorPreco", filtraFloat(maximo));
+        else
+            query.delete("maiorPreco")
 
-            if (minimo != "")
-                query += "&";
-
-            query += "maxPrice=" + maximo;
-        }
+        history.push(location.pathname + "?" + query);
         reiniciaListaDeProdutos(location.pathname, query, 12);
-        history.push(location.pathname + query);
-       
-
     }
 
     return (<>
@@ -57,7 +52,12 @@ function FaixaDePreco_({ location, reiniciaListaDeProdutos })  {
     </>);
 };
 
-const mapDispatchToProps = (dispatch)=>
-    bindActionCreators({reiniciaListaDeProdutos}, dispatch)
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators({ reiniciaListaDeProdutos }, dispatch)
 
 export const FaixaDePreco = connect(null, mapDispatchToProps)(withRouter(FaixaDePreco_));
+
+function filtraFloat(number) {
+    let _number = parseFloat(number);
+    return (_number === 0 || isNaN(number) || number === null ? "" : number)
+}

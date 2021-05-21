@@ -12,18 +12,21 @@ function Ordem_({ location, reiniciaListaDeProdutos }) {
     const history = useHistory();
     const query = new URLSearchParams(location.search);
 
-    function selectOrdem(e) {
+    function aplicaOrdem(e) {
 
-        query.set("ordem", e.target.value);
+        query.set("sort", e.target.value);
+
         history.push(location.pathname + "?" + query.toString());
-        console.log("feoi " + query.toString())
+        reiniciaListaDeProdutos(location.pathname, query, 12);
+       
     }
     return (<>
         <h4>Ordem</h4>
         <OrdemSelectForm >
-            <select name="ordem" id="ordem" onChange={selectOrdem}>
-                <option value="Menor preco" onClick={selectOrdem}>Menor Preço</option>
-                <option value="Maior preco">Maior Preço</option>
+            <select name="ordem" id="ordem" onChange={aplicaOrdem}>
+                <option value="nenhum">Nenhum</option>
+                <option value="menorPreco">Menor Preço</option>
+                <option value="maiorPreco">Maior Preço</option>
             </select>
         </OrdemSelectForm>
     </>);
