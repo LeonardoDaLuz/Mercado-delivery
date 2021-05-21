@@ -12,7 +12,7 @@ function Ordem_({ location }) {
     const history = useHistory();
     const query = new URLSearchParams(location.search);
 
-    console.log(query.get('sort'));
+    console.log(query.get('sort')); 
     function aplicaOrdem(e) {
 
         query.set("sort", e.target.value);
