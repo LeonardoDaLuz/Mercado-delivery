@@ -19,7 +19,7 @@ module.exports = (app) => {
         return val === null || isNaN(val) ? 0 : val;
     }
 
-    app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:from/:to", async function (req, resp) { //obtem lista com os produtos, filtrado por categorias
+    app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:from/:to", async function (req, resp) { //obtem lista com os produtos, filtrado por categorias 
 
         let query = {};
 
