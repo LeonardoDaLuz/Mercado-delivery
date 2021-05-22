@@ -1,0 +1,86 @@
+.slick-dots {
+    height: 50px;
+    top: 0px;
+    position: static;
+}
+
+.slick-dots li {
+    margin: 7px;
+}
+
+.slick-dots li button {
+    background-color: rgb(152, 152, 152);
+    border-radius: 20px;
+    width: 15px;
+    height: 15px;
+}
+
+.slick-dots li.slick-active button {
+    background-color: rgb(1, 157, 12);
+}
+
+.slick-dots li button:before {
+    display: none;
+}
+
+.slick-arrow {
+    top: 50%;
+    z-index: 3;
+    height: 50px;
+    width: 50px;
+    background-color: green;
+    border-radius: 50px;
+    opacity: 0.8;
+    transform: translateY(-100%);
+}
+
+.slick-prev {
+    left: 50px;
+}
+
+.slick-next {
+    right: 50px;
+}
+
+.slick-arrow:before, .slick-arrow:after {
+    content: '';
+    background-color: white;
+    position: absolute;
+    width: 20px;
+    height: 7px;
+    opacity: 1;
+}
+
+.slick-prev:before {
+    left: 12px;
+    top: 27px;
+    transform: rotate(45deg);
+}
+
+.slick-prev:after {
+    left: 12px;
+    top: 17px;
+    transform: rotate(-45deg);
+}
+
+.slick-next:before {
+    right: 12px;
+    top: 27px;
+    transform: rotate(-45deg);
+}
+
+.slick-next:after {
+    right: 12px;
+    top: 17px;
+    transform: rotate(45deg);
+}
+
+.slick-arrow:active, .slick-arrow:focus {
+    background-color: green;
+    opacity: 0.8;
+}
+
+.slick-arrow:hover {
+    background-color: green;
+    opacity: 1;
+}

@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Jumbotron } from './Jumbotron';
+import { Caroulsel } from './Carousel';
 
 
 function Home_() {
     return (
     <>
-        <Jumbotron />
+        <Caroulsel />
     </>
     )
 }
