@@ -16,7 +16,7 @@ module.exports = (app) => {
     }
     function filtraString(valor) {
         let val = valor;
-        return val === null || isNaN(val) ? 0 : val;
+        return val === null || val===undefined ? "" : val;
     }
 
     app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:from/:to", async function (req, resp) { //obtem lista com os produtos, filtrado por categorias 
@@ -27,13 +27,14 @@ module.exports = (app) => {
         let min = filtraFloat(req.query.menorPreco);
         let max = filtraFloat(req.query.maiorPreco);
         let busca = filtraString(req.query.busca);
+        console.log("busca "+busca);
         query.preco = { $gte: 0.01 };
 
         if (req.query.busca != '') {
             query.$or = 
             [
-                { titulo: { $regex: req.query.busca, $options: 'i' }},
-                { descricao: { $regex: req.query.busca, $options: 'i' }},
+                { titulo: { $regex: busca, $options: 'i' }},
+                { descricao: { $regex: busca, $options: 'i' }},
             ]
         }
 

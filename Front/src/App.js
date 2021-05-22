@@ -8,7 +8,7 @@ import {
 
 import "../node_modules/bootstrap/scss/bootstrap.scss";
 import './App.css';
-import Header from './components/Header'; 
+import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
 import Produto from './components/Produto';
@@ -16,6 +16,7 @@ import Produtos from './components/Produtos';
 import ProdutosPorCategoria from './components/ProdutosPorCategoria';
 import Footer from './components/Footer';
 import Loja from './classes/Loja';
+import { Home } from "./components/Home";
 
 
 
@@ -27,7 +28,7 @@ export default withRouter(class App extends Component {
   }
 
   render() {
- 
+
     return (
       <Router>
         <div>
@@ -35,6 +36,10 @@ export default withRouter(class App extends Component {
           <Sidebar tooglerId='sidebar-toogler' />
           <BarraCategorias />
           <Switch>
+            <Route exact path="/" >
+              <Home />
+            </Route>
+
             <Route exact path="/produto/:id" >
               <Produto loja={this.loja} />
             </Route>
@@ -47,7 +52,7 @@ export default withRouter(class App extends Component {
             <Route path="/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
               <ProdutosPorCategoria loja={this.loja} />
             </Route>
-            
+
           </Switch>
           <Footer />
         </div>

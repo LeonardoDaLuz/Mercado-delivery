@@ -1,9 +1,9 @@
-import React, { Component, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import assets from '@assets';
 import { carregarCarrinho } from '@actions/carrinho'
 
-import { quantosDesseForamAdicionadosAoCarrinho, quantosProdutosTemNoCarrinho, custoTotalNoCarrinho } from '@analyzers/carrinho';
+import { quantosProdutosTemNoCarrinho, custoTotalNoCarrinho } from '@analyzers/carrinho';
 
 import './style.css';
 import { Header, ContainerLg, NavbarLogo, SearchBar, Sandwich, Carrinho } from './styles';
