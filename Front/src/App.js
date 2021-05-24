@@ -17,6 +17,7 @@ import ProdutosPorCategoria from './components/ProdutosPorCategoria';
 import Footer from './components/Footer';
 import Loja from './classes/Loja';
 import { Home } from "./components/Home";
+import { CarouselManager } from "./components/CarouselManager";
 
 
 
@@ -39,7 +40,9 @@ export default withRouter(class App extends Component {
             <Route exact path="/" >
               <Home />
             </Route>
-
+            <Route path="/CarouselManager" >
+              <CarouselManager />
+            </Route>
             <Route exact path="/produto/:id" >
               <Produto loja={this.loja} />
             </Route>

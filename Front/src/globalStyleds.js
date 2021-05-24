@@ -1,5 +1,10 @@
 import styled from 'styled-components';
 
+export const CenterContainer = styled.div`
+    margin: 0 auto;
+    width: 100%;
+    max-width:1000px;
+`;
 export const Row = styled.div`
     display: flex;
     justify-content: ${props => (props.justify===undefined?'flex-start':props.justify)};

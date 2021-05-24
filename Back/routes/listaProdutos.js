@@ -4,11 +4,6 @@ var express = require('express');
 
 module.exports = (app) => {
 
-    /*
-    app.get("/produtos/:from/:to", async function (req, resp) {
-        produtosColecao = await global.db.listaProdutos(req.params.from, req.params.to);
-        resp.json(produtosColecao);
-    });*/
 
     function filtraFloat(valor) {
         let val = parseFloat(valor);

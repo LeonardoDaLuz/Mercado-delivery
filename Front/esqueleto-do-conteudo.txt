@@ -1,3 +1,9 @@
+
+Features
+
+gerenciador de imagens
+
+
 pg todos os produtos OK
 pg produtos por Categorias
 pg produto OK
