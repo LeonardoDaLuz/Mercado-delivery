@@ -6,10 +6,6 @@ import { CenterContainer } from '../../globalStyleds';
 
 function CarouselManager_() {
 
-    function onSubmit(e) {
-
-    }
-
     function handleInput(e) {
         filesUpload(e.target.files);
     }
@@ -17,8 +13,9 @@ function CarouselManager_() {
     function filesUpload(files) {
         const url = 'http://localhost:3001/carousel/addImages';
         const formData = new FormData();
-        console.log(files);
-        [...files].forEach((file, index) => formData.append('file'+index, file));       
+
+        [...files].forEach((file, index) => formData.append('file'+index, file));  
+
         const config = {
             method: 'POST',
             body: formData
@@ -34,7 +31,7 @@ function CarouselManager_() {
         <CenterContainer>
             <form method="post" action="http://localhost:3001/carousel/addImages" encType="multipart/form-data">
                 Upload Image
-                <input type="file" name="files" multiple onChange={handleInput} />
+                <input type="file" name="files" accept=".jpg,.jpeg,.png"multiple onChange={handleInput} />
                 <button type="submit">Upload</button>
             </form>
         </CenterContainer>
