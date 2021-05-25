@@ -1,19 +1,34 @@
 const formidable = require('formidable');
+const ObjectId = require("mongodb").ObjectID;
 const fs = require('fs');
 const path = require('path');
-const CarouselDAO = require('../infra/CarouselDAO');
-const carouselDAO = new CarouselDAO(global.conn);
 
 class CarouselController {
 
     static adicionaImagem(req, res, next) {
         saveFilesFromRequisitionOnDisk(req, 'public/img/uploads/carousel/', Date.now())
-            .then(filePathList => {
-                saveFilePathsOnDb(filePathList);
-                res.send('file Fuploaded');
+            .then(async filePathList => {
+                await saveFilePathsOnDb(filePathList);
+                CarouselController.obterImagens(req, res, next);
             }).catch(err => {
                 res.status(400).send('error');
             })
+    }
+
+    static async obterImagens(req, res, next) {
+        let listaImagens = await global.conn.collection('imagens_carrossel').find({}).toArray();
+        res.json(listaImagens);
+    }
+
+    static async deletarImagens(req, res, next) {
+
+        await global.conn.collection('imagens_carrossel').deleteOne({ _id: new ObjectId(req.params.id)},
+            function (err, result) {
+                if(err) {
+                    res.status(400).send("Error");
+                }
+                CarouselController.obterImagens(req, res, next);
+            });
     }
 }
 
@@ -37,7 +52,7 @@ function saveFilesFromRequisitionOnDisk(req, destination, sufix = '') {
                     fs.renameSync(oldPath, newPath);
                     fileList.push(newPath);
                 } else {
-                    
+
                 }
             })
             resolve(fileList);
@@ -45,13 +60,11 @@ function saveFilesFromRequisitionOnDisk(req, destination, sufix = '') {
     });
 }
 
-function isCorrectType(file) {
-
-}
-
-function saveFilePathsOnDb(paths) {
-    paths.forEach(filePath => {
-        global.conn.collection('imagens_carrosel').insertOne({ path: filePath });
+async function saveFilePathsOnDb(paths) {
+    await paths.forEach(async (filePath) => {
+        filePath = filePath.replace("public/", "");
+        await global.conn.collection('imagens_carrossel').insertOne({ path: filePath });
     });
 }
+
 module.exports = CarouselController;

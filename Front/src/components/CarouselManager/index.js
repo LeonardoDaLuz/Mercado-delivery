@@ -1,48 +1,66 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { CenterContainer } from '../../globalStyleds';
+import { ButtonFlat, CenterContainer } from '../../globalStyleds';
+import { DeleteImage, GerenciarImagensCarousel, ImgCardLi } from './styles';
+import { carregarImagensCarousel, uploadImagensCarousel, removeImageCarousel } from '@actions/carousel'
+import configs from "@configs";
 
+function CarouselManager_({ carousel, carregarImagensCarousel, uploadImagensCarousel, removeImageCarousel }) {
 
-function CarouselManager_() {
+    useEffect(() => {
+        carregarImagensCarousel();
+    }, [])
 
-    function handleInput(e) {
-        filesUpload(e.target.files);
+    function openFileSelectDialog(e, callback) {
+        var elemento = document.createElement("input");
+        elemento.type = "file";
+        elemento.onchange = callback;
+        elemento.click();
     }
 
-    function filesUpload(files) {
-        const url = 'http://localhost:3001/carousel/addImages';
-        const formData = new FormData();
+    function filesUpload(e) {
 
-        [...files].forEach((file, index) => formData.append('file'+index, file));  
-
-        const config = {
-            method: 'POST',
-            body: formData
-        }
-        fetch(url, config)
-            .then(response => response.text())
-            .then(response => { console.log('deu'); console.log(response) })
-            .catch(err => console.log(err));
+        uploadImagensCarousel(e);
 
     }
 
+    //<input type="file" name="files" accept=".jpg,.jpeg,.png"multiple onChange={handleInput} />
+    //{configs.imgsPath + produto.img}
     return (
         <CenterContainer>
-            <form method="post" action="http://localhost:3001/carousel/addImages" encType="multipart/form-data">
-                Upload Image
-                <input type="file" name="files" accept=".jpg,.jpeg,.png"multiple onChange={handleInput} />
-                <button type="submit">Upload</button>
-            </form>
+            <GerenciarImagensCarousel>
+                <ImageCardList carousel={carousel} removeImage={removeImageCarousel} />
+                <ButtonFlat style={{ margin: "10px auto", display: "block" }} onClick={(e) => openFileSelectDialog(e, filesUpload)}>Adicionar imagem</ButtonFlat>
+            </GerenciarImagensCarousel>
         </CenterContainer>
     )
 }
 
+function ImageCardList({ carousel, removeImage }) {
+
+    let imageCards = carousel.map(image => (<ImagemCard key={image._id} image={image} removeImage={removeImage}></ImagemCard>))
+
+    return (
+        <ul>
+            {imageCards}
+        </ul>
+    );
+}
+
+function ImagemCard({ image, removeImage }) {
+    return (
+        <ImgCardLi>
+            <img src={configs.imgsPath + image.path} />
+            <DeleteImage onClick={(e) => { removeImage(image._id) }}></DeleteImage>
+        </ImgCardLi>
+    );
+}
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({}, dispatch);
+    bindActionCreators({ carregarImagensCarousel, uploadImagensCarousel, removeImageCarousel }, dispatch);
 
 const mapStateToProps = (store) => ({
-
+    carousel: store.carousel
 });
 
 export const CarouselManager = connect(mapStateToProps, mapDispatchToProps)(CarouselManager_);
