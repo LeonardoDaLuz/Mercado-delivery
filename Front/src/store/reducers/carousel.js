@@ -33,9 +33,9 @@ const carousel = (state = initialState, action) => {
         case UPLOAD_IMAGENS_CAROUSEL_SUCCESS:
             return { ...state, ...action.payload, status: 'done' }
         case REMOVER_IMAGEM_CAROUSEL_SUCCESS:
-         
-
-            return { ...state, ...action.payload, status: 'done' }
+            let newDeletionList = [...state.deletionList];
+            
+            return { ...state, ...action.payload, status: 'done', deletionList: newDeletionList }
         default:
             return state;
     }
