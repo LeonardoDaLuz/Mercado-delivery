@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ButtonFlat, CenterContainer } from '../../globalStyleds';
-import { DeleteImage, GerenciarImagensCarousel, ImgCardLi } from './styles';
+import { DeleteImage, GerenciarImagensCarousel, ImgCardLi, LoadIndicator } from './styles';
 import { carregarImagensCarousel, uploadImagensCarousel, removeImageCarousel } from '@actions/carousel'
 import configs from "@configs";
 
@@ -15,6 +15,7 @@ function CarouselManager_({ carousel, carregarImagensCarousel, uploadImagensCaro
     function openFileSelectDialog(e, callback) {
         var elemento = document.createElement("input");
         elemento.type = "file";
+        elemento.setAttribute('multiple', "");
         elemento.onchange = callback;
         elemento.click();
     }
@@ -29,17 +30,22 @@ function CarouselManager_({ carousel, carregarImagensCarousel, uploadImagensCaro
     //{configs.imgsPath + produto.img}
     return (
         <CenterContainer>
+            {carousel.status}
             <GerenciarImagensCarousel>
-                <ImageCardList carousel={carousel} removeImage={removeImageCarousel} />
+                <ImageCardList images={carousel.images} removeImage={removeImageCarousel} />
+                {carousel.status === "loading" &&
+                    <LoadIndicator />
+                }
                 <ButtonFlat style={{ margin: "10px auto", display: "block" }} onClick={(e) => openFileSelectDialog(e, filesUpload)}>Adicionar imagem</ButtonFlat>
+
             </GerenciarImagensCarousel>
         </CenterContainer>
     )
 }
 
-function ImageCardList({ carousel, removeImage }) {
+function ImageCardList({ images, removeImage }) {
 
-    let imageCards = carousel.map(image => (<ImagemCard key={image._id} image={image} removeImage={removeImage}></ImagemCard>))
+    let imageCards = images.map(image => (<ImagemCard key={image._id} image={image} removeImage={removeImage}></ImagemCard>))
 
     return (
         <ul>

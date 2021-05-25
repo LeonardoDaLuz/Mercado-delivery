@@ -17,18 +17,16 @@ class CarouselController {
 
     static async obterImagens(req, res, next) {
         let listaImagens = await global.conn.collection('imagens_carrossel').find({}).toArray();
-        res.json(listaImagens);
+        setTimeout(()=>
+        res.json({ images: listaImagens})
+        , 1000)
     }
 
     static async deletarImagens(req, res, next) {
-
-        await global.conn.collection('imagens_carrossel').deleteOne({ _id: new ObjectId(req.params.id)},
-            function (err, result) {
-                if(err) {
-                    res.status(400).send("Error");
-                }
-                CarouselController.obterImagens(req, res, next);
-            });
+        let _id = new ObjectId(req.params.id);
+        let image = await global.conn.collection("imagens_carrossel").findOneAndDelete({ _id });
+        deleteFile("public/" + image.value.path);
+        CarouselController.obterImagens(req, res, next);
     }
 }
 
@@ -44,7 +42,7 @@ function saveFilesFromRequisitionOnDisk(req, destination, sufix = '') {
                 if (file.type.includes("image")) {
 
                     let oldPath = file.path;
-                    console.log(file);
+                    //console.log(file);
                     let ext = path.extname(file.name);
                     let fileNameWithoutExt = file.name.replace(ext, '');
                     const newPath = `${destination}${fileNameWithoutExt}-${sufix}${ext}`;
@@ -58,6 +56,12 @@ function saveFilesFromRequisitionOnDisk(req, destination, sufix = '') {
             resolve(fileList);
         });
     });
+}
+
+function deleteFile(path) {
+    if (fs.existsSync(path)) {
+        fs.unlinkSync(path, (err) => console.log(err));
+    }
 }
 
 async function saveFilePathsOnDb(paths) {

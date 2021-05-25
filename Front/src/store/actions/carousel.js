@@ -48,10 +48,9 @@ export const uploadImagensCarousel = (e) => {
         }
 
         let response = await fetch(url, config);
-        if(response.ok) {
+        if (response.ok) {
             let data = await response.json();
-            dispatch({ type: UPLOAD_IMAGENS_CAROUSEL_SUCCESS });
-            dispatch({ type: CARREGAR_IMAGENS_CAROUSEL_SUCCESS, payload: data });
+            dispatch({ type: UPLOAD_IMAGENS_CAROUSEL_SUCCESS, payload: data });
         } else {
             dispatch({ type: UPLOAD_IMAGENS_CAROUSEL_FAILURE, payload: response.status });
             console.error(response.status);
@@ -59,24 +58,23 @@ export const uploadImagensCarousel = (e) => {
     }
 }
 
-export const removeImageCarousel = (id) => {
+export const removeImageCarousel = (deleteImageId) => {
     return async dispatch => {
 
-        dispatch({ type: REMOVER_IMAGEM_CAROUSEL_START });
+        dispatch({ type: REMOVER_IMAGEM_CAROUSEL_START, deleteImageId  });
 
-        const url = 'http://localhost:3001/carousel/deleteImage/'+id;
+        const url = 'http://localhost:3001/carousel/deleteImage/' + deleteImageId;
 
         const config = {
             method: 'DELETE',
         }
 
         let response = await fetch(url, config);
-        if(response.ok) {
+        if (response.ok) {
             let data = await response.json();
-            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_SUCCESS });
-            dispatch({ type: CARREGAR_IMAGENS_CAROUSEL_SUCCESS, payload: data });
+            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_SUCCESS, payload:  data, deleteImageId });
         } else {
-            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_FAILURE, payload: response.status });
+            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_FAILURE, payload: response.status, deleteImageId });
             console.error(response.status);
         }
     }
