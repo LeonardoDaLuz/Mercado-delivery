@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import assets from '@assets';
+import { Link } from "react-router-dom";
 
 export const Header = styled.header`
     position: sticky;
@@ -20,7 +21,7 @@ export const ContainerLg = styled.div`
     }
 `;
 
-export const NavbarLogo = styled.a`
+export const NavbarLogo = styled(Link)`
     flex: 0;
     flex-basis: 64px;
     height: 48px;

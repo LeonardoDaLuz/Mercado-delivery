@@ -7,10 +7,9 @@ export const CarrouselContainer = styled.div`
 `;
 
 export const SlideFoto = styled.div`
-width: 500px;
+
 text-align: center;
     img {
-        display: inline-block;
-        height: 500px;
+
     }
 `;

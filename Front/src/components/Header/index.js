@@ -30,7 +30,7 @@ function Header_({ carregarCarrinho, history, location }) {
         <Header>
             <ContainerLg>
                 <Row>
-                    <NavbarLogo href="/"></NavbarLogo>
+                    <NavbarLogo to="/"></NavbarLogo>
                     <SearchBar onSubmit={buscaSubmit}>
                         <input type='text' name="busca" />
                         <ButtonOutline type='submit'>Buscar</ButtonOutline>

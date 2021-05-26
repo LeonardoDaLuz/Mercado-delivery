@@ -2,12 +2,17 @@
     height: 50px;
     top: 0px;
     position: static;
+    margin: 14px;
 }
 
 .slick-dots li {
     margin: 7px;
 }
 
+.slick-slide img {
+    max-width: 100%;
+    display: inline-block;
+}
 .slick-dots li button {
     background-color: rgb(152, 152, 152);
     border-radius: 20px;
