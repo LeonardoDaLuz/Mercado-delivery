@@ -30,7 +30,7 @@ function CarouselManager_({ carousel, carregarImagensCarousel, uploadImagensCaro
     //{configs.imgsPath + produto.img}
     return (
         <CenterContainer>
-            {carousel.status}
+            
             <GerenciarImagensCarousel>
                 <ImageCardList images={carousel.images} removeImage={removeImageCarousel} />
                 {carousel.status === "loading" &&
@@ -55,9 +55,8 @@ function ImageCardList({ images, removeImage }) {
 }
 
 function ImagemCard({ image, removeImage }) {
-    let styleInRemove = { opacity: 0.1, filter: 'blur(5px)' }
     return (
-        <ImgCardLi waiting={false}>
+        <ImgCardLi waiting={image.status=='deleting'}>
             <img src={configs.imgsPath + image.path} />
             <DeleteImage onClick={(e) => { removeImage(image._id) }}></DeleteImage>
 

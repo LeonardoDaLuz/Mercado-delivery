@@ -5,7 +5,9 @@ export const GerenciarImagensCarousel = styled.div`
         display: flex;
         flex-direction: column;
         align-items: center;
+        padding: 0px;
     }
+    padding-top: 15px;
 `;
 
 const LoadIndicatorAnimation = keyframes`
@@ -14,13 +16,35 @@ const LoadIndicatorAnimation = keyframes`
 `;
 
 export const LoadIndicator = styled.div`
-border: 16px solid #e5e5e5;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  animation: ${LoadIndicatorAnimation}  2s linear infinite;
+    border: 1px solid #686868;
+  width: 300px;
+  height: 200px;
+  position: relative;
+  margin: 0 auto 25px auto;
+  
+  &::before {
+        content: "";
+        background-color: black;
+        opacity: 0.1;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+      }
 
+
+  &:after {
+    content: "";
+    display: block;
+    left: calc(50% - 60px);
+    top: calc(50% - 60px);
+    position: absolute;
+    border: 16px solid #e5e5e5;
+    border-radius: 50%;
+    border-top: 16px solid #3498db;
+    width: 120px;
+    height: 120px;
+    animation: ${LoadIndicatorAnimation}  2s linear infinite;
+  }
   
 `;
 
@@ -38,13 +62,14 @@ export const ImgCardLi = styled.li`
     img {
         max-height: 500px;
         max-width: 100%;
+        min-height: 200px;
     }
 
-    ${props=> props.waiting && css`
+    ${props => props.waiting && css`
       &::before {
         content: "";
         background-color: black;
-        opacity: 0.8;
+        opacity: 0.5;
         position: absolute;
         width: 100%;
         height: 100%;
@@ -72,5 +97,30 @@ export const DeleteImage = styled.button`
     height: 30px;
     right: 0px;
     top: 0px;
+    border: none;
+    border-radius: 50%;
+
+    &::after {
+
+      content:"";
+      background-color: white;
+      display: block;
+      width: 19px;
+      height: 5px;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 12px;
+    }
+    &::before {
+
+      content:"";
+      background-color: white;
+      display: block;
+      position: absolute;
+      width: 19px;
+      height: 5px;
+      top: 12px;
+      transform: rotate(-45deg);
+    }
 `;
 

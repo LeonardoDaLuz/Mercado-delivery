@@ -32,7 +32,10 @@ const carousel = produce((state, action) => {
             break;
         case REMOVER_IMAGEM_CAROUSEL_START:
             state.status = 'deleting';
-            state.deletionList =  [...state.waitingImageList, action.waitingImageId];
+            console.log(action);
+            let deletingImage = state.images.find((image)=>image._id==action.deleteImageId);
+            deletingImage.status = 'deleting';
+            state.deletionList =  [...state.waitingImageList, action.deleteImageId];
             break;
         case CARREGAR_IMAGENS_CAROUSEL_SUCCESS:
             state.status = 'done';
@@ -43,7 +46,7 @@ const carousel = produce((state, action) => {
             state.images = action.payload.images;
             break
         case REMOVER_IMAGEM_CAROUSEL_SUCCESS:
-            state.deletionList = arrayRemove(state.deletionList, action.waitingImageId);
+            state.deletionList = arrayRemove(state.deletionList, action.deleteImageId);
             state.status = state.deletionList.length === 0 ? 'done' : 'deleting';
             state.images = action.payload.images;
             break
