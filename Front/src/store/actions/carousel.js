@@ -58,12 +58,12 @@ export const uploadImagensCarousel = (e) => {
     }
 }
 
-export const removeImageCarousel = (deleteImageId) => {
+export const removeImageCarousel = (waitingImageId) => {
     return async dispatch => {
 
-        dispatch({ type: REMOVER_IMAGEM_CAROUSEL_START, deleteImageId  });
+        dispatch({ type: REMOVER_IMAGEM_CAROUSEL_START, deleteImageId: waitingImageId  });
 
-        const url = 'http://localhost:3001/carousel/deleteImage/' + deleteImageId;
+        const url = 'http://localhost:3001/carousel/deleteImage/' + waitingImageId;
 
         const config = {
             method: 'DELETE',
@@ -72,9 +72,9 @@ export const removeImageCarousel = (deleteImageId) => {
         let response = await fetch(url, config);
         if (response.ok) {
             let data = await response.json();
-            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_SUCCESS, payload:  data, deleteImageId });
+            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_SUCCESS, payload:  data, deleteImageId: waitingImageId });
         } else {
-            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_FAILURE, payload: response.status, deleteImageId });
+            dispatch({ type: REMOVER_IMAGEM_CAROUSEL_FAILURE, payload: response.status, deleteImageId: waitingImageId });
             console.error(response.status);
         }
     }

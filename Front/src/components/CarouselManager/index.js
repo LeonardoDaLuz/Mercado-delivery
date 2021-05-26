@@ -55,10 +55,12 @@ function ImageCardList({ images, removeImage }) {
 }
 
 function ImagemCard({ image, removeImage }) {
+    let styleInRemove = { opacity: 0.1, filter: 'blur(5px)' }
     return (
-        <ImgCardLi>
+        <ImgCardLi waiting={false}>
             <img src={configs.imgsPath + image.path} />
             <DeleteImage onClick={(e) => { removeImage(image._id) }}></DeleteImage>
+
         </ImgCardLi>
     );
 }

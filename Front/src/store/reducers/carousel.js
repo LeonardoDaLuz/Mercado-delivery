@@ -1,3 +1,5 @@
+import { arrayRemove } from '../../utils/arrayUtils';
+import produce from "immer";
 import {
     CARREGAR_IMAGENS_CAROUSEL,
     CARREGAR_IMAGENS_CAROUSEL_START,
@@ -17,28 +19,35 @@ import {
 const initialState = {
     status: 'idle',
     images: [],
-    deletionList: []
+    waitingImageList: []
 }
-const carousel = (state = initialState, action) => {
+const carousel = produce((state, action) => {
 
     switch (action.type) {
         case CARREGAR_IMAGENS_CAROUSEL_START:
-            return { ...state, status: 'loading' }
+            state.status = 'loading';
+            break;
         case UPLOAD_IMAGENS_CAROUSEL_START:
-            return { ...state, status: 'loading' }
+            state.status = 'loading';
+            break;
         case REMOVER_IMAGEM_CAROUSEL_START:
-            return { ...state, status: 'loading', deletionList: [...state.deletionList, action.deleteImageId] }
+            state.status = 'deleting';
+            state.deletionList =  [...state.waitingImageList, action.waitingImageId];
+            break;
         case CARREGAR_IMAGENS_CAROUSEL_SUCCESS:
-            return { ...state, ...action.payload, status: 'done' }
+            state.status = 'done';
+            state.images = action.payload.images;
+            break
         case UPLOAD_IMAGENS_CAROUSEL_SUCCESS:
-            return { ...state, ...action.payload, status: 'done' }
+            state.status = 'done';
+            state.images = action.payload.images;
+            break
         case REMOVER_IMAGEM_CAROUSEL_SUCCESS:
-            let newDeletionList = [...state.deletionList];
-            
-            return { ...state, ...action.payload, status: 'done', deletionList: newDeletionList }
-        default:
-            return state;
+            state.deletionList = arrayRemove(state.deletionList, action.waitingImageId);
+            state.status = state.deletionList.length === 0 ? 'done' : 'deleting';
+            state.images = action.payload.images;
+            break
     }
-}
+}, initialState)
 
 export default carousel;
