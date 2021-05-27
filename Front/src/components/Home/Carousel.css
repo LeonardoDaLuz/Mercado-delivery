@@ -2,7 +2,7 @@
     height: 50px;
     top: 0px;
     position: static;
-    margin: 14px;
+    margin: 14px 0px 14px 0px;
 }
 
 .slick-dots li {

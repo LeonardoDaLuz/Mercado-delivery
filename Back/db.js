@@ -105,7 +105,7 @@ async function editarQuantidadeDoProdutoAoCarrinho(conta, produto, quantidade, c
 }
 
 
-async function listaProdutos(from, to, criterio = {}, sort = {}) {
+async function listaProdutos(from, to, criterio = {}, sort = {}) { ///DEPRECATED
     let produtos = await global.conn.collection("produtos").find(criterio).sort(sort).toArray();
     return produtos.slice(from, to);
 }

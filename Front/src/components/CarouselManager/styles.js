@@ -33,7 +33,7 @@ export const LoadIndicator = styled.div`
 
 
   &:after {
-    content: "";
+    content: ""; 
     display: block;
     left: calc(50% - 60px);
     top: calc(50% - 60px);

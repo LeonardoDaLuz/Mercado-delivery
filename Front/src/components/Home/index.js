@@ -1,18 +1,20 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Caroulsel } from './Carousel';
-
+import { OfertasDoDiaContainer } from './styles';
+import { OfertasDoDia } from './OfertasDoDia';
 
 function Home_() {
     return (
-    <>
-        <Caroulsel />
-    </>
+        <>
+            <Caroulsel />
+            <OfertasDoDia />
+        </>
     )
 }
 
-const mapDispatchToProps = (dispatch)=> 
-    bindActionCreators({},dispatch);
+const mapDispatchToProps = (dispatch) =>
+    bindActionCreators({}, dispatch);
 
 const mapStateToProps = (store) => ({
 
