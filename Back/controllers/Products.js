@@ -44,23 +44,7 @@ class ProductsController {
                 let now = new Date();
                 let timeZoneOffset = now.getTimezoneOffset();
                 now.setMinutes(now.getMinutes()-timeZoneOffset);
-                let minTime = new Date(
-                    now.getFullYear(),
-                    now.getMonth(),
-                    now.getDate(),
-                    0, -timeZoneOffset, 0, 0 //é preciso usar esse timeZoneOffset para ajustar o fuso-horário. O valor de date que está no mongo DB está com o fuso horario já ajustado).
-                );
-                let maxTime = new Date(
-                    now.getFullYear(),
-                    now.getMonth(),
-                    now.getDate(),
-                    23, 59 - timeZoneOffset, 59, 999
-                );
-
-                console.log(now);
-                console.log(minTime);
-                console.log(maxTime);
-
+                
                 query['offer.time_range.min'] = { $lt: now }
                 query['offer.time_range.max'] = { $gt: now }
             }
@@ -77,7 +61,7 @@ class ProductsController {
 
 
 
-        console.log("sd");
+        console.log("Seleting products from query:");
         console.log(query);
         let fullProductList = await global.conn.collection("produtos").find(query).sort(sort).toArray();
         let slicedProductList = fullProductList.slice(req.params.from, req.params.to);

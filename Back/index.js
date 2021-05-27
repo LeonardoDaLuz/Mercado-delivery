@@ -99,11 +99,11 @@ async function main() {
         resp.json(carrinho);
     });
 
-
+/*
     app.get("/:teste?/", async function (req, resp) {
         console.log(req.query.name);
         resp.json(req.query)
-    });
+    });*/
 
     app.post('/like/:conta/:objId', async (req, res) => {
 

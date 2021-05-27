@@ -4,8 +4,11 @@ const ProductsController = require('../controllers/Products');
 
 module.exports = (app) => {
 
+    app.get("/produtos/", ProductsController.listProducts);
 
     app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:from/:to", ProductsController.listProducts);
+
+    app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:to", ProductsController.listProducts);
 
     app.get("/atualiza-produtos/", ProductsController.updateProduct);
 
