@@ -40,14 +40,12 @@ class ProductsController {
 
 
         if (offer != '') {
-            if (offer == "day") {
-                let now = new Date();
-                let timeZoneOffset = now.getTimezoneOffset();
-                now.setMinutes(now.getMinutes()-timeZoneOffset);
-                
-                query['offer.time_range.min'] = { $lt: now }
-                query['offer.time_range.max'] = { $gt: now }
-            }
+            let now = new Date();
+            let timeZoneOffset = now.getTimezoneOffset();
+            now.setMinutes(now.getMinutes() - timeZoneOffset);
+            query['offer.time_range.starts'] = { $lt: now }
+            query['offer.time_range.ends'] = { $gt: now }
+            query['offer.type'] = offer;          
         }
 
         let keys = Object.keys(req.params);
