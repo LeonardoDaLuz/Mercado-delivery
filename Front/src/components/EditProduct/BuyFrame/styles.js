@@ -6,8 +6,8 @@ export const BuyFrameContainer = styled.div`
 
     flex-basis: 426px;
     flex-grow: 1;
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(164, 164, 164);
+    background-color: ${colorTheme.contentBackground};
+    border: 1px solid ${colorTheme.contentBackground(600)};
     border-radius: 5px;
     padding: 20px;
     text-align: left;
@@ -27,34 +27,15 @@ export const StockBlock = styled(Col)`
 export const ButtonOutline_ = styled(ButtonOutline)`
 
     font-weight: 400;
-    color: #212529;
-    border: 1px solid #bfc6cc;
+    color: ${colorTheme.contentText};
+    border: 1px solid ${colorTheme.contentBackground(800)};
     margin: 0;
 
     &:hover {
         color: rgb(255, 255, 255);
-        background-color: rgb(132, 141, 146);
-        border-color: rgb(150, 140, 125);
+        background-color: ${colorTheme.contentBackground(800)};
+        border-color: ${colorTheme.contentBackground(800)};
     }
-`;
-
-export const DiscartButton = styled(ButtonFlat)`
-    background-color: rgb(2, 157, 2);
-    border: 0px;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    flex-grow: 1;
-    padding: 10px;
-`;
-
-export const SaveButton = styled(ButtonFlat)`
-    background-color: rgb(36, 87, 208);
-    border: 0px;
-    border-radius: 5px;
-    color: rgb(255, 255, 255);
-    font-size: 16px;
-    flex-grow: 1;
 `;
 
 export const PriceBlock = styled.div`
@@ -64,7 +45,7 @@ export const PriceBlock = styled.div`
 
     &>input {
         width: 100%;
-        color: rgb(2, 157, 2);
+        color: ${colorTheme.primaryText};
         font-size: 45px;
         font-weight: 700;
         line-height: 20px;
@@ -84,7 +65,7 @@ export const PriceBlock = styled.div`
         left: 25px;
         font-weight: 700;
         font-size: 20px;
-        color: ${colorTheme.complementaryText};
+        color: ${colorTheme.contentText(0)};
 
     }
 `;
@@ -96,12 +77,12 @@ export const Offer = styled.div`
 `;
 
 export const OfferBody = styled.div`
-    background-color: ${colorTheme.primary(100)};
+    background-color: ${colorTheme.secondary(150)};
     border-radius: 10px;
     padding: 10px;
     display: flex;
     flex-wrap: wrap;
-
+    margin-bottom: 20px;
     &>div, &>button {
         flex: 1 1 200px;
         margin: 5px;

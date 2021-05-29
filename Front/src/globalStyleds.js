@@ -39,15 +39,25 @@ export const GlobalStyle = createGlobalStyle`
     }
 `
 
+//Div especial utilitária
+export const Div = styled.div`
+   ${({ ChildrenFlexGrow }) => ChildrenFlexGrow && `
+        &>* {
+            flex: 1 1 0%;
+        }
+   `}
+`;
+    
+
 export const CenterContainer = styled.div`
     margin: 0 auto;
     width: 100%;
     max-width:1000px;
 `;
-export const Row = styled.div`
+
+export const Row = styled(Div)`
     display: flex;
     justify-content: ${props => (props.justify === undefined ? 'flex-start' : props.justify)};
-   
 `;
 
 export const Col = styled.div`
@@ -74,13 +84,12 @@ export const ButtonFlat = styled.button`
     transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 
     &:active {
-        color: rgb(255, 255, 255);
-        background-color: rgb(56, 194, 87);
-        border-color: rgb(63, 223, 99);
+        filter: brightness(85%);
+
     }
 
     &:disabled {
-        opacity: 0.5!important;
+        opacity: 0.3!important;
     }
 `;
 

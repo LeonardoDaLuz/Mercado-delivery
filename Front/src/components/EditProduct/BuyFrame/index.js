@@ -14,13 +14,6 @@ import moveElementFromTo from '@utils/moveElementFromTo';
 import { BuyFrameContainer, ButtonOutline_, SaveButton, DiscartButton, PriceBlock, StockBlock, Offer, OfferBody } from './styles';
 import { ButtonFlat } from '../../../globalStyleds';
 
-
-
-
-
-
- 
-
 function BuyFrame(props) {
 
     let { produto, likeProduto, carregarCarrinho, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
@@ -78,14 +71,14 @@ function BuyFrame(props) {
                             <option value='month'>Mês</option>
                         </select>
                     </div>
-                    <ButtonFlat bgColor={colorTheme.primary()}>Ativar oferta</ButtonFlat>
-                    <ButtonFlat disabled={true}>Desativar oferta</ButtonFlat>
+                    <ButtonFlat bgColor={colorTheme.secondary()}>Ativar oferta</ButtonFlat>
+                    <ButtonFlat bgColor={colorTheme.secondary()} disabled={true}>Desativar oferta</ButtonFlat>
 
                 </OfferBody>
             </Offer>
-            <Row>
-                <SaveButton>Descartar alterações</SaveButton>
-                <DiscartButton onClick={adicionarAoCarrinho}>Salvar</DiscartButton>
+            <Row ChildrenFlexGrow mx2 flexBasis150>
+                <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
+                <ButtonFlat onClick={adicionarAoCarrinho}>Salvar</ButtonFlat>
             </Row>
         </BuyFrameContainer>
     );
