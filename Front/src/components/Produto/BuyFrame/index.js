@@ -3,12 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
-import { QuadroComprarContainer, Row, Col, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete } from './styles';
+import { QuadroComprarContainer, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete } from './styles';
 import { likeProduto } from '@actions/produto';
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho';
 import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
+import { Col, Row } from '../../../globalStyleds';
 
-function QuadroComprar(props) {
+function BuyFrame(props) {
 
     let { produto, likeProduto, carregarCarrinho, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
     let loja = props.loja;
@@ -74,4 +75,4 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators({ likeProduto, adicionarProdutoAoCarrinho, carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuadroComprar);
+export default connect(mapStateToProps, mapDispatchToProps)(BuyFrame);

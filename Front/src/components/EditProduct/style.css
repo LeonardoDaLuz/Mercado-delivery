@@ -163,14 +163,6 @@
     color: rgb(0, 0, 0);
 }
 
-.descricao-pg-produto {
-    margin: 25px 10px 20px 10px;
-    text-align: justify;
-}
-
-.descricao-pg-produto div {
-    text-align: justify;
-}
 
 .botao-verde {
     background-color: rgb(2, 157, 2);

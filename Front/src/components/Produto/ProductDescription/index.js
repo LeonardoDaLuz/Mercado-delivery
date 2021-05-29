@@ -1,4 +1,4 @@
-export function DescricaoProduto(props) {
+export function ProductDescription(props) {
 
     return (
         <div className="descricao-pg-produto">
@@ -7,7 +7,7 @@ export function DescricaoProduto(props) {
                 dangerouslySetInnerHTML={{
                     __html: props.produto.descricao
                 }}></div>
-<input type='text' style={{width:'auto'}}/>
+
         </div>
     )
 }

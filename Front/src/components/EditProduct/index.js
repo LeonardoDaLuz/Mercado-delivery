@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 
 //Sub Components
 import { BreadCumbs } from './BreadCumbs';
-import { QuadroDeFotos } from './QuadroDeFotos';
+import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
-import { DescricaoProduto } from './DescricaoProduto';
+import { ProductDescription } from './ProductDescription';
 //Others
 import { carregaProduto } from '@actions/produto'
 import './style.css';
@@ -33,9 +33,9 @@ class EditProduct extends Component {
             <div className="container-lg px-2 produto-page">
                 <BreadCumbs produto={produto} />            
                 <div className='row'>
-                    <QuadroDeFotos produto={produto} />
+                    <PhotoFrame produto={produto} />
                     <BuyFrame produto={produto} loja={loja} />
-                    <DescricaoProduto produto={produto} />
+                    <ProductDescription produto={produto} />
                 </div>
             </div >
         );
