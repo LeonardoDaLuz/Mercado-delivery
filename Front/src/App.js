@@ -6,8 +6,7 @@ import {
   withRouter
 } from "react-router-dom";
 
-import "../node_modules/bootstrap/scss/bootstrap.scss";
-import './App.css';
+
 import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
@@ -22,6 +21,11 @@ import { CarouselManager } from "./components/CarouselManager";
 //Admin Components
 import EditProduct from './components/EditProduct';
 
+//styles
+import "../node_modules/bootstrap/scss/bootstrap.scss";
+import { GlobalStyle } from "./globalStyleds";
+
+
 export default withRouter(class App extends Component {
 
   constructor() {
@@ -33,6 +37,7 @@ export default withRouter(class App extends Component {
 
     return (
       <Router>
+        <GlobalStyle />
         <div>
           <Header loja={this.loja} />
           <Sidebar tooglerId='sidebar-toogler' />

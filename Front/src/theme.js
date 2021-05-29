@@ -1,6 +1,9 @@
 import Color from 'color';
 
 const _colorTheme = {
+    contentBackground: 'white',
+    contentText: 'black',
+    siteBackground: 'rgb(244, 244, 244)',
     primary: '#0dad0d',
     secondary: '#2457D0',
     tertiary: '#41aea9',
@@ -21,17 +24,14 @@ function createAdvancedColorThemeObject(themeObject) {
     let hslValues = {}
     let keys = Object.keys(themeObject);
     keys.forEach(key => {
-        _bakedColors[key] = Color(themeObject[key]);
-        hslValues[key] = _bakedColors[key].hsl().color;
+        hslValues[key] = Color(themeObject[key]).hsl().color;
         newObj[key] = function (weight = 500) {
-            if (weight === 500 || typeof weight === 'object') {
+            if (typeof weight === 'object') {
                 return themeObject[key];
             } else {
-                let lightness = (((1000-weight)/1000)-0.5)*100;
-                return `hsl(${hslValues[key][0]},${hslValues[key][1]}%,${hslValues[key][2]+lightness}%)`;
+                let lightness = (((1000 - weight) / 1000) - 0.5) * 100;
+                return `hsl(${hslValues[key][0]},${hslValues[key][1]}%,${hslValues[key][2] + lightness}%)`;
             }
-
-            return 'yellow';
         }
     })
     console.log(newObj)

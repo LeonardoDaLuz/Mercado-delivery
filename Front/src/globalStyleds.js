@@ -1,4 +1,43 @@
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+import { colorTheme } from './theme';
+
+export const GlobalStyle = createGlobalStyle`
+    body {
+        background-color: ${colorTheme.siteBackground(500)};
+        min-height: 100%;
+    }
+
+    .noscroll {
+        position: fixed!important;
+    }
+
+    .navbar-logo {
+        flex: 0;
+        flex-basis: 64px;
+        height: 48px;
+        background-image: url('/src/assets/png/LogoAlpha48px.png');
+        background-repeat: no-repeat;
+        background-position: center;  
+
+    }
+
+    .c-px-3>* {
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+
+    .c-flex-grow-1>* {
+        flex-grow: 1;
+
+    }
+
+    @media screen and (min-width: 992px) {
+        .navbar-logo {
+            flex-basis: 289px;
+            background-image: url('/src/assets/png/LogoExtended48px.png');
+        }
+    }
+`
 
 export const CenterContainer = styled.div`
     margin: 0 auto;
@@ -23,9 +62,9 @@ export const Col3 = styled.div`
 
 export const ButtonFlat = styled.button`
 
-    color: ${({Color='white'})=>Color};
-    background-color: ${({bgColor='#32b112'})=>bgColor};
-    border: 1px solid ${({bgColor='#32b112'})=>bgColor};
+    color: ${({ Color = 'white' }) => Color};
+    background-color: ${({ bgColor = '#32b112' }) => bgColor};
+    border: 1px solid ${({ bgColor = '#32b112' }) => bgColor};
     border-radius: 0.25rem;
     display: inline-block;
     text-align: center;
