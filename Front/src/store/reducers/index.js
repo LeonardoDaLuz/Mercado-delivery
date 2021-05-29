@@ -4,11 +4,13 @@ import produto from './produto';
 import carrinho from './carrinho';
 import categorias from './categorias';
 import carousel from './carousel';
+import account from './account';
 
 export default combineReducers({
     produtos,
     produto,
     carrinho,
     categorias,
-    carousel
+    carousel,
+    account
 });
