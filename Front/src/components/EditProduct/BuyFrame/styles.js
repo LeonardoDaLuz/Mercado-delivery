@@ -96,7 +96,7 @@ export const Offer = styled.div`
 `;
 
 export const OfferBody = styled.div`
-    background-color: ${colorTheme.primary(150)};
+    background-color: ${colorTheme.primary(100)};
     border-radius: 10px;
     padding: 10px;
     display: flex;

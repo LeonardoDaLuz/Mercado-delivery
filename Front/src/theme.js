@@ -1,6 +1,6 @@
 import Color from 'color';
 
-const _colorTheme = {
+let _colorTheme = {
     contentBackground: 'white',
     contentText: 'black',
     siteBackground: 'rgb(244, 244, 244)',
@@ -29,7 +29,7 @@ function createAdvancedColorThemeObject(themeObject) {
             if (typeof weight === 'object') {
                 return themeObject[key];
             } else {
-                let lightness = (((1000 - weight) / 1000) - 0.5) * 100;
+                let lightness = (((1000 - weight) / 1000) - 0.5) * 125;
                 return `hsl(${hslValues[key][0]},${hslValues[key][1]}%,${hslValues[key][2] + lightness}%)`;
             }
         }
@@ -38,4 +38,6 @@ function createAdvancedColorThemeObject(themeObject) {
     return newObj;
 }
 
-export const colorTheme = createAdvancedColorThemeObject(_colorTheme);
+_colorTheme = createAdvancedColorThemeObject(_colorTheme);
+
+export const colorTheme = _colorTheme;
