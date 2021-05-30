@@ -10,10 +10,15 @@ export const PhotoFrame_ = styled.div`
     border-radius: 10px;
     overflow: hidden;
     margin-right: 20px;
+    display: flex;
 `;
 
 export const ImageViewer = styled.img`
     width: 100%;
+    flex: 1;
 
 `;
+export const ImageSelector = styled.div`
+   flex: 1;
 
+`;

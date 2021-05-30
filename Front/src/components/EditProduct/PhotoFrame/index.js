@@ -1,10 +1,18 @@
 import configs from '@configs';
-import { PhotoFrame_, ImageViewer } from './style';
+import { PhotoFrame_, ImageViewer, ImageSelector } from '../../Produto/PhotoFrame/style';
 
 export function PhotoFrame(props) {
     return (
         <PhotoFrame_>
-            <ImageViewer src={configs.imgsPath + props.produto.img} />
+            <ImageSelector>
+                <img src={configs.imgsPath + props.produto.img} />
+                <img src={configs.imgsPath + props.produto.img} />
+                <img src={configs.imgsPath + props.produto.img} />
+                <img className='active' src={configs.imgsPath + props.produto.img} />
+            </ImageSelector>
+            <ImageViewer >
+                <img src={configs.imgsPath + props.produto.img} />
+            </ImageViewer>
 
         </PhotoFrame_>
     )
