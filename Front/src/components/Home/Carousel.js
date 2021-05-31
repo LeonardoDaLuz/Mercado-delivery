@@ -19,9 +19,6 @@ function Caroulsel_({carousel, carregarImagensCarousel}) {
     const settings = {
         dots: true,
         infinite: true,
-
-       // centerMode: true,
-       // centerPadding: '100px',
         slidesToShow: 1,
         variableWidth: false
     }

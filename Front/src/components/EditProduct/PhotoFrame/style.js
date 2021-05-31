@@ -16,9 +16,10 @@ export const PhotoFrame_ = styled.div`
 export const ImageViewer = styled.img`
     width: 100%;
     flex: 1;
+    cursor: pointer;
 
 `;
 export const ImageSelector = styled.div`
    flex: 1;
-
+   cursor: pointer;
 `;

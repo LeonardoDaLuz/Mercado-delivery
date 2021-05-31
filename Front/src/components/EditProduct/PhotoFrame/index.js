@@ -5,8 +5,8 @@ export function PhotoFrame(props) {
     return (
         <PhotoFrame_>
             <ImageSelector>
-                <img src={configs.imgsPath + props.produto.img} />
-                <img src={configs.imgsPath + props.produto.img} />
+                <img src={configs.imgsPath + props.produto.imgs[0]} />
+                <img src={configs.imgsPath + props.produto.imgs[1]} />
                 <img src={configs.imgsPath + props.produto.img} />
                 <img className='active' src={configs.imgsPath + props.produto.img} />
             </ImageSelector>

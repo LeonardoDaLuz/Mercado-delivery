@@ -36,7 +36,6 @@ function createAdvancedColorThemeObject(themeObject) {
             }
         }
     })
-    console.log(newObj)
     return newObj;
 }
 

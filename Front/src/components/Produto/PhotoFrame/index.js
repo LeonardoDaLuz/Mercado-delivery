@@ -1,21 +1,50 @@
 import configs from '@configs';
-import { PhotoFrame_, ImageViewer, ImageSelector } from '../../Produto/PhotoFrame/style';
+import { useState } from 'react';
+import { PhotoFrame_, ImageViewer, ImageSelector, SlickLightBoxContainer, Center, BlackBackground } from '../../Produto/PhotoFrame/style';
+import Magnifier from "react-magnifier";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import { SlickLightBox } from './LightBox';
 
 export function PhotoFrame(props) {
+
+    const [selectedImageId, setSelectedImageId] = useState(0);
+    const [showLightbox, setShowLightBox] = useState(false);
+
+    let SelectedImageUrl = props.produto.img; //como a versão do banco de dados anteriormente só continha 1 imagem por produto, isto se faz necessário para manter compatibilidade.
+
+    if (props.produto.imgs)
+        SelectedImageUrl = props.produto.imgs[selectedImageId];
+
+    const slickSettings = {
+        infinite: true,
+        slidesToShow: 1,
+        variableHeight: false
+    }
+
+
+    function show() {
+        setShowLightBox(true);
+    }
+
     return (
         <PhotoFrame_>
-            <ImageSelector>
-                <img src={configs.imgsPath + props.produto.img} />
-                <img src={configs.imgsPath + props.produto.img} />
-                <img src={configs.imgsPath + props.produto.img} />
-                <img className='active' src={configs.imgsPath + props.produto.img} />
-            </ImageSelector>
+
+            {props.produto.imgs &&
+                <ImageSelector>
+                    {props.produto.imgs.map((img, index) => <img key={index} src={configs.imgsPath + img} onClick={() => setSelectedImageId(index)} />)}
+                </ImageSelector>
+            }
+
             <ImageViewer >
-                <img src={configs.imgsPath + props.produto.img} />
+                <Magnifier src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={show} />
             </ImageViewer>
 
-        </PhotoFrame_>
+            <SlickLightBox imgs={props.produto.imgs} show={showLightbox} />
+
+        </PhotoFrame_ >
     )
 }
 
-//quadro-de-foto mx-2'
+//quadro-de-foto mx-2'<img src={configs.imgsPath + img} />

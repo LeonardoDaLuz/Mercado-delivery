@@ -19,8 +19,7 @@ export const ImageViewer = styled.div`
     flex: 1 3 100px;
     img {
         width: 100%;
-    }
-   
+    }   
 `;
 export const ImageSelector = styled.div`
     width: 100px;
@@ -37,6 +36,7 @@ export const ImageSelector = styled.div`
 
     &>img.active,  &>img:hover {
         border: 2px solid ${colorTheme.primary(400)};
+        cursor: pointer;
     }
     
 `;

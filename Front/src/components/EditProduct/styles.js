@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { colorTheme } from '../../theme';
 
 
-
-
 export const QuadroComprarContainer = styled.div`
 
     flex-basis: 426px;
@@ -20,30 +18,9 @@ export const QuadroComprarContainer = styled.div`
         width: 100%;
         border: none;
     }
-
-`;
-
-export const LikeButton = styled.button`
-
-    color: rgb(125, 125, 125);
-    font-size: 60px;
-    font-family: Arial, Helvetica, sans-serif;
-    margin-top: -30px;
-    background-color: rgba(255, 255, 255, 0);
-    border: none;
-    transition: color 0.3s;
-
-
-    &.true {
-        color: red;
-        animation: liking 0.3s ease-out;
-    }
-
-
 `;
 
 export const Quantidade = styled.div`
-
     flex-basis: 150px;
     flex-grow: 0!important;
 `;
