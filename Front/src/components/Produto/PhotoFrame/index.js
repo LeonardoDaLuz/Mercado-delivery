@@ -17,13 +17,6 @@ export function PhotoFrame(props) {
     if (props.produto.imgs)
         SelectedImageUrl = props.produto.imgs[selectedImageId];
 
-    const slickSettings = {
-        infinite: true,
-        slidesToShow: 1,
-        variableHeight: false
-    }
-
-
     function show() {
         setShowLightBox(true);
     }
@@ -41,7 +34,13 @@ export function PhotoFrame(props) {
                 <Magnifier src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={show} />
             </ImageViewer>
 
-            <SlickLightBox imgs={props.produto.imgs} show={showLightbox} />
+            <SlickLightBox
+                showState={showLightbox}
+                imgs={props.produto.imgs}
+                currentSelectedImage={selectedImageId}
+                setCurrentSelectedImage={setSelectedImageId}
+                setStateShow={setShowLightBox}
+            />
 
         </PhotoFrame_ >
     )

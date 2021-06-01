@@ -20,10 +20,11 @@ function Caroulsel_({carousel, carregarImagensCarousel}) {
         dots: true,
         infinite: true,
         slidesToShow: 1,
-        variableWidth: false
+        variableWidth: false,
+        autoplay: true,
     }
 
-    let slideFotos = carousel.images.map(image=> <SlideFoto><img src={"http://localhost:3001/"+image.path}/></SlideFoto>)
+    let slideFotos = carousel.images.map((image, index)=> <SlideFoto key={index}><img src={"http://localhost:3001/"+image.path}/></SlideFoto>)
     return (
 
         <Slider {...settings} style={{ width: '100%' }}>
