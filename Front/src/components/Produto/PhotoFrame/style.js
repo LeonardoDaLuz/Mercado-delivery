@@ -25,6 +25,7 @@ export const ImageSelector = styled.div`
     width: 100px;
     margin-top: 5px;
     margin-left: 5px;
+
    &>img {
 
     box-sizing: border-box;
@@ -34,7 +35,7 @@ export const ImageSelector = styled.div`
         border-radius: 5px;
     }
 
-    &>img.active,  &>img:hover {
+    &>img.selected,  &>img:hover {
         border: 2px solid ${colorTheme.primary(400)};
         cursor: pointer;
     }

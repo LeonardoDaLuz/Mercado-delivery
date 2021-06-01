@@ -26,7 +26,13 @@ export function PhotoFrame(props) {
 
             {props.produto.imgs &&
                 <ImageSelector>
-                    {props.produto.imgs.map((img, index) => <img key={index} src={configs.imgsPath + img} onClick={() => setSelectedImageId(index)} />)}
+                    {props.produto.imgs.map((img, index) =>
+                        <img
+                            key={index}
+                            className={index==selectedImageId?'selected':''}
+                            src={configs.imgsPath + img}
+                            onClick={() => setSelectedImageId(index)}
+                        />)}
                 </ImageSelector>
             }
 
