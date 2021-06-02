@@ -11,6 +11,7 @@ import { ProductDescription } from './ProductDescription';
 //Others
 import { carregaProduto } from '@actions/produto'
 import './style.css';
+import { Row } from '../../globalStyleds';
 
 class Produto extends Component {
 
@@ -32,11 +33,11 @@ class Produto extends Component {
         return (
             <div className="container-lg px-2 produto-page">
                 <BreadCumbs produto={produto} />            
-                <div className='row'>
+                <Row>
                     <PhotoFrame produto={produto} />
                     <BuyFrame produto={produto} loja={loja} />
                     <ProductDescription produto={produto} />
-                </div>
+                </Row>
             </div >
         );
     }

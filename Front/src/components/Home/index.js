@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Caroulsel } from './Carousel';
 import { OfertasDoDiaContainer } from './styles';
 import { OfertasDoDia } from './OfertasDoDia';
+import { Caroulsel } from './Carousel';
 
 function Home_() {
-    return (
+    return ( 
         <>
             <Caroulsel />
             <OfertasDoDia />

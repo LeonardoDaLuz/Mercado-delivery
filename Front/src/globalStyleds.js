@@ -56,7 +56,8 @@ export const CenterContainer = styled.div`
 `;
 
 export const Row = styled(Div)`
-    display: flex;
+    display: flex;    
+    flex-wrap: wrap;
     justify-content: ${props => (props.justify === undefined ? 'flex-start' : props.justify)};
 `;
 

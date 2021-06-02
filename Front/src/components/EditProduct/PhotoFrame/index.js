@@ -1,5 +1,6 @@
 import configs from '@configs';
-import { PhotoFrame_, ImageViewer, ImageSelector } from '../../Produto/PhotoFrame/style';
+import { ImageViewer, ImageSelector } from '../../Produto/PhotoFrame/Gallery/style';
+import { PhotoFrame_ } from '../../Produto/PhotoFrame/style';
 
 export function PhotoFrame(props) {
     return (

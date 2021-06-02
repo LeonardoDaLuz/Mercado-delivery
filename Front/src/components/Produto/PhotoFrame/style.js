@@ -11,33 +11,22 @@ export const PhotoFrame_ = styled.div`
     border-radius: 10px;
     overflow: hidden;
     margin-right: 20px;
-    display: flex;
+
+    @media(max-width: 992px) {
+        margin-right: 0px;
+    }
 `;
 
-export const ImageViewer = styled.div`
 
-    flex: 1 3 100px;
-    img {
-        width: 100%;
-    }   
+export const DesktopView = styled.div`
+    @media(max-width: 992px) {
+        display: none;
+    }
 `;
-export const ImageSelector = styled.div`
-    width: 100px;
-    margin-top: 5px;
-    margin-left: 5px;
 
-   &>img {
+export const MobileView = styled.div`
 
-    box-sizing: border-box;
-        width: calc(100% - 10px);
-        border: 1px solid ${colorTheme.neutral(250)};
-        margin: 5px;
-        border-radius: 5px;
+    @media(min-width: 992px) {
+        display: none;
     }
-
-    &>img.selected,  &>img:hover {
-        border: 2px solid ${colorTheme.primary(400)};
-        cursor: pointer;
-    }
-    
 `;
