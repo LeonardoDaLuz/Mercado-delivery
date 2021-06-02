@@ -5,7 +5,8 @@ const initialState = {
     titulo: '',
     categorias: [],
     descricao: '',
-    imgs: []
+    imgs: [],
+    preco: 0,
 
 };
 

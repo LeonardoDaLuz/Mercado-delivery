@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
-import { QuadroComprarContainer, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete, BlocoQuantidade } from './styles';
+import { QuadroComprarContainer, LikeButton, ButtonIncreaseDecrease, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete, BlocoQuantidade } from './styles';
 import { likeProduto } from '@actions/produto';
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho';
 import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
@@ -36,14 +36,14 @@ function BuyFrame(props) {
                 <BlocoQuantidade>
                     <label>Quantidade:</label>
                     <Row>
-                        <BotaoOutline disabled={disabled} onClick={removerDoCarrinho}>-</BotaoOutline>
+                        <ButtonIncreaseDecrease disabled={disabled} onClick={removerDoCarrinho}>-</ButtonIncreaseDecrease>
                         <input className="form-control text-center" value={quantidadeAdicionado} onChange={editarQuantidade} />
-                        <BotaoOutline onClick={adicionarAoCarrinho}>+</BotaoOutline>
+                        <ButtonIncreaseDecrease onClick={adicionarAoCarrinho}>+</ButtonIncreaseDecrease>
                     </Row>
                 </BlocoQuantidade>
                 <BlocoPreco>
-                    <span>{produto.preco}</span><br />
-                    <span>Em <b>12x de 35 sem juros</b></span>
+                    <span>{(produto.preco.toFixed(2)).replace('.',',')}</span><br />
+                    <span>Em <b>12x de 35 <div>sem juros</div></b></span>
                 </BlocoPreco>
             </Row>
             <BlocoCalcularFrete>

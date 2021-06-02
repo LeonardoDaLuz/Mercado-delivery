@@ -1,7 +1,10 @@
 import styled from 'styled-components';
+import { ButtonOutline } from "@globalStyleds";
+import { colorTheme } from '../../../theme';
 
 export const QuadroComprarContainer = styled.div`
 
+    position: relative;
     flex-basis: 356px;
     flex-grow: 1;
     background-color: rgb(255, 255, 255);
@@ -13,15 +16,16 @@ export const QuadroComprarContainer = styled.div`
 
      h1 {
         font-size: 30px;
+        margin-right: 30px;
     }
-
+/*
     &>div {
         display: flex;
     }
 
     &>div>div {
         flex-grow: 1;
-    }
+    }*/
 
     .green-text {
         font-weight: 700;
@@ -30,10 +34,12 @@ export const QuadroComprarContainer = styled.div`
 
 export const LikeButton = styled.button`
 
+    position: absolute;
+    right: 14px;
+    top: 0px;
     color: rgb(125, 125, 125);
     font-size: 60px;
     font-family: Arial, Helvetica, sans-serif;
-    margin-top: -30px;
     background-color: rgba(255, 255, 255, 0);
     border: none;
     transition: color 0.3s;
@@ -53,23 +59,14 @@ export const Quantidade = styled.div`
     flex-grow: 0!important;
 `;
 
-export const BotaoOutline = styled.button`
-display: inline-block;
-    font-weight: 400;
+export const ButtonIncreaseDecrease = styled(ButtonOutline)`
     color: #212529;
-    text-align: center;
-    vertical-align: middle;
-    -webkit-user-select: none;
-    user-select: none;
-    background-color: transparent;
     border: 1px solid #bfc6cc;
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
     line-height: 1.5;
-    border-radius: 0.25rem;
-    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    margin: 0px;
 
-    cursor: pointer;
     &:hover {
         color: rgb(255, 255, 255);
         background-color: rgb(132, 141, 146);
@@ -84,8 +81,8 @@ export const BotaoVerde = styled.button`
     border-radius: 5px;
     color: rgb(255, 255, 255);
     font-size: 16px;
-    flex-grow: 1;
     padding: 10px;
+    flex: 1 1 1px;
 `;
 
 export const BotaoAzul = styled.button`
@@ -94,36 +91,47 @@ export const BotaoAzul = styled.button`
     border-radius: 5px;
     color: rgb(255, 255, 255);
     font-size: 16px;
-    flex-grow: 1;
+    flex: 1 1 1px;
 `;
 
 export const BlocoQuantidade = styled.div`
-    flex: 0 0 100px;
+    flex: 1 1 20px;
 
     button {
-        flex: 1 1 1px;
+        flex: 0 1 1px;
     }
     input {
-        flex: 1 1 1px;
+        flex: 1 1 20px;
     }
 `;
 
 export const BlocoPreco = styled.div`
 
     text-align: right;
-
+    flex: 1 1 80px;
+    margin-left: 10px;
     &>span:nth-child(1) {
         color: rgb(2, 157, 2);
         font-size: 45px;
         font-weight: 700;
         line-height: 40px;
+        position: relative;
     }
 
     &>span:nth-child(1)::before {
-        color: rgb(2, 157, 2);
-        font-size: 45px;
+        content: "R$";
+        color: ${colorTheme.contentText(100)};
+        font-size:22px;
+        top: 5px;
+        left: -25px;
+        position: absolute;
         font-weight: 700;
         margin-bottom: -10px;
+
+    }
+
+    b>div {
+        display: inline-block;
     }
 `;
 
