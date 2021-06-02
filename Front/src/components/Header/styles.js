@@ -82,7 +82,7 @@ export const SearchBar = styled.form`
 
    input {
        flex: 1 1 1px;
-       display: none;
+   
         width: 80%;
         height: calc(1.5em + 0.75rem + 2px);
         padding: 0.375rem 0.75rem;
@@ -101,9 +101,11 @@ export const SearchBar = styled.form`
 
 
 export const Sandwich = styled.button`
-    display: inline-block;
+
+
     flex: 0 0 50px;
     width: 48px;
+    padding: 0px;
     display: none;
     background: transparent url(${assets.sandwich_menu}) center center / contain no-repeat;
     border: none;
@@ -117,15 +119,13 @@ export const Sandwich = styled.button`
 
 export const MenuPrincipal = styled.ul`
     flex: 0 0 35px;
-    display: flex;
-    align-items: center;
-    margin: 0px;
+    display: flex;  
+    padding: 0px;
+    margin: 0px 8px 0px 0px;
+
     list-style-type: none;
-    padding: 0px 10px;
 
     li {
-        flex-grow: 1;
-        margin: 3px 10px; 
         list-style-type: none;
     }
 
@@ -141,10 +141,14 @@ export const Carrinho = styled.a`
     flex: 1 1 32px;
     position: relative;
     margin-right: 3px;
+    display: block;
+    width: 35px;
+    height: 50px;
+    background: transparent url(${assets.carrinho}) center center / auto no-repeat;
 
     .quantidade {
         position: absolute;
-        top: -15px;
+        top: 2px;
         right: -10px;
         background-color: red;
         color: white;
@@ -155,11 +159,11 @@ export const Carrinho = styled.a`
 
     .custo {
         position: absolute;
-        bottom: -35px;
+        bottom: -22px;
         left:  50%;
         background-color: rgb(125, 125, 125);
         color: white;
-    padding: 1px 5px 0px 3px;
+        padding: 1px 5px 0px 3px;
 
         border-radius: 20px;
         font-size: 12px;

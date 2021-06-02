@@ -5,7 +5,7 @@ import { carregarCarrinho } from '@actions/carrinho'
 
 import { quantosProdutosTemNoCarrinho, custoTotalNoCarrinho } from '@analyzers/carrinho';
 
-import './style.css';
+//import './style.css';
 import { Header, ContainerLg, NavbarLogo, SearchBar, Sandwich, Carrinho, Teste, MenuPrincipal } from './styles';
 import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
 import { connect } from 'react-redux';
@@ -29,15 +29,7 @@ function Header_({ carregarCarrinho, history, location }) {
     return (
         <Header>
             <ContainerLg>
-                <Teste>
-                    <Row>
-                        <div className="vermelho">asd</div>
-                        <div className="azul">
-      
-                        </div>
-                        <div className="verde"></div>
-                    </Row>
-                </Teste>
+
                 <Row>
                     <NavbarLogo to="/"></NavbarLogo>
                     <SearchBar onSubmit={buscaSubmit}>
@@ -53,8 +45,8 @@ function Header_({ carregarCarrinho, history, location }) {
                         <li className="d-block">
                             <Carrinho id="carrinho" href="#">
                                 <div className="quantidade">{quantosProdutosTemNoCarrinho()}</div>
-                                <img src={assets.carrinho} />
                                 <div className="custo">R$ {custoTotalNoCarrinho()}</div>
+
                             </Carrinho>
                         </li>
                     </MenuPrincipal>
@@ -64,7 +56,16 @@ function Header_({ carregarCarrinho, history, location }) {
     );
 }
 
-
+/*
+                <Teste>
+                    <Row>
+                        <div className="vermelho">asd</div>
+                        <div className="azul">
+      
+                        </div>
+                        <div className="verde"></div>
+                    </Row>
+                </Teste>*/
 const mapStateToProps = store => ({
     carrinho: store.carrinho
 })
