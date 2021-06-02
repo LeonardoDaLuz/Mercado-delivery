@@ -3,7 +3,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
-import { QuadroComprarContainer, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete } from './styles';
+import { QuadroComprarContainer, LikeButton, BotaoOutline, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete, BlocoQuantidade } from './styles';
 import { likeProduto } from '@actions/produto';
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho';
 import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
@@ -33,14 +33,14 @@ function BuyFrame(props) {
                 <LikeButton className={liked} onClick={() => likeProduto(produto._id)}>♥</LikeButton>
             </Row>
             <Row>
-                <Col style={{ flexBasis: "150px", flexGrow: '0' }}>
+                <BlocoQuantidade>
                     <label>Quantidade:</label>
                     <Row>
                         <BotaoOutline disabled={disabled} onClick={removerDoCarrinho}>-</BotaoOutline>
                         <input className="form-control text-center" value={quantidadeAdicionado} onChange={editarQuantidade} />
                         <BotaoOutline onClick={adicionarAoCarrinho}>+</BotaoOutline>
                     </Row>
-                </Col>
+                </BlocoQuantidade>
                 <BlocoPreco>
                     <span>{produto.preco}</span><br />
                     <span>Em <b>12x de 35 sem juros</b></span>

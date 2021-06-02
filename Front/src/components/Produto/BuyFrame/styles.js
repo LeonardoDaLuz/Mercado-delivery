@@ -53,7 +53,7 @@ export const Quantidade = styled.div`
     flex-grow: 0!important;
 `;
 
-export const BotaoOutline = styled.div`
+export const BotaoOutline = styled.button`
 display: inline-block;
     font-weight: 400;
     color: #212529;
@@ -95,6 +95,17 @@ export const BotaoAzul = styled.button`
     color: rgb(255, 255, 255);
     font-size: 16px;
     flex-grow: 1;
+`;
+
+export const BlocoQuantidade = styled.div`
+    flex: 0 0 100px;
+
+    button {
+        flex: 1 1 1px;
+    }
+    input {
+        flex: 1 1 1px;
+    }
 `;
 
 export const BlocoPreco = styled.div`

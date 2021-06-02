@@ -24,6 +24,7 @@ export default class Sidebar extends Component {
 
     openSidebar(open) {
         let element = document.getElementById('side-bar');
+        console.log("open");
         //document.body.classList.add("noscroll");
         element.classList.add("show");
         if (element.classList.contains('hide'))
@@ -31,6 +32,7 @@ export default class Sidebar extends Component {
     }
 
     closeSidebar(open) {
+        console.log("close");
         let element = document.getElementById('side-bar');
         if (element.classList.contains('show')) {
             //document.body.classList.remove("noscroll");

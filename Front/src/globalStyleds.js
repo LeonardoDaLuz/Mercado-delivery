@@ -31,13 +31,17 @@ export const GlobalStyle = createGlobalStyle`
 
     }
 
+    ul {
+    list-style-type: none;
+}
+
     @media screen and (min-width: 992px) {
         .navbar-logo {
             flex-basis: 289px;
             background-image: url('/src/assets/png/LogoExtended48px.png');
         }
     }
-`
+`;
 
 //Div especial utilitária
 export const Div = styled.div`
