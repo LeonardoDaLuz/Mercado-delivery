@@ -16,7 +16,7 @@ export const QuadroComprarContainer = styled.div`
 
      h1 {
         font-size: 30px;
-        margin-right: 30px;
+        margin-right: 40px;
     }
 /*
     &>div {
