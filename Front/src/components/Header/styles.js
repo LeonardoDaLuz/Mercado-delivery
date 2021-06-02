@@ -39,7 +39,7 @@ export const Header = styled.header`
     position: sticky;
     top: 0;
     background-color: white;
-    padding: 10px 0px;
+    padding: 5px 0px;
     z-index: 100;
 
     @media(max-width: 992px) {
@@ -81,8 +81,7 @@ export const SearchBar = styled.form`
     align-items: center;
 
    input {
-       flex: 1 1 1px;
-   
+       flex: 1 1 1px;   
         width: 80%;
         height: calc(1.5em + 0.75rem + 2px);
         padding: 0.375rem 0.75rem;
@@ -120,13 +119,17 @@ export const Sandwich = styled.button`
 export const MenuPrincipal = styled.ul`
     flex: 0 0 35px;
     display: flex;  
+    flex-wrap: none;
     padding: 0px;
     margin: 0px 8px 0px 0px;
 
     list-style-type: none;
+    align-items: center;
 
     li {
+        white-space: nowrap;
         list-style-type: none;
+        padding: 0 7px;
     }
 
     @media screen and (max-width: 992px) {       
