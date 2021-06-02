@@ -2,12 +2,49 @@ import styled from 'styled-components';
 import assets from '@assets';
 import { Link } from "react-router-dom";
 
+export const Teste = styled.div`
+
+.vermelho {
+    background-color: red;
+    flex: 1 1 1px;
+}
+
+.azul {
+    background-color: blue;
+    flex: 1 1 50px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.verde {
+    background-color: green;
+    flex: 1 1 50px;
+}
+
+input {
+    width: 80%;
+    flex-grow: 1;
+
+}
+
+button {
+
+    flex-grow: 1;
+
+}
+
+`;
+
 export const Header = styled.header`
     position: sticky;
     top: 0;
     background-color: white;
     padding: 10px 0px;
     z-index: 100;
+
+    @media(max-width: 992px) {
+        padding: 0;
+    }
 `;
 
 export const ContainerLg = styled.div`
@@ -21,9 +58,9 @@ export const ContainerLg = styled.div`
     }
 `;
 
+
 export const NavbarLogo = styled(Link)`
-    flex: 0;
-    flex-basis: 64px;
+    flex: 0 0 50px;
     height: 48px;
     background-image: url(${assets.logoAlpha});
     background-repeat: no-repeat;
@@ -37,15 +74,16 @@ export const NavbarLogo = styled(Link)`
     }
 `
 
+
 export const SearchBar = styled.form`
-    flex-grow: 1;
+    flex: 1 1 50px;
     display: flex;
     align-items: center;
 
    input {
-       flex-grow: 1;
-       display: block;
-        width: 100%;
+       flex: 1 1 1px;
+       display: none;
+        width: 80%;
         height: calc(1.5em + 0.75rem + 2px);
         padding: 0.375rem 0.75rem;
         font-size: 1rem;
@@ -59,9 +97,12 @@ export const SearchBar = styled.form`
    }
 `;
 
+
+
+
 export const Sandwich = styled.button`
     display: inline-block;
-    flex-grow: 0;
+    flex: 0 0 50px;
     width: 48px;
     display: none;
     background: transparent url(${assets.sandwich_menu}) center center / contain no-repeat;
@@ -74,9 +115,30 @@ export const Sandwich = styled.button`
 
 `;
 
+export const MenuPrincipal = styled.ul`
+    flex: 0 0 35px;
+    display: flex;
+    align-items: center;
+    margin: 0px;
+    list-style-type: none;
+    padding: 0px 10px;
+
+    li {
+        flex-grow: 1;
+        margin: 3px 10px; 
+        list-style-type: none;
+    }
+
+    @media screen and (max-width: 992px) {       
+        li {
+            display: none;
+        }
+    }
+`;
+
 
 export const Carrinho = styled.a`
-
+    flex: 1 1 32px;
     position: relative;
     margin-right: 3px;
 
@@ -119,3 +181,4 @@ export const Carrinho = styled.a`
         border-bottom: 5px solid rgb(125, 125, 125);
     }    
 `;
+
