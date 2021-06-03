@@ -20,7 +20,7 @@ export function MobileGallery({ imgs, currentSelectedImage, setCurrentSelectedIm
         <MobileGalleryContainer>
             <Slider {...slickSettings} style={{ height: '100%' }}>
                 {imgs?.map((img, index) =>
-                    <Center><img key={index} src={configs.imgsPath + img} /></Center>
+                    <Center key={index}><img key={index} src={configs.imgsPath + img} /></Center>
                 )}
             </Slider>
         </MobileGalleryContainer>

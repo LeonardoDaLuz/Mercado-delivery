@@ -11,6 +11,7 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
     if (imgs)
         SelectedImageUrl = imgs[selectedImageId];
 
+
     return (
         <Flex>
             {imgs &&
@@ -30,14 +31,16 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                     )}
                     <AddImgButton>
 
-                        
-                        </AddImgButton>
+
+                    </AddImgButton>
                 </ImageSelector>
             }
 
             <ImageViewer >
                 <DeleteImage />
-                <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={() => setShowLightboxState(true)} />
+                {SelectedImageUrl !== undefined &&
+                    <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={() => setShowLightboxState(true)} />
+                }
             </ImageViewer>
         </Flex>
     )

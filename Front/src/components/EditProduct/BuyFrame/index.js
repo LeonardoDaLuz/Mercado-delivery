@@ -34,7 +34,7 @@ function BuyFrame(props) {
 
     return (
         <BuyFrameContainer>
-            <textarea type='text' value={produto.titulo}>Titulo...</textarea>
+            <textarea type='text' value={produto.titulo} onChange={()=>{}}>Titulo...</textarea>
             <Row>
                 <QuantityBlock>
                     <label>Estoque:</label>
@@ -53,19 +53,19 @@ function BuyFrame(props) {
                 <label>Oferta:</label>
                 <OfferBody>
                     <div>
-                        <label for="inicio">Início</label>
+                        <label htmlFor="inicio">Início</label>
                         <input type="date" id='inicio' />
                     </div>
                     <div>
-                        <label for="fim">Fim</label>
+                        <label htmlFor="fim">Fim</label>
                         <input type="date" id='fim' />
                     </div>
                     <div>
-                        <label for="novoValor">Valor na oferta</label>
+                        <label htmlFor="novoValor">Valor na oferta</label>
                         <input type="text" name="novoValor" />
                     </div>
                     <div>
-                        <label for="offerType">Tipo</label>
+                        <label htmlFor="offerType">Tipo</label>
                         <select>
                             <option value='day'>Dia</option>
                             <option value='week'>semana</option>

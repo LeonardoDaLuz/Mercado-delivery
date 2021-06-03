@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 //Sub Components
-import { BreadCumbs } from './BreadCumbs';
+import { BreadcumbsSelector } from './BreadCumbs';
 import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
@@ -31,7 +31,7 @@ class EditProduct extends Component {
 
         return (
             <div className="container-lg px-2 produto-page">
-                <BreadCumbs produto={produto} />            
+                <BreadcumbsSelector produto={produto} />            
                 <div className='row'>
                     <PhotoFrame produto={produto} />
                     <BuyFrame produto={produto} loja={loja} />
