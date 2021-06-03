@@ -45,11 +45,11 @@ class ProductsController {
             now.setMinutes(now.getMinutes() - timeZoneOffset);
             query['offer.time_range.starts'] = { $lt: now }
             query['offer.time_range.ends'] = { $gt: now }
-            query['offer.type'] = offer;          
+            query['offer.type'] = offer;
         }
 
         let keys = Object.keys(req.params);
-        keys.forEach((key, index) => {
+        keys.forEach((key, index) => { //Cria filtro por categorias
             if (index < keys.length - 2) {
                 if (req.params[key] !== undefined) {
                     query["categorias." + (index)] = req.params[key];
@@ -64,29 +64,49 @@ class ProductsController {
         let fullProductList = await global.conn.collection("produtos").find(query).sort(sort).toArray();
         let slicedProductList = fullProductList.slice(req.params.from, req.params.to);
 
+        slicedProductList.map(item => { //Isto mantém compatibilidade entre o modelo antigo e o novo de dados.
+            if (item.imgs === undefined)
+                item.imgs = [item.img];
+        })
+
         let statusCode = slicedProductList.length == 0 ? 204 : 200;
 
         resp.status(200).json(slicedProductList);
     }
 
-    static async updateProduct(req, resp) {
-        produtosColecao = await global.db.listaProdutos(req.params.from, req.params.to);
-        produtosColecao.forEach(p => {
-            p.preco = parseFloat(p.preco);
-            global.db.updateProduto(p._id, p)
-        })
-        let produto = await global.db.getProduto(req.params.id);
-        console.log(produto)
-        resp.json(produto);
-    }
+    static async createOffer(req, resp) {
 
+    }
     static async getProduct(req, resp) {
         let produto = await global.db.getProduto(req.params.id);
+
+        if (produto.imgs === undefined) //Para manter a compatibilidade entre modelos.
+            produto.imgs = [produto.img];
+
         console.log(produto)
         resp.json(produto);
     }
 
     static async getProduct2(req, resp) {
+        let produto = await global.db.getProdutoPorObjId(req.params.id);
+
+        if (produto.imgs === undefined)  //Para manter a compatibilidade entre modelos.
+            produto.imgs = [produto.img];
+
+        console.log(produto)
+        resp.json(produto);
+    }
+
+    static async updateProduct(req, resp) {
+        let busca = filtraString(req.query.busca);
+
+
+
+        /*
+        offer: none|day|week|month
+        startDay: 1|2...
+        off_price: n 
+        */
         let produto = await global.db.getProdutoPorObjId(req.params.id);
         console.log(produto)
         resp.json(produto);

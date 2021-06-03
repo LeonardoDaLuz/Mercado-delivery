@@ -15,4 +15,6 @@ module.exports = (app) => {
     app.get("/produto/:id", ProductsController.getProduct);
     
     app.get("/produto2/:id", ProductsController.getProduct2);
+
+    app.put("/produto2/:id", ProductsController.updateProduct);
 }
