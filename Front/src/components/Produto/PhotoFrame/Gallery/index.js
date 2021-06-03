@@ -1,6 +1,8 @@
 import configs from '@configs';
-import { Flex, ImageSelector, ImageViewer } from './style';
+import { AddImgButton, Flex, ImageSelector, ImageViewer, ImgButton } from './style';
 import Magnifier from "react-magnifier";
+
+import { DeleteImage } from './style';
 
 export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setShowLightboxState }) {
 
@@ -14,17 +16,28 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
             {imgs &&
                 <ImageSelector>
                     {imgs.map((img, index) =>
-                        <img
-                            key={index}
+                        <ImgButton
                             className={index == selectedImageId ? 'selected' : ''}
-                            src={configs.imgsPath + img}
-                            onClick={() => setSelectedImageId(index)}
-                        />)}
+                            key={index}
+                        >
+                            <DeleteImage />
+                            <img
+
+                                src={configs.imgsPath + img}
+                                onClick={() => setSelectedImageId(index)}
+                            />
+                        </ImgButton>
+                    )}
+                    <AddImgButton>
+
+                        
+                        </AddImgButton>
                 </ImageSelector>
             }
 
             <ImageViewer >
-                <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={()=> setShowLightboxState(true)} />
+                <DeleteImage />
+                <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={() => setShowLightboxState(true)} />
             </ImageViewer>
         </Flex>
     )

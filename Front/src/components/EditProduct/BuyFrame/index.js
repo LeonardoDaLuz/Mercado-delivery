@@ -11,8 +11,9 @@ import { quantosDesseForamAdicionadosAoCarrinho, custoTotalNoCarrinho } from '@a
 //styles and animation
 import { Row, Col } from '@globalStyleds';
 import moveElementFromTo from '@utils/moveElementFromTo';
-import { BuyFrameContainer, ButtonOutline_, SaveButton, DiscartButton, PriceBlock, StockBlock, Offer, OfferBody } from './styles';
+import { BuyFrameContainer, ButtonOutline_, SaveButton, DiscartButton, PriceBlock, StockBlock, Offer, OfferBody, ButtonIncreaseDecrease, QuantityBlock } from './styles';
 import { ButtonFlat } from '../../../globalStyleds';
+
 
 function BuyFrame(props) {
 
@@ -35,14 +36,14 @@ function BuyFrame(props) {
         <BuyFrameContainer>
             <textarea type='text' value={produto.titulo}>Titulo...</textarea>
             <Row>
-                <StockBlock>
+                <QuantityBlock>
                     <label>Estoque:</label>
                     <Row>
-                        <ButtonOutline_ disabled={disabled} onClick={removerDoCarrinho}>-</ButtonOutline_>
+                        <ButtonIncreaseDecrease disabled={disabled} onClick={removerDoCarrinho}>-</ButtonIncreaseDecrease>
                         <input className="form-control text-center" value={quantidadeAdicionado} onChange={editarQuantidade} />
-                        <ButtonOutline_ onClick={adicionarAoCarrinho}>+</ButtonOutline_>
+                        <ButtonIncreaseDecrease onClick={adicionarAoCarrinho}>+</ButtonIncreaseDecrease>
                     </Row>
-                </StockBlock>
+                </QuantityBlock>
                 <PriceBlock>
                     <label>Preço:</label>
                     <input id="preco" name="preco" />
@@ -60,7 +61,7 @@ function BuyFrame(props) {
                         <input type="date" id='fim' />
                     </div>
                     <div>
-                        <label for="fim">Valor</label>
+                        <label for="novoValor">Valor na oferta</label>
                         <input type="text" name="novoValor" />
                     </div>
                     <div>
@@ -71,8 +72,10 @@ function BuyFrame(props) {
                             <option value='month'>Mês</option>
                         </select>
                     </div>
-                    <ButtonFlat bgColor={colorTheme.secondary()}>Ativar oferta</ButtonFlat>
-                    <ButtonFlat bgColor={colorTheme.secondary()} disabled={true}>Desativar oferta</ButtonFlat>
+                    <Row style={{flexBasis: '300px'}}>
+                        <ButtonFlat bgColor={colorTheme.secondary()}>Ativar oferta</ButtonFlat>
+                        <ButtonFlat bgColor={colorTheme.secondary()} disabled={true}>Desativar oferta</ButtonFlat>
+                    </Row>
 
                 </OfferBody>
             </Offer>
@@ -83,7 +86,12 @@ function BuyFrame(props) {
         </BuyFrameContainer>
     );
 }
+/*  
 
+ 
+
+
+*/
 
 function animarAdicao(e, dir = 1) {
     let fromImg = document.querySelector(".quadro-de-foto img");

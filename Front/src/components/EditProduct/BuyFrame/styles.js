@@ -24,6 +24,34 @@ export const StockBlock = styled(Col)`
     flex-basis: 150px;
     flex-grow: 0;
 `;
+
+export const ButtonIncreaseDecrease = styled(ButtonOutline)`
+    color: #212529;
+    border: 1px solid #bfc6cc;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0px;
+
+    &:hover {
+        color: rgb(255, 255, 255);
+        background-color: rgb(132, 141, 146);
+        border-color: rgb(150, 140, 125);
+    }
+
+`;
+
+export const QuantityBlock = styled.div`
+    flex: 1 1 20px;
+
+    button {
+        flex: 0 1 1px;
+    }
+    input {
+        flex: 1 1 20px;
+    }
+`;
+
 export const ButtonOutline_ = styled(ButtonOutline)`
 
     font-weight: 400;
@@ -83,24 +111,27 @@ export const OfferBody = styled.div`
     display: flex;
     flex-wrap: wrap;
     margin-bottom: 20px;
-    &>div, &>button {
-        flex: 1 1 200px;
-        margin: 5px;
+
+    &>div,  &>button {
+        flex: 1 0 150px;
+        box-sizing: border-box;
+        padding: 5px;    
+        position: relative;
     }
 
-    &>button {
-
-    }
 
     input, select {
-        border: 1px solid #e2e2e2;
+        display: block;
+        border: 0px solid #e2e2e2;
         border-radius: 10px;
-        padding: 10px;
+        padding: 8px;
+        box-sizing: border-box;
         width: 100%;
     }
 
     button {
-        width: 49%;
+        flex: 1 1 1px;
+        width: 50%;
         box-sizing: border-box;
 
     }

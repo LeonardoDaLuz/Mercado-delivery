@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colorTheme } from '../../../theme';
 
 export const PhotoFrame_ = styled.div`
 
@@ -10,16 +11,22 @@ export const PhotoFrame_ = styled.div`
     border-radius: 10px;
     overflow: hidden;
     margin-right: 20px;
-    display: flex;
+
+    @media(max-width: 992px) {
+        margin-right: 0px;
+    }
 `;
 
-export const ImageViewer = styled.img`
-    width: 100%;
-    flex: 1;
-    cursor: pointer;
 
+export const DesktopView = styled.div`
+    @media(max-width: 992px) {
+        display: none;
+    }
 `;
-export const ImageSelector = styled.div`
-   flex: 1;
-   cursor: pointer;
+
+export const MobileView = styled.div`
+
+    @media(min-width: 992px) {
+        display: none;
+    }
 `;
