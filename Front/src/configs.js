@@ -1,5 +1,6 @@
 var configs = {
-    imgsPath: 'http://localhost:3001/',   
+    host: 'http://localhost:3000/',
+    imgsPath: 'http://localhost:3001/',   //aka imgHost
 }
 
 export default configs;

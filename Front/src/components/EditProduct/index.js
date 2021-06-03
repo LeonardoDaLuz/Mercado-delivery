@@ -10,7 +10,7 @@ import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
 //Others
 import { carregaProduto } from '@actions/produto'
-import './style.css';
+//import './style.css';
 
 class EditProduct extends Component {
 

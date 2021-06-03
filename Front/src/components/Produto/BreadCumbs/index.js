@@ -1,13 +1,26 @@
-export function BreadCumbs(props) {
+import { Link } from "react-router-dom"
+import { BreadcumbNav } from "./styles";
 
-    var breadLis = props.produto.categorias.map(function (cat, index) { return (<li key={index}>{cat}</li>); });
+export function BreadCumbs({ produto }) {
+
+    let categories = produto.categorias;
+
+    var CategoriesList = categories.map(function (category, index) {
+        let sliced = categories.slice(0, index+1);
+
+        return (
+            <li key={index}>
+                <Link to={'/produtos/' + sliced.join('/')}>{category}</Link>
+            </li>
+        );
+    });
 
     return (
-        <nav className='bread mx-2 mt-4' aria-label="breadcrumb">
+        <BreadcumbNav aria-label="breadcrumb">
             <ol>
-                <li>Home</li>
-                {breadLis}
+                <li><Link to='/produtos'>Todos</Link></li>
+                {CategoriesList}
             </ol>
-        </nav>
+        </BreadcumbNav>
     )
 }
