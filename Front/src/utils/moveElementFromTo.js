@@ -65,6 +65,8 @@ export default async function moveElementFromTo(img, from, to, dir = 1) {
                 box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.333);
                 background-color: white;
                 animation: adicao-carrinho-fade-in 0.6s ease-out;
+                pointer-events: none;
+                opacity: 0.8;
             }
 
             @keyframes adicao-carrinho-fade-in {

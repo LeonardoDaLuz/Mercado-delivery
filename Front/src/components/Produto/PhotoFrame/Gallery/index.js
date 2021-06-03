@@ -24,7 +24,7 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
             }
 
             <ImageViewer >
-                <Magnifier src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={()=> setShowLightboxState(true)} />
+                <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={()=> setShowLightboxState(true)} />
             </ImageViewer>
         </Flex>
     )

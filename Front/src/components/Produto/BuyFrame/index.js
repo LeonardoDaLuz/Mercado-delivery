@@ -61,7 +61,7 @@ function BuyFrame(props) {
 
 
 function animarAdicao(e, dir = 1) {
-    let fromImg = document.querySelector(".quadro-de-foto img");
+    let fromImg = document.querySelector(".productImg img");
     let to = document.querySelector("#carrinho");
     moveElementFromTo(fromImg, fromImg, to, dir);
 }
