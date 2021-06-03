@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 //Sub Components
-import { BreadcumbsSelector } from './BreadCumbs';
+import { BreadcumbsSelector } from './BreadCumbsSelector';
 import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
