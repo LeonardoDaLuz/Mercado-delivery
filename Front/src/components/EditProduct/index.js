@@ -16,11 +16,24 @@ class EditProduct extends Component {
 
     constructor() {
         super();
+        this.state =
+        {
+            titulo: "ss",
+            imgs: [ "sd "],
+            preco: -1,
+            descricao: "",
+            categorias: [""],
+        }
+     
     }
 
     componentDidMount() {
         const { carregaProduto } = this.props;
         carregaProduto(this.props.match.params.id);
+        this.setState({
+            ...this.state,
+            titulo: 'leo2'
+        })
     }
 
 
@@ -31,10 +44,10 @@ class EditProduct extends Component {
 
         return (
             <div className="container-lg px-2 produto-page">
-                <BreadcumbsSelector produto={produto} />            
+                <BreadcumbsSelector produto={produto} />
                 <div className='row'>
-                    <PhotoFrame produto={produto} />
-                    <BuyFrame produto={produto} loja={loja} />
+                    <PhotoFrame produto={produto} editionState={this.state} setEditionState={this.setState}/>
+                    <BuyFrame produto={produto}  editionState={this.state} setEditionState={this.setState} />
                     <ProductDescription produto={produto} />
                 </div>
             </div >

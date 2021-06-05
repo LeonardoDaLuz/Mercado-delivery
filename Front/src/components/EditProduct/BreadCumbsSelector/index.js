@@ -30,10 +30,12 @@ function BreadCumbsSelector_({ produto, carregaCategorias, categorias: categorie
 
     function DrawCategorySelector(categoriesOfThisProduct, currentDepthIndex, CurrentCategoriesOptions) {
 
-        if (currentDepthIndex >= categoriesOfThisProduct.length)
+        let keys = Object.keys(CurrentCategoriesOptions);
+
+        if (keys.length === 0)
             return <></>;
 
-        let keys = Object.keys(CurrentCategoriesOptions);
+
         let currentSelector = (
             <li key={0}>
                 <SelectionCategory value={categoriesOfThisProduct[currentDepthIndex]} onChange={() => { }}>
@@ -46,7 +48,7 @@ function BreadCumbsSelector_({ produto, carregaCategorias, categorias: categorie
 
         let nextOptions = CurrentCategoriesOptions[categoriesOfThisProduct[currentDepthIndex]]
         if (nextOptions !== undefined) {
-            let nextSelector = DrawCategorySelector(categoriesOfThisProduct, currentDepthIndex+1, nextOptions);
+            let nextSelector = DrawCategorySelector(categoriesOfThisProduct, currentDepthIndex + 1, nextOptions);
             return (
                 <>
                     {currentSelector}
@@ -56,7 +58,6 @@ function BreadCumbsSelector_({ produto, carregaCategorias, categorias: categorie
         } else {
             return currentSelector;
         }
-            
     }
 
     return (

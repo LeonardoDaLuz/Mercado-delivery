@@ -4,44 +4,35 @@ import { colorTheme } from '../../../theme';
 //redux
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { likeProduto } from '@actions/produto';
-import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho';
-import { quantosDesseForamAdicionadosAoCarrinho, custoTotalNoCarrinho } from '@analyzers/carrinho';
 
 //styles and animation
 import { Row, Col } from '@globalStyleds';
 import moveElementFromTo from '@utils/moveElementFromTo';
-import { BuyFrameContainer, ButtonOutline_, SaveButton, DiscartButton, PriceBlock, StockBlock, Offer, OfferBody, ButtonIncreaseDecrease, QuantityBlock } from './styles';
+import { BuyFrameContainer, PriceBlock, Offer, OfferBody, ButtonIncreaseDecrease, QuantityBlock } from './styles';
 import { ButtonFlat } from '../../../globalStyleds';
 
 
-function BuyFrame(props) {
+function BuyFrame( { produto, editionState, setEditionState }) {
 
-    let { produto, likeProduto, carregarCarrinho, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
-    let loja = props.loja;
-    let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
-    let liked = produto.likes !== undefined && produto.likes.includes(0);
-    let disabled = quantidadeAdicionado < 1;
-
-    useEffect(() => {
-        // carregarCarrinho();
-    }, []);
-
-
-    function removerDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }
-    function adicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e); }
-    function editarQuantidade(e) { editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value); }
+    function handleChange (e) {
+        const { name, value } = e.target;
+        setEditionState({
+            ...editionState,
+            titulo: 'leo'
+        });
+        console.log("kct");
+    }
 
     return (
         <BuyFrameContainer>
-            <textarea type='text' value={produto.titulo} onChange={()=>{}}>Titulo...</textarea>
+            <textarea type='text' name='titulo' value={editionState.titulo} onChange={handleChange}>Titulo...</textarea>
             <Row>
                 <QuantityBlock>
                     <label>Estoque:</label>
                     <Row>
-                        <ButtonIncreaseDecrease disabled={disabled} onClick={removerDoCarrinho}>-</ButtonIncreaseDecrease>
-                        <input className="form-control text-center" value={quantidadeAdicionado} onChange={editarQuantidade} />
-                        <ButtonIncreaseDecrease onClick={adicionarAoCarrinho}>+</ButtonIncreaseDecrease>
+                        <ButtonIncreaseDecrease>-</ButtonIncreaseDecrease>
+                        <input className="form-control text-center" />
+                        <ButtonIncreaseDecrease>+</ButtonIncreaseDecrease>
                     </Row>
                 </QuantityBlock>
                 <PriceBlock>
@@ -81,11 +72,13 @@ function BuyFrame(props) {
             </Offer>
             <Row ChildrenFlexGrow mx2 flexBasis150>
                 <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
-                <ButtonFlat onClick={adicionarAoCarrinho}>Salvar</ButtonFlat>
+                <ButtonFlat >Salvar</ButtonFlat>
             </Row>
         </BuyFrameContainer>
     );
 }
+
+
 /*  
 
  
@@ -105,7 +98,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ likeProduto, adicionarProdutoAoCarrinho, carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho }, dispatch);
+    bindActionCreators({  }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuyFrame);

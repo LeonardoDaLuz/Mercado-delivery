@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { ButtonOutline } from "@globalStyleds";
 import { colorTheme } from '../../../theme';
 
-export const QuadroComprarContainer = styled.div`
+export const BuyFrameContainer = styled.div`
 
     position: relative;
-    flex-basis: 356px;
+    flex-basis: 356px; 
     flex-grow: 1;
     background-color: rgb(255, 255, 255);
     border: 1px solid rgb(164, 164, 164);
