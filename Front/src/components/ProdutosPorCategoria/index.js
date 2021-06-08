@@ -56,13 +56,13 @@ function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, reiniciaLis
 
 
     let produtoCards = produtos.map((p, index) => {
-        return <ProdutoCard produto={p} key={index} carrinho={loja.carrinho} />
+        return <ProdutoCard produto={p} key={index}/>
     })
 
 
     return (
         <Container>
-            <SidebarCategorias loja={loja} />
+            <SidebarCategorias />
             <ListaDeProdutos>
 
                 {produtoCards}

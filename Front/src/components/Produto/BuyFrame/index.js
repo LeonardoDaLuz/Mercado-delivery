@@ -11,8 +11,7 @@ import { Col, Row } from '../../../globalStyleds';
 
 function BuyFrame(props) {
 
-    let { produto, likeProduto, carregarCarrinho, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
-    let loja = props.loja;
+    let { produto, likeProduto, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
     let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
     let liked = produto.likes !== undefined && produto.likes.includes(0);
     let disabled = quantidadeAdicionado < 1;
@@ -48,7 +47,7 @@ function BuyFrame(props) {
             </Row>
             <BlocoCalcularFrete>
                 <span>Acima de 100 reais em compras o <b>Frete é grátis!</b><br />
-                Abaixo disso, o frete para sua localização atual é R$ <b>{loja.state.frete.toFixed(2)} </b>
+                Abaixo disso, o frete para sua localização atual é R$ <b>{'loja.state.frete.toFixed(2)'} </b>
                 </span>
             </BlocoCalcularFrete>
             <Row>

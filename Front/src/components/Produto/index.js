@@ -21,7 +21,7 @@ class Produto extends Component {
 
     componentDidMount() {
         const { carregaProduto } = this.props;
-       // carregaProduto(this.props.match.params.id);
+        carregaProduto(this.props.match.params.id);
     }
 
 
