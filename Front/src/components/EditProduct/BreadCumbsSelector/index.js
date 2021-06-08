@@ -13,17 +13,7 @@ function BreadCumbsSelector_({ produto, carregaCategorias, categorias: categorie
 
     let categoriesOfThisProduct = produto.categorias;
 
-    /*
-        var CategoriesList = categories.map(function (category, index) {
-            let sliced = categories.slice(0, index+1);
-    
-            return (
-                <li key={index}>
-                    <Link to={'/produtos/' + sliced.join('/')}>{category}</Link>
-                </li>
-            );
-        });
-        */
+
 
     let CategoriesSelectors = DrawCategorySelector(categoriesOfThisProduct, 0, categoriesOptionsHierarchy);
 
@@ -37,10 +27,10 @@ function BreadCumbsSelector_({ produto, carregaCategorias, categorias: categorie
 
 
         let currentSelector = (
-            <li key={0}>
+            <li key={currentDepthIndex}>
                 <SelectionCategory value={categoriesOfThisProduct[currentDepthIndex]} onChange={() => { }}>
                     {keys.map((key, index) => {
-                        return <option value={key}>{key}</option>
+                        return <option key={key} value={key}>{key}</option>
                     })}
                 </SelectionCategory>
             </li>

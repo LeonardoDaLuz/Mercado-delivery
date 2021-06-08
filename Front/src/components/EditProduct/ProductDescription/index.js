@@ -7,9 +7,11 @@ import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { useLogChangedPropsWhenUpdate } from '../../../utils/useLogChangedPropsWhenUpdate';
 
-function _ProductDescription({ produto, values , formik }) {
+function _ProductDescription(props) {
 
+    const { produto, values , formik } = props;
     const editorConfiguration = {
         toolbar: {
             items: [
@@ -62,9 +64,8 @@ function _ProductDescription({ produto, values , formik }) {
         },
         licenseKey: '',
     };
+    useLogChangedPropsWhenUpdate(props, 'productDescription');
 
-    console.log("update:")
-    console.log(JSON.stringify(values));
     return (
         <DescricaoPgProduto>
             <div><h3 >Descrição do produto</h3></div>

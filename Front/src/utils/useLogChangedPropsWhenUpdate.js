@@ -1,3 +1,5 @@
+import { useEffect, useRef } from "react";
+
 export const useLogChangedPropsWhenUpdate = (props, component = 'Component') => {
 
   const prev = useRef(props);
@@ -9,7 +11,7 @@ export const useLogChangedPropsWhenUpdate = (props, component = 'Component') => 
       return ps;
     }, {});
     if (Object.keys(changedProps).length > 0) {
-      console.log('<' + component + '> update when Changed props:', changedProps);
+      console.log('<' + component + '> update when Changed props:', JSON.stringify(changedProps));
     }
     prev.current = props;
   });
