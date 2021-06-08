@@ -28,13 +28,7 @@ import { GlobalStyle } from "./globalStyleds";
 
 export default withRouter(class App extends Component {
 
-  constructor() {
-    super();
-    this.loja = new Loja(this);
-  }
-
   render() {
-
     return (
       <Router>
         <GlobalStyle />
@@ -71,7 +65,5 @@ export default withRouter(class App extends Component {
       </Router >
     );
   }
-
-  /* <button onClick={this.log.bind(this)}>kjj</button> */
 })
 

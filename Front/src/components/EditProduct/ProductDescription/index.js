@@ -4,8 +4,11 @@ import { ButtonFlat, Row } from '../../../globalStyleds';
 import { colorTheme } from '../../../theme';
 import { DescricaoPgProduto, SaveOrDiscard } from './styles';
 import Editor from 'ckeditor5-custom-build/build/ckeditor';
+import { useEffect, useLayoutEffect } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
-export function ProductDescription(props) {
+function _ProductDescription({ produto, values , formik }) {
 
     const editorConfiguration = {
         toolbar: {
@@ -60,13 +63,17 @@ export function ProductDescription(props) {
         licenseKey: '',
     };
 
+    console.log("update:")
+    console.log(JSON.stringify(values));
     return (
         <DescricaoPgProduto>
             <div><h3 >Descrição do produto</h3></div>
-            dsdd
-            <CKEditor
+            {produto.descricao} 
+            {values.descricao} 
+            <input type="text" {...formik.getFieldProps("descricao")} />
+            <CKEditor 
                 editor={Editor}
-                data={props.produto.descricao}
+                data={formik.values.descricao}
                 config={editorConfiguration}
             />
             <SaveOrDiscard>
@@ -77,3 +84,5 @@ export function ProductDescription(props) {
         </DescricaoPgProduto>
     )
 }
+
+export const ProductDescription = _ProductDescription;

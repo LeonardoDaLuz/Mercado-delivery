@@ -1,4 +1,4 @@
-import { Component, useEffect, useState } from 'react';
+import { Component, useEffect, useLayoutEffect, useState } from 'react';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -22,7 +22,7 @@ function EditProduct({ carregaProduto, produto, match }) {
         imgs: ["sd "],
         preco: -1,
         descricao: "",
-        categorias: [""],
+        categorias: ["" ],
         stock: 5,
         offer: {
             time_range: { starts: 'ds', ends: 'ao' },
@@ -34,9 +34,9 @@ function EditProduct({ carregaProduto, produto, match }) {
     const validation = {
 
     }
-
+ 
     useEffect(() => {
-        carregaProduto(match.params.id);
+        //carregaProduto(match.params.id);
     }, [])
 
 
@@ -56,23 +56,27 @@ function EditProduct({ carregaProduto, produto, match }) {
     
     const formik = useFormik({
         initialValues: editionState,
+        enableReinitialize: true,
         onSubmit
     })
 
+/*
+    useLayoutEffect(() => {
 
-    useEffect(() => {
-        Object.assign(formik.values, produto);
-
+        let keys = Object.keys(formik.values);
+        keys.forEach(key => {
+            formik.setFieldValue(key, produto[key]);
+        })
     }, [produto])
-
+*/
 
     return (
         <div className="container-lg px-2 produto-page">
             <BreadcumbsSelector produto={produto} />
-            <form className='row' onSubmit={(e)=> { e.preventDefault(); console.log(formik.values)}}>
-                <PhotoFrame formik={formik} produto={produto} editionState={editionState} handleChange={handleChange} />
-                <BuyFrame formik={formik} produto={produto} editionState={editionState} handleChange={handleChange} />
-                <ProductDescription produto={produto} />
+            <form className='row ' onSubmit={(e)=> { e.preventDefault(); console.log(formik.values)}}>
+                <PhotoFrame formik={formik} produto={produto}  />
+                <BuyFrame formik={formik} produto={produto}  />
+                <ProductDescription formik={formik} produto={produto} values={formik.values}/>
             </form>
         </div >
     );
