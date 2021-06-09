@@ -12,17 +12,17 @@ import { ProductDescription } from './ProductDescription';
 import { carregaProduto } from '@actions/produto'
 import produce from 'immer';
 import { useFormik } from 'formik';
-import { useLogChangedPropsWhenUpdate } from '../../utils/useLogChangedPropsWhenUpdate';
+import { LogRender } from '@utils/logRender';
 //import './style.css';
 
 function EditProduct(props) {
 
 
-    useLogChangedPropsWhenUpdate(props, "EditProduct");
+
     const { carregaProduto, produto, match } = props;
 
 
- 
+
     useEffect(() => {
         carregaProduto(match.params.id);
     }, [])
@@ -37,23 +37,24 @@ function EditProduct(props) {
         enableReinitialize: true,
         onSubmit
     })
-    
 
-    useLayoutEffect(() => {   
 
-         if(produto.titulo!=="")
+    useLayoutEffect(() => {
+
+        if (produto.titulo !== "")
             formik.setValues(produto);
 
     }, [produto])
 
+    LogRender(formik, "EditProduct");
 
     return (
         <div className="container-lg px-2 produto-page">
             <BreadcumbsSelector produto={produto} />
-            <form className='row ' onSubmit={(e)=> { e.preventDefault(); console.log(formik.values)}}>
-                <PhotoFrame formik={formik} produto={produto}  />
-                <BuyFrame formik={formik} produto={produto}  />
-                <ProductDescription formik={formik} produto={produto} values={formik.values}/>
+            <form className='row ' onSubmit={(e) => { e.preventDefault(); console.log(formik.values) }}>
+                <PhotoFrame formik={formik} produto={produto} />
+                <BuyFrame formik={formik} produto={produto} />
+                <ProductDescription formik={formik} produto={produto} values={formik.values} />
             </form>
         </div >
     );

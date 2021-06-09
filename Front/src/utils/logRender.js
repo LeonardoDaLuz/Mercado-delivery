@@ -1,7 +1,20 @@
 import { useEffect, useRef } from "react";
 
-export const useLogChangedPropsWhenUpdate = (props, component = 'Component') => {
+export const LogRender = function () {
 
+  let component = arguments[arguments.length-1];
+ 
+
+  for(let i=0; i<arguments.length-1; i++) {
+    LogRender2(arguments[i], component);
+  }
+}
+
+export const LogRender2 = function () {
+
+  let component = arguments[arguments.length-1];
+  let props= arguments[0];
+  
   const prev = useRef(props);
   useEffect(() => {
     const changedProps = Object.entries(props).reduce((ps, [k, v]) => {

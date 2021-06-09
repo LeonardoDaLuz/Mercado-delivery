@@ -7,11 +7,8 @@ import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { useEffect, useLayoutEffect } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { useLogChangedPropsWhenUpdate } from '../../../utils/useLogChangedPropsWhenUpdate';
 
 export const ProductDescription = (props) => {
-    console.log("rendersub");
-
     const { produto, values , formik } = props;
     const editorConfiguration = {
         toolbar: {
