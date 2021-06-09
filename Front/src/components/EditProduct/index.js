@@ -17,12 +17,14 @@ import { useLogChangedPropsWhenUpdate } from '../../utils/useLogChangedPropsWhen
 
 function EditProduct(props) {
 
+
+    useLogChangedPropsWhenUpdate(props, "EditProduct");
     const { carregaProduto, produto, match } = props;
 
 
  
     useEffect(() => {
-      //  carregaProduto(match.params.id);
+        carregaProduto(match.params.id);
     }, [])
 
 
@@ -30,26 +32,19 @@ function EditProduct(props) {
     const onSubmit = (values) => {
         alert(values);
     }
-    let formik = useFormik({
+    const formik = useFormik({
         initialValues: produto,
         enableReinitialize: true,
         onSubmit
     })
     
-    useLogChangedPropsWhenUpdate(props, 'editProduct');
 
-    useEffect(() => {   
+    useLayoutEffect(() => {   
 
-       // Object.assign(formik.values, produto);
-        formik.setValues(produto);
-       /* let keys = Object.keys(formik.values);
-        console.log(JSON.stringify(produto)csss);
-        keys.forEach(key => {
-            formik.setFieldValue(key, produto[key]);
-        })*/
+         if(produto.titulo!=="")
+            formik.setValues(produto);
 
-
-    }, [])
+    }, [produto])
 
 
     return (

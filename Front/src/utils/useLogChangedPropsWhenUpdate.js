@@ -11,7 +11,9 @@ export const useLogChangedPropsWhenUpdate = (props, component = 'Component') => 
       return ps;
     }, {});
     if (Object.keys(changedProps).length > 0) {
-      console.log('<' + component + '> update when Changed props:', JSON.stringify(changedProps));
+      console.log('<%c' + component + '%c> update when Changed props:', "color: lime", "color: none", changedProps);
+    } else {
+      console.log('<%c' + component + '%c> update without Changed props:', "color: lime", "color: none", props);
     }
     prev.current = props;
   });

@@ -9,7 +9,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { useLogChangedPropsWhenUpdate } from '../../../utils/useLogChangedPropsWhenUpdate';
 
-function _ProductDescription(props) {
+export const ProductDescription = (props) => {
+    console.log("rendersub");
 
     const { produto, values , formik } = props;
     const editorConfiguration = {
@@ -64,7 +65,7 @@ function _ProductDescription(props) {
         },
         licenseKey: '',
     };
-    useLogChangedPropsWhenUpdate(props, 'productDescription');
+
 
     return (
         <DescricaoPgProduto>
@@ -85,5 +86,3 @@ function _ProductDescription(props) {
         </DescricaoPgProduto>
     )
 }
-
-export const ProductDescription = _ProductDescription;

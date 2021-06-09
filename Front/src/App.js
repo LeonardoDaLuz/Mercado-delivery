@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   withRouter
@@ -50,7 +50,7 @@ export default withRouter(class App extends Component {
               <Produto loja={this.loja} />
             </Route>
             <Route exact path="/editProduct/:id" >
-              <EditProduct loja={this.loja} />
+              <EditProduct/>
             </Route>
             <Route exact path="/produtos/all" >
               <Produtos loja={this.loja} />

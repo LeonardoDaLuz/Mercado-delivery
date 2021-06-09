@@ -2,7 +2,7 @@ import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, CARREGA_PRODUTO_FAILURE
 
 const initialState = {
     _id: 5,
-    titulo: 'Loading...',
+    titulo: '',
     categorias: [],
     descricao: '',
     imgs: [],
