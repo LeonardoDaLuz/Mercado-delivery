@@ -15,46 +15,46 @@ import { useFormik } from 'formik';
 import { LogRender } from '@utils/logRender';
 //import './style.css';
 
-function EditProduct(props) {
+function EditProduct({ carregaProduto, produto, match }) {
 
-
-
-    const { carregaProduto, produto, match } = props;
-
-
+    const [draftProductState, setDraftProductState] = useState({
+        _id: 5,
+        titulo: 'teste',
+        categorias: [],
+        descricao: '',
+        imgs: [],
+        preco: 0,
+        stock: 1
+    });
 
     useEffect(() => {
         carregaProduto(match.params.id);
-    }, [])
+    }, []);
 
-
+    useEffect(() => {
+        setDraftProductState({ ...produto });
+    }, [produto]);
 
     const onSubmit = (values) => {
         alert(values);
     }
-    const formik = useFormik({
-        initialValues: produto,
-        enableReinitialize: true,
-        onSubmit
-    })
 
+    const handleChanges = (e) => {
 
-    useLayoutEffect(() => {
+        setDraftProductState(produce(draftProductState, (draftState) => {
+            draftState[e.target.name] = e.target.value;
+        }));
+    }
 
-        if (produto.titulo !== "")
-            formik.setValues(produto);
-
-    }, [produto])
-
-    LogRender(formik, "EditProduct");
+    let childProps = { product: draftProductState, produto: draftProductState, handleChanges } //produto está redundante apenas para manter compatibilidade por enquanto
 
     return (
         <div className="container-lg px-2 produto-page">
-            <BreadcumbsSelector produto={produto} />
-            <form className='row ' onSubmit={(e) => { e.preventDefault(); console.log(formik.values) }}>
-                <PhotoFrame formik={formik} produto={produto} />
-                <BuyFrame formik={formik} produto={produto} />
-                <ProductDescription formik={formik} produto={produto} values={formik.values} />
+            <BreadcumbsSelector {...childProps} />
+            <form className='row ' onSubmit={(e) => { e.preventDefault(); }}>
+                <PhotoFrame   {...childProps} />
+                <BuyFrame   {...childProps} />
+                <ProductDescription   {...childProps} />
             </form>
         </div >
     );

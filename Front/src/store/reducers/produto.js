@@ -7,7 +7,7 @@ const initialState = {
     descricao: '',
     imgs: [],
     preco: 0,
-
+    stock: 1,
 };
 
 const produto = (state = initialState, action) => {

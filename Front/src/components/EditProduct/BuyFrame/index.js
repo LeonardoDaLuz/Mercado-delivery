@@ -11,8 +11,9 @@ import moveElementFromTo from '@utils/moveElementFromTo';
 import { BuyFrameContainer, PriceBlock, Offer, OfferBody, ButtonIncreaseDecrease, QuantityBlock } from './styles';
 import { ButtonFlat } from '../../../globalStyleds';
 import { filtraFloat } from '../../../utils/InputFilters';
+import { LogRender } from '../../../utils/logRender';
 
-function BuyFrame({ produto, formik, editionState, setEditionState, handleChange }) {
+function BuyFrame({ product, handleChanges }) {
 
     function filterAndChangePrice(e) {
         let { name, value } = e.target;
@@ -28,25 +29,27 @@ function BuyFrame({ produto, formik, editionState, setEditionState, handleChange
 
         value = value.replace('.', ',');
 
-        handleChange({ target: { value, name } });
+        handleChanges({ target: { value, name } });
         console.log(value);
     }
 
+    //LogRender({ product }, "BuyFrame");
+
     return (
         <BuyFrameContainer>
-            <textarea type='text' {...formik.getFieldProps("titulo")}>Titulo...</textarea>
+            <textarea type='text' name='titulo' value={product.titulo} onChange={handleChanges} >Titulo...</textarea>
             <Row>
                 <QuantityBlock>
                     <label>Estoque:</label>
                     <Row>
                         <ButtonIncreaseDecrease>-</ButtonIncreaseDecrease>
-                        <input className="form-control text-center" {...formik.getFieldProps("stock")} />
+                        <input className="form-control text-center"  />
                         <ButtonIncreaseDecrease>+</ButtonIncreaseDecrease>
                     </Row>
                 </QuantityBlock>
                 <PriceBlock>
                     <label>Preço:</label>
-                    <input id="preco" {...formik.getFieldProps("preco")} />
+                    <input id="preco"/>
                 </PriceBlock>
             </Row>
             <Offer>
@@ -54,19 +57,19 @@ function BuyFrame({ produto, formik, editionState, setEditionState, handleChange
                 <OfferBody>
                     <div>
                         <label htmlFor="inicio">Início</label>
-                        <input type="date" id='inicio'  {...formik.getFieldProps("offer.time_range.starts")} />
+                        <input type="date" id='inicio'  />
                     </div>
                     <div>
                         <label htmlFor="fim">Fim</label>
-                        <input type="date" id='fim' {...formik.getFieldProps("offer.time_range.ends")} />
+                        <input type="date" id='fim'  />
                     </div>
                     <div>
                         <label htmlFor="novoValor">Valor na oferta</label>
-                        <input type="text"  {...formik.getFieldProps("offer.off_price")}/>
+                        <input type="text" />
                     </div>
                     <div>
                         <label htmlFor="offerType">Tipo</label>
-                        <select {...formik.getFieldProps("offer.type")}>
+                        <select>
                             <option value='day'>Dia</option>
                             <option value='week'>semana</option>
                             <option value='month'>Mês</option>

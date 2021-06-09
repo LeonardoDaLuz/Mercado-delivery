@@ -1,19 +1,20 @@
 import { useEffect, useRef } from "react";
 
-export const LogRender = function () {
+export const LogRender = (propsAll, component = 'Component') => {
 
-  let component = arguments[arguments.length-1];
- 
+  console.log('<%c' + component + '%c> update with changes:', "color: lime", "color: none");
+  Object.keys(propsAll).forEach(key=> {
+    LogRender2(propsAll[key], key);
+  }) 
 
-  for(let i=0; i<arguments.length-1; i++) {
-    LogRender2(arguments[i], component);
-  }
+  useEffect(() => {
+    console.log("\n");
+  })
+
 }
 
-export const LogRender2 = function () {
+const LogRender2 = (props, propsName) => {
 
-  let component = arguments[arguments.length-1];
-  let props= arguments[0];
   
   const prev = useRef(props);
   useEffect(() => {
@@ -24,9 +25,9 @@ export const LogRender2 = function () {
       return ps;
     }, {});
     if (Object.keys(changedProps).length > 0) {
-      console.log('<%c' + component + '%c> update when Changed props:', "color: lime", "color: none", changedProps);
+      console.log('%c' + propsName + '%c: ', "color: orange", "color: none", changedProps);
     } else {
-      console.log('<%c' + component + '%c> update without Changed props:', "color: lime", "color: none", props);
+
     }
     prev.current = props;
   });

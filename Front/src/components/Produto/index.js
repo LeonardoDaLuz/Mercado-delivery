@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component, useEffect } from 'react';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -12,35 +12,26 @@ import { ProductDescription } from './ProductDescription';
 import { carregaProduto } from '@actions/produto'
 //import './style.css';
 import { Row } from '../../globalStyleds';
+import { LogRender } from '../../utils/logRender';
 
-class Produto extends Component {
+function Produto({ carregaProduto, produto, loja, match }) {
 
-    constructor() {
-        super();
-    }
+    useEffect(() => {
+        carregaProduto(match.params.id);
+    }, []);
 
-    componentDidMount() {
-        const { carregaProduto } = this.props;
-        carregaProduto(this.props.match.params.id);
-    }
+    //LogRender({ produto }, "Produto");
+    return (
+        <div className="container-lg px-2 produto-page">
+            <BreadCumbs produto={produto} />
+            <Row>
+                <PhotoFrame produto={produto} />
+                <BuyFrame produto={produto} loja={loja} />
+                <ProductDescription produto={produto} />
+            </Row>
+        </div >
+    );
 
-
-    render() {
-
-        let loja = this.props.loja;
-        const { carregaProduto, produto } = this.props;
-
-        return (
-            <div className="container-lg px-2 produto-page">
-                <BreadCumbs produto={produto} />            
-                <Row>
-                    <PhotoFrame produto={produto} />
-                    <BuyFrame produto={produto} loja={loja} />
-                    <ProductDescription produto={produto} />
-                </Row>
-            </div >
-        );
-    }
 }
 
 const mapStateToProps = store => ({
