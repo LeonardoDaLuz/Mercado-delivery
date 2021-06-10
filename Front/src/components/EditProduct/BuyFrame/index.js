@@ -13,7 +13,7 @@ import { ButtonFlat } from '../../../globalStyleds';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { LogRender } from '../../../utils/logRender';
 
-function BuyFrame({ product, handleChanges }) {
+function BuyFrame({ product, handleChanges, draftStatus }) {
 
     function filterAndChangePrice(e) {
         let { name, value } = e.target;
@@ -33,7 +33,18 @@ function BuyFrame({ product, handleChanges }) {
         console.log(value);
     }
 
-    //LogRender({ product }, "BuyFrame");
+
+    //computa o tempo e seus formatos
+    let _offerStarts = new Date(product.offer.time_range.starts);
+    let _offerEnds = new Date(product.offer.time_range.ends);
+
+    if (_offerEnds.getTime() < _offerStarts.getTime())
+        _offerEnds = _offerStarts;
+
+    let offerStartsString = convertDateToInputDateValue(_offerStarts);
+    let offerEndsString = convertDateToInputDateValue(_offerEnds);
+
+
 
     return (
         <BuyFrameContainer>
@@ -43,13 +54,13 @@ function BuyFrame({ product, handleChanges }) {
                     <label>Estoque:</label>
                     <Row>
                         <ButtonIncreaseDecrease>-</ButtonIncreaseDecrease>
-                        <input className="form-control text-center"  />
+                        <input className="form-control text-center" name="stock" value={product.stock} onChange={handleChanges} />
                         <ButtonIncreaseDecrease>+</ButtonIncreaseDecrease>
                     </Row>
                 </QuantityBlock>
                 <PriceBlock>
                     <label>Preço:</label>
-                    <input id="preco"/>
+                    <input type='text' name="preco" value={product.preco} onChange={filterAndChangePrice} />
                 </PriceBlock>
             </Row>
             <Offer>
@@ -57,45 +68,60 @@ function BuyFrame({ product, handleChanges }) {
                 <OfferBody>
                     <div>
                         <label htmlFor="inicio">Início</label>
-                        <input type="date" id='inicio'  />
+                        <input type="date" name='offer.time_range.starts' value={offerStartsString} onChange={handleChanges} />
                     </div>
                     <div>
                         <label htmlFor="fim">Fim</label>
-                        <input type="date" id='fim'  />
+                        <input type="date" name='offer.time_range.ends' value={offerEndsString} onChange={handleChanges} />
                     </div>
                     <div>
                         <label htmlFor="novoValor">Valor na oferta</label>
-                        <input type="text" />
+                        <input type="text" name='offer.off_price' value={product.offer.off_price} onChange={filterAndChangePrice} />
                     </div>
                     <div>
                         <label htmlFor="offerType">Tipo</label>
-                        <select>
+                        <select name='offer.type' value={product.offer.type} onChange={handleChanges} >
                             <option value='day'>Dia</option>
-                            <option value='week'>semana</option>
+                            <option value='week'>Semana</option>
                             <option value='month'>Mês</option>
                         </select>
                     </div>
                     <Row style={{ flexBasis: '300px' }}>
-                        <ButtonFlat bgColor={colorTheme.secondary()}>Ativar oferta</ButtonFlat>
-                        <ButtonFlat bgColor={colorTheme.secondary()} disabled={true}>Desativar oferta</ButtonFlat>
+                        <ButtonFlat
+                            bgColor={colorTheme.secondary()}
+                            name='offer.enabled'
+                            value={true}
+                            onClick={handleChanges}
+                            disabled={product.offer.enabled == 'true'}>
+                            Ativar oferta
+                        </ButtonFlat>
+                        <ButtonFlat
+                            bgColor={colorTheme.secondary()}
+                            name='offer.enabled'
+                            value={false}
+                            onClick={handleChanges}
+                            disabled={product.offer.enabled == 'false'}>
+                            Desativar oferta</ButtonFlat>
                     </Row>
 
                 </OfferBody>
             </Offer>
             <Row ChildrenFlexGrow mx2 flexBasis150>
                 <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
-                <ButtonFlat type='submit' >Salvar</ButtonFlat>
+                <ButtonFlat disabled={draftStatus.current !== 'modified'} type='submit' >Salvar</ButtonFlat>
             </Row>
         </BuyFrameContainer>
     );
 }
 
 
-
+function convertDateToInputDateValue(date) {
+    var currentDate = date.toISOString().substring(0, 10);
+    return currentDate;
+}
 
 const mapStateToProps = store => ({
-    produto: store.produto,
-    carrinho: store.carrinho
+
 })
 
 const mapDispatchToProps = dispatch =>

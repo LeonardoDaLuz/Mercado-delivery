@@ -1,4 +1,4 @@
-import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, CARREGA_PRODUTO_FAILURE } from '../types'
+import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, UPDATE_PRODUCT_SUCCESS } from '../types'
 
 const initialState = {
     _id: 5,
@@ -8,12 +8,23 @@ const initialState = {
     imgs: [],
     preco: 0,
     stock: 1,
+    offer: {
+        time_range: {
+            starts: 0,
+            ends: 0
+        },
+        off_price: 0,
+        enabled: false
+    }
+
 };
 
 const produto = (state = initialState, action) => {
     switch (action.type) {
         case CARREGA_PRODUTO_SUCCESS:
-            return { ...action.payload};
+            return { ...action.payload };
+        case UPDATE_PRODUCT_SUCCESS:
+            return { ...action.payload };
         default:
             return state;
     }

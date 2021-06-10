@@ -7,8 +7,9 @@ import Editor from 'ckeditor5-custom-build/build/ckeditor';
 import { useEffect, useLayoutEffect, useRef } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { editarQuantidadeDoProdutoAoCarrinho } from '../../../store/actions/carrinho';
 
-export const ProductDescription = ({ product }) => {
+export const ProductDescription = ({ product, changeDescription }) => {
 
     const editorConfiguration = {
         toolbar: {
@@ -30,18 +31,18 @@ export const ProductDescription = ({ product }) => {
 
     const editorInstanceRef = useRef(null);
 
-    useEffect(() => {
-        if (editorInstanceRef.current) {
-            editorInstanceRef.current.setData(product.descricao);
-        }
-    }, [product]);
+    // useEffect(() => {
+
+    //     if (editorInstanceRef.current && editorInstanceRef.current.getData()=='') {
+    //         editorInstanceRef.current.setData(product.descricao);
+    //     }
+    // }, [product]);
+
+
 
     return (
         <DescricaoPgProduto>
             <div><h3 >Descrição do produto</h3></div>
-            {product.descricao}
-
-
             <CKEditor
                 editor={Editor}
                 data={product.descricao}
@@ -49,6 +50,10 @@ export const ProductDescription = ({ product }) => {
                 onReady={(instance => {
                     editorInstanceRef.current = instance;
                 })}
+                onChange={(event, editor) => {
+                    
+                //    changeDescription(editor.getData());  
+                }}
             />
             <SaveOrDiscard>
                 <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>

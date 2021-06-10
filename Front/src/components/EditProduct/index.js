@@ -1,4 +1,4 @@
-import { Component, useEffect, useLayoutEffect, useState } from 'react';
+import { Component, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,49 +9,96 @@ import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
 //Others
-import { carregaProduto } from '@actions/produto'
+import { carregaProduto, updateProduct } from '@actions/produto'
 import produce from 'immer';
 import { useFormik } from 'formik';
 import { LogRender } from '@utils/logRender';
+import { nestedPropertySeletor } from '../../utils/nestedPropertySelector';
 //import './style.css';
 
-function EditProduct({ carregaProduto, produto, match }) {
+function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const [draftProductState, setDraftProductState] = useState({
-        _id: 5,
+        _id: 0,
         titulo: 'teste',
         categorias: [],
         descricao: '',
         imgs: [],
         preco: 0,
-        stock: 1
+        stock: 1,
+        offer: {
+            time_range: {
+                starts: 0,
+                ends: 0
+            },
+            off_price: 0,
+            enabled: false
+        },
     });
 
+    const draftStatus = useRef('empty');
+
     useEffect(() => {
+        draftStatus.current = 'loading';
         carregaProduto(match.params.id);
     }, []);
 
     useEffect(() => {
+
         setDraftProductState({ ...produto });
-    }, [produto]);
+        if (draftStatus.current === 'saving')
+            draftStatus.current = 'saved';
+        else
+            draftStatus.current = 'loaded';
 
-    const onSubmit = (values) => {
-        alert(values);
+    }, [produto]); //Quando o produto é carregado a partir do servidor, isto é copiado para um rascunho do produto, que é onde os dados serão alterados.
+
+    const submit = (e) => {
+        e.preventDefault();
+        draftStatus.current = 'saving';
+
+        updateProduct(
+            draftProductState,
+            () => { draftStatus.current = 'saved'; },
+            () => { draftStatus.current = 'save failure'; }
+        );
     }
 
-    const handleChanges = (e) => {
 
+    const handleChanges = useCallback((e) => {
         setDraftProductState(produce(draftProductState, (draftState) => {
-            draftState[e.target.name] = e.target.value;
+
+            console.log(e);
+            // console.log('handleChanges type: ' + e.target.type);
+            switch (e.target.type) {
+                case 'date':
+                    nestedPropertySeletor(draftState, e.target.name).set(e.target.value + "T00:00:00.000Z");
+                    break;
+                default:
+                    nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
+            }
+
+
         }));
+        draftStatus.current = 'modified';
+
+    });
+
+    const changeDescription = (value) => {
+        setDraftProductState(produce(draftProductState, (draftState) => {
+            draftState.descricao = value;
+        }));
+
+        //draftStatus.current = 'modified';
     }
 
-    let childProps = { product: draftProductState, produto: draftProductState, handleChanges } //produto está redundante apenas para manter compatibilidade por enquanto
+    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeDescription, onSubmit: submit } //produto está redundante apenas para manter compatibilidade por enquanto
 
     return (
         <div className="container-lg px-2 produto-page">
+            {draftStatus.current}
             <BreadcumbsSelector {...childProps} />
-            <form className='row ' onSubmit={(e) => { e.preventDefault(); }}>
+            <form className='row ' onSubmit={submit}>
                 <PhotoFrame   {...childProps} />
                 <BuyFrame   {...childProps} />
                 <ProductDescription   {...childProps} />
@@ -66,7 +113,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaProduto }, dispatch);
+    bindActionCreators({ carregaProduto, updateProduct }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProduct));
