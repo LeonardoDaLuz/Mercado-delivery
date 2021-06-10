@@ -18,7 +18,7 @@ export const carregaProduto = (id, callback) => {
 
     return dispatch => {
         dispatch({ type: CARREGA_PRODUTO_START });
-        fetch('http://localhost:3001/produto2/' + id)
+        fetch('http://localhost:3001/produto2/' + id+"?delay=3")
             .then(body => body.json())
             .then(data => {
                 console.log("PRODUTO CARREGADO PELO REDUX");
