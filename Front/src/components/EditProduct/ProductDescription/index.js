@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { editarQuantidadeDoProdutoAoCarrinho } from '../../../store/actions/carrinho';
 
-export const ProductDescription = ({ product, changeDescription }) => {
+export const ProductDescription = ({ product, handleChanges, changeDescription }) => {
 
     const editorConfiguration = {
         toolbar: {
@@ -28,17 +28,8 @@ export const ProductDescription = ({ product, changeDescription }) => {
         },
         licenseKey: '',
     };
-
-    const editorInstanceRef = useRef(null);
-
-    // useEffect(() => {
-
-    //     if (editorInstanceRef.current && editorInstanceRef.current.getData()=='') {
-    //         editorInstanceRef.current.setData(product.descricao);
-    //     }
-    // }, [product]);
-
-
+//dd
+    const initialized = useRef(false);
 
     return (
         <DescricaoPgProduto>
@@ -47,12 +38,14 @@ export const ProductDescription = ({ product, changeDescription }) => {
                 editor={Editor}
                 data={product.descricao}
                 config={editorConfiguration}
-                onReady={(instance => {
-                    editorInstanceRef.current = instance;
-                })}
                 onChange={(event, editor) => {
-                    
-                //    changeDescription(editor.getData());  
+                    console.log('onChange');
+                    if (initialized.current) {
+                        handleChanges({ target: { name: 'descricao', value: editor.getData() } });
+                    } else {
+                        initialized.current = true;
+
+                    }
                 }}
             />
             <SaveOrDiscard>

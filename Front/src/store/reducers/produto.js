@@ -1,7 +1,7 @@
 import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, UPDATE_PRODUCT_SUCCESS } from '../types'
 
 const initialState = {
-    _id: 5,
+    _id: '',
     titulo: '',
     categorias: [],
     descricao: '',

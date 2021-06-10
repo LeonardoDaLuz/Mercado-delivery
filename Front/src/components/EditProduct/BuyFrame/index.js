@@ -35,8 +35,8 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
 
 
     //computa o tempo e seus formatos
-    let _offerStarts = new Date(product.offer.time_range.starts);
-    let _offerEnds = new Date(product.offer.time_range.ends);
+    let _offerStarts = new Date(product.offer?.time_range.starts);
+    let _offerEnds = new Date(product.offer?.time_range.ends);
 
     if (_offerEnds.getTime() < _offerStarts.getTime())
         _offerEnds = _offerStarts;

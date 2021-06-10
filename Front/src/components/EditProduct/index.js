@@ -19,7 +19,7 @@ import { nestedPropertySeletor } from '../../utils/nestedPropertySelector';
 function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const [draftProductState, setDraftProductState] = useState({
-        _id: 0,
+
         titulo: 'teste',
         categorias: [],
         descricao: '',
@@ -66,6 +66,9 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
 
     const handleChanges = useCallback((e) => {
+
+        draftStatus.current = 'modified';
+
         setDraftProductState(produce(draftProductState, (draftState) => {
 
             console.log(e);
@@ -80,19 +83,11 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
 
         }));
-        draftStatus.current = 'modified';
+  
 
     });
 
-    const changeDescription = (value) => {
-        setDraftProductState(produce(draftProductState, (draftState) => {
-            draftState.descricao = value;
-        }));
-
-        //draftStatus.current = 'modified';
-    }
-
-    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeDescription, onSubmit: submit } //produto está redundante apenas para manter compatibilidade por enquanto
+    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges } //produto está redundante apenas para manter compatibilidade por enquanto
 
     return (
         <div className="container-lg px-2 produto-page">
@@ -101,7 +96,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
             <form className='row ' onSubmit={submit}>
                 <PhotoFrame   {...childProps} />
                 <BuyFrame   {...childProps} />
-                <ProductDescription   {...childProps} />
+                <ProductDescription  {...childProps} />
             </form>
         </div >
     );
