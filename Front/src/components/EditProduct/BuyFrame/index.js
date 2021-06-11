@@ -8,7 +8,7 @@ import { bindActionCreators } from 'redux';
 //styles and animation
 import { Row, Col } from '@globalStyleds';
 import moveElementFromTo from '@utils/moveElementFromTo';
-import { BuyFrameContainer, PriceBlock, Offer, OfferBody, ButtonIncreaseDecrease, QuantityBlock } from './styles';
+import { BuyFrameContainer, PriceBlock, Offer, OfferBody, ButtonIncreaseDecrease, QuantityBlock, DraftStatus } from './styles';
 import { ButtonFlat } from '../../../globalStyleds';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { LogRender } from '../../../utils/logRender';
@@ -110,7 +110,11 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
                 <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
                 <ButtonFlat disabled={draftStatus.current !== 'modified'} type='submit' >Salvar</ButtonFlat>
             </Row>
-        </BuyFrameContainer>
+            {(draftStatus.current === 'Saved'  || draftStatus.current === 'Saving...') && <DraftStatus>
+                {draftStatus.current}
+            </DraftStatus>}
+
+        </BuyFrameContainer >
     );
 }
 

@@ -18,7 +18,7 @@ export const carregaProduto = (id, callback) => {
 
     return dispatch => {
         dispatch({ type: CARREGA_PRODUTO_START });
-        fetch('http://localhost:3001/produto2/' + id+"?delay=3")
+        fetch('http://localhost:3001/produto2/' + id+"")
             .then(body => body.json())
             .then(data => {
                 console.log("PRODUTO CARREGADO PELO REDUX");
@@ -51,7 +51,7 @@ export const updateProduct = (editedProduct, callBackOnSuccess, callbackOnFail) 
 
         dispatch({ type: UPDATE_PRODUCT_START });
 
-        const url = 'http://localhost:3001/produto2/' + editedProduct._id;
+        const url = 'http://localhost:3001/produto2/' + editedProduct._id+"?delay=2";
 
         let response = await fetch(url, {
             method: 'POST',

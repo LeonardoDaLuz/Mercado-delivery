@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { BreadcumbNav, SelectionCategory } from "./styles";
 import { carregaCategorias } from '@actions/categorias';
 
-function BreadCumbsSelector_({ product, carregaCategorias, categorias: categoriesOptionsHierarchy }) {
+function BreadCumbsSelector_({ product, carregaCategorias, categorias: categoriesOptionsHierarchy, changeBreadcumb }) {
 
     useEffect(() => {
         carregaCategorias();
@@ -28,7 +28,8 @@ function BreadCumbsSelector_({ product, carregaCategorias, categorias: categorie
 
         let currentSelector = (
             <li key={currentDepthIndex}>
-                <SelectionCategory value={categoriesOfThisProduct[currentDepthIndex]} onChange={() => { }}>
+                <SelectionCategory value={categoriesOfThisProduct[currentDepthIndex]} onChange={(e) => { changeBreadcumb(currentDepthIndex, e.target.value) }}>
+                    <option key={-1} value='todos'>Todos</option>
                     {keys.map((key, index) => {
                         return <option key={key} value={key}>{key}</option>
                     })}

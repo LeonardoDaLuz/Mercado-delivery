@@ -39,28 +39,26 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     const draftStatus = useRef('empty');
 
     useEffect(() => {
-        draftStatus.current = 'loading';
+        draftStatus.current = 'Loading...';
         carregaProduto(match.params.id);
     }, []);
 
     useEffect(() => {
 
         setDraftProductState({ ...produto });
-        if (draftStatus.current === 'saving')
-            draftStatus.current = 'saved';
-        else
-            draftStatus.current = 'loaded';
+        if (draftStatus.current !== 'Saved')
+            draftStatus.current = 'Loaded';
 
     }, [produto]); //Quando o produto é carregado a partir do servidor, isto é copiado para um rascunho do produto, que é onde os dados serão alterados.
 
     const submit = (e) => {
         e.preventDefault();
-        draftStatus.current = 'saving';
+        draftStatus.current = 'Saving...';
 
         updateProduct(
             draftProductState,
-            () => { draftStatus.current = 'saved'; },
-            () => { draftStatus.current = 'save failure'; }
+            () => { draftStatus.current = 'Saved'; },
+            () => { draftStatus.current = 'Save failure'; }
         );
     }
 
@@ -71,8 +69,6 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
         setDraftProductState(produce(draftProductState, (draftState) => {
 
-            console.log(e);
-            // console.log('handleChanges type: ' + e.target.type);
             switch (e.target.type) {
                 case 'date':
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value + "T00:00:00.000Z");
@@ -81,17 +77,26 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
             }
 
-
         }));
-  
 
     });
 
-    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges } //produto está redundante apenas para manter compatibilidade por enquanto
+    const changeBreadcumb = (index, newValue) => {
+        draftStatus.current = 'modified';
+
+        setDraftProductState(produce(draftProductState, (draftState) => {
+            draftState.categorias[index] = newValue;
+            draftState.categorias.length = index + 1;
+
+        }));
+        console.log(draftProductState.categorias);
+    }
+
+    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeBreadcumb } //produto está redundante apenas para manter compatibilidade por enquanto
 
     return (
         <div className="container-lg px-2 produto-page">
-            {draftStatus.current}
+    
             <BreadcumbsSelector {...childProps} />
             <form className='row ' onSubmit={submit}>
                 <PhotoFrame   {...childProps} />
