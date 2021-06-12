@@ -36,36 +36,39 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         },
     });
 
-    const draftStatus = useRef('empty');
+    const [draftStatus, setDraftStatus] = useState('empty');
 
-    useEffect(() => {
-        draftStatus.current = 'Loading...';
+    useEffect(() => {        
+        setDraftStatus('Loading...');
         carregaProduto(match.params.id);
     }, []);
 
+
     useEffect(() => {
+        if (draftStatus === 'Loading...')
+            setDraftStatus('Loaded...');
 
         setDraftProductState({ ...produto });
-        if (draftStatus.current !== 'Saved')
-            draftStatus.current = 'Loaded';
-
     }, [produto]); //Quando o produto é carregado a partir do servidor, isto é copiado para um rascunho do produto, que é onde os dados serão alterados.
 
     const submit = (e) => {
+
         e.preventDefault();
-        draftStatus.current = 'Saving...';
+
+        setDraftStatus('Saving...')
 
         updateProduct(
             draftProductState,
-            () => { draftStatus.current = 'Saved'; },
-            () => { draftStatus.current = 'Save failure'; }
+            () => { setDraftStatus('Saved') },
+            () => { setDraftStatus('Save failure'); }
         );
     }
 
 
     const handleChanges = useCallback((e) => {
 
-        draftStatus.current = 'modified';
+
+        setDraftStatus('modified');
 
         setDraftProductState(produce(draftProductState, (draftState) => {
 
@@ -82,7 +85,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     });
 
     const changeBreadcumb = (index, newValue) => {
-        draftStatus.current = 'modified';
+        setDraftStatus('modified');
 
         setDraftProductState(produce(draftProductState, (draftState) => {
             draftState.categorias[index] = newValue;
@@ -96,7 +99,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     return (
         <div className="container-lg px-2 produto-page">
-    
+            teste
             <BreadcumbsSelector {...childProps} />
             <form className='row ' onSubmit={submit}>
                 <PhotoFrame   {...childProps} />

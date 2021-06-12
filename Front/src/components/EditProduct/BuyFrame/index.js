@@ -108,16 +108,23 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
             </Offer>
             <Row ChildrenFlexGrow mx2 flexBasis150>
                 <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
-                <ButtonFlat disabled={draftStatus.current !== 'modified'} type='submit' >Salvar</ButtonFlat>
+                <ButtonFlat disabled={draftStatus !== 'modified'} type='submit' >Salvar</ButtonFlat>
             </Row>
-            {(draftStatus.current === 'Saved'  || draftStatus.current === 'Saving...') && <DraftStatus>
-                {draftStatus.current}
-            </DraftStatus>}
-
+            <GetSaveStatus draftStatus={draftStatus} />
         </BuyFrameContainer >
     );
 }
 
+function GetSaveStatus({ draftStatus }) {
+    switch (draftStatus) {
+        case 'Saved':
+            return <DraftStatus style={{ color: 'lime' }}>Salvo!</DraftStatus>
+        case 'Saving...':
+            return <DraftStatus>Salvando...</DraftStatus>
+        default:
+            return <></>
+    }
+}
 
 function convertDateToInputDateValue(date) {
     var currentDate = date.toISOString().substring(0, 10);
