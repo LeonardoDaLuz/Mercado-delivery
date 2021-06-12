@@ -1,3 +1,6 @@
+const ObjectId = require("mongodb").ObjectID;
+const waitForSeconds = require('../utilities/waitForSeconds');
+
 class ProductsController {
     static async listProducts(req, resp) {
         //obtem lista com os produtos, filtrado por categorias 
@@ -42,7 +45,7 @@ class ProductsController {
         if (offer != '') {
             let now = new Date();
             let timeZoneOffset = now.getTimezoneOffset();
-            now.setMinutes(now.getMinutes() - timeZoneOffset);
+            now.setMinutes(now.getMinutes() - timeZoneOffset); //Ajuste devido ao fuso horário. o TimezoneOffset vale 180, oq significa 3 horas no fuso horário.
             query['offer.time_range.starts'] = { $lt: now }
             query['offer.time_range.ends'] = { $gt: now }
             query['offer.type'] = offer;
@@ -93,23 +96,41 @@ class ProductsController {
         if (produto.imgs === undefined)  //Para manter a compatibilidade entre modelos.
             produto.imgs = [produto.img];
 
-        console.log(produto)
+        let delay = req.query.delay;
+        if(delay) {
+            console.log("proposeful delay...");   
+            await waitForSeconds(delay); 
+        }
+
+        console.log('Loaded product: ', produto);     
+
         resp.json(produto);
     }
 
     static async updateProduct(req, resp) {
-        let busca = filtraString(req.query.busca);
 
+        let product = req.body;
+   
+        if(Object.keys(product).length==0) {
+            resp.json({ result: "error, missing the body" });
+        }
+        
+        delete product._id;
 
+        let result = await global.conn.collection('produtos').updateOne(
+            { _id: new ObjectId(req.params.id) },
+            { $set: req.body }
+        )
 
-        /*
-        offer: none|day|week|month
-        startDay: 1|2...
-        off_price: n 
-        */
-        let produto = await global.db.getProdutoPorObjId(req.params.id);
-        console.log(produto)
-        resp.json(produto);
+        product._id = req.params.id;
+
+        if(req.query.delay) {
+            console.log("proposeful delay...");   
+            await waitForSeconds(req.query.delay); 
+        }
+
+        //result.product = product;
+        resp.json({ result: result.result, product: product });
     }
 }
 
