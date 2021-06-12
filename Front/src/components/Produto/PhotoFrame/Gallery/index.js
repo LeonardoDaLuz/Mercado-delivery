@@ -7,36 +7,31 @@ import { uploadImages } from '../../../../utils/uploadImagesToServer';
 
 export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setShowLightboxState, pushImages, removeImage }) {
 
-    let SelectedImageUrl = img; //como a versão do banco de dados anteriormente só continha 1 imagem por produto, isto se faz necessário para manter compatibilidade.
 
-    if (imgs)
-        SelectedImageUrl = imgs[selectedImageId];
+    const SelectedImageUrl = imgs[selectedImageId];
 
 
     return (
         <Flex>
-            {imgs &&
-                <ImageSelector>
-                    {imgs.map((img, index) =>
-                        <ImgButton
-                            className={index == selectedImageId ? 'selected' : ''}
-                            key={index}
-                        >
-                            <DeleteImage />
-                            <img
+            <ImageSelector>
+                {imgs.map((img, index) =>
+                    <ImgButton
+                        className={index == selectedImageId ? 'selected' : ''}
+                        key={index}
+                    >
+                        <DeleteImage />
+                        <img
 
-                                src={configs.imgsPath + img}
-                                onClick={() => setSelectedImageId(index)}
-                            />
-                        </ImgButton>
-                    )}
-                    <AddImgButton onClick={() => { uploadImages().then(images => { pushImages(images) }) }}>
+                            src={configs.imgsPath + img}
+                            onClick={() => setSelectedImageId(index)}
+                        />
+                    </ImgButton>
+                )}
+                <AddImgButton onClick={() => { uploadImages().then(images => { pushImages(images) }) }}>
 
 
-                    </AddImgButton>
-                </ImageSelector>
-            }
-
+                </AddImgButton>
+            </ImageSelector>
             <ImageViewer >
                 <DeleteImage onClick={() => { removeImage(SelectedImageUrl) }} />
                 {SelectedImageUrl !== undefined &&

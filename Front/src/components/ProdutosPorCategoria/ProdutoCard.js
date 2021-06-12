@@ -24,7 +24,7 @@ function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
             </Link>
             <h5>{produto.titulo}</h5>
             <Preco>
-                <div>R$ {(produto.preco * 1.1).toFixed(2)}</div>
+                <div>R$ {produto.price /* * 1.1*/.toFixed(2)}</div>
                 <div>{produto.preco}</div>
             </Preco>
             <AdicionarRemoverDoCarrinho>

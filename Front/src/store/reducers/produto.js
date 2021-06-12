@@ -7,6 +7,7 @@ const initialState = {
     descricao: '',
     imgs: [],
     preco: 0,
+    price: 0,
     stock: 1,
     offer: {
         time_range: {

@@ -1,0 +1,4 @@
+{"t":{"$date":"2021-06-07T20:54:16.531-03:00"},"s":"I",  "c":"CONTROL",  "id":23285,   "ctx":"main","msg":"Automatically disabling TLS 1.0, to force-enable TLS 1.0 specify --sslDisabledProtocols 'none'"}
+{"t":{"$date":"2021-06-07T20:54:16.534-03:00"},"s":"W",  "c":"ASIO",     "id":22601,   "ctx":"main","msg":"No TransportLayer configured during NetworkInterface startup"}
+{"t":{"$date":"2021-06-07T20:54:16.535-03:00"},"s":"I",  "c":"NETWORK",  "id":4648602, "ctx":"main","msg":"Implicit TCP FastOpen in use."}
+{"t":{"$date":"2021-06-07T20:54:16.535-03:00"},"s":"I",  "c":"CONTROL",  "id":23316,   "ctx":"main","msg":"Trying to start Windows service '{toUtf8String_serviceName}'","attr":{"toUtf8String_serviceName":"MongoDB"}}

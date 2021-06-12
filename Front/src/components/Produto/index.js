@@ -26,7 +26,7 @@ function Produto({ carregaProduto, produto, loja, match }) {
             <BreadCumbs produto={produto} />
             <Row>
                 <PhotoFrame produto={produto} />
-                <BuyFrame produto={produto} loja={loja} />
+                <BuyFrame produto={produto} />
                 <ProductDescription produto={produto} />
             </Row>
         </div >

@@ -25,6 +25,7 @@ function BuyFrame(props) {
     function adicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e); }
     function editarQuantidade(e) { editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value); }
 
+
     return (
         <BuyFrameContainer>
             <Row>
@@ -41,7 +42,7 @@ function BuyFrame(props) {
                     </Row>
                 </BlocoQuantidade>
                 <BlocoPreco>
-                    <span>{(produto.preco.toFixed(2)).replace('.',',')}</span><br />
+                    <span>{(produto.price.toFixed(2)).replace('.',',')}</span><br />
                     <span>Em <b>12x de 35 <div>sem juros</div></b></span>
                 </BlocoPreco>
             </Row>
