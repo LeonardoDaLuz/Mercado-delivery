@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { editarQuantidadeDoProdutoAoCarrinho } from '../../../store/actions/carrinho';
 
-export const ProductDescription = ({ product, handleChanges, changeDescription }) => {
+export const ProductDescription = ({ product, handleChanges, draftStatus, discardChanges }) => {
 
     const editorConfiguration = {
         toolbar: {
@@ -28,7 +28,7 @@ export const ProductDescription = ({ product, handleChanges, changeDescription }
         },
         licenseKey: '',
     };
-//dd
+    //dd
     const initialized = useRef(false);
 
     return (
@@ -49,8 +49,8 @@ export const ProductDescription = ({ product, handleChanges, changeDescription }
                 }}
             />
             <SaveOrDiscard>
-                <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
-                <ButtonFlat >Salvar Alterações</ButtonFlat>
+                <ButtonFlat bgColor={colorTheme.warning()} disabled={draftStatus !== 'modified'} onClick={discardChanges}>Descartar alterações</ButtonFlat>
+                <ButtonFlat type='submit' disabled={draftStatus !== 'modified'}>Salvar Alterações</ButtonFlat>
             </SaveOrDiscard>
 
         </DescricaoPgProduto>

@@ -109,7 +109,12 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         }));
     }
 
-    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage } //produto está redundante apenas para manter compatibilidade por enquanto 
+    const discardChanges = (e) => {
+        e.preventDefault();
+        setDraftProductState({ ...produto });
+    }
+
+    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage, discardChanges } //produto está redundante apenas para manter compatibilidade por enquanto 
 
     return (
         <div className="container-lg px-2 produto-page">

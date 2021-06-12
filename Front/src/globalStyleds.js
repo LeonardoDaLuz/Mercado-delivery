@@ -51,7 +51,7 @@ export const Div = styled.div`
         }
    `}
 `;
-    
+
 
 export const CenterContainer = styled.div`
     margin: 0 auto;
@@ -75,7 +75,9 @@ export const Col3 = styled.div`
 `;
 
 
-export const ButtonFlat = styled.button`
+export const ButtonFlat = styled.button.attrs(({ type }) => { 
+    return (type === undefined ? { type: 'button' } : { type: '' }) //isto previne q os buttons venham como type=submit como padrão.
+})`
 
     color: ${({ Color = 'white' }) => Color};
     background-color: ${({ bgColor = '#32b112' }) => bgColor};
@@ -98,7 +100,9 @@ export const ButtonFlat = styled.button`
     }
 `;
 
-export const ButtonOutline = styled.button`
+export const ButtonOutline = styled.button.attrs(({ type }) => {
+    return (type === undefined ? { type: 'button' } : { type: '' })
+})`
     background-color: transparent;
     color: rgb(63, 223, 99);
     cursor: pointer;

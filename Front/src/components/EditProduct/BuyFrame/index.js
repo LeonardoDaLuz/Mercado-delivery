@@ -13,7 +13,7 @@ import { ButtonFlat } from '../../../globalStyleds';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { LogRender } from '../../../utils/logRender';
 
-function BuyFrame({ product, handleChanges, draftStatus }) {
+function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
 
     function filterAndChangePrice(e) {
         let { name, value } = e.target;
@@ -35,14 +35,14 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
 
 
     //computa o tempo e seus formatos
-    
+
     let _offerStarts = new Date(product.offer.time_range.starts);
     let _offerEnds = new Date(product.offer.time_range.ends);
 
     if (_offerEnds.getTime() < _offerStarts.getTime())
         _offerEnds = _offerStarts;
 
-        console.log(_offerStarts);
+    console.log(_offerStarts);
 
     let offerStartsString = convertDateToInputDateValue(_offerStarts);
     let offerEndsString = convertDateToInputDateValue(_offerEnds);
@@ -110,7 +110,7 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
                 </OfferBody>
             </Offer>
             <Row ChildrenFlexGrow mx2 flexBasis150>
-                <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
+                <ButtonFlat bgColor={colorTheme.warning()} disabled={draftStatus !== 'modified'} onClick={discardChanges}>Descartar alterações</ButtonFlat>
                 <ButtonFlat disabled={draftStatus !== 'modified'} type='submit' >Salvar</ButtonFlat>
             </Row>
             <SaveStatus draftStatus={draftStatus} />
