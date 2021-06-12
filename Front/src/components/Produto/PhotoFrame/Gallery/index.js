@@ -1,9 +1,10 @@
 import configs from '@configs';
-import { AddImgButton, Flex, ImageSelector, ImageViewer, ImgButton } from './style';
+import { AddImgButton, Flex, ImageSelector, ImageViewer, ImgButton, ImagePlaceholder } from './style';
 import Magnifier from "react-magnifier";
 
 import { DeleteImage } from './style';
 import { uploadImages } from '../../../../utils/uploadImagesToServer';
+import assets from '../../../../assets';
 
 export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setShowLightboxState, pushImages, removeImage }) {
 
@@ -19,7 +20,7 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                         className={index == selectedImageId ? 'selected' : ''}
                         key={index}
                     >
-                        <DeleteImage />
+                        <DeleteImage onClick={(e) => { removeImage(e, img) }}/>
                         <img
 
                             src={configs.imgsPath + img}
@@ -27,16 +28,17 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                         />
                     </ImgButton>
                 )}
-                <AddImgButton onClick={() => { uploadImages().then(images => { pushImages(images) }) }}>
+                <AddImgButton onClick={(e) => { uploadImages().then(images => { pushImages(e, images) }) }}>
 
 
                 </AddImgButton>
             </ImageSelector>
             <ImageViewer >
-                <DeleteImage onClick={() => { removeImage(SelectedImageUrl) }} />
+                <DeleteImage onClick={(e) => { removeImage(e, SelectedImageUrl) }} />
                 {SelectedImageUrl !== undefined &&
                     <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={() => setShowLightboxState(true)} />
                 }
+                {imgs.length === 0 && <img src={assets.imagePlaceholder} />}
             </ImageViewer>
         </Flex>
     )

@@ -11,7 +11,7 @@ function BreadCumbsSelector_({ product, carregaCategorias, categorias: categorie
         carregaCategorias();
     }, [])
 
-    let categoriesOfThisProduct = product.categorias;
+    let categoriesOfThisProduct = product.categories;
 
 
 

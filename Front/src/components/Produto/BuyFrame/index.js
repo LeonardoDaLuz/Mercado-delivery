@@ -9,40 +9,39 @@ import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProduto
 import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
 import { Col, Row } from '../../../globalStyleds';
 
-function BuyFrame(props) {
+function BuyFrame({ product, likeProduto, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho }) {
 
-    let { produto, likeProduto, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho } = props;
-    let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
-    let liked = produto.likes !== undefined && produto.likes.includes(0);
-    let disabled = quantidadeAdicionado < 1;
+    let addedQuantity = quantosDesseForamAdicionadosAoCarrinho(product._id);
+    let liked = product.likes !== undefined && product.likes.includes(0);
+    let disabled = addedQuantity < 1;
 
     useEffect(() => {
        // carregarCarrinho();
     }, []);
 
 
-    function removerDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1); }
-    function adicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e); }
-    function editarQuantidade(e) { editarQuantidadeDoProdutoAoCarrinho(produto._id, e.target.value); }
+    function removerDoCarrinho(e) { adicionarProdutoAoCarrinho(product._id, -1); animarAdicao(e, -1); }
+    function adicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(product._id, 1); animarAdicao(e); }
+    function editarQuantidade(e) { editarQuantidadeDoProdutoAoCarrinho(product._id, e.target.value); }
 
 
     return (
         <BuyFrameContainer>
             <Row>
-                <h1>{produto.titulo}   </h1>
-                <LikeButton className={liked} onClick={() => likeProduto(produto._id)}>♥</LikeButton>
+                <h1>{product.title}   </h1>
+                <LikeButton className={liked} onClick={() => likeProduto(product._id)}>♥</LikeButton>
             </Row>
             <Row>
                 <BlocoQuantidade>
                     <label>Quantidade:</label>
                     <Row>
                         <ButtonIncreaseDecrease disabled={disabled} onClick={removerDoCarrinho}>-</ButtonIncreaseDecrease>
-                        <input className="form-control text-center" value={quantidadeAdicionado} onChange={editarQuantidade} />
+                        <input className="form-control text-center" value={addedQuantity} onChange={editarQuantidade} />
                         <ButtonIncreaseDecrease onClick={adicionarAoCarrinho}>+</ButtonIncreaseDecrease>
                     </Row>
                 </BlocoQuantidade>
                 <BlocoPreco>
-                    <span>{(produto.price.toFixed(2)).replace('.',',')}</span><br />
+                    <span>{(product.price.toFixed(2)).replace('.',',')}</span><br />
                     <span>Em <b>12x de 35 <div>sem juros</div></b></span>
                 </BlocoPreco>
             </Row>

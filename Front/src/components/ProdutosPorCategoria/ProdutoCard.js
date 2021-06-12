@@ -11,7 +11,7 @@ import { quantosDesseForamAdicionadosAoCarrinho } from '../../store/analyzers/ca
 
 function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
 
-    let quantidadeAdicionado = quantosDesseForamAdicionadosAoCarrinho(produto._id);
+    let addedQuantity = quantosDesseForamAdicionadosAoCarrinho(produto._id);
 
     function RemoverDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1) }
 
@@ -20,17 +20,17 @@ function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
     return (
         <ProdutoCard_ key={index}>
             <Link to={'/produto2/' + produto._id}>
-                <img src={configs.imgsPath + produto.img} />
+                <img src={configs.imgsPath + produto.imgs[0]} />
             </Link>
-            <h5>{produto.titulo}</h5>
+            <h5>{produto.title}</h5>
             <Preco>
-                <div>R$ {produto.price /* * 1.1*/.toFixed(2)}</div>
-                <div>{produto.preco}</div>
+                <div>R$ {(produto.price * 1.1).toFixed(2)}</div>
+                <div>{produto.price.toFixed(2)}</div>
             </Preco>
             <AdicionarRemoverDoCarrinho>
-                <button disabled={quantidadeAdicionado < 1} onClick={RemoverDoCarrinho}
+                <button disabled={addedQuantity < 1} onClick={RemoverDoCarrinho}
                 >-</button>
-                <div>{quantidadeAdicionado}</div>
+                <div>{addedQuantity}</div>
                 <button onClick={AdicionarAoCarrinho}>+</button>
             </AdicionarRemoverDoCarrinho>
         </ProdutoCard_>

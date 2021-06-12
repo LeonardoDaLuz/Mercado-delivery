@@ -10,14 +10,13 @@ import { Gallery } from './Gallery';
 import { DesktopView } from './style';
 import { MobileGallery } from './MobileGallery';
 
-export function PhotoFrame({ produto, pushImages, removeImage }) {
+export function PhotoFrame({ product, pushImages, removeImage }) {
 
     const [selectedImageId, setSelectedImageId] = useState(0);
     const [showLightbox, setShowLightBox] = useState(false);
 
     const childProps = {
-        img: produto.img,
-        imgs: produto.imgs,
+        imgs: product.imgs,
         selectedImageId: selectedImageId,
         showState: showLightbox,
         setSelectedImageId: setSelectedImageId,

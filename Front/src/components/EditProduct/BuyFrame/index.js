@@ -51,7 +51,7 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
 
     return (
         <BuyFrameContainer>
-            <textarea type='text' name='titulo' value={product.titulo} onChange={handleChanges} >Titulo...</textarea>
+            <textarea type='text' name='title' value={product.title} onChange={handleChanges} >Titulo...</textarea>
             <Row>
                 <QuantityBlock>
                     <label>Estoque:</label>
@@ -63,7 +63,7 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
                 </QuantityBlock>
                 <PriceBlock>
                     <label>Preço:</label>
-                    <input type='text' name="preco" value={product.preco} onChange={filterAndChangePrice} />
+                    <input type='text' name="price" value={product.price} onChange={filterAndChangePrice} />
                 </PriceBlock>
             </Row>
             <Offer>

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom"
 import { BreadcumbNav } from "./styles";
 
-export function BreadCumbs({ produto }) {
+export function BreadCumbs({ product }) {
 
-    let categories = produto.categorias;
+    let categories = product.categories;
 
     var CategoriesList = categories.map(function (category, index) {
         let sliced = categories.slice(0, index+1);

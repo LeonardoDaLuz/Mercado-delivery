@@ -116,3 +116,8 @@ export const DeleteImage = styled.button`
     }
 `;
 
+export const ImagePlaceholder = styled.div`
+    text-align: center;
+    vertical-align: middle;
+    line-height: 100px;
+`;

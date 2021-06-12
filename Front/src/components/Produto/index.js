@@ -19,15 +19,16 @@ function Produto({ carregaProduto, produto, loja, match }) {
     useEffect(() => {
         carregaProduto(match.params.id);
     }, []);
+    console.log(produto);
 
     //LogRender({ produto }, "Produto");
     return (
         <div className="container-lg px-2 produto-page">
-            <BreadCumbs produto={produto} />
+            <BreadCumbs product={produto} />
             <Row>
-                <PhotoFrame produto={produto} />
-                <BuyFrame produto={produto} />
-                <ProductDescription produto={produto} />
+                <PhotoFrame product={produto} />
+                <BuyFrame product={produto} />
+                <ProductDescription product={produto} />
             </Row>
         </div >
     );

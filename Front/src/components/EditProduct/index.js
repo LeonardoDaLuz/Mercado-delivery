@@ -20,11 +20,11 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const [draftProductState, setDraftProductState] = useState({
 
-        titulo: 'teste',
-        categorias: [],
-        descricao: '',
+        title: 'teste',
+        categories: [],
+        description: '',
         imgs: [],
-        preco: 0,
+        price: 0,
         stock: 1,
         offer: {
             time_range: {
@@ -83,26 +83,28 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftStatus('modified');
 
         setDraftProductState(produce(draftProductState, (draftState) => {
-            draftState.categorias[index] = newValue;
-            draftState.categorias.length = index + 1;
+            draftState.categories[index] = newValue;
+            draftState.categories.length = index + 1;
 
         }));
-        console.log(draftProductState.categorias);
+        console.log(draftProductState.categories);
     }
 
-    const pushImages = (images) => {
+    const pushImages = (e, images) => {
+        e.preventDefault();
         setDraftStatus('modified');
         setDraftProductState(produce(draftProductState, (draftState) => {
-            draftProductState.imgs.push(...images);
+            draftState.imgs.push(...images);
         }));
     }
 
-    const removeImage = (image) => {
+    const removeImage = (e, image) => {
+        e.preventDefault();
         setDraftStatus('modified');
         setDraftProductState(produce(draftProductState, (draftState) => {
-            let index = draftProductState.imgs.indexOf(image);
+            let index = draftState.imgs.indexOf(image);
             if (index !== -1) {
-                draftProductState.imgs.splice(index, 1);
+                draftState.imgs.splice(index, 1);
             }
         }));
     }

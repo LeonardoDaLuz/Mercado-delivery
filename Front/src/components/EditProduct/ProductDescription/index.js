@@ -36,12 +36,12 @@ export const ProductDescription = ({ product, handleChanges, changeDescription }
             <div><h3 >Descrição do produto</h3></div>
             <CKEditor
                 editor={Editor}
-                data={product.descricao}
+                data={product.description}
                 config={editorConfiguration}
                 onChange={(event, editor) => {
                     console.log('onChange');
                     if (initialized.current) {
-                        handleChanges({ target: { name: 'descricao', value: editor.getData() } });
+                        handleChanges({ target: { name: 'description', value: editor.getData() } });
                     } else {
                         initialized.current = true;
 

@@ -2,11 +2,10 @@ import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, UPDATE_PRODUCT_SUCCESS 
 
 const initialState = {
     _id: '',
-    titulo: '',
-    categorias: [],
-    descricao: '',
+    title: '',
+    categories: [],
+    description: '',
     imgs: [],
-    preco: 0,
     price: 0,
     stock: 1,
     offer: {
