@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import assets from '@assets';
 import { Link } from "react-router-dom";
+import { colorTheme } from '../../theme';
 
 export const Teste = styled.div`
 
@@ -93,6 +94,9 @@ export const SearchBar = styled.form`
         background-clip: padding-box;
         border: 1px solid #ced4da;
         border-radius: 0.25rem;
+   }
+   input:focus {
+        outline-color: ${colorTheme.primary()};
    }
 `;
 

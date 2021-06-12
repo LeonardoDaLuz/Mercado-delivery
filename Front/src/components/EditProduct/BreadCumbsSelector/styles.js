@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colorTheme } from '../../../theme';
 
 export const BreadcumbNav = styled.nav`
     
@@ -38,6 +39,25 @@ export const BreadcumbNav = styled.nav`
 `;
 
 export const SelectionCategory = styled.select`
+    border: 1.5px solid ${colorTheme.primary()};
+    color: ${colorTheme.primary(560)};
+    border-radius: 10px;
+    padding: 2px;
+    font-family: 'open sans';
+        font-weight: 600;
 
 
+    &:focus {
+        outline: none;
+
+    }
+
+    option {
+        background-color: ${colorTheme.primary};
+        color: ${colorTheme.primaryText};
+        padding: 10px;
+        font-family: 'open sans';
+        font-weight: 600;
+
+    }
 `;

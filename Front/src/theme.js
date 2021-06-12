@@ -5,7 +5,7 @@ let _colorTheme = {
     contentText: 'black',
     siteBackground: 'rgb(244, 244, 244)',
     primary: '#0dad0d',
-    primaryText:  '#0dad0d',
+    primaryText:  'white',
     secondary: '#2457D0',
     tertiary: '#41aea9',
     neutral: 'grey',

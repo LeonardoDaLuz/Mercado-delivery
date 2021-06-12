@@ -13,6 +13,7 @@ module.exports = {
       '@actions': path.resolve(__dirname, 'src/store/actions'),
       '@types': path.resolve(__dirname, 'src/store/types'),
       '@analyzers' :  path.resolve(__dirname, 'src/store/analyzers'),
+      '@colorTheme' :  path.resolve(__dirname, 'src/theme'),
     }
   },
 };
