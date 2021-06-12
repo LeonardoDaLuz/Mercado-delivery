@@ -10,38 +10,31 @@ import { Gallery } from './Gallery';
 import { DesktopView } from './style';
 import { MobileGallery } from './MobileGallery';
 
-export function PhotoFrame(props) {
+export function PhotoFrame({ produto, pushImages, removeImage }) {
 
     const [selectedImageId, setSelectedImageId] = useState(0);
     const [showLightbox, setShowLightBox] = useState(false);
 
+    const childProps = {
+        img: produto.img,
+        imgs: produto.imgs,
+        selectedImageId: selectedImageId,
+        showState: showLightbox,
+        setSelectedImageId: setSelectedImageId,
+        setShowLightboxState: setShowLightBox,
+        setStateShow: setShowLightBox,
+        pushImages,
+        removeImage
+    }
 
     return (
         <PhotoFrame_>
             <DesktopView>
-                <Gallery
-                    img={props.produto.img}
-                    imgs={props.produto.imgs}
-                    selectedImageId={selectedImageId}
-                    setSelectedImageId={setSelectedImageId}
-                    setShowLightboxState={setShowLightBox}
-                />
-                <SlickLightBox
-                    showState={showLightbox}
-                    imgs={props.produto.imgs}
-                    currentSelectedImage={selectedImageId}
-                    setCurrentSelectedImage={setSelectedImageId}
-                    setStateShow={setShowLightBox}
-                />
+                <Gallery {...childProps} />
+                <SlickLightBox {...childProps} />
             </DesktopView>
             <MobileView>
-                <MobileGallery
-                    img={props.produto.img}
-                    imgs={props.produto.imgs}
-                    currentSelectedImage={selectedImageId}
-                    setCurrentSelectedImage={setSelectedImageId}
-                    setStateShow={setShowLightBox}
-                />
+                <MobileGallery{...childProps} />
             </MobileView>
         </PhotoFrame_ >
     )

@@ -35,11 +35,14 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
 
 
     //computa o tempo e seus formatos
-    let _offerStarts = new Date(product.offer?.time_range.starts);
-    let _offerEnds = new Date(product.offer?.time_range.ends);
+    
+    let _offerStarts = new Date(product.offer.time_range.starts);
+    let _offerEnds = new Date(product.offer.time_range.ends);
 
     if (_offerEnds.getTime() < _offerStarts.getTime())
         _offerEnds = _offerStarts;
+
+        console.log(_offerStarts);
 
     let offerStartsString = convertDateToInputDateValue(_offerStarts);
     let offerEndsString = convertDateToInputDateValue(_offerEnds);
@@ -110,12 +113,12 @@ function BuyFrame({ product, handleChanges, draftStatus }) {
                 <ButtonFlat bgColor={colorTheme.warning()}>Descartar alterações</ButtonFlat>
                 <ButtonFlat disabled={draftStatus !== 'modified'} type='submit' >Salvar</ButtonFlat>
             </Row>
-            <GetSaveStatus draftStatus={draftStatus} />
+            <SaveStatus draftStatus={draftStatus} />
         </BuyFrameContainer >
     );
 }
 
-function GetSaveStatus({ draftStatus }) {
+function SaveStatus({ draftStatus }) {
     switch (draftStatus) {
         case 'Saved':
             return <DraftStatus style={{ color: 'lime' }}>Salvo!</DraftStatus>

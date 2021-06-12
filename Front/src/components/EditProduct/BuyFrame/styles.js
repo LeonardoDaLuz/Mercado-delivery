@@ -139,7 +139,5 @@ export const OfferBody = styled.div`
 
 export const DraftStatus = styled.div`
     text-align: center;
-    color: ${colorTheme.primary(400)};
     margin-top: 8px;
-
 `;

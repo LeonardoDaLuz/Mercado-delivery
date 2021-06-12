@@ -6,14 +6,14 @@ import Slider from 'react-slick';
 //import "slick-carousel/slick/slick.css";
 //import "slick-carousel/slick/slick-theme.css";
 
-export function MobileGallery({ imgs, currentSelectedImage, setCurrentSelectedImage, setStateShow }) {
+export function MobileGallery({ imgs, selectedImageId, setSelectedImageId, setStateShow }) {
 
     const slickSettings = {
         infinite: true,
         slidesToShow: 1,
         variableHeight: true,
-        initialSlide: currentSelectedImage,
-        afterChange: (currentSlide) => setCurrentSelectedImage(currentSlide),
+        initialSlide: selectedImageId,
+        afterChange: (currentSlide) => setSelectedImageId(currentSlide),
     }
 
     return (

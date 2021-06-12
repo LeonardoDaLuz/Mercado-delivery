@@ -3,8 +3,9 @@ import { AddImgButton, Flex, ImageSelector, ImageViewer, ImgButton } from './sty
 import Magnifier from "react-magnifier";
 
 import { DeleteImage } from './style';
+import { uploadImages } from '../../../../utils/uploadImagesToServer';
 
-export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setShowLightboxState }) {
+export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setShowLightboxState, pushImages, removeImage }) {
 
     let SelectedImageUrl = img; //como a versão do banco de dados anteriormente só continha 1 imagem por produto, isto se faz necessário para manter compatibilidade.
 
@@ -29,7 +30,7 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                             />
                         </ImgButton>
                     )}
-                    <AddImgButton>
+                    <AddImgButton onClick={() => { uploadImages().then(images => { pushImages(images) }) }}>
 
 
                     </AddImgButton>
@@ -37,7 +38,7 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
             }
 
             <ImageViewer >
-                <DeleteImage />
+                <DeleteImage onClick={() => { removeImage(SelectedImageUrl) }} />
                 {SelectedImageUrl !== undefined &&
                     <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={() => setShowLightboxState(true)} />
                 }

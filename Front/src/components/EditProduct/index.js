@@ -38,7 +38,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const [draftStatus, setDraftStatus] = useState('empty');
 
-    useEffect(() => {        
+    useEffect(() => {
         setDraftStatus('Loading...');
         carregaProduto(match.params.id);
     }, []);
@@ -67,11 +67,8 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const handleChanges = useCallback((e) => {
 
-
         setDraftStatus('modified');
-
         setDraftProductState(produce(draftProductState, (draftState) => {
-
             switch (e.target.type) {
                 case 'date':
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value + "T00:00:00.000Z");
@@ -79,9 +76,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
                 default:
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
             }
-
         }));
-
     });
 
     const changeBreadcumb = (index, newValue) => {
@@ -95,11 +90,27 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         console.log(draftProductState.categorias);
     }
 
-    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeBreadcumb } //produto está redundante apenas para manter compatibilidade por enquanto
+    const pushImages = (images) => {
+        setDraftStatus('modified');
+        setDraftProductState(produce(draftProductState, (draftState) => {
+            draftProductState.imgs.push(...images);
+        }));
+    }
+
+    const removeImage = (image) => {
+        setDraftStatus('modified');
+        setDraftProductState(produce(draftProductState, (draftState) => {
+            let index = draftProductState.imgs.indexOf(image);
+            if (index !== -1) {
+                draftProductState.imgs.splice(index, 1);
+            }
+        }));
+    }
+
+    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage } //produto está redundante apenas para manter compatibilidade por enquanto 
 
     return (
         <div className="container-lg px-2 produto-page">
-            teste
             <BreadcumbsSelector {...childProps} />
             <form className='row ' onSubmit={submit}>
                 <PhotoFrame   {...childProps} />
