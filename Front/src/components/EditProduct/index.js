@@ -55,6 +55,8 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
         e.preventDefault();
 
+        console.log(draftProductState);
+
         setDraftStatus('Saving...')
 
         updateProduct(
@@ -71,12 +73,14 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftProductState(produce(draftProductState, (draftState) => {
             switch (e.target.type) {
                 case 'date':
-                    nestedPropertySeletor(draftState, e.target.name).set(e.target.value + "T00:00:00.000Z");
+                    nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
                     break;
                 default:
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
             }
+
         }));
+   
     });
 
     const changeBreadcumb = (index, newValue) => {

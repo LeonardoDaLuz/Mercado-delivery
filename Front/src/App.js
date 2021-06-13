@@ -25,6 +25,7 @@ import EditProduct from './components/EditProduct';
 import "../node_modules/bootstrap/scss/bootstrap.scss";
 import { GlobalStyle } from "./globalStyleds";
 
+import "./utils/fetchDelay";
 
 export default withRouter(class App extends Component {
 
@@ -50,7 +51,7 @@ export default withRouter(class App extends Component {
               <Produto loja={this.loja} />
             </Route>
             <Route exact path="/editProduct/:id" >
-              <EditProduct/>
+              <EditProduct />
             </Route>
             <Route exact path="/produtos/all" >
               <Produtos loja={this.loja} />

@@ -130,7 +130,11 @@ function SaveStatus({ draftStatus }) {
 }
 
 function convertDateToInputDateValue(date) {
-    var currentDate = date.toISOString().substring(0, 10);
+    if(isNaN(date.getTime())) {
+        return new Date().toISOString().substring(0, 10)
+    }
+
+    var currentDate = date.toISOString().substring(0, 10); //este substring é para deixar a string com o formato reconhecivel pelo input type=date
     return currentDate;
 }
 

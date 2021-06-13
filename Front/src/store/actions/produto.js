@@ -51,7 +51,7 @@ export const updateProduct = (editedProduct, callBackOnSuccess, callbackOnFail) 
 
         dispatch({ type: UPDATE_PRODUCT_START });
 
-        const url = 'http://localhost:3001/produto2/' + editedProduct._id+"?delay=2";
+        const url = 'http://localhost:3001/produto2/' + editedProduct._id;
 
         let response = await fetch(url, {
             method: 'POST',
