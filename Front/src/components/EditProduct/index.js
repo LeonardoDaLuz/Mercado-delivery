@@ -14,6 +14,7 @@ import produce from 'immer';
 import { useFormik } from 'formik';
 import { LogRender } from '@utils/logRender';
 import { nestedPropertySeletor } from '../../utils/nestedPropertySelector';
+import { Row } from '../../globalStyleds';
 //import './style.css';
 
 function EditProduct({ carregaProduto, updateProduct, produto, match }) {
@@ -73,14 +74,14 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftProductState(produce(draftProductState, (draftState) => {
             switch (e.target.type) {
                 case 'date':
-                    nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
+                    nestedPropertySeletor(draftState, e.target.name).set(e.target.value + "T00:00:00.000Z");
                     break;
                 default:
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value);
             }
 
         }));
-   
+
     });
 
     const changeBreadcumb = (index, newValue) => {
@@ -123,10 +124,12 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     return (
         <div className="container-lg px-2 produto-page">
             <BreadcumbsSelector {...childProps} />
-            <form className='row ' onSubmit={submit}>
-                <PhotoFrame   {...childProps} />
-                <BuyFrame   {...childProps} />
-                <ProductDescription  {...childProps} />
+            <form onSubmit={submit}>
+                <Row>
+                    <PhotoFrame   {...childProps} />
+                    <BuyFrame   {...childProps} />
+                    <ProductDescription  {...childProps} />
+                </Row>
             </form>
         </div >
     );

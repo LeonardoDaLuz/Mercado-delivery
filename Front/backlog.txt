@@ -1,0 +1,26 @@
+BUGS
+
+    Ckeditor não carrega quando a rota foi mudada
+    Desalinhamento na mudança entre a pagina de editar produto e a de ver produto
+    Layout da oferta na pagina de editar produto quebrou
+
+Roadmap
+
+    Quando salvar o produto deve ir pra pagina de ver produto
+    Deletar produto
+    Home
+        Ofertas do dia
+        Ofertas do mes
+        Ofertas da Semana
+        Mais vendidos
+        Categorias na Home
+    Pg Categorias Manager
+    Pg Carrinho
+    Pg Pedidos
+    Pg Minha conta
+    Pg Criar conta
+    Pg Login
+    Sair
+    Gerenciamento de permissões
+    Emailer
+    Proposeful delay

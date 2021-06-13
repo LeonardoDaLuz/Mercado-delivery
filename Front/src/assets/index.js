@@ -5,6 +5,8 @@ import logomonoWhite from './png/logomono-white.png';
 import LogoExtended48px from './png/LogoExtended48px.png'
 import sandwich_menu from './svg/sandwich_menu.svg'
 import imagePlaceholder from './png/placeholder-image.png'
+import edit from './svg/edit.svg';
+import delete_ from './svg/trash.svg';
 
 const assets = {
     heart,
@@ -13,7 +15,9 @@ const assets = {
     logomonoWhite,
     LogoExtended48px,
     sandwich_menu,
-    imagePlaceholder
+    imagePlaceholder,
+    edit,
+    delete_
 }
 
 export default assets;

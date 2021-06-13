@@ -1,8 +1,9 @@
 import styled from 'styled-components';
+import { colorTheme } from '../../../theme';
 
 export const BreadcumbNav = styled.nav`
     
-    display: inline-block;
+    flex: 1 1 1px;
     font-weight: 700;
     font-size: 14px;
 
@@ -33,6 +34,6 @@ export const BreadcumbNav = styled.nav`
         right: -5px;
         top: 1px;
         position: relative;
-        color: rgb(0, 0, 0);
+        color: ${colorTheme.neutral(600)};
     }
 `;

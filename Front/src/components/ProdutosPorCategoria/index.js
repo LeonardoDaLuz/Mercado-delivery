@@ -16,7 +16,7 @@ let loading = false;
 let path = "";
 let query = "";
 
-function ProdutosPorCategoria({ loja, produtos, carregaMaisProdutos, reiniciaListaDeProdutos, location, history }) {
+function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDeProdutos, location, history }) {
 
     query = location.search;
     path = location.pathname;

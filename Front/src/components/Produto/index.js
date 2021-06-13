@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 //Sub Components
 import { BreadCumbs } from './BreadCumbs';
+import { AdminOptions } from './AdminOptions';
 import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
@@ -24,7 +25,11 @@ function Produto({ carregaProduto, produto, loja, match }) {
     //LogRender({ produto }, "Produto");
     return (
         <div className="container-lg px-2 produto-page">
-            <BreadCumbs product={produto} />
+            <Row>
+                <BreadCumbs product={produto} />
+                <AdminOptions product={produto}/>
+            </Row>
+            <div style={{ clear: 'both' }} />
             <Row>
                 <PhotoFrame product={produto} />
                 <BuyFrame product={produto} />

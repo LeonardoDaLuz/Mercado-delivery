@@ -2,14 +2,14 @@ import { Component } from 'react';
 import { Link } from "react-router-dom";
 import configs from '@configs';
 import moveElementFromTo from '@utils/moveElementFromTo';
-import { AdicionarRemoverDoCarrinho, Preco, ProdutoCard_ } from './styles';
-import { Row } from '../../globalStyleds';
-import { adicionarProdutoAoCarrinho } from '../../store/actions/carrinho';
+import { ProductLink, AdicionarRemoverDoCarrinho, Price, OffPrice, ProdutoCard_ } from './styles';
+import { Row } from '@globalStyleds';
+import { adicionarProdutoAoCarrinho } from '../../../store/actions/carrinho';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { quantosDesseForamAdicionadosAoCarrinho } from '../../store/analyzers/carrinho';
+import { quantosDesseForamAdicionadosAoCarrinho } from '../../../store/analyzers/carrinho';
 
-function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
+function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
 
     let addedQuantity = quantosDesseForamAdicionadosAoCarrinho(produto._id);
 
@@ -17,16 +17,25 @@ function ProdutoCard( { produto, adicionarProdutoAoCarrinho, index } ) {
 
     function AdicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }
 
+    const offerEnabled = produto.offer.enabled;
+
     return (
         <ProdutoCard_ key={index}>
-            <Link to={'/produto2/' + produto._id}>
+            <ProductLink to={'/produto2/' + produto._id}>
                 <img src={configs.imgsPath + produto.imgs[0]} />
-            </Link>
+            </ProductLink>
             <h5>{produto.title}</h5>
-            <Preco>
-                <div>R$ {(produto.price * 1.1).toFixed(2)}</div>
-                <div>{produto.price.toFixed(2)}</div>
-            </Preco>
+            {offerEnabled &&
+                <OffPrice>
+                    <div>R$ {(produto.price * 1.1).toFixed(2).replace('.',',')}</div>
+                    <div>{produto.price.toFixed(2).replace('.',',')}</div>
+                </OffPrice>
+            }
+            {!offerEnabled &&
+                <Price>
+                    <div>{produto.price.toFixed(2).replace('.',',')}</div>
+                </Price>
+            }
             <AdicionarRemoverDoCarrinho>
                 <button disabled={addedQuantity < 1} onClick={RemoverDoCarrinho}
                 >-</button>
@@ -43,7 +52,7 @@ async function animarAdicao(e, dir = 1) {
     moveElementFromTo(img, img, carrinho, dir);
 }
 
-const mapStateToProps = store => ({  
+const mapStateToProps = store => ({
     carrinho: store.carrinho
 })
 
