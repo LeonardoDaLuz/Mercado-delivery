@@ -9,7 +9,19 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { editarQuantidadeDoProdutoAoCarrinho } from '../../../store/actions/carrinho';
 
-export const ProductDescription = ({ product, handleChanges, draftStatus, discardChanges }) => {
+export const ProductDescription = ({ product, draftProduct, handleChanges, draftStatus, discardChanges }) => {
+
+    useEffect(() => {
+        console.log('product Changed', product);
+        if(editorRef.current) {
+            console.log(`editorRef.current.setData(${product.description})`);
+            editorRef.current.setData(product.description);
+        }
+    }, [product]);
+
+    useEffect(() => {
+        console.log('draftProduct Changed', draftProduct);
+    }, [draftProduct]);
 
     const editorConfiguration = {
         toolbar: {
@@ -30,22 +42,31 @@ export const ProductDescription = ({ product, handleChanges, draftStatus, discar
     };
     //dd
     const initialized = useRef(false);
+    const editorRef = useRef(null);
+    window.cket = draftProduct;
 
     return (
         <DescricaoPgProduto>
             <div><h3 >Descrição do produto</h3></div>
             <CKEditor
                 editor={Editor}
-                data={product.description}
                 config={editorConfiguration}
+                onReady={editor => {
+                    editorRef.current = editor;
+                    window.editorRef = editor;
+                    // You can store the "editor" and use when it is needed.
+                    console.log('Editor is ready to use!', "+" + editor.getData());
+                }}
                 onChange={(event, editor) => {
-                    console.log('onChange');
-                    if (initialized.current) {
-                        handleChanges({ target: { name: 'description', value: editor.getData() } });
-                    } else {
-                        initialized.current = true;
+                    console.log('CKE onChange', product, draftProduct);
+                    handleChanges({ target: { name: 'description', value: editor.getData() } });
 
-                    }
+                    /* if (initialized.current) {
+                         handleChanges({ target: { name: 'description', value: editor.getData() } });
+                     } else {
+                         initialized.current = true;
+ 
+                     }*/
                 }}
             />
             <SaveOrDiscard>

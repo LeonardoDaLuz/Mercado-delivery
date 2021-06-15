@@ -5,13 +5,13 @@ import { bindActionCreators } from "redux";
 import { BreadcumbNav, SelectionCategory } from "./styles";
 import { carregaCategorias } from '@actions/categorias';
 
-function BreadCumbsSelector_({ product, carregaCategorias, categorias: categoriesOptionsHierarchy, changeBreadcumb }) {
+function BreadCumbsSelector_({ draftProduct, carregaCategorias, categorias: categoriesOptionsHierarchy, changeBreadcumb }) {
 
     useEffect(() => {
         carregaCategorias();
     }, [])
 
-    let categoriesOfThisProduct = product.categories;
+    let categoriesOfThisProduct = draftProduct.categories;
 
 
 

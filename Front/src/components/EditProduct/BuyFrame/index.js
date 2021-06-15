@@ -13,7 +13,7 @@ import { ButtonFlat } from '../../../globalStyleds';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { LogRender } from '../../../utils/logRender';
 
-function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
+function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) {
 
     function filterAndChangePrice(e) {
         let { name, value } = e.target;
@@ -36,13 +36,13 @@ function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
 
     //computa o tempo e seus formatos
 
-    let _offerStarts = new Date(product.offer.time_range.starts);
-    let _offerEnds = new Date(product.offer.time_range.ends);
+    let _offerStarts = new Date(draftProduct.offer.time_range.starts);
+    let _offerEnds = new Date(draftProduct.offer.time_range.ends);
 
     if (_offerEnds.getTime() < _offerStarts.getTime())
         _offerEnds = _offerStarts;
 
-    console.log(_offerStarts);
+   
 
     let offerStartsString = convertDateToInputDateValue(_offerStarts);
     let offerEndsString = convertDateToInputDateValue(_offerEnds);
@@ -51,19 +51,19 @@ function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
 
     return (
         <BuyFrameContainer>
-            <textarea type='text' name='title' value={product.title} onChange={handleChanges} >Titulo...</textarea>
+            <textarea type='text' name='title' value={draftProduct.title} onChange={handleChanges} >Titulo...</textarea>
             <Row>
                 <QuantityBlock>
                     <label>Estoque:</label>
                     <Row>
                         <ButtonIncreaseDecrease>-</ButtonIncreaseDecrease>
-                        <input className="form-control text-center" name="stock" value={product.stock} onChange={handleChanges} />
+                        <input className="form-control text-center" name="stock" value={draftProduct.stock} onChange={handleChanges} />
                         <ButtonIncreaseDecrease>+</ButtonIncreaseDecrease>
                     </Row>
                 </QuantityBlock>
                 <PriceBlock>
                     <label>Preço:</label>
-                    <input type='text' name="price" value={product.price} onChange={filterAndChangePrice} />
+                    <input type='text' name="price" value={draftProduct.price} onChange={filterAndChangePrice} />
                 </PriceBlock>
             </Row>
             <Offer>
@@ -79,11 +79,11 @@ function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
                     </div>
                     <div>
                         <label htmlFor="novoValor">Valor na oferta</label>
-                        <input type="text" name='offer.off_price' value={product.offer.off_price} onChange={filterAndChangePrice} />
+                        <input type="text" name='offer.off_price' value={draftProduct.offer.off_price} onChange={filterAndChangePrice} />
                     </div>
                     <div>
                         <label htmlFor="offerType">Tipo</label>
-                        <select name='offer.type' value={product.offer.type} onChange={handleChanges} >
+                        <select name='offer.type' value={draftProduct.offer.type} onChange={handleChanges} >
                             <option value='day'>Dia</option>
                             <option value='week'>Semana</option>
                             <option value='month'>Mês</option>
@@ -95,7 +95,7 @@ function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
                             name='offer.enabled'
                             value={true}
                             onClick={handleChanges}
-                            disabled={product.offer.enabled == 'true'}>
+                            disabled={draftProduct.offer.enabled == 'true'}>
                             Ativar oferta
                         </ButtonFlat>
                         <ButtonFlat
@@ -103,7 +103,7 @@ function BuyFrame({ product, handleChanges, draftStatus, discardChanges }) {
                             name='offer.enabled'
                             value={false}
                             onClick={handleChanges}
-                            disabled={product.offer.enabled == 'false'}>
+                            disabled={draftProduct.offer.enabled == 'false'}>
                             Desativar oferta</ButtonFlat>
                     </Row>
 

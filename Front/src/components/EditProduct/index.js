@@ -19,7 +19,7 @@ import { Row } from '../../globalStyleds';
 
 function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
-    const [draftProductState, setDraftProductState] = useState({
+    const [draftProduct, setDraftProductState] = useState({
 
         title: 'teste',
         categories: [],
@@ -56,12 +56,12 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
         e.preventDefault();
 
-        console.log(draftProductState);
+        console.log(draftProduct);
 
         setDraftStatus('Saving...')
 
         updateProduct(
-            draftProductState,
+            draftProduct,
             () => { setDraftStatus('Saved') },
             () => { setDraftStatus('Save failure'); }
         );
@@ -71,7 +71,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     const handleChanges = useCallback((e) => {
 
         setDraftStatus('modified');
-        setDraftProductState(produce(draftProductState, (draftState) => {
+        setDraftProductState(produce(draftProduct, (draftState) => {
             switch (e.target.type) {
                 case 'date':
                     nestedPropertySeletor(draftState, e.target.name).set(e.target.value + "T00:00:00.000Z");
@@ -87,18 +87,18 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     const changeBreadcumb = (index, newValue) => {
         setDraftStatus('modified');
 
-        setDraftProductState(produce(draftProductState, (draftState) => {
+        setDraftProductState(produce(draftProduct, (draftState) => {
             draftState.categories[index] = newValue;
             draftState.categories.length = index + 1;
 
         }));
-        console.log(draftProductState.categories);
+        console.log(draftProduct.categories);
     }
 
     const pushImages = (e, images) => {
         e.preventDefault();
         setDraftStatus('modified');
-        setDraftProductState(produce(draftProductState, (draftState) => {
+        setDraftProductState(produce(draftProduct, (draftState) => {
             draftState.imgs.push(...images);
         }));
     }
@@ -106,7 +106,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     const removeImage = (e, image) => {
         e.preventDefault();
         setDraftStatus('modified');
-        setDraftProductState(produce(draftProductState, (draftState) => {
+        setDraftProductState(produce(draftProduct, (draftState) => {
             let index = draftState.imgs.indexOf(image);
             if (index !== -1) {
                 draftState.imgs.splice(index, 1);
@@ -119,14 +119,14 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftProductState({ ...produto });
     }
 
-    let childProps = { product: draftProductState, produto: draftProductState, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage, discardChanges } //produto está redundante apenas para manter compatibilidade por enquanto 
+    let childProps = { draftProduct, product: produto, produto: draftProduct, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage, discardChanges } //produto está redundante apenas para manter compatibilidade por enquanto 
 
     return (
         <div className="container-lg px-2 produto-page">
             <BreadcumbsSelector {...childProps} />
             <form onSubmit={submit}>
                 <Row>
-                    <PhotoFrame   {...childProps} />
+                    <PhotoFrame   {...childProps} product={draftProduct} />
                     <BuyFrame   {...childProps} />
                     <ProductDescription  {...childProps} />
                 </Row>

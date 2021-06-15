@@ -1,4 +1,4 @@
-let delay = 0;
+let delay = 0.2;
 
 const originalFetch = fetch;
 
@@ -14,7 +14,7 @@ window.fetch = (url, config) => { //intercepta o fetch para criar um delay fake
             url += '?delay=' + delay;
         }
 
-        console.log(url);
+        //console.log(url);
         originalFetch(url, config).then((data) => resolve(data)).catch(err => reject(err));
     })
 }

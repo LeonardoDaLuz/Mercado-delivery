@@ -20,7 +20,6 @@ function Produto({ carregaProduto, produto, loja, match }) {
     useEffect(() => {
         carregaProduto(match.params.id);
     }, []);
-    console.log(produto);
 
     //LogRender({ produto }, "Produto");
     return (
