@@ -4,7 +4,7 @@ import { ButtonOutline, ButtonFlat, Col } from '@globalStyleds';
 
 export const BuyFrameContainer = styled.div`
 
-    flex-basis: 426px;
+flex-basis: 356px; 
     flex-grow: 1;
     background-color: ${colorTheme.contentBackground};
     border: 1px solid ${colorTheme.contentBackground(600)};

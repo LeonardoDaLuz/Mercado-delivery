@@ -43,7 +43,8 @@ export const ProdutoCard_ = styled.li`
 
     h5 {
         font-size: 14px;
-        margin-bottom: 5px;
+        margin: 5px 5px 5px 5px;
+
     }
 
 

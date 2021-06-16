@@ -26,14 +26,16 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
             </ProductLink>
             <h5>{produto.title}</h5>
             {offerEnabled &&
-                <OffPrice>
-                    <div>R$ {(produto.price * 1.1).toFixed(2).replace('.',',')}</div>
-                    <div>{produto.price.toFixed(2).replace('.',',')}</div>
-                </OffPrice>
+                <>
+                    <OffPrice>
+                        <div>R$ {(produto.price).toFixed(2).replace('.', ',')}</div>
+                        <div>{produto.offer.off_price.toFixed(2).replace('.', ',')}</div>
+                    </OffPrice>
+                </>
             }
             {!offerEnabled &&
                 <Price>
-                    <div>{produto.price.toFixed(2).replace('.',',')}</div>
+                    <div>{produto.price.toFixed(2).replace('.', ',')}</div>
                 </Price>
             }
             <AdicionarRemoverDoCarrinho>

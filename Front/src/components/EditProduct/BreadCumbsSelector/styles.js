@@ -44,8 +44,8 @@ export const SelectionCategory = styled.select`
     border-radius: 10px;
     padding: 2px;
     font-family: 'open sans';
-        font-weight: 600;
-
+    font-weight: 600;
+    max-width: 150px;
 
     &:focus {
         outline: none;
@@ -55,7 +55,7 @@ export const SelectionCategory = styled.select`
     option {
         background-color: ${colorTheme.primary};
         color: ${colorTheme.primaryText};
-        padding: 10px;
+        padding: 50px;
         font-family: 'open sans';
         font-weight: 600;
 

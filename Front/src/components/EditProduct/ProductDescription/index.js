@@ -40,10 +40,7 @@ export const ProductDescription = ({ product, draftProduct, handleChanges, draft
         },
         licenseKey: '',
     };
-    //dd
-    const initialized = useRef(false);
     const editorRef = useRef(null);
-    window.cket = draftProduct;
 
     return (
         <DescricaoPgProduto>
@@ -53,20 +50,9 @@ export const ProductDescription = ({ product, draftProduct, handleChanges, draft
                 config={editorConfiguration}
                 onReady={editor => {
                     editorRef.current = editor;
-                    window.editorRef = editor;
-                    // You can store the "editor" and use when it is needed.
-                    console.log('Editor is ready to use!', "+" + editor.getData());
                 }}
                 onChange={(event, editor) => {
-                    console.log('CKE onChange', product, draftProduct);
                     handleChanges({ target: { name: 'description', value: editor.getData() } });
-
-                    /* if (initialized.current) {
-                         handleChanges({ target: { name: 'description', value: editor.getData() } });
-                     } else {
-                         initialized.current = true;
- 
-                     }*/
                 }}
             />
             <SaveOrDiscard>

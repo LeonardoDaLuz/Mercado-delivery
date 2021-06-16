@@ -44,11 +44,11 @@ export default withRouter(class App extends Component {
             <Route path="/CarouselManager" >
               <CarouselManager />
             </Route>
-            <Route exact path="/produto/:id" >
-              <Produto loja={this.loja} />
-            </Route>
             <Route exact path="/produto2/:id" >
               <Produto loja={this.loja} />
+            </Route>
+            <Route exact path="/product/:id" >
+              <Produto/>
             </Route>
             <Route exact path="/editProduct/:id" >
               <EditProduct />

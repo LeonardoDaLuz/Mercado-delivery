@@ -20,7 +20,9 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                         className={index == selectedImageId ? 'selected' : ''}
                         key={index}
                     >
-                        <DeleteImage onClick={(e) => { removeImage(e, img) }}/>
+                        {removeImage &&
+                            <DeleteImage onClick={(e) => { removeImage(e, img) }} />
+                        }
                         <img
 
                             src={configs.imgsPath + img}
@@ -28,13 +30,17 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                         />
                     </ImgButton>
                 )}
-                <AddImgButton onClick={(e) => { uploadImages().then(images => { pushImages(e, images) }) }}>
 
+                {pushImages &&
+                    <AddImgButton onClick={(e) => { uploadImages().then(images => { pushImages(e, images) }) }} />
 
-                </AddImgButton>
+                }
+
             </ImageSelector>
             <ImageViewer >
-                <DeleteImage onClick={(e) => { removeImage(e, SelectedImageUrl) }} />
+                {removeImage &&
+                    <DeleteImage onClick={(e) => { removeImage(e, SelectedImageUrl) }} />
+                }
                 {SelectedImageUrl !== undefined &&
                     <Magnifier className='productImg' src={configs.imgsPath + SelectedImageUrl} mgWidth={200} mgHeight={200} onClick={() => setShowLightboxState(true)} />
                 }

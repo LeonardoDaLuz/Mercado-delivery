@@ -1,5 +1,5 @@
 import { Component, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { withRouter } from "react-router-dom";
+import { Redirect, useHistory, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
@@ -39,6 +39,8 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const [draftStatus, setDraftStatus] = useState('empty');
 
+    const history = useHistory();
+
     useEffect(() => {
         setDraftStatus('Loading...');
         carregaProduto(match.params.id);
@@ -51,21 +53,6 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
         setDraftProductState({ ...produto });
     }, [produto]); //Quando o produto é carregado a partir do servidor, isto é copiado para um rascunho do produto, que é onde os dados serão alterados.
-
-    const submit = (e) => {
-
-        e.preventDefault();
-
-        console.log(draftProduct);
-
-        setDraftStatus('Saving...')
-
-        updateProduct(
-            draftProduct,
-            () => { setDraftStatus('Saved') },
-            () => { setDraftStatus('Save failure'); }
-        );
-    }
 
 
     const handleChanges = useCallback((e) => {
@@ -108,8 +95,8 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftStatus('modified');
         setDraftProductState(produce(draftProduct, (draftState) => {
             let index = draftState.imgs.indexOf(image);
-            if (index !== -1) {
-                draftState.imgs.splice(index, 1);
+            if (index !== -1) { 
+                draftState.imgs.splice(index, 1); 
             }
         }));
     }
@@ -119,12 +106,27 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftProductState({ ...produto });
     }
 
+    const saveChanges = (e) => {
+        e.preventDefault();
+
+        console.log(draftProduct);
+
+        setDraftStatus('Saving...')
+
+        updateProduct(
+            draftProduct,
+            () => { setDraftStatus('Saved'); history.push('/product/'+produto._id) },
+            () => { setDraftStatus('Save failure'); }
+        );
+    }
+
+
     let childProps = { draftProduct, product: produto, produto: draftProduct, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage, discardChanges } //produto está redundante apenas para manter compatibilidade por enquanto 
 
     return (
         <div className="container-lg px-2 produto-page">
             <BreadcumbsSelector {...childProps} />
-            <form onSubmit={submit}>
+            <form onSubmit={saveChanges}>
                 <Row>
                     <PhotoFrame   {...childProps} product={draftProduct} />
                     <BuyFrame   {...childProps} />
