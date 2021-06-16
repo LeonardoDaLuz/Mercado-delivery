@@ -73,6 +73,7 @@ export const Price = styled.div`
 export const OffPrice = styled.div`
     text-align: right;
     margin: -0px 15px 15px 0pc;
+    flex: 1 1 100px;
 
     &>div:first-child {
         color: grey;
@@ -92,9 +93,9 @@ export const OffPrice = styled.div`
         content: "R$";
         font-size: 14px;
         color: ${colorTheme.neutral};
-        font-weight: 700;
-        display: inline-block;
-        transform: translate(-2px,-7px);
+        position: absolute;
+
+        transform: translate(-17px,4px);
     }
 `;
 
@@ -130,3 +131,22 @@ export const AdicionarRemoverDoCarrinho = styled.div`
     }
 `;
 
+export const OfferTag = styled.div`
+    background: transparent url(${assets.offerTag2}) no-repeat center left;
+    background-size: contain;
+    width: 55px;
+    height: 80px;
+    position: absolute;
+   left: -18px;
+   top: -14px;
+   padding: 10px 10px 10px 10px;
+   color: white;
+    font-family: Arial, Helvetica, sans-serif;
+   font-weight: 800;
+   -webkit-text-stroke:1.5px black;
+  -webkit-text-fill-color:white;
+
+
+
+
+`;

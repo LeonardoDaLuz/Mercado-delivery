@@ -2,12 +2,14 @@ import { Component } from 'react';
 import { Link } from "react-router-dom";
 import configs from '@configs';
 import moveElementFromTo from '@utils/moveElementFromTo';
-import { ProductLink, AdicionarRemoverDoCarrinho, Price, OffPrice, ProdutoCard_ } from './styles';
+import { ProductLink, AdicionarRemoverDoCarrinho, Price, OffPrice, ProdutoCard_, OfferTag } from './styles';
 import { Row } from '@globalStyleds';
 import { adicionarProdutoAoCarrinho } from '../../../store/actions/carrinho';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { quantosDesseForamAdicionadosAoCarrinho } from '../../../store/analyzers/carrinho';
+import assets from '../../../assets';
+import { OfferTagSVG } from './OfferTagSvg';
 
 function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
 
@@ -19,19 +21,25 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
 
     const offerEnabled = produto.offer.enabled;
 
+
     return (
         <ProdutoCard_ key={index}>
+
+            {produto.offer.enabled &&
+                <OfferTagSVG product={produto} />
+            }
             <ProductLink to={'/produto2/' + produto._id}>
                 <img src={configs.imgsPath + produto.imgs[0]} />
             </ProductLink>
             <h5>{produto.title}</h5>
             {offerEnabled &&
-                <>
+                <Row>
+
                     <OffPrice>
                         <div>R$ {(produto.price).toFixed(2).replace('.', ',')}</div>
                         <div>{produto.offer.off_price.toFixed(2).replace('.', ',')}</div>
                     </OffPrice>
-                </>
+                </Row>
             }
             {!offerEnabled &&
                 <Price>

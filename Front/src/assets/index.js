@@ -7,6 +7,8 @@ import sandwich_menu from './svg/sandwich_menu.svg'
 import imagePlaceholder from './png/placeholder-image.png'
 import edit from './svg/edit.svg';
 import delete_ from './svg/trash.svg';
+import offerTag from './svg/offerTag.svg';
+import offerTag2 from './svg/offerTag2.svg';
 
 const assets = {
     heart,
@@ -17,7 +19,9 @@ const assets = {
     sandwich_menu,
     imagePlaceholder,
     edit,
-    delete_
+    delete_,
+    offerTag,
+    offerTag2
 }
 
 export default assets;

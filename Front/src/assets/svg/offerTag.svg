@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="84"
+   height="45"
+   viewBox="0 0 22.225 11.90625"
+   version="1.1"
+   id="svg12"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   sodipodi:docname="offerTag.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview14"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="px"
+     showgrid="false"
+     inkscape:zoom="8.3049731"
+     inkscape:cx="45.575102"
+     inkscape:cy="36.06273"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="1791"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1"
+     units="px"
+     showborder="true" />
+  <defs
+     id="defs9" />
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#d40000;stroke:none;stroke-width:0.0594275px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+       d="M 0.3884862,2.859472 2.6289969,0.2160102 2.5971384,2.989527 Z"
+       id="path552"
+       sodipodi:nodetypes="cccc" />
+    <rect
+       style="fill:#ff2824;fill-opacity:1;stroke:none;stroke-width:0.0594275"
+       id="rect517"
+       width="21.696497"
+       height="8.6624069"
+       x="0.38848734"
+       y="2.8594723" />
+  </g>
+</svg>
