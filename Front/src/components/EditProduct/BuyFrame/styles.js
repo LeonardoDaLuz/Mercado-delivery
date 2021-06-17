@@ -14,7 +14,7 @@ flex-basis: 356px;
     margin-bottom: auto;    
 
     textarea {
-        font-size: 20px;
+        font-size: 28px;
         width: 100%;
         border: none;
     }
@@ -42,7 +42,7 @@ export const ButtonIncreaseDecrease = styled(ButtonOutline)`
 `;
 
 export const QuantityBlock = styled.div`
-    flex: 1 1 20px;
+    flex: 1 1 140px;
 
     button {
         flex: 0 1 1px;
@@ -67,14 +67,14 @@ export const ButtonOutline_ = styled(ButtonOutline)`
 `;
 
 export const PriceBlock = styled.div`
-    flex: 1;
+    flex: 1 1 230px;
     padding: 0 15px 0 15px;
     position: relative;
 
     &>input {
         width: 100%;
-        color: ${colorTheme.primaryText};
-        font-size: 45px;
+        color: ${colorTheme.primary};
+        font-size: 40px;
         font-weight: 700;
         line-height: 20px;
         padding-left: 40px;

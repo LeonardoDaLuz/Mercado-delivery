@@ -63,7 +63,7 @@ function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) 
                 </QuantityBlock>
                 <PriceBlock>
                     <label>Preço:</label>
-                    <input type='text' name="price" value={draftProduct.price} onChange={filterAndChangePrice} />
+                    <input type='number' name="price" value={draftProduct.price} onChange={handleChanges} />
                 </PriceBlock>
             </Row>
             <Offer>

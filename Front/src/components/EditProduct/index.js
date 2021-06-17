@@ -95,8 +95,8 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
         setDraftStatus('modified');
         setDraftProductState(produce(draftProduct, (draftState) => {
             let index = draftState.imgs.indexOf(image);
-            if (index !== -1) { 
-                draftState.imgs.splice(index, 1); 
+            if (index !== -1) {
+                draftState.imgs.splice(index, 1);
             }
         }));
     }
@@ -115,7 +115,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
         updateProduct(
             draftProduct,
-            () => { setDraftStatus('Saved'); history.push('/product/'+produto._id) },
+            () => { setDraftStatus('Saved'); history.push('/product/' + produto._id) },
             () => { setDraftStatus('Save failure'); }
         );
     }
