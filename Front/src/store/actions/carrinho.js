@@ -25,7 +25,7 @@ export const carregarCarrinho = (id, quantidade) => {
         else {
             let data = await response.text();
             dispatch({ type: CARREGAR_CARRINHO_FAILURE, payload: data });
-            console.error('erro', data);
+            alert(data);
         }
     }
 }
