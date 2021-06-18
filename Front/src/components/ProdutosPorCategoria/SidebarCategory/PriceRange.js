@@ -1,12 +1,12 @@
 import { useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
-import { Input } from '../../globalStyleds';
+import { Input } from '@globalStyleds';
 import { FaixaDePrecoForm } from './styles';
-import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
+import { reiniciaListaDeProdutos } from '@actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function FaixaDePreco_({ location, reiniciaListaDeProdutos }) {
+function PriceRange_({ location, reiniciaListaDeProdutos }) {
 
     let query = new URLSearchParams(location.search);
 
@@ -50,7 +50,7 @@ function FaixaDePreco_({ location, reiniciaListaDeProdutos }) {
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ reiniciaListaDeProdutos }, dispatch)
 
-export const FaixaDePreco = connect(null, mapDispatchToProps)(withRouter(FaixaDePreco_));
+export const PriceRange = connect(null, mapDispatchToProps)(withRouter(PriceRange_));
 
 function filtraFloat(number) {
     let _number = parseFloat(number);

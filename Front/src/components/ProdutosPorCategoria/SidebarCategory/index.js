@@ -5,18 +5,18 @@ import {
     withRouter,
     useHistory
 } from "react-router-dom";
-import { Input } from '../../globalStyleds';
-import { carregaCategorias } from '../../store/actions/categorias';
-import Breadcumb from "./Breadcumb";
-import { CategoriasAside, FaixaDePrecoForm } from './styles';
+import { Input } from '../../../globalStyleds';
+import { carregaCategorias } from '../../../store/actions/categorias';
+import Breadcumbs from "./Breadcumb";
+import { CategoriasAside, FaixaDePrecoForm } from '../styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
-import { filtraFloat } from '../../utils/InputFilters';
-import { FaixaDePreco } from './FaixaDePreco';
-import { Ordem } from './Ordem';
+import { reiniciaListaDeProdutos } from '../../../store/actions/produtos';
+import { filtraFloat } from '../../../utils/InputFilters';
+import { PriceRange } from './PriceRange';
+import { Order } from './Order';
 
-function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categorias, loja, location, match, }) {
+function SidebarCategory({ carregaCategorias, reiniciaListaDeProdutos, categorias, loja, location, match, }) {
 
     useEffect(() => {
         carregaCategorias();
@@ -75,12 +75,12 @@ function SidebarCategorias({ carregaCategorias, reiniciaListaDeProdutos, categor
     return (
         <CategoriasAside>
             {!isRoot &&
-                <Breadcumb path={caminho().caminhoAcima} loja={loja} />
+                <Breadcumbs path={caminho().caminhoAcima} loja={loja} />
             }
             <h3>{caminho().ultimaCategoria}</h3>
             {DrawListaAPartirDaCategoria(categoriaSelecionada)}
-            <FaixaDePreco loja={loja} />
-            <Ordem/>
+            <PriceRange loja={loja} />
+            <Order/>
         </CategoriasAside>
     )
 
@@ -97,5 +97,5 @@ const mapDispatchToProps = dispatch =>
     bindActionCreators({ carregaCategorias, reiniciaListaDeProdutos }, dispatch);
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SidebarCategorias));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SidebarCategory));
 

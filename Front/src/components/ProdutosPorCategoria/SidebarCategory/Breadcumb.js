@@ -3,7 +3,7 @@ import react, { Component } from 'react';
 import { Link, withRouter } from "react-router-dom";
 import './Breadcumb.css';
 import { BreadcumbList } from './styles';
-import { reiniciaListaDeProdutos } from '../../store/actions/produtos';
+import { reiniciaListaDeProdutos } from '@actions/produtos';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 

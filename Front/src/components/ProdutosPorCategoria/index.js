@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useHistory, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import SidebarCategorias from './SidebarCategorias';
+import SidebarCategory from './SidebarCategory';
 import ProdutoCard from './ProdutoCard';
 import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
 
@@ -60,7 +60,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
 
     return (
         <Container>
-            <SidebarCategorias />
+            <SidebarCategory />
             <ListaDeProdutos>
 
                 {produtoCards}

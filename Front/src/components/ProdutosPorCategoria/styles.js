@@ -49,33 +49,6 @@ export const CategoriasAside = styled.aside`
     }
 `;
 
-export const BreadcumbList = styled.nav`
-
-    display: inline-block;
-    font-weight: 700;
-    font-size: 14px;
-
-    ul {
-    margin-bottom: 5px;
-    }
-
-    li {
-        display: inline;
-        margin: 0 5px 0 5px;
-    }
-
-    li a {
-        color: rgb(1, 155, 1);
-    }
-
-    li:not(:first-child)::before {
-        content: ">";
-        font-weight: 1000;
-        left: -5px;
-        position: relative;
-        color: rgb(0, 0, 0);
-    }
-`;
 
 export const FaixaDePrecoForm = styled.form`
  
