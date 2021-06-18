@@ -1,10 +1,9 @@
 var env = process.argv[2] || 'dev';
 require('express-async-errors');
 var express = require('express');
-var bodyParser = require('body-parser');
-var produtosColecao = null //require('./produtos.json');
+//var bodyParser = require('body-parser');
 const { NetworkAuthenticationRequire } = require('http-errors');
-const cors = require('cors');
+//const cors = require('cors');
 var consign = require('consign');
 
 
@@ -13,7 +12,7 @@ main();
 async function main() {
 
     global.db = await require('./db')();
-    
+
     var app = express();
 
     app.use(express.static('public'));

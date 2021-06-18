@@ -4,6 +4,8 @@ const originalFetch = fetch;
 
 window.fetch = (url, config) => { //intercepta o fetch para criar um delay fake
     return new Promise((resolve, reject) => {
+
+        //prepara o que foi colocado nas querys da url
         if (url.includes('?')) {
             if (url.charAt(url.length - 1) == '?')
                 url += 'delay=' + delay;
@@ -14,14 +16,33 @@ window.fetch = (url, config) => { //intercepta o fetch para criar um delay fake
             url += '?delay=' + delay;
         }
 
-        //console.log(url);
-        originalFetch(url, config).then((data) => resolve(data)).catch(err => reject(err));
+        originalFetch(url, config).then(async response => {
+            if (response.ok) {
+                resolve(response);
+            }
+            else {
+                console.error('Error: ' + response.status);
+                let text = await response.text();
+                let responseClone = {
+                    ok: response.ok,
+                    status: response.status,
+                    text: () => text,
+                    json: () => JSON.stringify(text)
+                }
+                resolve(responseClone);
+                setTimeout(() => alert('URL: '+url+'\n\n'+text), 1000);
+            }
+        }
+        ).catch(err => {
+            console.error('Server not responding...');
+            reject(err)
+        });
     })
 }
 
 const urlSearchParams = new URLSearchParams(window.location.search);
 const _delay = urlSearchParams.get('delay');
-if(_delay)
+if (_delay)
     delay = _delay;
 
 export const purposefulDelay = {
