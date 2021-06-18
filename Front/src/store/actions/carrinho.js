@@ -13,7 +13,7 @@ import {
 
 export const carregarCarrinho = (id, quantidade) => {
 
-    
+
     return async dispatch => {
         dispatch({ type: CARREGAR_CARRINHO_START });
 
@@ -23,7 +23,9 @@ export const carregarCarrinho = (id, quantidade) => {
             dispatch({ type: CARREGAR_CARRINHO_SUCCESS, payload: data });
         }
         else {
-            console.error(response.status);
+            let data = await response.text();
+            dispatch({ type: CARREGAR_CARRINHO_FAILURE, payload: data });
+            console.error('erro', data);
         }
     }
 }
@@ -48,7 +50,7 @@ export const adicionarProdutoAoCarrinho = (id, quantidade) => {
 export const editarQuantidadeDoProdutoAoCarrinho = (id, quantidade) => {
 
     return async (dispatch, getState) => {
-   
+
         quantidade = parseInt(quantidade);
         if (isNaN(quantidade))
             quantidade = 0;

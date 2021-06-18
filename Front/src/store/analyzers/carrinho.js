@@ -10,6 +10,11 @@ export function getState() {
 
 export function quantosDesseForamAdicionadosAoCarrinho(id) {
 
+    let { carrinho } = store.getState();
+
+    if(carrinho===undefined)
+        return 0;
+
     let registroProduto = store.getState().carrinho.produtos[id];
 
     if (registroProduto == undefined)
@@ -23,7 +28,7 @@ export function custoTotalNoCarrinho() {
     let {carrinho} = store.getState(); 
     for (var key in carrinho.produtos) {
         let prod = carrinho.produtos[key];
-        custo += (prod.data.preco * prod.quantidade);
+        custo += (parseFloat(prod.data.price) * parseInt(prod.quantidade));
     }
     return custo.toFixed(2);
 }

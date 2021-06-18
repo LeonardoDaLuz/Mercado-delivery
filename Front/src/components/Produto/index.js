@@ -10,7 +10,7 @@ import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
 //Others
-import { carregaProduto } from '@actions/produto'
+import { carregaProduto, deleteProduct } from '@actions/produto'
 //import './style.css';
 import { Row } from '../../globalStyleds';
 import { LogRender } from '../../utils/logRender';
@@ -44,7 +44,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaProduto }, dispatch);
+    bindActionCreators({ carregaProduto, deleteProduct }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Produto));

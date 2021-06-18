@@ -12,6 +12,7 @@ main();
 async function main() {
 
     global.db = await require('./db')();
+    global.logErrorToFront = await require('./utilities/logErrorToFront');
     var app = express();
 
     app.use(express.static('public'));
@@ -32,6 +33,7 @@ async function main() {
         .include('routes') //incorpora todo codigo dentro dessa pasta, para dentro do app.
         .into(app);
 
+        /*
     app.get('/importaprodutosjson', (req, resp) => {
         (async () => {
 
@@ -49,86 +51,8 @@ async function main() {
             resp.json(result);
         }
         )();
-    })
-
-    app.get("/carrinho", async function (req, resp) {
-        try {
-            let carrinho = await global.db.getCarrinho(0);
-            await loadCarrinhoProductDatas(carrinho);
-            resp.json(carrinho);
-        } catch (e) {
-            resp.stats(400).send(e);
-        }
-    });
-
-    async function loadCarrinhoProductDatas(carrinho) {
-
-        for (var key in carrinho.produtos) {
-            let prod = carrinho.produtos[key];
-            prod.data = await global.db.getProdutoPorObjId(key);
-        }
-
-        return carrinho;
-    }
-
-    app.post("/carrinho/addproduto/:id/:quantidade", async function (req, resp) {
-
-        //tem que colocar um filtro aqui pra ele n deixar add um produto com id invalido senao vai crashar
-        let carrinho = await global.db.addProdutoNoCarrinho(0, req.params.id, req.params.quantidade);
-
-        if (carrinho == null) {
-            resp.status(400).send('failed');
-            return;
-        }
-
-        await loadCarrinhoProductDatas(carrinho);
-        resp.json(carrinho);
-    });
-
-    app.post("/carrinho/modificarQuantidadeProduto/:objId/:quantidade", async function (req, resp) {
-
-        //tem que colocar um filtro aqui pra ele n deixar add um produto com id invalido senao vai crashar
-        let carrinho = await global.db.editarQuantidadeDoProdutoAoCarrinho(0, req.params.objId, req.params.quantidade);
-
-        if (carrinho == null) {
-            resp.status(400).send('failed');
-            return;
-        }
-
-        await loadCarrinhoProductDatas(carrinho);
-        resp.json(carrinho);
-    });
-
-/*
-    app.get("/:teste?/", async function (req, resp) {
-        console.log(req.query.name);
-        resp.json(req.query)
-    });*/
-
-    app.post('/like/:conta/:objId', async (req, res) => {
-
-        let conta = parseInt(req.params.conta)
-        let produto = await global.db.getProdutoPorObjId(req.params.objId);
-
-        if (produto.likes === undefined) {
-            produto.likes = [];
-        }
-
-        let index = produto.likes.indexOf(conta);
-        if (index == -1) {
-            produto.likes.push(conta)
-        } else {
-            produto.likes.splice(index, 1);
-        }
-
-        let update = await global.db.updateProduto(req.params.objId, produto);
-
-        if (update)
-            res.json(produto)
-        else
-            res.status(400).send('failed');
-
-    })
+    })*/
+   
 
     app.listen(3001, () => console.log("Servidor rodando"));
 }

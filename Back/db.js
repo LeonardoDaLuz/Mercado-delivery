@@ -37,72 +37,9 @@ async function updateProduto(objectId, doc) {
     return resp.result.nModified == 1;
 }
 
-async function addProdutoNoCarrinho(conta, produto, quantidade, callback) {
-    quantidade = parseInt(quantidade);
-    if (isNaN(quantidade))
-        quantidade = 0;
 
-    let carrinho = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
 
-    if (carrinho == null)
-        return null;
 
-    let produtos = carrinho.produtos;
-
-    if (produtos[produto] === undefined) {
-        produtos[produto] = { quantidade: quantidade, preco: 25 }
-    } else {
-        produtos[produto].quantidade += quantidade;
-    }
-
-    if (produtos[produto].quantidade < 1)
-        delete produtos[produto];
-
-    let resp = await global.conn.collection("carrinhos").updateOne({ conta: parseInt(conta) },
-        {
-            $set: { produtos: produtos }
-        }
-    );
-
-    if (resp.result.nModified == 0)
-        return null;
-
-    return carrinho;
-}
-
-async function editarQuantidadeDoProdutoAoCarrinho(conta, produto, quantidade, callback) {
-    quantidade = parseInt(quantidade);
-    if (isNaN(quantidade))
-        quantidade = 0;
-
-    let carrinho = await global.conn.collection("carrinhos").findOne({ conta });
-
-    if (carrinho == null)
-        return null;
-
-    let produtos = carrinho.produtos;
-
-    if (quantidade > 0) {
-        if (produtos[produto] === undefined) {
-            produtos[produto] = { quantidade, preco: 25 }
-        } else {
-            produtos[produto].quantidade = quantidade;
-        }
-    } else {
-        delete produtos[produto];
-    }
-
-    let resp = await global.conn.collection("carrinhos").updateOne({ conta },
-        {
-            $set: { produtos: produtos }
-        }
-    );
-
-    if (resp.result.nModified == 0)
-        return null;
-
-    return carrinho;
-}
 
 
 async function listaProdutos(from, to, criterio = {}, sort = {}) { ///DEPRECATED
@@ -135,7 +72,6 @@ module.exports = (async () => {
         });
 
     return {
-        findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getCarrinho, addProdutoNoCarrinho, getProdutoPorObjId,
-        editarQuantidadeDoProdutoAoCarrinho, updateProduto
+        findAll, insertOne, insertMany, GetAutoIncrementIndex, AddAutoIncrementIndex, getProduto, listaProdutos, getProdutoPorObjId, updateProduto
     }
 });
