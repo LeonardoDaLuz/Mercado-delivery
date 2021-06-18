@@ -103,7 +103,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
     const discardChanges = (e) => {
         e.preventDefault();
-        setDraftProductState({ ...produto });
+        history.push('/product/' + produto._id);
     }
 
     const saveChanges = (e) => {

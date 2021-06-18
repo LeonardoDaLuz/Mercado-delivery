@@ -79,7 +79,7 @@ function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) 
                     </div>
                     <div>
                         <label htmlFor="novoValor">Valor na oferta</label>
-                        <input type="text" name='offer.off_price' value={draftProduct.offer.off_price} onChange={filterAndChangePrice} />
+                        <input type="number" name='offer.off_price' value={draftProduct.offer.off_price} onChange={handleChanges} />
                     </div>
                     <div>
                         <label htmlFor="offerType">Tipo</label>

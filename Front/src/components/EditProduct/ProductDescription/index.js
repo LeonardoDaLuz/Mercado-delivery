@@ -12,15 +12,13 @@ import { editarQuantidadeDoProdutoAoCarrinho } from '../../../store/actions/carr
 export const ProductDescription = ({ product, draftProduct, handleChanges, draftStatus, discardChanges }) => {
 
     useEffect(() => {
-        console.log('product Changed', product);
         if(editorRef.current) {
-            console.log(`editorRef.current.setData(${product.description})`);
             editorRef.current.setData(product.description);
         }
     }, [product]);
 
     useEffect(() => {
-        console.log('draftProduct Changed', draftProduct);
+
     }, [draftProduct]);
 
     const editorConfiguration = {
