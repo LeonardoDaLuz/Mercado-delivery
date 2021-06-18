@@ -112,11 +112,12 @@ export const OfferBody = styled.div`
     flex-wrap: wrap;
     margin-bottom: 20px;
 
-    &>div,  &>button {
-        flex: 1 0 150px;
+    &>div {
+        flex: 1 1 120px;
         box-sizing: border-box;
         padding: 5px;    
         position: relative;
+        overflow: hidden;
     }
 
 
