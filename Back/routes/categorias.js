@@ -11,7 +11,7 @@ module.exports = (app) => {
         let hierarquia = {};
 
         produtosColecao.forEach(p => {
-            hierarquia = inclui(p.categorias, 0, hierarquia);
+            hierarquia = inclui(p.categories, 0, hierarquia);
 
         });
         resp.json(hierarquia);

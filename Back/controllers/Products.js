@@ -13,32 +13,32 @@ class ProductsController {
         let busca = filtraString(req.query.busca);
         let offer = filtraString(req.query.offer);
 
-        query.preco = { $gte: 0.01 };
+        query.price = { $gte: 0.01 };
 
         if (busca != '') {
             query.$or =
                 [
-                    { titulo: { $regex: busca, $options: 'i' } },
-                    { descricao: { $regex: busca, $options: 'i' } },
+                    { title: { $regex: busca, $options: 'i' } },
+                    { description: { $regex: busca, $options: 'i' } },
                 ]
         }
 
         if (min !== 0 && max !== 0) {
-            query.preco = { $gte: filtraFloat(req.query.menorPreco), $lte: filtraFloat(req.query.maiorPreco) }
+            query.price = { $gte: filtraFloat(req.query.menorPreco), $lte: filtraFloat(req.query.maiorPreco) }
         }
         else if (min !== 0) {
-            query.preco = { $gte: filtraFloat(req.query.menorPreco) }
+            query.price = { $gte: filtraFloat(req.query.menorPreco) }
         }
         else if (max !== 0) {
-            query.preco = { $lte: filtraFloat(req.query.maiorPreco) }
+            query.price = { $lte: filtraFloat(req.query.maiorPreco) }
         }
 
         let sort = {};
         if (req.query.sort !== undefined) {
             if (req.query.sort == "maiorPreco")
-                sort = { preco: -1 };
+                sort = { price: -1 };
             if (req.query.sort == "menorPreco")
-                sort = { preco: 1 };
+                sort = { price: 1 };
         }
 
 
@@ -55,7 +55,7 @@ class ProductsController {
         keys.forEach((key, index) => { //Cria filtro por categorias
             if (index < keys.length - 2) {
                 if (req.params[key] !== undefined) {
-                    query["categorias." + (index)] = req.params[key];
+                    query["categories." + (index)] = req.params[key];
                 }
             }
         })
@@ -97,12 +97,12 @@ class ProductsController {
             produto.imgs = [produto.img];
 
         let delay = req.query.delay;
-        if(delay) {
-            console.log("proposeful delay...");   
-            await waitForSeconds(delay); 
+        if (delay) {
+            console.log("proposeful delay...");
+            await waitForSeconds(delay);
         }
 
-        console.log('Loaded product: ', produto);     
+        console.log('Loaded product: ', produto);
 
         resp.json(produto);
     }
@@ -110,23 +110,38 @@ class ProductsController {
     static async updateProduct(req, resp) {
 
         let product = req.body;
-   
-        if(Object.keys(product).length==0) {
+
+        if (Object.keys(product).length == 0) {
             resp.json({ result: "error, missing the body" });
         }
-        
-        delete product._id;
+
+        let productInDb = global.conn.collection('produtos').findOne(
+            { _id: new ObjectId(req.params.id) });
+
+        let newProduct = {
+            ...productInDb,
+            title: product.title,
+            categories: product.categories,
+            stock: product.stock,
+            description: product.description,
+            price: parseFloat(product.price),
+            imgs: product.imgs,
+            offer: { 
+                ...product.offer,
+                off_price: parseFloat(product.offer.off_price),
+            }           
+        }
 
         let result = await global.conn.collection('produtos').updateOne(
             { _id: new ObjectId(req.params.id) },
-            { $set: req.body }
+            { $set: newProduct }
         )
 
         product._id = req.params.id;
 
-        if(req.query.delay) {
-            console.log("proposeful delay...");   
-            await waitForSeconds(req.query.delay); 
+        if (req.query.delay) {
+            console.log("proposeful delay...");
+            await waitForSeconds(req.query.delay);
         }
 
         //result.product = product;
