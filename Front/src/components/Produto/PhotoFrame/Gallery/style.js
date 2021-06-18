@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { colorTheme } from '../../../../theme';
-
+import { Button } from '../../../../globalStyleds';
 
 export const Flex = styled.div`
     display: flex;
@@ -42,7 +42,7 @@ export const ImageSelector = styled.div`
 
 `;
 
-export const AddImgButton = styled.button`
+export const AddImgButton = styled(Button)`
     width: calc(100% - 10px);
     margin: 5px;
     height: 86px;

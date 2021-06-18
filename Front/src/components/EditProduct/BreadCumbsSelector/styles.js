@@ -6,8 +6,9 @@ export const BreadcumbNav = styled.nav`
     display: inline-block;
     font-weight: 700;
     font-size: 14px;
-
+    flex: 1 1 500px;
     margin: 10px 10px;
+    height: 24px;
     .teste {
         font-size: 16px;
         word-wrap: initial;
@@ -15,13 +16,14 @@ export const BreadcumbNav = styled.nav`
 
      ol {
         padding: 0;
-        margin: 0px;
+        margin: -2px 0px 0px 0px;
     }
 
      li {
         display: inline-block;
         margin: 0 5px 0 5px;
         color: rgb(1, 155, 1);
+
     }
 
     a {

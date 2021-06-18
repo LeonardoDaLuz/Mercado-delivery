@@ -74,10 +74,11 @@ export const Col3 = styled.div`
     max-width: 25%;
 `;
 
-
-export const ButtonFlat = styled.button.attrs(({ type }) => { 
+export const Button = styled.button.attrs(({ type }) => { 
     return (type === undefined ? { type: 'button' } : { type: '' }) //isto previne q os buttons venham como type=submit como padrão.
-})`
+})``;
+
+export const ButtonFlat = styled(Button)`
 
     color: ${({ Color = 'white' }) => Color};
     background-color: ${({ bgColor = '#32b112' }) => bgColor};

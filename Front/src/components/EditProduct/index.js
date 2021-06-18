@@ -14,7 +14,9 @@ import produce from 'immer';
 import { useFormik } from 'formik';
 import { LogRender } from '@utils/logRender';
 import { nestedPropertySeletor } from '../../utils/nestedPropertySelector';
-import { Row } from '../../globalStyleds';
+import { Row, ButtonFlat} from '../../globalStyleds';
+import { colorTheme } from '../../theme';
+import { Options  } from './Options';
 //import './style.css';
 
 function EditProduct({ carregaProduto, updateProduct, produto, match }) {
@@ -121,11 +123,14 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
     }
 
 
-    let childProps = { draftProduct, product: produto, produto: draftProduct, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage, discardChanges } //produto está redundante apenas para manter compatibilidade por enquanto 
+    let childProps = { draftProduct, product: produto, produto: draftProduct, draftStatus, handleChanges, changeBreadcumb, pushImages, removeImage, saveChanges, discardChanges } //produto está redundante apenas para manter compatibilidade por enquanto 
 
     return (
         <div className="container-lg px-2 produto-page">
-            <BreadcumbsSelector {...childProps} />
+            <Row>
+                <BreadcumbsSelector {...childProps} />
+                <Options {...childProps}/>
+            </Row>
             <form onSubmit={saveChanges}>
                 <Row>
                     <PhotoFrame   {...childProps} product={draftProduct} />
