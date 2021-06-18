@@ -1,6 +1,7 @@
+var env = process.argv[2] || 'dev';
+require('express-async-errors');
 var express = require('express');
 var bodyParser = require('body-parser');
-
 var produtosColecao = null //require('./produtos.json');
 const { NetworkAuthenticationRequire } = require('http-errors');
 const cors = require('cors');
@@ -12,7 +13,7 @@ main();
 async function main() {
 
     global.db = await require('./db')();
-    global.logErrorToFront = await require('./utilities/logErrorToFront');
+    
     var app = express();
 
     app.use(express.static('public'));
@@ -20,7 +21,7 @@ async function main() {
     app.use(express.json());
 
     app.use(function (req, res, next) {
-        res.header('Access-Control-Allow-Origin', /*req.get('Origin') || */'*');
+        res.header('Access-Control-Allow-Origin', '*');
         res.header('Access-Control-Allow-Credentials', 'true');
         res.header('Access-Control-Allow-Methods', 'GET,HEAD,PUT,PATCH,POST,DELETE');
         res.header('Access-Control-Expose-Headers', 'Content-Length');
@@ -29,30 +30,24 @@ async function main() {
         next();
     });
 
+
+
     consign()
         .include('routes') //incorpora todo codigo dentro dessa pasta, para dentro do app.
         .into(app);
 
-        /*
-    app.get('/importaprodutosjson', (req, resp) => {
-        (async () => {
 
-            let algunsProd = produtosColecao;
-            let result = null;
-            for (let prod of algunsProd) {
-                let newIndex = await global.db.GetAutoIncrementIndex("produtos");
-                let bosta = newIndex.countIndex + 1;
-                prod.codigo = bosta;
-                console.log(prod.codigo)
-                result = await global.db.insert("produtos", prod);
-                await global.db.AddAutoIncrementIndex("produtos");
-            }
+    app.use((error, req, resp, next) => {
+        console.log("\x1b[31m", error.stack);
 
-            resp.json(result);
+        if (env === 'dev') {
+            resp.status(500).send("INTERNAL SERVER ERROR: \n\n" + error.stack);
+        } else {
+            resp.status(500).send("Internal server Error...");
         }
-        )();
-    })*/
-   
+    })
 
     app.listen(3001, () => console.log("Servidor rodando"));
+
+
 }

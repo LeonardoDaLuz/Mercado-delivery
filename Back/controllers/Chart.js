@@ -1,13 +1,9 @@
 class ChartController {
 
     static async getChart(req, resp) {
-        try {
-            let carrinho = await global.db.getCarrinho(0);
-            await ChartController.loadCarrinhoProductDatas(carrinho);
-            resp.json(carrinho);
-        } catch (e) {
-            global.logErrorToFront(resp, e);
-        }
+        let carrinho = await global.db.getCarrinho(0);
+        await ChartController.loadCarrinhoProductDatas(carrinho);
+        resp.json(carrinho);
     }
 
     static async loadCarrinhoProductDatas(carrinho) {
@@ -23,7 +19,7 @@ class ChartController {
     static async addProductInChart(req, resp) {
 
         var { id, quantidade } = req.params;
-        quantidade = parseInt(quantidade); 
+        quantidade = parseInt(quantidade);
         id = parseInt(id);
 
         if (isNaN(quantidade))
@@ -61,6 +57,7 @@ class ChartController {
 
         await ChartController.loadCarrinhoProductDatas(carrinho);
         resp.json(carrinho);
+
     }
 
 
@@ -112,7 +109,6 @@ class ChartController {
 
         return carrinho;
     }
-
 }
 
 module.exports = ChartController;
