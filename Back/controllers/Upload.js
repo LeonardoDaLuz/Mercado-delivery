@@ -41,7 +41,7 @@ class UploadController {
                         const newPath = `${destination}${fileNameWithoutExt}-${sufix}${ext}`;
 
                         fs.renameSync(oldPath, newPath);
-                        fileList.push(newPath);
+                        fileList.push(newPath.replace('public/',''));
                     } else {
 
                     }
