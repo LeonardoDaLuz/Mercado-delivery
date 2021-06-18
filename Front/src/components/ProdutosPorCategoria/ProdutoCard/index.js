@@ -9,7 +9,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { quantosDesseForamAdicionadosAoCarrinho } from '../../../store/analyzers/carrinho';
 import assets from '../../../assets';
-import { OfferTagSVG } from './OfferTagSvg';
+import { OfferTagSVG3 } from './OfferTagSvg3';
 
 function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
 
@@ -25,15 +25,16 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
     return (
         <ProdutoCard_ key={index}>
 
-            {produto.offer.enabled &&
-                <OfferTagSVG product={produto} />
-            }
+
             <ProductLink to={'/produto2/' + produto._id}>
                 <img src={configs.imgsPath + produto.imgs[0]} />
             </ProductLink>
             <h5>{produto.title}</h5>
             {offerEnabled &&
                 <Row>
+                    {produto.offer.enabled &&
+                        <OfferTagSVG3 product={produto} />
+                    }
 
                     <OffPrice>
                         <div>R$ {(produto.price).toFixed(2).replace('.', ',')}</div>

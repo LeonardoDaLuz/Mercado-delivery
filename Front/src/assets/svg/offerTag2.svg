@@ -1,15 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="69"
-   height="100"
-   viewBox="0 0 18.25625 26.458333"
+   height="84"
+   viewBox="0 0 18.25625 22.225005"
    version="1.1"
    id="svg5"
+   sodipodi:docname="offerTag2.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
-
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="8.24"
+     inkscape:cx="34.526699"
+     inkscape:cy="40.351942"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="1791"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
   <defs
      id="defs2">
     <linearGradient
@@ -67,7 +87,7 @@
        x2="15.35576"
        y2="19.513283"
        gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(1.2386184,0,0,1.2386184,-6.9053639,-5.5791884)" />
+       gradientTransform="matrix(1.2386184,0,0,1.2386184,-6.9053639,-9.8818792)" />
   </defs>
   <g
      inkscape:label="Camada 1"
@@ -75,7 +95,7 @@
      id="layer1">
     <path
        style="fill:url(#linearGradient32025);fill-opacity:1;stroke:#960000;stroke-width:0.327717px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 5.4834509,10.827619 7.8127671,-0.0558 V 25.950907 L 9.1666128,21.653886 5.7624782,25.727684 Z"
+       d="m 5.4834509,6.524929 7.8127671,-0.0558 V 21.648217 L 9.1666128,17.351196 5.7624782,21.424994 Z"
        id="path9692" />
     <path
        sodipodi:type="star"

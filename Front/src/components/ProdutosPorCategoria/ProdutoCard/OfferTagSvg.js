@@ -1,21 +1,22 @@
 export const OfferTagSVG = ({ product }) => {
-    let size = 0.8;
-    let percent = ((1-(product.offer.off_price/product.price))*100).toFixed(0);
-    return (
+   let size = 0.7;
+   let percent = ((1 - (product.offer.off_price / product.price)) * 100).toFixed(0);
+   return (
 
-        <div
-            style={{
-                position: 'absolute',
-                left: '-3px',
-                top: '-3px'
-            }}
+      <div
+         style={{
+            position: 'relative',
+            left: '0px',
+            top: '0px',
+            marginBottom: '10px'
+         }}
 
-            dangerouslySetInnerHTML={{
-                __html: `
+         dangerouslySetInnerHTML={{
+            __html: `
             <svg
-   width="${69*size}"
-   height="${100*size}"
-   viewBox="0 0 18.25625 26.458333"
+   width="${69 * size}"
+   height="${84 * size}"
+   viewBox="0 0 18.25625 22.225005"
    version="1.1"
    id="svg5"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
@@ -87,10 +88,10 @@ export const OfferTagSVG = ({ product }) => {
      inkscape:label="Camada 1"
      inkscape:groupmode="layer"
      id="layer1">
-    <path
-       style="fill:url(#linearGradient32025);fill-opacity:1;stroke:#960000;stroke-width:0.327717px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       d="m 5.4834509,10.827619 7.8127671,-0.0558 V 25.950907 L 9.1666128,21.653886 5.7624782,25.727684 Z"
-       id="path9692" />
+     <path
+     style="fill:url(#linearGradient32025);fill-opacity:1;stroke:#960000;stroke-width:0.327717px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 5.4834509,6.524929 7.8127671,-0.0558 V 21.648217 L 9.1666128,17.351196 5.7624782,21.424994 Z"
+     id="path9692" />
     <path
        sodipodi:type="star"
        style="fill:url(#linearGradient4444);fill-opacity:1;fill-rule:nonzero;stroke:#fbb000;stroke-width:1.6;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -134,9 +135,9 @@ export const OfferTagSVG = ({ product }) => {
 </svg>
 
             `
-            }}>
+         }}>
 
-        </div>
+      </div>
 
-    );
+   );
 }

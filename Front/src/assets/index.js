@@ -9,6 +9,8 @@ import edit from './svg/edit.svg';
 import delete_ from './svg/trash.svg';
 import offerTag from './svg/offerTag.svg';
 import offerTag2 from './svg/offerTag2.svg';
+import offerTag3 from './svg/offerTag3.svg';
+
 
 const assets = {
     heart,
@@ -21,7 +23,8 @@ const assets = {
     edit,
     delete_,
     offerTag,
-    offerTag2
+    offerTag2,
+    offerTag3
 }
 
 export default assets;
