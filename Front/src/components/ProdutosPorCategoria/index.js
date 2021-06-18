@@ -29,7 +29,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
 
     async function ligarInfiniteLoader() {
 
-        await carregaMaisProdutos(path, query, 12);
+        await reiniciaListaDeProdutos(path, query, 12);
         await window.waitForSeconds(0.5);
 
         let tries = 5;

@@ -24,7 +24,6 @@ class ChartController {
 
         let { id, quantidade } = req.params;
         quantidade = parseInt(quantidade);
-        id = parseInt(id);
 
         if (isNaN(quantidade))
             quantidade = 0;
@@ -68,50 +67,45 @@ class ChartController {
 
     static async modifyQuantityOnChart(req, resp) {
 
-        //tem que colocar um filtro aqui pra ele n deixar add um produto com id invalido senao vai crashar
-        let carrinho = await ChartController.editarQuantidadeDoProdutoAoCarrinho(0, req.params.objId, req.params.quantidade);
+        let conta = 0;
 
-        if (carrinho == null) {
-            resp.status(400).send('failed');
-            return;
-        }
+        let { objId, quantidade } = req.params;
 
-        await loadCarrinhoProductDatas(carrinho);
-        resp.json(carrinho);
-    }
-
-    static async editarQuantidadeDoProdutoAoCarrinho(conta, produto, quantidade, callback) {
         quantidade = parseInt(quantidade);
+
         if (isNaN(quantidade))
             quantidade = 0;
 
         let carrinho = await global.conn.collection("carrinhos").findOne({ conta });
 
-        if (carrinho == null)
-            return null;
+        if (carrinho == null) {
+            resp.status(400).send('Chart not found');
+            return;
+        }
 
         let produtos = carrinho.produtos;
 
         if (quantidade > 0) {
-            if (produtos[produto] === undefined) {
-                produtos[produto] = { quantidade, preco: 25 }
-            } else {
-                produtos[produto].quantidade = quantidade;
-            }
+            produtos[objId] = { quantidade };
         } else {
-            delete produtos[produto];
+            delete produtos[objId];
         }
 
-        let resp = await global.conn.collection("carrinhos").updateOne({ conta },
+        let dbResp = await global.conn.collection("carrinhos").updateOne({ conta },
             {
                 $set: { produtos: produtos }
             }
         );
 
-        if (resp.result.nModified == 0)
-            return null;
+        if (dbResp.result.nModified == 0)
+        {
+            resp.status(400).send('Unable to edit product quantity in chart');
+            return;
+        }
 
-        return carrinho;
+
+        await ChartController.loadCarrinhoProductDatas(carrinho);
+        resp.json(carrinho);
     }
 }
 

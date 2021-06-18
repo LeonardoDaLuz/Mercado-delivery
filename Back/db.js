@@ -27,8 +27,8 @@ async function getProdutoPorObjId(objectId) {
 }
 
 async function getCarrinho(conta) {
-    let produto = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
-    return produto;
+    let carrinho = await global.conn.collection("carrinhos").findOne({ conta: parseInt(conta) });
+    return carrinho;
 }
 
 async function updateProduto(objectId, doc) {
