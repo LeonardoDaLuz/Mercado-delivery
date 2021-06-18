@@ -12,19 +12,17 @@ import './style.css';
 import { carregaMaisProdutos, reiniciaListaDeProdutos } from '../../store/actions/produtos';
 
 
-let loading = false;
-let path = "";
-let query = "";
-
 function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDeProdutos, location, history }) {
 
-    query = location.search;
-    path = location.pathname;
+    let query = location.search;
+    let path = location.pathname;
 
     useEffect(() => {
+
+
         ligarInfiniteLoader();
 
-        return history.listen(location => reiniciaListaDeProdutos(location.pathname, location.search, 12));
+        return desligaInfiniteLoader;
 
     }, [])
 
@@ -34,29 +32,29 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
         await carregaMaisProdutos(path, query, 12);
         await window.waitForSeconds(0.5);
 
-        while (document.body.clientHeight < window.innerHeight) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
-            if (!loading) {
+        let tries = 5;
+        while (document.body.clientHeight < window.innerHeight && tries > 0) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
 
-                loading = true;
-                await carregaMaisProdutos(path, query, 12);
-                await window.waitForSeconds(0.5);
-                loading = false;
-            }
+            tries--;
+            await carregaMaisProdutos(path, query, 12);
+            await window.waitForSeconds(0.5);
         }
 
-        window.addEventListener("scroll", async (e) => { //carrega mais produtos a medida que dá scroll (infinite loader)
-            if (!loading && window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
-
-                loading = true;
-                await carregaMaisProdutos(path, query, 12);
-                loading = false;
-            }
-        });
+        window.addEventListener("scroll", infiniteLoadOnScroll);
     }
 
+    function desligaInfiniteLoader() {
+        window.removeEventListener("scroll", infiniteLoadOnScroll);
+    }
+
+    async function infiniteLoadOnScroll(e) { //carrega mais produtos a medida que dá scroll (infinite loader)
+        if (window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
+            await carregaMaisProdutos(path, query, 12);
+        }
+    }
 
     let produtoCards = produtos.map((p, index) => {
-        return <ProdutoCard produto={p} key={index}/>
+        return <ProdutoCard produto={p} key={index} />
     })
 
 
