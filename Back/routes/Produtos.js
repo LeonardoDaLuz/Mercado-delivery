@@ -16,6 +16,8 @@ module.exports = (app) => {
     
     app.put("/produto/:id", ProductsController.updateProduct);
 
+    app.delete("/produto/:id", ProductsController.deleteProduct);
+
     app.get("/produto2/:id", ProductsController.getProduct2);
 
     app.post("/produto2/:id", ProductsController.updateProduct);

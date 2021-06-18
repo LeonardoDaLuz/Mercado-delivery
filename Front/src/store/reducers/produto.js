@@ -1,4 +1,4 @@
-import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, UPDATE_PRODUCT_SUCCESS } from '../types'
+import { CARREGA_PRODUTO_START, CARREGA_PRODUTO_SUCCESS, UPDATE_PRODUCT_SUCCESS, DELETE_PRODUCT_SUCCESS } from '../types'
 
 const initialState = {
     _id: '',
@@ -24,7 +24,9 @@ const produto = (state = initialState, action) => {
         case CARREGA_PRODUTO_SUCCESS:
             return { ...action.payload };
         case UPDATE_PRODUCT_SUCCESS:
-            return { ...action.payload };
+            return { ...action.payload }; 
+        case DELETE_PRODUCT_SUCCESS:
+            return { ...initialState };
         default:
             return state;
     }

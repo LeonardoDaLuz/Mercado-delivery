@@ -11,6 +11,10 @@ import {
     UPDATE_PRODUCT_START,
     UPDATE_PRODUCT_SUCCESS,
     UPDATE_PRODUCT_FAILURE,
+    DELETE_PRODUCT_SUCCESS,
+    DELETE_PRODUCT_START,
+    DELETE_PRODUCT_FAILURE
+
 } from '../types'
 
 
@@ -18,7 +22,7 @@ export const carregaProduto = (id, callback) => {
 
     return dispatch => {
         dispatch({ type: CARREGA_PRODUTO_START });
-        fetch('http://localhost:3001/produto2/' + id+"")
+        fetch('http://localhost:3001/produto2/' + id + "")
             .then(body => body.json())
             .then(data => {
                 console.log("PRODUTO CARREGADO PELO REDUX");
@@ -78,6 +82,38 @@ export const updateProduct = (editedProduct, callBackOnSuccess, callbackOnFail) 
 
         } else {
             dispatch({ type: UPDATE_PRODUCT_FAILURE, payload: response.status });
+            console.error(response.status);
+            if (callbackOnFail)
+                callBackOnSuccess();
+        }
+    }
+}
+
+
+export const deleteProduct = (product, callBackOnSuccess, callbackOnFail) => {
+    return async dispatch => {
+
+        dispatch({ type: DELETE_PRODUCT_START });
+
+        const url = 'http://localhost:3001/produto/' + product._id;
+
+        let response = await fetch(url, { method: 'DELETE' });
+
+        if (response.ok) {
+            let data = await response.json();
+            if (data.result && data.result.ok) {
+                dispatch({ type: DELETE_PRODUCT_SUCCESS });
+                if (callBackOnSuccess)
+                    callBackOnSuccess();
+            } else {
+                dispatch({ type: UPDATE_PRODUCT_FAILURE, payload: data.product });
+                console.error(UPDATE_PRODUCT_FAILURE, data.result);
+                if (callBackOnSuccess)
+                    callBackOnSuccess();
+            }
+
+        } else {
+            dispatch({ type: DELETE_PRODUCT_FAILURE, payload: response.status });
             console.error(response.status);
             if (callbackOnFail)
                 callBackOnSuccess();

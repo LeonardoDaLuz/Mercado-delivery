@@ -82,6 +82,7 @@ export const BotaoVerde = styled.button`
     color: rgb(255, 255, 255);
     font-size: 16px;
     padding: 10px;
+    margin-left: 3px;
     flex: 1 1 1px;
 `;
 
@@ -92,6 +93,7 @@ export const BotaoAzul = styled.button`
     color: rgb(255, 255, 255);
     font-size: 16px;
     flex: 1 1 1px;
+    margin-right: 3px;
 `;
 
 export const BlocoQuantidade = styled.div`

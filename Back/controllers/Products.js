@@ -126,10 +126,10 @@ class ProductsController {
             description: product.description,
             price: parseFloat(product.price),
             imgs: product.imgs,
-            offer: { 
+            offer: {
                 ...product.offer,
                 off_price: parseFloat(product.offer.off_price),
-            }           
+            }
         }
 
         let result = await global.conn.collection('produtos').updateOne(
@@ -146,6 +146,16 @@ class ProductsController {
 
         //result.product = product;
         resp.json({ result: result.result, product: product });
+    }
+
+    static async deleteProduct(req, resp) {
+
+
+        let result = await global.conn.collection('produtos').deleteOne(
+            { _id: new ObjectId(req.params.id) },
+        )
+
+        resp.json(result);
     }
 }
 
