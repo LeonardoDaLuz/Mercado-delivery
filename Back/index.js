@@ -42,7 +42,7 @@ async function main() {
         if (env === 'dev') {
             resp.status(500).send("INTERNAL SERVER ERROR: \n\n" + error.stack);
         } else {
-            resp.status(500).send("Internal server Error...");
+            resp.status(500).send("Internal server Error D...");
         }
     })
 

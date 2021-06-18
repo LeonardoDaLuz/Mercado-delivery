@@ -1,7 +1,11 @@
 class ChartController {
 
     static async getChart(req, resp) {
-        let carrinho = await global.db.getCarrinho(0);
+        let conta = 0;
+        conta = parseInt(conta);
+
+        let carrinho = await global.conn.collection("carrinhos").findOne({ conta });
+
         await ChartController.loadCarrinhoProductDatas(carrinho);
         resp.json(carrinho);
     }
@@ -18,7 +22,7 @@ class ChartController {
 
     static async addProductInChart(req, resp) {
 
-        var { id, quantidade } = req.params;
+        let { id, quantidade } = req.params;
         quantidade = parseInt(quantidade);
         id = parseInt(id);
 

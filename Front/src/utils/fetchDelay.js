@@ -21,7 +21,6 @@ window.fetch = (url, config) => { //intercepta o fetch para criar um delay fake
                 resolve(response);
             }
             else {
-                console.error('Error: ' + response.status);
                 let text = await response.text();
                 let responseClone = {
                     ok: response.ok,
@@ -30,11 +29,17 @@ window.fetch = (url, config) => { //intercepta o fetch para criar um delay fake
                     json: () => JSON.stringify(text)
                 }
                 resolve(responseClone);
-                setTimeout(() => alert('URL: '+url+'\n\n'+text), 1000);
+                let alertMessage = 'URL: ' + url + '\n\n' + text;
+                setTimeout(() => alert(alertMessage), 500);
+                
+                let error = new Error();
+                error.customMessage = alertMessage;
+                throw error;
             }
         }
         ).catch(err => {
-            console.error('Server not responding...');
+            console.error(err.customMessage);
+            console.error(err.stack);
             reject(err)
         });
     })
