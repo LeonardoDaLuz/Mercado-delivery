@@ -3,7 +3,7 @@ import { CenterContainer } from "@globalStyleds";
 
 export const CarrouselContainer = styled.div`
 .slick-dots {
-    height: 50px;
+    height: 30px;
     top: 0px;
     position: static;
     margin: 14px 0px 14px 0px;
