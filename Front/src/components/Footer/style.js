@@ -26,6 +26,6 @@ export const Footer_ = styled.footer`
 
 export const FooterLogo = styled(Col)`
 
-    background: transparent url(${assets.logomonoWhite}) no-repeat center;
+    background: transparent url(${assets.mercado_delivery_monochrome_white_logo}) no-repeat center;
     background-size: contain;
 `;
