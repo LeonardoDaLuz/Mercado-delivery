@@ -34,7 +34,7 @@ function PriceRange_({ location, reiniciaListaDeProdutos }) {
             query.delete("maiorPreco")
 
         history.push(location.pathname + "?" + query);
-       // reiniciaListaDeProdutos(location.pathname, query, 12);
+        reiniciaListaDeProdutos(location.pathname, query, 12);
     }
 
     return (<>

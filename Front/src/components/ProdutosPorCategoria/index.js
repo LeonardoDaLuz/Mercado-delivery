@@ -10,12 +10,18 @@ import { Container, ListaDeProdutos } from './styles';
 import assets from '@assets';
 import './style.css';
 import { carregaMaisProdutos, reiniciaListaDeProdutos } from '../../store/actions/produtos';
+import { combinePathWithQuery } from '../../utils/combinePathWithQuery';
 
 
 function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDeProdutos, location, history }) {
 
+
     let query = location.search;
     let path = location.pathname;
+
+    produtos = produtos[combinePathWithQuery(path, query)];
+    produtos = produtos === undefined ? [] : produtos;
+
 
     useEffect(() => {
 
@@ -74,7 +80,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
 
 
 const mapStateToProps = store => ({
-    produtos: store.produtos.mainSearch
+    produtos: store.produtos
 })
 
 

@@ -7,7 +7,7 @@ import { reiniciaListaDeProdutos } from '../../../store/actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function Order_({ location }) {
+function Order_({ location,reiniciaListaDeProdutos }) {
 
     const history = useHistory();
     const query = new URLSearchParams(location.search);
@@ -19,7 +19,7 @@ function Order_({ location }) {
         query.set("sort", e.target.value);
 
         history.push(location.pathname + "?" + query.toString());
-
+        reiniciaListaDeProdutos(location.pathname, query, 12);
        
     }
     return (<>

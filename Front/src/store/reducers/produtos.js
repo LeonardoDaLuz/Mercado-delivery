@@ -13,13 +13,15 @@ import {
 import produce from 'immer';
 
 const initialState = {
-    mainSearch: [],    
+    mainSearch: [],
 };
 
 const produtos = produce((draftState, action) => {
     switch (action.type) {
         case CARREGA_MAIS_PRODUTOS_SUCCESS:
-            draftState.mainSearch = draftState.mainSearch.concat(action.payload);
+            let previous = draftState[action.payload.path + action.payload.query];
+            previous = previous === undefined ? [] : previous;
+            draftState[action.path + action.query] = previous.concat(action.payload);
             break
         case RESETA_LISTA_PRODUTOS:
             draftState.mainSearch = [];

@@ -13,7 +13,7 @@ import {
 
 
 
-export const carregaMaisProdutos = (path, query, quantidade) => {
+export const carregaMaisProdutos = (path, query, quantity) => {
     return async (dispatch, getState) => {
         //se usar o location.search ou o URLSearchParams ele começa ou não com '?', então este trecho normaliza esta diferença.
         query = query.toString();
@@ -26,7 +26,7 @@ export const carregaMaisProdutos = (path, query, quantidade) => {
             path += "/";
 
         //Montando a url de pesquisa q será interpretada pelo backend.
-        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantidade) + query;
+        let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantity) + query;
 
         //fazendo as requisições e a emissão os actions.
         dispatch({ type: CARREGA_MAIS_PRODUTOS_START, payload: url });
@@ -39,7 +39,7 @@ export const carregaMaisProdutos = (path, query, quantidade) => {
             }
             )
             .then(data => {
-                dispatch({ type: CARREGA_MAIS_PRODUTOS_SUCCESS, payload: data });
+                dispatch({ type: CARREGA_MAIS_PRODUTOS_SUCCESS, payload: data, path, query });
             })
             .catch(err => {
                 dispatch({ type: CARREGA_MAIS_PRODUTOS_FAILURE, payload: err.message });
