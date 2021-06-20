@@ -27,7 +27,8 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
 
     if (isNaN(offerStarts.getTime()) ||
         isNaN(offerEnds.getTime()) ||
-        !(now.getTime() > offerStarts.getTime() && now.getTime() < offerEnds.getTime())
+        !(now.getTime() > offerStarts.getTime() && now.getTime() < offerEnds.getTime()) ||
+        produto.price < produto.offer.off_price
     ) {
         offerEnabled = false;
     }
