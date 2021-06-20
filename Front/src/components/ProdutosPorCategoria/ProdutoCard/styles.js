@@ -12,7 +12,10 @@ export const ProductLink = styled(Link)`
     line-height: 200px;
 
     img {
-        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
         max-height: 200px;
     }
 `;
