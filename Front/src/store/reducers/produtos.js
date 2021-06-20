@@ -8,7 +8,8 @@ import {
     CARREGA_MAIS_PRODUTOS_START,
     CARREGA_MAIS_PRODUTOS_SUCCESS,
     CARREGA_MAIS_PRODUTOS_FAILURE,
-    RESETA_LISTA_PRODUTOS
+    RESETA_LISTA_PRODUTOS,
+    RESET_PRODUCT_LIST
 } from '../types'
 import produce from 'immer';
 
@@ -25,6 +26,9 @@ const produtos = produce((draftState, action) => {
             break
         case RESETA_LISTA_PRODUTOS:
             draftState.mainSearch = [];
+            break;
+        case RESET_PRODUCT_LIST:
+            Object.keys(draftState).forEach(key=>draftState[key]=[]);
             break;
         default:
             return draftState;

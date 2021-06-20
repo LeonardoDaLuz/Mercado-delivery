@@ -11,12 +11,12 @@ import Breadcumbs from "./Breadcumb";
 import { CategoriasAside, FaixaDePrecoForm, ListaCategorias } from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { reiniciaListaDeProdutos } from '../../../store/actions/produtos';
+import { carregaMaisProdutos } from '../../../store/actions/produtos';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { PriceRange } from './PriceRange';
 import { Order } from './Order';
 
-function SidebarCategory({ carregaCategorias, reiniciaListaDeProdutos, categorias, loja, location, match, }) {
+function SidebarCategory({ carregaCategorias, carregaMaisProdutos, categorias, loja, location, match, }) {
 
     useEffect(() => {
         carregaCategorias();
@@ -32,7 +32,7 @@ function SidebarCategory({ carregaCategorias, reiniciaListaDeProdutos, categoria
         let resultado = keys.map((key, index) => {
 
             let id = key;
-            let link = <Link to={path + key + location.search} onClick={() => { reiniciaListaDeProdutos(path + key, location.search, 12) }}>{key}</Link>;
+            let link = <Link to={path + key + location.search} onClick={() => { carregaMaisProdutos(path + key, location.search, 12) }}>{key}</Link>;
             return <li key={key}>{link}</li>;
         });
 
@@ -92,7 +92,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaCategorias, reiniciaListaDeProdutos }, dispatch);
+    bindActionCreators({ carregaCategorias, carregaMaisProdutos }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SidebarCategory));

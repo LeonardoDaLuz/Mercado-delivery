@@ -76,7 +76,7 @@ export const Price = styled.div`
 
 `;
 export const OffPrice = styled.div`
-    flex: 0 0 32px;
+    flex: 1 0 82px;
     text-align: right;
     margin: -0px 15px 15px 0pc;
 

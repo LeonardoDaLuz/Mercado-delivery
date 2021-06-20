@@ -2,11 +2,11 @@ import { useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
 import { Input } from '@globalStyleds';
 import { FaixaDePrecoForm } from './styles';
-import { reiniciaListaDeProdutos } from '@actions/produtos';
+import { carregaMaisProdutos } from '@actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function PriceRange_({ location, reiniciaListaDeProdutos }) {
+function PriceRange_({ location, carregaMaisProdutos }) {
 
     let query = new URLSearchParams(location.search);
 
@@ -34,7 +34,7 @@ function PriceRange_({ location, reiniciaListaDeProdutos }) {
             query.delete("maiorPreco")
 
         history.push(location.pathname + "?" + query);
-        reiniciaListaDeProdutos(location.pathname, query, 12);
+        carregaMaisProdutos(location.pathname, query, 12);
     }
 
     return (<>
@@ -48,7 +48,7 @@ function PriceRange_({ location, reiniciaListaDeProdutos }) {
 };
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ reiniciaListaDeProdutos }, dispatch)
+    bindActionCreators({ carregaMaisProdutos }, dispatch)
 
 export const PriceRange = connect(null, mapDispatchToProps)(withRouter(PriceRange_));
 

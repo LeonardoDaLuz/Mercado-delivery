@@ -19,12 +19,22 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
 
     function AdicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }
 
-    const offerEnabled = produto.offer.enabled;
+    let offerEnabled = produto.offer.enabled;
+
+    let now = new Date();
+    let offerStarts = new Date(produto.offer.time_range.starts);
+    let offerEnds = new Date(produto.offer.time_range.ends);
+
+    if (isNaN(offerStarts.getTime()) ||
+        isNaN(offerEnds.getTime()) ||
+        !(now.getTime() > offerStarts.getTime() && now.getTime() < offerEnds.getTime())
+    ) {
+        offerEnabled = false;
+    }
 
 
     return (
         <ProdutoCard_ key={index}>
-
 
             <ProductLink to={'/produto2/' + produto._id}>
                 <img src={configs.imgsPath + produto.imgs[0]} />
@@ -42,7 +52,7 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
                     </OffPrice>
                 </Row>
             }
-            {!offerEnabled &&
+            {!offerEnabled && //casos em que o preço em oferta for maior que o preço normal, exibirá o preço normal, como se não houvesse oferta
                 <Price>
                     <div>{produto.price.toFixed(2).replace('.', ',')}</div>
                 </Price>

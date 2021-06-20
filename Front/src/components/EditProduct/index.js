@@ -10,6 +10,7 @@ import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
 //Others
 import { carregaProduto, updateProduct } from '@actions/produto'
+import { resetProductList } from '../../store/actions/produtos';
 import produce from 'immer';
 import { useFormik } from 'formik';
 import { LogRender } from '@utils/logRender';
@@ -19,7 +20,7 @@ import { colorTheme } from '../../theme';
 import { Options  } from './Options';
 //import './style.css';
 
-function EditProduct({ carregaProduto, updateProduct, produto, match }) {
+function EditProduct({ carregaProduto, updateProduct, produto, match, resetProductList }) {
 
     const [draftProduct, setDraftProductState] = useState({
 
@@ -58,7 +59,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
 
     const handleChanges = useCallback((e) => {
-
+console.log('change');
         setDraftStatus('modified');
         setDraftProductState(produce(draftProduct, (draftState) => {
             switch (e.target.type) {
@@ -117,7 +118,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match }) {
 
         updateProduct(
             draftProduct,
-            () => { setDraftStatus('Saved'); history.push('/product/' + produto._id) },
+            () => { setDraftStatus('Saved'); history.push('/product/' + produto._id); resetProductList();  },
             () => { setDraftStatus('Save failure'); }
         );
     }
@@ -148,7 +149,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaProduto, updateProduct }, dispatch);
+    bindActionCreators({ carregaProduto, updateProduct, resetProductList }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProduct));

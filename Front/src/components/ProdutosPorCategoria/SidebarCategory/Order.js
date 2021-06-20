@@ -1,26 +1,26 @@
 import { useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
 import { Input } from '../../../globalStyleds';
-import {  OrdemSelectForm } from './styles';
+import { OrdemSelectForm } from './styles';
 import { filtraFloat } from '../../../utils/InputFilters';
-import { reiniciaListaDeProdutos } from '../../../store/actions/produtos';
+import { carregaMaisProdutos } from '../../../store/actions/produtos';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-function Order_({ location,reiniciaListaDeProdutos }) {
+function Order_({ location, carregaMaisProdutos }) {
 
     const history = useHistory();
     const query = new URLSearchParams(location.search);
-    let sort  = query.get('sort');
-    sort = sort===null?'':sort;
+    let sort = query.get('sort');
+    sort = sort === null ? '' : sort;
 
     function aplicaOrdem(e) {
 
         query.set("sort", e.target.value);
 
         history.push(location.pathname + "?" + query.toString());
-        reiniciaListaDeProdutos(location.pathname, query, 12);
-       
+        carregaMaisProdutos(location.pathname, query, 12);
+
     }
     return (<>
         <h4>Ordem</h4>
@@ -35,6 +35,6 @@ function Order_({ location,reiniciaListaDeProdutos }) {
 };
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ reiniciaListaDeProdutos }, dispatch)
+    bindActionCreators({ carregaMaisProdutos }, dispatch)
 
 export const Order = connect(null, mapDispatchToProps)(withRouter(Order_));

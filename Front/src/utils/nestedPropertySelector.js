@@ -13,15 +13,21 @@ export const nestedPropertySeletor = (parent, path) => {
         get: () => parent[cursorPropertyName],
         set: (value) => {
             let type = typeof parent[cursorPropertyName];
-            console.log('type',type);
-            switch(type) {
+      
+            switch (type) {
                 case 'number':
                     parent[cursorPropertyName] = parseFloat(value);
+                    break;
+                case 'boolean':
+                    if (typeof value === 'string')
+                        value = value === 'true';
+
+                    parent[cursorPropertyName] = value;
                     break;
                 default:
                     parent[cursorPropertyName] = value;
             }
-          
+
         }
     }
 }

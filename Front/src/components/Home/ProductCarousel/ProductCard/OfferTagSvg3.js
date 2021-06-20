@@ -10,6 +10,7 @@ export const OfferTagSVG3 = ({ product, color = '#FFFFF' }) => {
             left: '0px',
             top: '0px',
             marginBottom: '10px',
+            marginLeft: '10px',
             filter: 'drop-shadow(1px 3px 2px rgba(0,0,0,0.5))'
 
          }}
