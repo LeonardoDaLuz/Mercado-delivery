@@ -7,8 +7,9 @@ function Home_() {
     return ( 
         <>
             <Caroulsel />
-            <ProductCarousel title='Bebidas' path='/produtos/Bebidas' query=''/><br />
-            <ProductCarousel title='Ofertas do Dia' path='/produtos/Alimentos/Doces%20e%20sobremesas' query=''/>
+            <ProductCarousel title='Ofertas do Dia' path='/produtos/' query='offer=day'/><br />
+            <ProductCarousel title='Ofertas do Dia' path='/produtos/' query='offer=week'/><br />
+      
         </>
     )
 }
