@@ -16,14 +16,27 @@ import {
 export const carregaMaisProdutos = (path, query, quantity) => {
     return async (dispatch, getState) => {
         //se usar o location.search ou o URLSearchParams ele começa ou não com '?', então este trecho normaliza esta diferença.
+
+
+
+
+        if (path.charAt(path.length - 1) === '?') {
+            path = path.replace('?', '')
+        }
+
+        if (path[path.length - 1] !== "/")
+            path += "/";
+
         query = query.toString();
         if (!query.startsWith('?'))
             query = '?' + query;
 
-        const produtos = getState().produtos.mainSearch;
+        let produtos = getState().produtos[path + query];
+
+        if(produtos===undefined)
+            produtos = [];
+
         const aPartirDe = produtos.length;
-        if (path[path.length - 1] !== "/")
-            path += "/";
 
         //Montando a url de pesquisa q será interpretada pelo backend.
         let url = "http://localhost:3001" + path + aPartirDe + "/" + (aPartirDe + quantity) + query;

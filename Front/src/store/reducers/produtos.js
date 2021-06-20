@@ -19,7 +19,7 @@ const initialState = {
 const produtos = produce((draftState, action) => {
     switch (action.type) {
         case CARREGA_MAIS_PRODUTOS_SUCCESS:
-            let previous = draftState[action.payload.path + action.payload.query];
+            let previous = draftState[action.path + action.query];
             previous = previous === undefined ? [] : previous;
             draftState[action.path + action.query] = previous.concat(action.payload);
             break
