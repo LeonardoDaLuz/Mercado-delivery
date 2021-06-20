@@ -128,6 +128,7 @@ class ProductsController {
             imgs: product.imgs,
             offer: {
                 ...product.offer,
+                enabled: product.offer.enabled==='true',
                 off_price: parseFloat(product.offer.off_price),
             }
         }
