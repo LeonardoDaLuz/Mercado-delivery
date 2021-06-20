@@ -7,11 +7,11 @@ import {
 
 
 const initialState = {
-    ofertasDoDia: [],
-    ofertasDaSemana: [],
-    ofertasDoMes: [],
-    maisVendidos: [],
-    menosvendidos: [],
+    offerDay: [],
+    offerWeek: [],
+    offerMonth: [],
+    bestSeller: [],
+    lessSold: [],
 };
 
 const home = (state = initialState, action) => {

@@ -4,11 +4,14 @@ import { connect } from "react-redux";
 import { carregarImagensCarousel } from "../../../store/actions/carousel";
 import { bindActionCreators } from "redux";
 import { CenterContainer } from "../../../globalStyleds";
+import { loadHome } from '@actions/home';
+import Slider from 'react-slick';
+import { ProductCard } from "./ProductCard";
 
-function OfertasDoDia_({carousel, carregarImagensCarousel}) {
+function OfertasDoDia_({ home, loadHome }) {
 
     useEffect(() => {
-        //carregarImagensCarousel();
+        loadHome();
     }, [])
 
 
@@ -16,17 +19,22 @@ function OfertasDoDia_({carousel, carregarImagensCarousel}) {
 
         <OfertasDoDiaContainer>
             <h2>Ofertas do Dia</h2>
-            
+            asd
+            {home.offerDay.map(item =>
+                <ProductCard product={item} />
+            )}
         </OfertasDoDiaContainer>
     )
 }
 
 
+
+
 const mapStateToProps = (store) => ({
-    carousel: store.carousel
+    home: store.home
 })
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({carregarImagensCarousel}, dispatch)
+    bindActionCreators({ loadHome }, dispatch)
 
 export const OfertasDoDia = connect(mapStateToProps, mapDispatchToProps)(OfertasDoDia_);
