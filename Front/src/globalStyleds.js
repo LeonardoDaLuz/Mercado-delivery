@@ -98,6 +98,10 @@ export const GlobalStyle = createGlobalStyle`
     a:hover {
         text-decoration: underline;
     }
+
+    button {
+        cursor: pointer!important;
+    }
 `;
 
 //Div especial utilitária
