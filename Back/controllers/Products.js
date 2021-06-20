@@ -46,9 +46,10 @@ class ProductsController {
             let now = new Date();
             let timeZoneOffset = now.getTimezoneOffset();
             now.setMinutes(now.getMinutes() - timeZoneOffset); //Ajuste devido ao fuso horário. o TimezoneOffset vale 180, oq significa 3 horas no fuso horário.
-            query['offer.time_range.starts'] = { $lt: now }
-            query['offer.time_range.ends'] = { $gt: now }
+            query['offer.time_range.starts'] = { $lt: now.toISOString() }
+            query['offer.time_range.ends'] = { $gt: now.toISOString() }
             query['offer.type'] = offer;
+            query['offer.enabled'] = true;
         }
 
         let keys = Object.keys(req.params);
