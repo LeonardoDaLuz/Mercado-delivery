@@ -137,7 +137,10 @@ export const MenuPrincipal = styled.ul`
 
     @media screen and (max-width: 992px) {       
         li {
-            display: none;
+            display: none;            
+        }
+        .d-block {
+            display: block;
         }
     }
 `;
