@@ -5,6 +5,19 @@ export const GlobalStyle = createGlobalStyle`
     body {
         background-color: ${colorTheme.siteBackground(500)};
         min-height: 100%;
+
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #212529;
+        text-align: left;
+        background-color: #fff;
+    }
+
+    *, *::before, *::after {
+        box-sizing: border-box;
     }
 
     .noscroll {
@@ -21,25 +34,70 @@ export const GlobalStyle = createGlobalStyle`
 
     }
 
-    .c-px-3>* {
-        margin-left: 1rem;
-        margin-right: 1rem;
-    }
-
-    .c-flex-grow-1>* {
-        flex-grow: 1;
-
-    }
 
     ul {
-    list-style-type: none;
-}
+        list-style-type: none;
+        margin: 0px;
+    }
 
     @media screen and (min-width: 992px) {
         .navbar-logo {
             flex-basis: 289px;
             background-image: url('/src/assets/png/LogoExtended48px.png');
         }
+    }
+
+    img {
+        vertical-align: middle;
+        border-style: none;
+    }
+
+    input, button, select, optgroup, textarea {
+        margin: 0;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .h1, h1 {
+        font-size: 2.5rem;
+    }
+
+    .h2, h2 {
+        font-size: 2rem;
+    }
+
+    .h3, h3 {
+        font-size: calc(1.3rem + .6vw);
+    }
+    .h4, h4 {
+        font-size: 1.5rem;
+    }
+
+    .h5, h5 {
+        font-size: 1.25rem;
+    }
+
+    .h6, h6 {
+        font-size: 1rem;
+    }
+
+
+    a {
+        color: rgb(64, 64, 64);
+        text-decoration: none;
+
+
+    }
+    a:hover {
+        text-decoration: underline;
     }
 `;
 
@@ -52,6 +110,11 @@ export const Div = styled.div`
    `}
 `;
 
+export const Container = styled.div`
+    max-width: 1140px;
+    width: 100%;
+    margin: 0px auto;
+`;
 
 export const CenterContainer = styled.div`
     margin: 0 auto;
@@ -66,7 +129,9 @@ export const Row = styled(Div)`
 `;
 
 export const Col = styled.div`
-    flex-grow: 1;
+    flex: 1 0 0%;
+    overflow: hidden;
+   
 `;
 
 export const Col3 = styled.div`
@@ -74,7 +139,7 @@ export const Col3 = styled.div`
     max-width: 25%;
 `;
 
-export const Button = styled.button.attrs(({ type }) => { 
+export const Button = styled.button.attrs(({ type }) => {
     return (type === undefined ? { type: 'button' } : { type: '' }) //isto previne q os buttons venham como type=submit como padrão.
 })``;
 

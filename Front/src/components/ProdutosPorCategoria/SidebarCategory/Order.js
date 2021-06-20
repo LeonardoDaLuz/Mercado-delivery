@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
 import { Input } from '../../../globalStyleds';
-import { FaixaDePrecoForm, OrdemSelectForm } from '../styles';
+import {  OrdemSelectForm } from './styles';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { reiniciaListaDeProdutos } from '../../../store/actions/produtos';
 import { connect } from 'react-redux';

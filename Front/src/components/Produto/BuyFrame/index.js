@@ -36,7 +36,7 @@ function BuyFrame({ product, likeProduto, adicionarProdutoAoCarrinho, editarQuan
                     <label>Quantidade:</label>
                     <Row>
                         <ButtonIncreaseDecrease disabled={disabled} onClick={removerDoCarrinho}>-</ButtonIncreaseDecrease>
-                        <input className="form-control text-center" value={addedQuantity} onChange={editarQuantidade} />
+                        <input value={addedQuantity} onChange={editarQuantidade} />
                         <ButtonIncreaseDecrease onClick={adicionarAoCarrinho}>+</ButtonIncreaseDecrease>
                     </Row>
                 </BlocoQuantidade>

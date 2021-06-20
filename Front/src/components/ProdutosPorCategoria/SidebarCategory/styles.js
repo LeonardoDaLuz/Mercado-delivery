@@ -8,7 +8,8 @@ export const BreadcumbList = styled.nav`
     font-size: 14px;
 
     ul {
-    margin-bottom: 5px;
+        margin-bottom: 5px;
+        padding-left: 0px;
     }
 
     li {
@@ -27,6 +28,23 @@ export const BreadcumbList = styled.nav`
         position: relative;
         color: rgb(0, 0, 0);
     }
+`;
+
+
+export const CategoriasAside = styled.aside`
+
+    padding: 20px 20px 25px 0px;
+    flex: 0 0 25%;
+    max-width: 25%;
+    width: 100%;
+`;
+
+export const ListaCategorias = styled.ul`
+        position: relative;
+        background-color: rgb(235, 235, 235);
+        margin: 20px 0px 20px 0px;
+        border-radius: 5px;
+        padding: 10px;
 `;
 
 
@@ -50,4 +68,19 @@ export const FaixaDePrecoForm = styled.form`
     border-radius: 5px;
     margin-left: 5px;
     }
+`;
+
+export const OrdemSelectForm = styled.form`
+
+
+    select {
+        width: 100%;
+        border-radius: 5px;
+        border: 1px solid rgb(172, 172, 172);
+    }
+
+    
+
+
+
 `;

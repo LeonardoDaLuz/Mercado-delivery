@@ -8,7 +8,7 @@ export const BreadcumbNav = styled.nav`
     font-size: 14px;
     flex: 1 1 500px;
     margin: 10px 10px;
-    height: 24px;
+
     .teste {
         font-size: 16px;
         word-wrap: initial;

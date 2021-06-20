@@ -22,7 +22,8 @@ import { CarouselManager } from "./components/CarouselManager";
 import EditProduct from './components/EditProduct';
 
 //styles
-import "../node_modules/bootstrap/scss/bootstrap.scss";
+import "normalize.css";
+//import "../node_modules/bootstrap/scss/bootstrap.scss";
 import { GlobalStyle } from "./globalStyleds";
 
 import "./utils/fetchDelay";

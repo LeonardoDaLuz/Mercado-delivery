@@ -5,6 +5,7 @@ import carrinho from './carrinho';
 import categorias from './categorias';
 import carousel from './carousel';
 import account from './account';
+import home from './home';
 
 export default combineReducers({
     produtos,
@@ -12,5 +13,6 @@ export default combineReducers({
     carrinho,
     categorias,
     carousel,
-    account
+    account,
+    home
 });

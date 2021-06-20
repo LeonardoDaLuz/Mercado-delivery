@@ -8,7 +8,7 @@ import {
 import { Input } from '../../../globalStyleds';
 import { carregaCategorias } from '../../../store/actions/categorias';
 import Breadcumbs from "./Breadcumb";
-import { CategoriasAside, FaixaDePrecoForm } from '../styles';
+import { CategoriasAside, FaixaDePrecoForm, ListaCategorias } from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { reiniciaListaDeProdutos } from '../../../store/actions/produtos';
@@ -36,9 +36,7 @@ function SidebarCategory({ carregaCategorias, reiniciaListaDeProdutos, categoria
             return <li key={key}>{link}</li>;
         });
 
-
-
-        return keys.length == 0 ? <></> : <ul className="lista">{resultado}</ul>;
+        return keys.length == 0 ? <></> : <ListaCategorias>{resultado}</ListaCategorias>;
     }
 
     function selecionaSubcategoria(categorias) {
