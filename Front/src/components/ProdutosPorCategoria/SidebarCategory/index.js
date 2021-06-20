@@ -32,7 +32,7 @@ function SidebarCategory({ carregaCategorias, carregaMaisProdutos, categorias, l
         let resultado = keys.map((key, index) => {
 
             let id = key;
-            let link = <Link to={path + key + location.search} onClick={() => { carregaMaisProdutos(path + key, location.search, 12) }}>{key}</Link>;
+            let link = <Link to={path + key + location.search}>{key}</Link>;
             return <li key={key}>{link}</li>;
         });
 

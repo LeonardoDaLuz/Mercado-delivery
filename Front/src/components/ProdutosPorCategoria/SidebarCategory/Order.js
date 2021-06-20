@@ -17,11 +17,8 @@ function Order_({ location, carregaMaisProdutos }) {
     function aplicaOrdem(e) {
 
         query.set("sort", e.target.value);
-
         history.push(location.pathname + "?" + query.toString());
-        carregaMaisProdutos(location.pathname, query, 12);
-
-    }
+      }
     return (<>
         <h4>Ordem</h4>
         <OrdemSelectForm >

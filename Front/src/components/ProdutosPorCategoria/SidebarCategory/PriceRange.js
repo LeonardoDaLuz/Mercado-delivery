@@ -34,7 +34,6 @@ function PriceRange_({ location, carregaMaisProdutos }) {
             query.delete("maiorPreco")
 
         history.push(location.pathname + "?" + query);
-        carregaMaisProdutos(location.pathname, query, 12);
     }
 
     return (<>
