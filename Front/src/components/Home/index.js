@@ -1,14 +1,14 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { OfertasDoDia } from './OfertasDoDia';
+import { ProductCarousel } from './ProductCarousel';
 import { Caroulsel } from './Carousel';
 
 function Home_() {
     return ( 
         <>
             <Caroulsel />
-            <OfertasDoDia title='Bebidas' path='/produtos/Bebidas' query=''/><br />
-            <OfertasDoDia title='Ofertas do Dia' path='/produtos/Alimentos/Doces%20e%20sobremesas' query=''/>
+            <ProductCarousel title='Bebidas' path='/produtos/Bebidas' query=''/><br />
+            <ProductCarousel title='Ofertas do Dia' path='/produtos/Alimentos/Doces%20e%20sobremesas' query=''/>
         </>
     )
 }

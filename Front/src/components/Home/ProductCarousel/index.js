@@ -10,7 +10,7 @@ import { ProductCard } from "./ProductCard";
 import { carregaMaisProdutos } from '@actions/produtos';
 import { combinePathWithQuery } from "../../../utils/combinePathWithQuery";
 
-function OfertasDoDia_({ title, produtos, path, query, carregaMaisProdutos }) {
+function ProductCarousel_({ title, produtos, path, query, carregaMaisProdutos }) {
 
     useEffect(() => {
         carregaMaisProdutos(path, query, 12);
@@ -53,4 +53,4 @@ const mapStateToProps = (store) => ({
 const mapDispatchToProps = (dispatch) =>
     bindActionCreators({ carregaMaisProdutos }, dispatch)
 
-export const OfertasDoDia = connect(mapStateToProps, mapDispatchToProps)(OfertasDoDia_);
+export const ProductCarousel = connect(mapStateToProps, mapDispatchToProps)(ProductCarousel_);
