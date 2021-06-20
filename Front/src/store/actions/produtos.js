@@ -20,7 +20,7 @@ export const carregaMaisProdutos = (path, query, quantidade) => {
         if (!query.startsWith('?'))
             query = '?' + query;
 
-        const { produtos } = getState();
+        const produtos = getState().produtos.mainSearch;
         const aPartirDe = produtos.length;
         if (path[path.length - 1] !== "/")
             path += "/";

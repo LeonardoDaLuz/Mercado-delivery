@@ -74,7 +74,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
 
 
 const mapStateToProps = store => ({
-    produtos: store.produtos
+    produtos: store.produtos.mainSearch
 })
 
 

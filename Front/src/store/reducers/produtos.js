@@ -10,19 +10,23 @@ import {
     CARREGA_MAIS_PRODUTOS_FAILURE,
     RESETA_LISTA_PRODUTOS
 } from '../types'
+import produce from 'immer';
 
+const initialState = {
+    mainSearch: [],    
+};
 
-const initialState = [];
-
-const produtos = (state = initialState, action) => {
+const produtos = produce((draftState, action) => {
     switch (action.type) {
         case CARREGA_MAIS_PRODUTOS_SUCCESS:
-            return state.concat(action.payload);
+            draftState.mainSearch = draftState.mainSearch.concat(action.payload);
+            break
         case RESETA_LISTA_PRODUTOS:
-            return [];
+            draftState.mainSearch = [];
+            break;
         default:
-            return state;
+            return draftState;
     }
-}
+}, initialState);
 
 export default produtos;
