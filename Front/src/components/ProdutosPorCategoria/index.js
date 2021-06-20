@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useHistory, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -13,7 +13,7 @@ import { carregaMaisProdutos, reiniciaListaDeProdutos } from '../../store/action
 import { combinePathWithQuery } from '../../utils/combinePathWithQuery';
 
 
-function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDeProdutos, location, history }) {
+function ProdutosPorCategoria({ produtos, carregaMaisProdutos, location, history }) {
 
 
     let query = location.search;
@@ -22,35 +22,32 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
     produtos = produtos[combinePathWithQuery(path, query)];
     produtos = produtos === undefined ? [] : produtos;
 
+    const listaDeProdutosElem = useRef(null);
+
 
     useEffect(() => {
-
 
         ligarInfiniteLoader();
 
         return desligaInfiniteLoader;
 
-    }, [])
-
+    }, [location.pathname, location.search])
 
     async function ligarInfiniteLoader() {
 
-        await reiniciaListaDeProdutos(path, query, 12);
-        await window.waitForSeconds(0.5);
-
         let tries = 5;
-        while (document.body.clientHeight < window.innerHeight && tries > 0) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
+        while (listaDeProdutosElem.current.clientHeight < window.innerHeight && tries > 0) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
 
             tries--;
             await carregaMaisProdutos(path, query, 12);
             await window.waitForSeconds(0.5);
         }
 
-        window.addEventListener("scroll", infiniteLoadOnScroll);
+        window.onscroll = infiniteLoadOnScroll;
     }
 
     function desligaInfiniteLoader() {
-        window.removeEventListener("scroll", infiniteLoadOnScroll);
+        window.onscroll = null;
     }
 
     async function infiniteLoadOnScroll(e) { //carrega mais produtos a medida que dá scroll (infinite loader)
@@ -67,7 +64,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, reiniciaListaDePr
     return (
         <Container>
             <SidebarCategory />
-            <ListaDeProdutos>
+            <ListaDeProdutos ref={listaDeProdutosElem}>
 
                 {produtoCards}
 
