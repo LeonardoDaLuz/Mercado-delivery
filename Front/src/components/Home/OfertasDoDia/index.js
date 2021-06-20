@@ -1,4 +1,4 @@
-import { OfertasDoDiaContainer } from "../styles";
+import { OfertasDoDiaContainer } from "./styles";
 import React, { useEffect, useRef } from "react";
 import { connect } from "react-redux";
 import { carregarImagensCarousel } from "../../../store/actions/carousel";
@@ -7,22 +7,38 @@ import { CenterContainer } from "../../../globalStyleds";
 import { loadHome } from '@actions/home';
 import Slider from 'react-slick';
 import { ProductCard } from "./ProductCard";
+import { carregaMaisProdutos } from '@actions/produtos';
+import { combinePathWithQuery } from "../../../utils/combinePathWithQuery";
 
-function OfertasDoDia_({ home, loadHome }) {
+function OfertasDoDia_({ title, produtos, path, query, carregaMaisProdutos }) {
 
     useEffect(() => {
-        loadHome();
+        carregaMaisProdutos(path, query, 12);
     }, [])
 
+    produtos = produtos[combinePathWithQuery(path, query)];
+    produtos = produtos === undefined ? [] : produtos;
+
+    const settings = {
+        dots: false,
+        infinite: true,
+        slidesToShow: 5,
+        variableWidth: false,
+        autoplay: false,
+        adaptativeHeight: false,
+        pauseOnHover: true,
+
+    }
 
     return (
 
         <OfertasDoDiaContainer>
-            <h2>Ofertas do Dia</h2>
-            asd
-            {home.offerDay.map(item =>
-                <ProductCard product={item} />
-            )}
+            <h2>{title}</h2>
+            <Slider {...settings}>
+                {produtos.map(product =>
+                    <ProductCard product={product} />
+                )}
+            </Slider>
         </OfertasDoDiaContainer>
     )
 }
@@ -31,10 +47,10 @@ function OfertasDoDia_({ home, loadHome }) {
 
 
 const mapStateToProps = (store) => ({
-    home: store.home
+    produtos: store.produtos
 })
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ loadHome }, dispatch)
+    bindActionCreators({ carregaMaisProdutos }, dispatch)
 
 export const OfertasDoDia = connect(mapStateToProps, mapDispatchToProps)(OfertasDoDia_);
