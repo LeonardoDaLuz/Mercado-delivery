@@ -8,7 +8,8 @@ function Home_() {
         <>
             <Caroulsel />
             <ProductCarousel title='Ofertas do Dia' path='/produtos/' query='offer=day'/><br />
-            <ProductCarousel title='Ofertas do Dia' path='/produtos/' query='offer=week'/><br />
+            <ProductCarousel title='Ofertas da Semana' path='/produtos/' query='offer=week'/><br />
+            <ProductCarousel title='Ofertas do Mês' path='/produtos/' query='offer=month'/><br />
       
         </>
     )

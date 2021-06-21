@@ -129,7 +129,12 @@ class ProductsController {
             imgs: product.imgs,
             offer: {
                 ...product.offer,
-                enabled: product.offer.enabled==='true',
+                time_range: {
+                    starts: product.offer.time_range.starts,
+                    ends: product.offer.time_range.ends.replace('T00:00:00.000Z', 'T23:59:59.999Z'),
+                },
+
+                enabled: product.offer.enabled,
                 off_price: parseFloat(product.offer.off_price),
             }
         }
@@ -147,7 +152,7 @@ class ProductsController {
         }
 
         //result.product = product;
-        resp.json({ result: result.result, product: product });
+        resp.json({ result: result.result, product: newProduct });
     }
 
     static async deleteProduct(req, resp) {

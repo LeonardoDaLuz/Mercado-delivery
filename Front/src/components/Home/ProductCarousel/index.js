@@ -19,13 +19,13 @@ function ProductCarousel_({ title, produtos, path, query, carregaMaisProdutos })
     produtos = produtos[combinePathWithQuery(path, query)];
     produtos = produtos === undefined ? [] : produtos;
 
-    if(produtos.length==0)
+    if (produtos.length < 3)
         return <></>
-        
+
     const settings = {
         dots: false,
         infinite: produtos.length < 5 ? false : true,
-        slidesToShow: 5,
+        slidesToShow: (produtos.length > 4 ? 5 : produtos.length),
         variableWidth: false,
         autoplay: false,
         adaptativeHeight: false,
