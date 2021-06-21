@@ -50,6 +50,7 @@ class ProductsController {
             query['offer.time_range.ends'] = { $gt: now.toISOString() }
             query['offer.type'] = offer;
             query['offer.enabled'] = true;
+            query['$where'] =  "this.price > this.offer.off_price";
         }
 
         let keys = Object.keys(req.params);
