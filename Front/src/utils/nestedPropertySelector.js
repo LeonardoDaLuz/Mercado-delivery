@@ -1,4 +1,6 @@
 export const nestedPropertySeletor = (parent, path) => {
+
+
     path = path.split('.');
     let cursorPropertyName = path[0];
 
@@ -10,10 +12,15 @@ export const nestedPropertySeletor = (parent, path) => {
     })
 
     return {
-        get: () => parent[cursorPropertyName],
+        get: () => {
+            if (cursorPropertyName === '') {
+                return parent;
+            }
+            return parent[cursorPropertyName];
+        },
         set: (value) => {
             let type = typeof parent[cursorPropertyName];
-      
+
             switch (type) {
                 case 'number':
                     parent[cursorPropertyName] = parseFloat(value);

@@ -17,7 +17,19 @@ function ProductCard__({ product, adicionarProdutoAoCarrinho }) {
 
     function AdicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(product._id, 1); animarAdicao(e) }
 
-    const offerEnabled = product.offer.enabled;
+    let offerEnabled = product.offer.enabled;
+
+    let now = new Date();
+    let offerStarts = new Date(product.offer.time_range.starts);
+    let offerEnds = new Date(product.offer.time_range.ends);
+
+    if (isNaN(offerStarts.getTime()) ||
+        isNaN(offerEnds.getTime()) ||
+        !(now.getTime() > offerStarts.getTime() && now.getTime() < offerEnds.getTime()) ||
+        product.price < product.offer.off_price
+    ) {
+        offerEnabled = false;
+    }
 
 
     return (
