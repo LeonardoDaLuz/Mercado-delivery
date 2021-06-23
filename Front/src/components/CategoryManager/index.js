@@ -1,4 +1,4 @@
-import { CategoryManager_, Category_, FolderBackground, PathBreadcrumbs, ThumbnailSelector } from "./style";
+import { CategoryManager_, Category_, FolderBackground, PathBreadcrumbs, ThumbnailSelector, EditButton, DeleteButton } from "./style";
 import { Row, Col, ButtonOutline, ButtonFlat } from "../../globalStyleds";
 import { colorTheme } from "../../theme";
 import { nestedPropertySeletor } from "../../utils/nestedPropertySelector";
@@ -278,11 +278,7 @@ export const CategoryManager = withRouter(({ location }) => {
                 {
                     drawPropertiesAsFolder(categories, objectPath, linkPath)
                 }
-                <ThumbnailSelector>
-                    <h4>Thumbnail:</h4>
-                    <img src={assets.imagePlaceholder} />
-                    <ButtonFlat>Change</ButtonFlat>
-                </ThumbnailSelector>
+
             </Row>
         </CategoryManager_>
     );
@@ -299,16 +295,26 @@ function drawPropertiesAsFolder(obj, objectPath, linkPath) {
 
     const currentFolder = nestedPropertySeletor(obj, objectPath).get();
 
+    if (currentFolder === undefined)
+        return <></>;
+
     return (
-        <FolderBackground>
+        <>
+            <FolderBackground>
 
-            {
-                Object.keys(currentFolder).map(key => (<Category key={key} name={key} linkPath={linkPath} />))
+                {
+                    Object.keys(currentFolder).map(key => (<Category key={key} name={key} linkPath={linkPath} />))
 
-            }
-            <hr />
-            <Category_ style={{ backgroundColor: colorTheme.secondary() }}>Adicionar Nova Categoria</Category_>
-        </FolderBackground>
+                }
+                <hr />
+                <Category_ style={{ backgroundColor: colorTheme.secondary() }}><Link>Adicionar Nova Categoria</Link></Category_>
+            </FolderBackground>
+            <ThumbnailSelector>
+                <h4>Thumbnail:</h4>
+                <img src={assets.imagePlaceholder} />
+                <ButtonFlat>Change</ButtonFlat>
+            </ThumbnailSelector>
+        </>
     )
 }
 
@@ -341,10 +347,17 @@ function CategoryBreadcrumbs({ objectPath, rootPath }) {
 
 }
 function Category({ name, linkPath }) {
-    return (
-        <Category_ to={linkPath + name}>
 
-            {name}
+    const [onEdit, setOnEdit] = useState(false);
+    return (
+        <Category_>
+            {onEdit
+                ? <input type='text' value={name}></input>
+                : <Link to={linkPath + name}>{name}</Link>
+            }
+
+            <EditButton onClick={(e)=>setOnEdit(!onEdit)}></EditButton>
+            <DeleteButton>X</DeleteButton>
         </Category_>
     );
 }

@@ -31,13 +31,7 @@ export const FolderBackground = styled.div`
 
 `;
 
-export const Category_ = styled(Link)`
-    padding: 13px;
-    background-color: ${colorTheme.primary};
-    color: ${colorTheme.primaryText};
-    margin: 10px;
-    border-radius: 10px;
-`;
+
 
 export const PathBreadcrumbs = styled.ul`
     list-style: none;
@@ -77,6 +71,53 @@ export const PathBreadcrumbs = styled.ul`
         pointer-events: none;
     }
   
+`;
+
+export const Category_ = styled.div`
+
+    background-color: ${colorTheme.primary};
+    position: relative;
+    margin: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-right: 10px;
+    
+    a {
+        color: ${colorTheme.primaryText};
+        padding: 15px;
+        display: inline-block;
+        text-decoration: none;
+    }
+    input {
+
+        padding: 15px;
+        
+        display: inline-block;
+        text-decoration: none;
+    }
+
+
+`;
+
+export const EditButton = styled.button`
+    width:32px;
+    height: 32px;
+    border: none;
+    border-radius: 3px;
+    background: ${colorTheme.secondary()} url(${assets.editIcon}) no-repeat center;
+    vertical-align: middle;
+    background-size: 70%;
+    filter: invert(100%);
+`;
+
+export const DeleteButton = styled.button`
+    width:32px;
+    height: 32px;
+    vertical-align: middle;
+        border: none;
+        border-radius: 3px;
+        color: ${colorTheme.primaryText};
+        background-color: ${colorTheme.warning(400)};
 `;
 
 export const ThumbnailSelector = styled.div`
