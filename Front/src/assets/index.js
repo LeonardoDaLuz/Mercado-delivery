@@ -12,6 +12,7 @@ import delete_ from './svg/trash.svg';
 import offerTag from './svg/offerTag.svg';
 import offerTag2 from './svg/offerTag2.svg';
 import offerTag3 from './svg/offerTag3.svg';
+import exitFolder from './svg/exitFolder.svg';
 import mercado_delivery_monochrome_white_logo from './svg/mercado_delivery_monochrome_white_logo.svg';
 
 const assets = {
@@ -29,7 +30,8 @@ const assets = {
     delete_,
     offerTag,
     offerTag2,
-    offerTag3
+    offerTag3,
+    exitFolder
 }
 
 export default assets;

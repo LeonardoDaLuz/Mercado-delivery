@@ -1,10 +1,12 @@
-import { CategoryManager_, Category_, FolderBackground, PathBreadcrumbs } from "./style";
-import { Row, Col } from "../../globalStyleds";
+import { CategoryManager_, Category_, FolderBackground, PathBreadcrumbs, ThumbnailSelector } from "./style";
+import { Row, Col, ButtonOutline, ButtonFlat } from "../../globalStyleds";
 import { colorTheme } from "../../theme";
 import { nestedPropertySeletor } from "../../utils/nestedPropertySelector";
 import { useState } from "react";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
+import assets from "../../assets";
+import React from "react";
 
 export const CategoryManager = withRouter(({ location }) => {
 
@@ -272,10 +274,16 @@ export const CategoryManager = withRouter(({ location }) => {
             <h1>Gerenciar Categorias</h1>
             <CategoryBreadcrumbs objectPath={objectPath} />
 
-
-            {
-                drawPropertiesAsFolder(categories, objectPath, linkPath)
-            }
+            <Row style={{ flexWrap: 'wrap' }}>
+                {
+                    drawPropertiesAsFolder(categories, objectPath, linkPath)
+                }
+                <ThumbnailSelector>
+                    <h4>Thumbnail:</h4>
+                    <img src={assets.imagePlaceholder} />
+                    <ButtonFlat>Change</ButtonFlat>
+                </ThumbnailSelector>
+            </Row>
         </CategoryManager_>
     );
 });
@@ -308,17 +316,26 @@ function drawPropertiesAsFolder(obj, objectPath, linkPath) {
 function CategoryBreadcrumbs({ objectPath, rootPath }) {
 
     let pathArray = objectPath.split('.');
+    let exitFolderClasses = pathArray.length === 0 || pathArray[0] === '' ? 'exitFolder disabled' : 'exitFolder';
+    console.log(pathArray);
     return (
         <PathBreadcrumbs>
-            <li>Todos</li>
+            <Link className={exitFolderClasses} to={'/CategoryManager/' + pathArray.slice(0, pathArray.length - 1).join('/')}></Link>
+            <Link key='0' to='/CategoryManager/'>Todas</Link>
 
-            {pathArray.map((item, index) =>
-                <>
-                    <li className='separator'>{'>'}</li>
-                    <Link to={pathArray.slice(0, index+1).join('/')}>{item}</Link>
-                </>
+            {pathArray.map((item, index) => {
+
+                let to = '/CategoryManager/' + pathArray.slice(0, index + 1).join('/');
+
+                return (
+                    <React.Fragment key={index}>
+                        <span className='separator'>{'>'}</span>
+                        <Link to={to}>{item}</Link>
+                    </React.Fragment>
+                )
+            }
             )}
-            <li className='separator'>{':'}</li>
+            {objectPath.length > 0 && <span className='separator'>{':'}</span>}
         </PathBreadcrumbs>
     );
 
