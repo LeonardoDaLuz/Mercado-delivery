@@ -28,7 +28,7 @@ function Category__({ name, linkPath, objectPath, categoryRename }) {
 
     return (
         <Category_>
-            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={(e) => setEditedName(e.target.value)}
+            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={(e) => setEditedName(e.target.value.replace(/[`~!@#$%^&*()_|+\-=?;:'".<>\{\}\[\]\\\/]/gi,''))}
                 onClick={
                     () => {
                         if (!onEdit)
