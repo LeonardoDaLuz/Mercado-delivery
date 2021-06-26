@@ -13,31 +13,37 @@ import {
 export const carregaCategorias = () => {
     return async (dispatch, getState) => {
 
-        dispatch({ type: LOAD_CATEGORY_START });
+        let url = `http://localhost:3001/GetCategories`;
 
-        fetch(`http://localhost:3001/GetCategories`)
+        dispatch({ type: LOAD_CATEGORY_START, url });
+
+        fetch(url)
             .then(body => body.json())
             .then(data => {
-                dispatch({ type: LOAD_CATEGORY_SUCCESS, payload: data });
+                dispatch({ type: LOAD_CATEGORY_SUCCESS, url, payload: data });
             })
             .catch(err => {
-                dispatch({ type: RENAME_CATEGORY_FAILURE, payload: err.message })
+                dispatch({ type: RENAME_CATEGORY_FAILURE, url, payload: err.message })
             });
     }
 }
 
-export const categoryRename = () => {
+export const categoryRename = (fieldToRename, newName) => {
     return async (dispatch, getState) => {
 
-        dispatch({ type: RENAME_CATEGORY_START });
+        console.log(fieldToRename);
 
-        fetch(`http://localhost:3001/CalculateCategory`)
+        let url = `http://localhost:3001/RenameCategory/${fieldToRename}/${newName}`;
+
+        dispatch({ type: RENAME_CATEGORY_START, url });
+        
+        fetch(url)
             .then(body => body.json())
             .then(data => {
-                dispatch({ type: RENAME_CATEGORY_SUCCESS, payload: data });
+                dispatch({ type: RENAME_CATEGORY_SUCCESS, url, payload: data });
             })
             .catch(err => {
-                dispatch({ type: RENAME_CATEGORY_FAILURE, payload: err.message })
+                dispatch({ type: RENAME_CATEGORY_FAILURE, url, payload: err.message })
             });
     }
 }

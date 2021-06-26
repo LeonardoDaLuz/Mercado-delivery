@@ -22,7 +22,7 @@ const categories = (state = initialState, action) => {
         case LOAD_CATEGORY_FAILURE:
             return { ...state, isFetching: false, result: 'error' };
         case RENAME_CATEGORY_START:
-            return { ...state, isFetching: true };
+            return state;
         case RENAME_CATEGORY_SUCCESS:
             return { ...state, data: action.payload, isFetching: false, result: 'ok' };
         case RENAME_CATEGORY_FAILURE:
