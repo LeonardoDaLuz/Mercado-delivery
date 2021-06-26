@@ -5,7 +5,7 @@ export const nestedPropertySeletor = (parent, path) => {
     let cursorPropertyName = path[0];
 
     path.forEach((current, index) => {
-        if (index > 0) {
+        if (index > 0 && parent !== undefined) {
             parent = parent[path[index - 1]]
         }
         cursorPropertyName = current;
@@ -13,12 +13,21 @@ export const nestedPropertySeletor = (parent, path) => {
 
     return {
         get: () => {
+
             if (cursorPropertyName === '') {
                 return parent;
             }
+
+            if (parent === undefined)
+                return undefined;
+
             return parent[cursorPropertyName];
         },
         set: (value) => {
+
+            if (parent === undefined)
+                return undefined;
+
             let type = typeof parent[cursorPropertyName];
 
             switch (type) {

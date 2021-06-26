@@ -1,14 +1,17 @@
-import { CategoryManager_, Category_, FolderBackground, PathBreadcrumbs, ThumbnailSelector, EditButton, DeleteButton } from "./style";
+import { CategoryManager_, Category_, FolderBackground, PathBreadcrumbs, ThumbnailSelector, EditButton, DeleteButton, SaveButton, NewCategory } from "./style";
 import { Row, Col, ButtonOutline, ButtonFlat } from "../../globalStyleds";
 import { colorTheme } from "../../theme";
 import { nestedPropertySeletor } from "../../utils/nestedPropertySelector";
-import { useState } from "react";
-import { withRouter } from "react-router";
+import { useEffect, useRef, useState } from "react";
+import { useHistory, withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import assets from "../../assets";
 import React from "react";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import { carregaCategorias } from "@actions/categorias";
 
-export const CategoryManager = withRouter(({ location }) => {
+function CategoryManager__({ location, categories, carregaCategorias }) {
 
 
     let linkPath = location.pathname;
@@ -23,251 +26,9 @@ export const CategoryManager = withRouter(({ location }) => {
         objectPath = objectPath.slice(0, -1);
 
 
-    const categories = {
-        "Alimentos": {
-            "Enlatados e conservas": {
-                "Enlatados e conservas": {
-                    "Outras conservas": {},
-                    "Patês": {},
-                    "Cogumelos": {},
-                    "Azeitonas": {},
-                    "Outros enlatados": {},
-                    "Atum e sardinha": {}
-                }
-            },
-            "Básico da despensa": {
-                "Cafés, chás e achocolatados": {
-                    "Cafés": {},
-                    "Chás": {},
-                    "Cappuccinos e bebidas de café": {},
-                    "Achocolatados": {}
-                },
-                "Óleos e azeites": {
-                    "Azeite": {},
-                    "Óleos vegetais": {}
-                },
-                "Farináceos": {
-                    "Mistura para bolos": {},
-                    "Farinhas": {},
-                    "Outros farináceos": {},
-                    "Mistura para pão": {}
-                },
-                "Açúcar e adoçante": {
-                    "Adoçante": {},
-                    "Outros": {},
-                    "Mel ": {},
-                    "Açúcar": {}
-                },
-                "Grãos e Cereais": {
-                    "Cereais matinais": {},
-                    "Outros grãos": {},
-                    "Outros cereais": {},
-                    "Aveias": {},
-                    "Quinoa": {},
-                    "Arroz": {},
-                    "Grão de bico": {},
-                    "Granola": {},
-                    "Lentilha": {}
-                },
-                "Kits e Cestas": {
-                    "Cheftime": {},
-                    "Kits culinários": {}
-                },
-                "Massas": {
-                    "Massas secas": {},
-                    "Massas frescas": {},
-                    "Massas instantâneas": {}
-                },
-                "Sopas e cremes": {
-                    "Sopas": {},
-                    "Cremes": {}
-                }
-            },
-            "Doces e sobremesas": {
-                "Bomboniere": {
-                    "Chocolate": {},
-                    "Outros": {},
-                    "Balas": {},
-                    "Goma de mascar": {},
-                    "Bombons": {}
-                },
-                "Outros doces": {
-                    "Outros": {},
-                    "Pasta de amendoim": {},
-                    "Doce de leite": {},
-                    "Confeitos": {},
-                    "Pudim e mousses": {},
-                    "Brigadeiro": {}
-                },
-                "Compotas e frutas": {
-                    "Compotas": {}
-                },
-                "Sorvetes": {
-                    "Sorvete de massa": {}
-                }
-            },
-            "Biscoitos, salgadinhos e snacks": {
-                "Biscoitos e bolachas": {
-                    "Biscoitos doces": {},
-                    "Biscoitos salgados": {}
-                },
-                "Salgadinhos e snacks": {
-                    "Aperitivos": {},
-                    "Salgadinhos": {},
-                    "Pipoca": {},
-                    "Outros salgadinhos": {},
-                    "Chips": {}
-                }
-            },
-            "Molhos, temperos e condimentos": {
-                "Molhos e condimentos": {
-                    "Outros molhos": {},
-                    "Temperos secos": {},
-                    "Molhos para salada": {},
-                    "Molhos de pimenta e alho": {},
-                    "Ketchup": {},
-                    "Molhos atomatados": {},
-                    "Vinagres e agrins": {},
-                    "Molhos brancos": {},
-                    "Condimentos prontos e secos": {}
-                },
-                "Sal, caldos e realçadores de sabor": {
-                    "Sal": {},
-                    "Caldos": {}
-                }
-            },
-            "Peixaria": {
-                "Pescados": {
-                    "Peixes congelados": {}
-                },
-                "Frutos do mar": {
-                    "Frutos do mar congelados": {},
-                    "Frutos do mar frescos": {}
-                }
-            },
-            "Queijos e laticínios": {
-                "Laticínios": {
-                    "Iogurte": {},
-                    "Outros": {},
-                    "Cream Cheese": {},
-                    "Margarina": {},
-                    "Chantilly": {},
-                    "Manteiga": {},
-                    "Leites fermentados": {},
-                    "Petit suísse": {}
-                },
-                "Queijos": {
-                    "Queijos ralados": {},
-                    "Queijos frescos": {},
-                    "Queijos macios": {},
-                    "Outros": {}
-                }
-            },
-            "Legumes e verduras": {
-                "Verduras": {
-                    "Verduras frescas": {}
-                },
-                "Temperos": {
-                    "Temperos frescos": {}
-                },
-                "Legumes": {
-                    "Legumes fracionados": {},
-                    "Legumes frescos": {}
-                }
-            },
-            "Sementes e oleaginosas": {
-                "Amendoim": {},
-                "Outros": {},
-                "Castanhas": {}
-            },
-            "Frutas": {
-                "Frutas frescas": {},
-                "Frutas secas": {},
-                "Frutas congeladas": {}
-            },
-            "Congelados": {
-                "Pratos prontos": {
-                    "Massas congeladas": {},
-                    "Pizzas congeladas": {},
-                    "Tortas salgadas e quiches": {},
-                    "Outros": {},
-                    "Refeições congeladas": {}
-                },
-                "Petiscos e salgados": {
-                    "Salgadinhos congelados": {},
-                    "Outros": {}
-                },
-                "Polpas e frutas congeladas": {
-                    "Açaí": {}
-                },
-                "Outros congelados": {
-                    "Outros": {}
-                },
-                "Hambúrgueres e almôndegas": {
-                    "Hambúrguer de carne": {}
-                },
-                "sobremesas prontas": {
-                    "Tortas doces": {}
-                }
-            },
-            "Frios": {
-                "Mortadelas, presuntos e apresuntados": {
-                    "Presunto e apresuntados": {},
-                    "Mortadela": {}
-                },
-                "Outros frios": {
-                    "Outros": {}
-                },
-                "Linguiças e salsichas": {
-                    "Linguiça": {}
-                },
-                "Salame e copa": {
-                    "Salames": {}
-                }
-            },
-            "Carnes e aves": {
-                "Aves": {},
-                "Carnes": {
-                    "Bovina": {},
-                    "Suína": {}
-                }
-            },
-            "Padaria e confeitaria": {
-                "Confeitaria": {
-                    "Bolos prontos": {}
-                },
-                "Padaria": {
-                    "Outros pães": {},
-                    "Torradas": {}
-                }
-            }
-        },
-        "Bebidas": {
-            "Água, sucos e chás": {
-                "Sucos": {},
-                "Chás": {},
-                "Águas": {}
-            },
-            "Refrigerantes": {
-                "Outros": {},
-                "Cola": {},
-                "Guaraná": {},
-                "Limão": {},
-                "Laranja": {}
-            },
-            "Energéticos e isotônicos": {
-                "Energéticos": {},
-                "Isotônicos": {}
-            },
-            "Leites": {
-                "Leite em pó": {},
-                "Leites vegetais": {},
-                "Outros leites": {},
-                "Leite longa vida": {}
-            }
-        }
-    };
-
+    useEffect(()=> {
+        carregaCategorias();
+    }, [])
 
     return (
         <CategoryManager_>
@@ -282,12 +43,13 @@ export const CategoryManager = withRouter(({ location }) => {
             </Row>
         </CategoryManager_>
     );
-});
+};
 
-/**                    Object.keys(obj).map(key => {
-                        return <Category_ key={key}>{key}</Category_>
-                    }) */
+const mapStateToProps = (store) => ({ categories: store.categories.data })
 
+const mapDispatchToProps = (dispatch) => bindActionCreators({ carregaCategorias }, dispatch);
+
+export const CategoryManager = connect(mapStateToProps, mapDispatchToProps)(withRouter(CategoryManager__));
 
 function drawPropertiesAsFolder(obj, objectPath, linkPath) {
     if (obj === undefined)
@@ -307,7 +69,7 @@ function drawPropertiesAsFolder(obj, objectPath, linkPath) {
 
                 }
                 <hr />
-                <Category_ style={{ backgroundColor: colorTheme.secondary() }}><Link>Adicionar Nova Categoria</Link></Category_>
+                <NewCategory><Link>Adicionar Nova Categoria</Link></NewCategory>
             </FolderBackground>
             <ThumbnailSelector>
                 <h4>Thumbnail:</h4>
@@ -346,18 +108,43 @@ function CategoryBreadcrumbs({ objectPath, rootPath }) {
     );
 
 }
+
 function Category({ name, linkPath }) {
 
     const [onEdit, setOnEdit] = useState(false);
+    const [editedName, setEditedName] = useState(name);
+
+    let inputRef = useRef(null);
+    let history = useHistory();
+
     return (
         <Category_>
+            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={
+                (e) => setEditedName(e.target.value)
+            }
+                onClick={
+                    () => {
+                        if (!onEdit)
+                            history.push(linkPath + name);
+                    }
+                } />
+
             {onEdit
-                ? <input type='text' value={name}></input>
-                : <Link to={linkPath + name}>{name}</Link>
+                ?
+                <>
+
+                    <SaveButton onClick={(e) => setOnEdit(!onEdit)}></SaveButton>
+                    <EditButton onClick={(e) => setOnEdit(!onEdit)}></EditButton>
+                </>
+                :
+                <>
+
+                    <EditButton onClick={(e) => { setOnEdit(!onEdit); inputRef.current.focus() }}></EditButton>
+                    <DeleteButton></DeleteButton>
+                </>
             }
 
-            <EditButton onClick={(e)=>setOnEdit(!onEdit)}></EditButton>
-            <DeleteButton>X</DeleteButton>
+
         </Category_>
     );
 }

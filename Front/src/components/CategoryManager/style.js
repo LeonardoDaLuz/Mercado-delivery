@@ -16,7 +16,7 @@ export const CategoryManager_ = styled(Container)`
 
 
 export const FolderBackground = styled.div`
-    background-color: ${colorTheme.neutral(250)};
+    background-color: ${colorTheme.primary(560)};
     display: flex;
     justify-content: center;
     align-items: center;
@@ -24,6 +24,7 @@ export const FolderBackground = styled.div`
     border-radius: 0px 0px 0px 10px;
     flex: 1 1 800px;
     width: 900px;
+
     hr {
         width: 100%;
         border: none;
@@ -81,21 +82,47 @@ export const Category_ = styled.div`
     border-radius: 10px;
     overflow: hidden;
     padding-right: 10px;
-    
+    box-shadow: 0px 5px 0px ${colorTheme.primary(600)}, 3px 5px 4px rgba(0,0,0,0.5);
+    font-weight: 600;
+
     a {
-        color: ${colorTheme.primaryText};
-        padding: 15px;
-        display: inline-block;
-        text-decoration: none;
+
     }
+    
     input {
-
-        padding: 15px;
-        
+         margin: 12px;        
         display: inline-block;
         text-decoration: none;
+        border: none;
+        font-weight: 600;
+        color: ${colorTheme.contentText()};
+        background-color: ${colorTheme.contentBackground()};
+        outline: none;
     }
 
+    input:read-only {
+         margin: 12px;        
+        display: inline-block;
+        text-decoration: none;
+        border: none;
+        font-weight: 600;
+        background-color: transparent;
+        color: ${colorTheme.primaryText()};
+        cursor: pointer;
+     
+    }
+
+
+`;
+
+export const NewCategory = styled(Category_)`
+    background-color: ${colorTheme.tertiary};
+    box-shadow: 0px 5px 0px ${colorTheme.tertiary(700)}, 3px 5px 4px rgba(0,0,0,0.5);
+    padding: 10px 15px;
+    a {
+ 
+    color: ${colorTheme.tertiaryText};
+    }
 
 `;
 
@@ -104,20 +131,48 @@ export const EditButton = styled.button`
     height: 32px;
     border: none;
     border-radius: 3px;
-    background: ${colorTheme.secondary()} url(${assets.editIcon}) no-repeat center;
+    background-color: ${colorTheme.tertiary()};
     vertical-align: middle;
-    background-size: 70%;
-    filter: invert(100%);
+    overflow: hidden;
+    position: relative;
+    margin: 3px;
+    box-shadow: 0px 3px ${colorTheme.tertiary(700)};
+    
+    &:before {
+        content: '';
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background: transparent url(${assets.editIcon}) no-repeat center;
+        background-size: 50%;
+        filter: invert(0%);
+    }
 `;
 
-export const DeleteButton = styled.button`
-    width:32px;
-    height: 32px;
-    vertical-align: middle;
-        border: none;
-        border-radius: 3px;
-        color: ${colorTheme.primaryText};
-        background-color: ${colorTheme.warning(400)};
+export const SaveButton = styled(EditButton)`
+    &:before {
+        content: '';
+        width: 32px;
+        height: 32px;
+        position: absolute;
+        left: 0px;
+        top: 0px;
+        background: transparent url(${assets.saveIcon}) no-repeat center;
+        background-size: 50%;
+        filter: invert(0%);
+    }
+
+
+`;
+
+export const DeleteButton = styled(EditButton)`
+
+    &:before {
+        background: transparent url(${assets.delete_}) no-repeat center;
+    background-size: 70%;
+    }
 `;
 
 export const ThumbnailSelector = styled.div`

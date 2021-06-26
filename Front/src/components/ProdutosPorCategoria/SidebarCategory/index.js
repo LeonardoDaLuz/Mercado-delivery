@@ -87,7 +87,7 @@ function SidebarCategory({ carregaCategorias, carregaMaisProdutos, categorias, l
 }
 
 const mapStateToProps = store => ({
-    categorias: store.categorias,
+    categorias: store.categories.data,
 
 })
 
