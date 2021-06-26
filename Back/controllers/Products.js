@@ -50,7 +50,7 @@ class ProductsController {
             query['offer.time_range.ends'] = { $gt: now.toISOString() }
             query['offer.type'] = offer;
             query['offer.enabled'] = true;
-            query['$where'] =  "this.price > this.offer.off_price";
+            query['$where'] = "this.price > this.offer.off_price";
         }
 
         let keys = Object.keys(req.params);
@@ -98,13 +98,12 @@ class ProductsController {
         if (produto.imgs === undefined)  //Para manter a compatibilidade entre modelos.
             produto.imgs = [produto.img];
 
-        let delay = req.query.delay;
-        if (delay) {
-            console.log("proposeful delay...");
-            await waitForSeconds(delay);
-        }
+        if (produto)
+            console.log('Loaded product: ', produto.title);
+        else
+            console.log('Product not found: ', req.params.id);
 
-        console.log('Loaded product: ', produto);
+
 
         resp.json(produto);
     }
@@ -166,7 +165,7 @@ class ProductsController {
         resp.json(result);
     }
 
-    
+
 }
 
 
