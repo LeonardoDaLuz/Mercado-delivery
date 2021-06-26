@@ -1,12 +1,12 @@
 
-import { Category_, EditButton, DeleteButton, SaveButton } from "./style";
+import { Category_, EditButton, DeleteButton, SaveButton, CategoryProductCount } from "./style";
 import { useRef, useState } from "react";
 import { useHistory } from "react-router";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { categoryRename } from '@actions/categorias';
 
-function Category__({ name, linkPath, objectPath, categoryRename }) {
+function Category__({ name, linkPath, objectPath, categoryRename, categoryObject }) {
 
     const [onEdit, setOnEdit] = useState(false);
     const [editedName, setEditedName] = useState(name);
@@ -28,7 +28,7 @@ function Category__({ name, linkPath, objectPath, categoryRename }) {
 
     return (
         <Category_>
-            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={(e) => setEditedName(e.target.value.replace(/[`~!@#$%^&*()_|+\-=?;:'".<>\{\}\[\]\\\/]/gi,''))}
+            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={(e) => setEditedName(e.target.value.replace(/[`~!@#$%^&*()_|+\-=?;:'".<>\{\}\[\]\\\/]/gi, ''))}
                 onClick={
                     () => {
                         if (!onEdit)
@@ -37,7 +37,7 @@ function Category__({ name, linkPath, objectPath, categoryRename }) {
                 }
                 onKeyDown={onEnter}
             />
-
+            <CategoryProductCount>{categoryObject._quantity}</CategoryProductCount>
             {onEdit
                 ?
                 <>

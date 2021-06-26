@@ -19,7 +19,9 @@ function drawPropertiesAsFolder_(obj, objectPath, linkPath) {
             <FolderBackground>
 
                 {
-                    Object.keys(currentFolder).map(key => (<Category key={key} name={key} linkPath={linkPath} objectPath={objectPath} />))
+                    Object.keys(currentFolder)
+                        .filter(key => key.charAt(0) !== '_')
+                        .map(key => (<Category key={key} name={key} linkPath={linkPath} objectPath={objectPath} categoryObject={currentFolder[key]} />))
 
                 }
                 <hr />
