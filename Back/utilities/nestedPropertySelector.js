@@ -61,6 +61,10 @@ const nestedPropertySeletor = (parent, path) => {
 }
 
 function renameObjectField(object_, fieldName, fieldNewName) {
+
+    if(fieldName===fieldNewName)
+        return;
+        
     Object.keys(object_).forEach(key => {
         if (key === fieldName) {
             object_[fieldNewName] = object_[key];

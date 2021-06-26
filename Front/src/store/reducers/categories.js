@@ -6,30 +6,41 @@ import {
     RENAME_CATEGORY_SUCCESS,
     RENAME_CATEGORY_FAILURE,
 } from '../types'
-
+import { nestedPropertySeletor } from '../../utils/nestedPropertySelector';
+import { produce } from 'immer';
 const initialState = {
     isFetching: false,
     result: 'none',
-    data: {}
+    data: {} //As propriedades __thumb correspondem ao thumbnail da propriedade, que será usado na interface em alguns casos.
 };
 
-const categories = (state = initialState, action) => {
+const categories = produce((state, action) => {
     switch (action.type) {
         case LOAD_CATEGORY_START:
-            return { ...state, isFetching: true };
+            state.isFetching = true;
+            break;
         case LOAD_CATEGORY_SUCCESS:
-            return { ...state, data: action.payload, isFetching: false, result: 'ok' };
+            state.data =  action.payload.data;
+            state.isFetching = false;
+            state.result= 'ok';
+            break;
         case LOAD_CATEGORY_FAILURE:
-            return { ...state, isFetching: false, result: 'error' };
+            state.isFetching = false;
+            state.result = 'error';
+            break;
         case RENAME_CATEGORY_START:
-            return state;
+            nestedPropertySeletor(state.data, action.fieldToRename).renameTo( action.newName);
+            break;
         case RENAME_CATEGORY_SUCCESS:
-            return { ...state, data: action.payload, isFetching: false, result: 'ok' };
+            state.data = action.payload.data;
+            state.isFetching = false;
+            state.result= 'ok';
+            break;
         case RENAME_CATEGORY_FAILURE:
-            return { ...state, isFetching: false, result: 'error' }; 
-        default:
-            return state;
+            state.isFetching = false;
+            state.result = 'error';
+            break;
     }
-}
+}, initialState);
 
 export default categories;

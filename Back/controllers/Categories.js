@@ -1,4 +1,5 @@
-let nestedPropertySeletor  = require('./../utilities/nestedPropertySelector');
+const ObjectId = require("mongodb").ObjectID;
+let nestedPropertySeletor = require('./../utilities/nestedPropertySelector');
 
 class Categories {
     static async calculateCategory(req, resp) {
@@ -12,7 +13,7 @@ class Categories {
             hierarquia = Categories.inclui(p.categories, 0, hierarquia);
 
         });
-        resp.json(hierarquia);
+        resp.json({ result: 'ok', data: hierarquia });
     }
 
     static inclui(listaCategorias, index, hierarquia) {
@@ -36,19 +37,22 @@ class Categories {
 
         delete categories._id;
 
-        resp.json(categories);
+        resp.json({ result: 'ok', data: categories });
     }
 
     static async renameCategory(req, resp) {
         console.log("obtendo categorias");
 
-        let categories = await global.conn.collection("categories").findOne({});   
+        let categories = await global.conn.collection("categories").findOne({});
 
         nestedPropertySeletor(categories, req.params.from).renameTo(req.params.to);
 
+        let _id = categories._id;
         delete categories._id;
-        
-        resp.json(categories);
+
+        let result = await global.conn.collection("categories").updateOne({ _id: new ObjectId(_id) }, { $set: categories });
+
+        resp.json({ result: 'ok', data: categories });
     }
 }
 

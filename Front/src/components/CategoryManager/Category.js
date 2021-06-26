@@ -14,23 +14,35 @@ function Category__({ name, linkPath, objectPath, categoryRename }) {
     let inputRef = useRef(null);
     let history = useHistory();
 
+    function sendToRename() {
+        categoryRename(objectPath + '.' + name, editedName);
+        setOnEdit(!onEdit)
+    }
+
+    function onEnter(e) {
+        if (e.key === 'Enter') {
+            sendToRename();
+            setOnEdit(!onEdit)
+        }
+    }
+
     return (
         <Category_>
-            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={
-                (e) => setEditedName(e.target.value)
-            }
+            <input type='text' readOnly={!onEdit} ref={inputRef} value={editedName} style={{ width: (editedName.length * 0.95 + 1) + 'ch' }} onChange={(e) => setEditedName(e.target.value)}
                 onClick={
                     () => {
                         if (!onEdit)
                             history.push(linkPath + name);
                     }
-                } />
+                }
+                onKeyDown={onEnter}
+            />
 
             {onEdit
                 ?
                 <>
 
-                    <SaveButton onClick={(e) => categoryRename(objectPath + '.' + name, editedName)}></SaveButton>
+                    <SaveButton onClick={sendToRename} ></SaveButton>
                     <EditButton onClick={(e) => setOnEdit(!onEdit)}></EditButton>
                 </>
                 :

@@ -44,6 +44,30 @@ export const nestedPropertySeletor = (parent, path) => {
                     parent[cursorPropertyName] = value;
             }
 
+        },
+        renameTo: (newName) => {
+
+            if (parent === undefined)
+                return;
+
+            renameObjectField(parent, cursorPropertyName, newName);       
         }
     }
+}
+
+function renameObjectField(object_, fieldName, fieldNewName) {
+
+    if(fieldName===fieldNewName)
+        return;
+
+    Object.keys(object_).forEach(key => {
+        if (key === fieldName) {
+            object_[fieldNewName] = object_[key];
+            delete object_[key];
+        } else {
+            let backup = object_[key];
+            delete object_[key];
+            object_[key] = backup;
+        }
+    });
 }

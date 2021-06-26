@@ -35,7 +35,7 @@ export const categoryRename = (fieldToRename, newName) => {
 
         let url = `http://localhost:3001/RenameCategory/${fieldToRename}/${newName}`;
 
-        dispatch({ type: RENAME_CATEGORY_START, url });
+        dispatch({ type: RENAME_CATEGORY_START, url, fieldToRename, newName });
         
         fetch(url)
             .then(body => body.json())
