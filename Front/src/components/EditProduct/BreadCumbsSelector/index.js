@@ -5,7 +5,7 @@ import { bindActionCreators } from "redux";
 import { BreadcumbNav, SelectionCategory } from "./styles";
 import { carregaCategorias } from '@actions/categorias';
 
-function BreadCumbsSelector_({ draftProduct, carregaCategorias, categorias: categoriesOptionsHierarchy, changeBreadcumb }) {
+function BreadCumbsSelector_({ draftProduct, carregaCategorias, categories, changeBreadcumb }) {
 
     useEffect(() => {
         carregaCategorias();
@@ -15,12 +15,12 @@ function BreadCumbsSelector_({ draftProduct, carregaCategorias, categorias: cate
 
 
 
-    let CategoriesSelectors = DrawCategorySelector(categoriesOfThisProduct, 0, categoriesOptionsHierarchy);
+    let CategoriesSelectors = DrawCategorySelector(categoriesOfThisProduct, 0, categories);
 
 
     function DrawCategorySelector(categoriesOfThisProduct, currentDepthIndex, CurrentCategoriesOptions) {
 
-        let keys = Object.keys(CurrentCategoriesOptions);
+        let keys = Object.keys(CurrentCategoriesOptions).filter(key=>key.charAt(0)!=="_");
 
         if (keys.length === 0)
             return <></>;
@@ -62,7 +62,7 @@ function BreadCumbsSelector_({ draftProduct, carregaCategorias, categorias: cate
 }
 
 const mapStateToProps = store => ({
-    categorias: store.categorias,
+    categories: store.categories.data,
 })
 
 const mapDispatchToProps = dispatch =>

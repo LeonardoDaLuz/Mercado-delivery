@@ -116,7 +116,7 @@ export const Category_ = styled.div`
 export const CategoryProductCount = styled.span`
     flex: 1 1 20px;
     background-color: ${colorTheme.primary(200)};
-    border-radius: 15px;
+    border-radius: 20px;
     padding: 3px;
     font-size: 12px;
     color: black;

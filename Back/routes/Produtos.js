@@ -10,6 +10,12 @@ module.exports = (app) => {
 
     app.get("/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:to", ProductsController.listProducts);
 
+    app.get("/products/", ProductsController.listProducts);
+
+    app.get("/products/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:from/:to", ProductsController.listProducts);
+    
+    app.get("/products/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:to", ProductsController.listProducts);
+
     app.put("/produto/", ProductsController.updateProduct);
 
     app.get("/produto/:id", ProductsController.getProduct);    

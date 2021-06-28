@@ -17,6 +17,7 @@ export const ListaDeProdutos = styled.ul.attrs({
     className: "col-9"
 })`
     display: flex;
+    flex: 1 1 300px;
     /*width: 100%;
     max-width: 75%;*/
     flex-wrap: wrap;

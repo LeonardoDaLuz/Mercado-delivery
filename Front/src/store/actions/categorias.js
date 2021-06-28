@@ -10,7 +10,7 @@ import {
 
 
 
-export const carregaCategorias = () => {
+export const loadCategories = () => {
     return async (dispatch, getState) => {
 
         let url = `http://localhost:3001/GetCategories`;
@@ -27,6 +27,8 @@ export const carregaCategorias = () => {
             });
     }
 }
+
+export const carregaCategorias = loadCategories;
 
 export const categoryRename = (fieldToRename, newName) => {
     return async (dispatch, getState) => {

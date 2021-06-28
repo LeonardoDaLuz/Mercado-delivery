@@ -58,6 +58,9 @@ export default withRouter(class App extends Component {
             <Route path="/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
               <ProdutosPorCategoria loja={this.loja} />
             </Route>
+            <Route path="/products/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
+              <ProdutosPorCategoria loja={this.loja} />
+            </Route>
             <Route path="/CategoryManager" >
               <CategoryManager />
             </Route>

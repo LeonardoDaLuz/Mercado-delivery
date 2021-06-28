@@ -6,14 +6,16 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-export function SlickLightBox({ showState = true, imgs, currentSelectedImage, setCurrentSelectedImage, setStateShow }) {
+export function SlickLightBox({ showState = true, imgs, selectedImageId, setSelectedImageId, setStateShow }) {
     const slickSettings = {
         infinite: true,
         slidesToShow: 1,
         variableHeight: false,
-        initialSlide: currentSelectedImage,
-        afterChange: (currentSlide) => setCurrentSelectedImage(currentSlide),
+        initialSlide: selectedImageId,
+        afterChange: (currentSlide) => setSelectedImageId(currentSlide),
     }
+
+    console.log("eita", imgs);
 
     if (showState)
         return (
@@ -22,8 +24,10 @@ export function SlickLightBox({ showState = true, imgs, currentSelectedImage, se
                     <CloseButton />
                 </BlackBackground>
                 <Slider {...slickSettings} style={{ height: '100%' }}>
-                    {imgs.map((img, index) =>
-                        <Center><img key={index} src={configs.imgsPath + img} /></Center>
+                    {imgs.map((img, index) => {
+                        console.log(img, index);
+                        return <Center key={img}><img src={configs.imgsPath + img} /></Center>
+                    }
                     )}
                 </Slider>
             </SlickLightBoxContainer>
