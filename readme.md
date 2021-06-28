@@ -1,5 +1,5 @@
 <h1>Mercado delivery</h1>
-<p>Work in progress...</p>
+<h2>Work in progress...</h2>
 <p>Home primeiras versões</p>
 <img src="https://github.com/LeonardoDaLuz/Mercado-delivery/blob/main/outros/Screenshot19-Home-primeiras-versoes.gif?raw=true" />
 <p>Filtragem de produtos</p>
