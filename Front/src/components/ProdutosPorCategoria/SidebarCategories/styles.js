@@ -79,7 +79,7 @@ export const OrdemSelectForm = styled.form`
         border: 1px solid rgb(172, 172, 172);
     }
 
-    
+    margin-bottom: 20px;
 
 
 
