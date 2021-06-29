@@ -49,8 +49,22 @@ export const QuantityBlock = styled.div`
     }
     input {
         flex: 1 1 20px;
+        width: 100%;
+        border: 1px solid #ced4da;
+        border-left: none;
+        border-right: none;
+        text-align: center;
+        border-radius: 0px;
+    }
+
+    button:first-child {
+        border-radius: 10px 0px 0px 10px;
+    }
+    button:last-child {
+        border-radius: 0px 10px 10px 0px;
     }
 `;
+
 
 export const ButtonOutline_ = styled(ButtonOutline)`
 
@@ -113,7 +127,7 @@ export const OfferBody = styled.div`
     margin-bottom: 20px;
 
     &>div {
-        flex: 1 1 120px;
+        flex: 1 1 180px;
         box-sizing: border-box;
         padding: 5px;    
         position: relative;

@@ -14,24 +14,24 @@ import { filtraFloat } from '../../../utils/InputFilters';
 import { LogRender } from '../../../utils/logRender';
 
 function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) {
-
-    function filterAndChangePrice(e) {
-        let { name, value } = e.target;
-
-        value = value.replace(/^,|[^0-9.,]/g, '');
-
-
-        var t = 0;
-        value = value.replaceAll(',', function (match) { //remove apenas a segunda ocorrência de virgula
-            t++;
-            return (t === 2) ? '' : match;
-        });
-
-        value = value.replace('.', ',');
-
-        handleChanges({ target: { value, name } });
-        console.log(value);
-    }
+    /*
+        function filterAndChangePrice(e) {
+            let { name, value } = e.target;
+    
+            value = value.replace(/^,|[^0-9.,]/g, '');
+    
+    
+            var t = 0;
+            value = value.replaceAll(',', function (match) { //remove apenas a segunda ocorrência de virgula
+                t++;
+                return (t === 2) ? '' : match;
+            });
+    
+            value = value.replace('.', ',');
+    
+            handleChanges({ target: { value, name } });
+            console.log(value);
+        }*/
 
 
     //computa o tempo e seus formatos
@@ -39,10 +39,12 @@ function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) 
     let _offerStarts = new Date(draftProduct.offer.time_range.starts);
     let _offerEnds = new Date(draftProduct.offer.time_range.ends);
 
-    if (_offerEnds.getTime() < _offerStarts.getTime())
+    if (_offerEnds.getTime() < _offerStarts.getTime()) { //impede que a data de inicio seja maior que a de fim
         _offerEnds = _offerStarts;
+        handleChanges({ target: { name: 'offer.time_range.ends', value: _offerStarts, } });
+    }
 
-   
+
 
     let offerStartsString = convertDateToInputDateValue(_offerStarts);
     let offerEndsString = convertDateToInputDateValue(_offerEnds);
@@ -95,7 +97,7 @@ function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) 
                             name='offer.enabled'
                             value={true}
                             onClick={handleChanges}
-                            disabled={draftProduct.offer.enabled == 'true'}>
+                            disabled={draftProduct.offer.enabled == true}>
                             Ativar oferta
                         </ButtonFlat>
                         <ButtonFlat
@@ -103,7 +105,7 @@ function BuyFrame({ draftProduct, handleChanges, draftStatus, discardChanges }) 
                             name='offer.enabled'
                             value={false}
                             onClick={handleChanges}
-                            disabled={draftProduct.offer.enabled == 'false'}>
+                            disabled={draftProduct.offer.enabled == false}>
                             Desativar oferta</ButtonFlat>
                     </Row>
 
@@ -130,7 +132,7 @@ function SaveStatus({ draftStatus }) {
 }
 
 function convertDateToInputDateValue(date) {
-    if(isNaN(date.getTime())) {
+    if (isNaN(date.getTime())) {
         return new Date().toISOString().substring(0, 10)
     }
 

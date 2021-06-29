@@ -63,15 +63,14 @@ export const ContainerLg = styled.div`
 export const NavbarLogo = styled(Link)`
     flex: 0 0 50px;
     height: 48px;
-    background-image: url(${assets.logoAlpha});
-    background-repeat: no-repeat;
-    background-position: center;  
+    background: transparent url(${assets.mercado_delivery_isolated_logo}) no-repeat center;
+    background-size: auto 85%;
 
     @media screen and (min-width: 992px) {
  
-        flex-basis: 289px;
-        background-image: url(${assets.LogoExtended48px});
-    
+        flex-basis: 259px;
+        background: transparent url(${assets.mercado_delivery_default_logo}) no-repeat left center;
+        background-size: auto 85%;
     }
 `
 
@@ -138,7 +137,10 @@ export const MenuPrincipal = styled.ul`
 
     @media screen and (max-width: 992px) {       
         li {
-            display: none;
+            display: none;            
+        }
+        .d-block {
+            display: block;
         }
     }
 `;
@@ -151,7 +153,8 @@ export const Carrinho = styled.a`
     display: block;
     width: 35px;
     height: 50px;
-    background: transparent url(${assets.carrinho}) center center / auto no-repeat;
+    background: transparent url(${assets.carrinho}) no-repeat center;
+    background-size: contain;
 
     .quantidade {
         position: absolute;

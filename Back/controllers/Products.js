@@ -46,9 +46,11 @@ class ProductsController {
             let now = new Date();
             let timeZoneOffset = now.getTimezoneOffset();
             now.setMinutes(now.getMinutes() - timeZoneOffset); //Ajuste devido ao fuso horário. o TimezoneOffset vale 180, oq significa 3 horas no fuso horário.
-            query['offer.time_range.starts'] = { $lt: now }
-            query['offer.time_range.ends'] = { $gt: now }
+            query['offer.time_range.starts'] = { $lt: now.toISOString() }
+            query['offer.time_range.ends'] = { $gt: now.toISOString() }
             query['offer.type'] = offer;
+            query['offer.enabled'] = true;
+            query['$where'] = "this.price > this.offer.off_price";
         }
 
         let keys = Object.keys(req.params);
@@ -96,13 +98,12 @@ class ProductsController {
         if (produto.imgs === undefined)  //Para manter a compatibilidade entre modelos.
             produto.imgs = [produto.img];
 
-        let delay = req.query.delay;
-        if (delay) {
-            console.log("proposeful delay...");
-            await waitForSeconds(delay);
-        }
+        if (produto)
+            console.log('Loaded product: ', produto.title);
+        else
+            console.log('Product not found: ', req.params.id);
 
-        console.log('Loaded product: ', produto);
+
 
         resp.json(produto);
     }
@@ -128,6 +129,12 @@ class ProductsController {
             imgs: product.imgs,
             offer: {
                 ...product.offer,
+                time_range: {
+                    starts: product.offer.time_range.starts,
+                    ends: product.offer.time_range.ends.replace('T00:00:00.000Z', 'T23:59:59.999Z'),
+                },
+
+                enabled: product.offer.enabled,
                 off_price: parseFloat(product.offer.off_price),
             }
         }
@@ -145,7 +152,7 @@ class ProductsController {
         }
 
         //result.product = product;
-        resp.json({ result: result.result, product: product });
+        resp.json({ result: result.result, product: newProduct });
     }
 
     static async deleteProduct(req, resp) {
@@ -158,7 +165,7 @@ class ProductsController {
         resp.json(result);
     }
 
-    
+
 }
 
 

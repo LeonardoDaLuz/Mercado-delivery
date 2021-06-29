@@ -6,28 +6,28 @@ const path = require('path');
 class CarouselController {
 
     static adicionaImagem(req, res, next) {
-            saveFilesFromRequisitionOnDisk(req, 'public/img/uploads/carousel/', Date.now())
-                .then(async filePathList => {
-                    await saveFilePathsOnDb(filePathList);
-                    CarouselController.obterImagens(res, next);
-                }).catch(err => {
-                    res.status(400).send('error');
-                })
+        saveFilesFromRequisitionOnDisk(req, 'public/img/uploads/carousel/', Date.now())
+            .then(async filePathList => {
+                await saveFilePathsOnDb(filePathList);
+                CarouselController.obterImagens(req, res);
+            }).catch(err => {
+                res.status(400).send('error');
+            })
 
     }
 
-    static async obterImagens(res) {
+    static async obterImagens(req, res) {
         let listaImagens = await global.conn.collection('imagens_carrossel').find({}).toArray();
-        setTimeout(() =>
-            res.json({ images: listaImagens })
-            , 1000)
+
+        res.json({ images: listaImagens })
+
     }
 
     static async deletarImagens(req, res, next) {
-            let _id = new ObjectId(req.params.id);
-            let image = await global.conn.collection("imagens_carrossel").findOneAndDelete({ _id });
-            deleteFile("public/" + image.value.path);
-            CarouselController.obterImagens(req, res, next);
+        let _id = new ObjectId(req.params.id);
+        let image = await global.conn.collection("imagens_carrossel").findOneAndDelete({ _id });
+        deleteFile("public/" + image.value.path);
+        CarouselController.obterImagens(req, res, next);
     }
 }
 

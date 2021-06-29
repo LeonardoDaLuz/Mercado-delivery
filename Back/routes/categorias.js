@@ -1,34 +1,12 @@
 
 const { resolveInclude } = require('ejs');
 var express = require('express');
+let Categories = require('../controllers/Categories');
 
 module.exports = (app) => {
-    app.get("/calculaCategoria", async function (req, resp) {
-        console.log("calculando categorias");
+    app.get("/CalculateCategory", Categories.calculateCategory);   
 
-        produtosColecao = await global.db.findAll("produtos");
+    app.get("/GetCategories", Categories.getCategories);
 
-        let hierarquia = {};
-
-        produtosColecao.forEach(p => {
-            hierarquia = inclui(p.categories, 0, hierarquia);
-
-        });
-        resp.json(hierarquia);
-    });
-
-    function inclui(listaCategorias, index, hierarquia) {
-        if(listaCategorias[index] === undefined)
-        {
-            return hierarquia;
-        }
-    
-        if (hierarquia[listaCategorias[index]] == undefined) {
-            hierarquia[listaCategorias[index]] = inclui(listaCategorias, index + 1, {});
-        } else {
-            hierarquia[listaCategorias[index]] = inclui(listaCategorias, index + 1, hierarquia[listaCategorias[index]]);
-        }
-
-        return hierarquia;
-    }
+    app.get("/RenameCategory/:from/:to", Categories.renameCategory);
 }

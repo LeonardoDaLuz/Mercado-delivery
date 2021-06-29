@@ -12,7 +12,7 @@ import { ProductDescription } from './ProductDescription';
 //Others
 import { carregaProduto, deleteProduct } from '@actions/produto'
 //import './style.css';
-import { Row } from '../../globalStyleds';
+import { Container, Row } from '../../globalStyleds';
 import { LogRender } from '../../utils/logRender';
 
 function Produto({ carregaProduto, produto, loja, match }) {
@@ -23,7 +23,7 @@ function Produto({ carregaProduto, produto, loja, match }) {
 
     //LogRender({ produto }, "Produto");
     return (
-        <div className="container-lg px-2 produto-page">
+        <Container>
             <Row>
                 <BreadCumbs product={produto} />
                 <AdminOptions product={produto}/>
@@ -34,7 +34,7 @@ function Produto({ carregaProduto, produto, loja, match }) {
                 <BuyFrame product={produto} />
                 <ProductDescription product={produto} />
             </Row>
-        </div >
+        </Container >
     );
 
 }

@@ -1,14 +1,16 @@
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { OfertasDoDiaContainer } from './styles';
-import { OfertasDoDia } from './OfertasDoDia';
+import { ProductCarousel } from './ProductCarousel';
 import { Caroulsel } from './Carousel';
 
 function Home_() {
     return ( 
         <>
             <Caroulsel />
-            <OfertasDoDia />
+            <ProductCarousel title='Ofertas do Dia' path='/produtos/' query='offer=day'/><br />
+            <ProductCarousel title='Ofertas da Semana' path='/produtos/' query='offer=week'/><br />
+            <ProductCarousel title='Ofertas do Mês' path='/produtos/' query='offer=month'/><br />
+      
         </>
     )
 }

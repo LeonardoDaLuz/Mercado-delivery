@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   data-v-423bf9ae=""
+   viewBox="0 0 101 92"
+   class="iconLeftSlogan"
+   version="1.1"
+   id="svg20"
+   sodipodi:docname="mercado_delivery_isolated_logo.svg"
+   width="101"
+   height="92"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview22"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:pageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="3.7364462"
+     inkscape:cx="120.30148"
+     inkscape:cy="16.45949"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
+     inkscape:window-x="1791"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg20" />
+  <!---->
+  <!---->
+  <!---->
+  <defs
+     data-v-423bf9ae=""
+     id="defs10">
+    <linearGradient
+       data-v-423bf9ae=""
+       gradientTransform="rotate(25)"
+       id="4cb2de5b-4a90-43cc-90d0-d61dfda8ed2b"
+       x1="0"
+       y1="0"
+       x2="1"
+       y2="0">
+      <stop
+         data-v-423bf9ae=""
+         offset="0%"
+         style="stop-color: rgb(102, 108, 53); stop-opacity: 1;"
+         id="stop5" />
+      <stop
+         data-v-423bf9ae=""
+         offset="100%"
+         style="stop-color: rgb(119, 214, 54); stop-opacity: 1;"
+         id="stop7" />
+    </linearGradient>
+  </defs>
+  <g
+     data-v-423bf9ae=""
+     id="fea0dc13-87c8-4a90-b1d7-8ddd969dbe0d"
+     transform="matrix(1.0708547,0,0,1.0708547,-0.90102695,-5.4235695)"
+     stroke="none"
+     fill="url(#4cb2de5b-4a90-43cc-90d0-d61dfda8ed2b)">
+    <path
+       d="M 93,29.42 H 86.035 L 84.827,19.025 C 83.977,11.709 70.425,5.978 53.975,5.978 H 42.026 c -16.45,0 -30.002,5.731 -30.853,13.048 L 9.965,29.42 H 3 a 1.5,1.5 0 0 0 -1.5,1.5 v 16.467 a 1.5,1.5 0 0 0 1.5,1.5 h 11.747 l 5.775,39.851 a 1.499,1.499 0 0 0 1.484,1.285 h 51.986 c 0.745,0 1.378,-0.547 1.484,-1.285 L 81.251,48.887 H 93 a 1.5,1.5 0 0 0 1.5,-1.5 V 30.92 A 1.5,1.5 0 0 0 93,29.42 Z M 14.154,19.372 C 14.725,14.455 26.312,8.977 42.026,8.977 h 11.948 c 15.714,0 27.301,5.478 27.872,10.395 l 1.168,10.048 h -7.292 l -0.823,-6.954 c -0.738,-6.235 -14.41,-9.6 -26.899,-9.6 -12.489,0 -26.161,3.365 -26.899,9.601 L 20.278,29.42 H 12.986 Z M 72.702,29.42 H 23.298 l 0.781,-6.601 c 0.344,-2.903 9.61,-6.953 23.921,-6.953 14.311,0 23.577,4.049 23.921,6.953 z m 1.744,45.523 H 59.533 l 1.29,-12.592 H 76.27 Z m -17.928,0 H 38.78 L 37.758,62.351 h 20.05 z M 39.762,87.024 39.025,77.943 H 56.21 l -0.931,9.081 z M 19.729,62.351 H 34.748 L 35.77,74.943 H 21.554 Z m 17.785,-3 -0.85,-10.463 h 22.523 l -1.072,10.463 z m -3.86,-10.463 0.85,10.463 H 19.295 L 17.778,48.888 Z M 21.988,77.943 h 14.026 l 0.737,9.081 H 23.305 Z m 50.707,9.081 h -14.4 l 0.931,-9.081 h 14.786 z m 4.01,-27.673 H 61.131 L 62.203,48.888 H 78.222 Z M 91.5,45.888 H 4.5 V 32.42 h 87 z"
+       id="path12" />
+    <path
+       d="m 16.689,33.966 c -2.861,0 -5.188,2.327 -5.188,5.188 0,2.861 2.327,5.188 5.188,5.188 2.86,0 5.188,-2.328 5.188,-5.188 0,-2.86 -2.327,-5.188 -5.188,-5.188 z m 0,7.376 c -1.207,0 -2.188,-0.982 -2.188,-2.188 0,-1.206 0.981,-2.188 2.188,-2.188 1.206,0 2.188,0.981 2.188,2.188 0,1.207 -0.981,2.188 -2.188,2.188 z m 63.266,3 c 2.861,0 5.188,-2.328 5.188,-5.188 0,-2.86 -2.327,-5.188 -5.188,-5.188 -2.86,0 -5.188,2.327 -5.188,5.188 0,2.861 2.328,5.188 5.188,5.188 z m 0,-7.376 c 1.207,0 2.188,0.981 2.188,2.188 0,1.207 -0.981,2.188 -2.188,2.188 -1.206,0 -2.188,-0.982 -2.188,-2.188 0,-1.206 0.982,-2.188 2.188,-2.188 z"
+       id="path14" />
+  </g>
+  <!---->
+</svg>

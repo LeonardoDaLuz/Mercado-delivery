@@ -5,7 +5,7 @@ export const Options_ = styled.div`
 
     display: flex;
     flex: 0 1 280px;
-    align-items: flex-start;
+    align-items: center;
 
 
     &>* {

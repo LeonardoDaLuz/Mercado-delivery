@@ -8,21 +8,31 @@ import {
     CARREGA_MAIS_PRODUTOS_START,
     CARREGA_MAIS_PRODUTOS_SUCCESS,
     CARREGA_MAIS_PRODUTOS_FAILURE,
-    RESETA_LISTA_PRODUTOS
+    RESETA_LISTA_PRODUTOS,
+    RESET_PRODUCT_LIST
 } from '../types'
+import produce from 'immer';
 
+const initialState = {
+    mainSearch: [],
+};
 
-const initialState = [];
-
-const produtos = (state = initialState, action) => {
+const produtos = produce((draftState, action) => {
     switch (action.type) {
         case CARREGA_MAIS_PRODUTOS_SUCCESS:
-            return state.concat(action.payload);
+            let previous = draftState[action.path + action.query];
+            previous = previous === undefined ? [] : previous;
+            draftState[action.path + action.query] = previous.concat(action.payload);
+            break
         case RESETA_LISTA_PRODUTOS:
-            return [];
+            draftState.mainSearch = [];
+            break;
+        case RESET_PRODUCT_LIST:
+            Object.keys(draftState).forEach(key=>draftState[key]=[]);
+            break;
         default:
-            return state;
+            return draftState;
     }
-}
+}, initialState);
 
 export default produtos;

@@ -4,7 +4,7 @@
 
 /Back/public/img/
 /Back/public/img/**
-**/mongodb_database
+**/mongodb_database/journal
 **/node_modules
 /node_modules
 /.pnp

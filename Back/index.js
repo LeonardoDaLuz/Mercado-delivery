@@ -5,6 +5,7 @@ var express = require('express');
 const { NetworkAuthenticationRequire } = require('http-errors');
 //const cors = require('cors');
 var consign = require('consign');
+const waitForSeconds = require('./utilities/waitForSeconds');
 
 
 main();
@@ -29,7 +30,16 @@ async function main() {
         next();
     });
 
+    app.use(async function (req, res, next) {
 
+        let delay = req.query.delay;
+        if (delay) {
+            console.log('\x1b[36m%s\x1b[0m', "proposeful delay...");
+            await waitForSeconds(delay);
+        }
+
+        next();
+    });
 
     consign()
         .include('routes') //incorpora todo codigo dentro dessa pasta, para dentro do app.
@@ -37,7 +47,7 @@ async function main() {
 
 
     app.use((error, req, resp, next) => {
-        console.log("\x1b[31m", error.stack);
+        console.log('\x1b[31m%s\x1b[0m', error.stack);
 
         if (env === 'dev') {
             resp.status(500).send("INTERNAL SERVER ERROR: \n\n" + error.stack);

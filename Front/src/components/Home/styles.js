@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CenterContainer } from "../../globalStyleds";
+import { Container } from "../../globalStyleds";
 
 export const CarrouselContainer = styled.div`
     background-color: black;
@@ -15,7 +15,7 @@ text-align: center;
     }
 `;
 
-export const OfertasDoDiaContainer = styled(CenterContainer)`
+export const OfertasDoDiaContainer = styled(Container)`
 
 
 `;

@@ -12,7 +12,10 @@ export const ProductLink = styled(Link)`
     line-height: 200px;
 
     img {
-        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        display: block;
+        margin: 0 auto;
         max-height: 200px;
     }
 `;
@@ -22,7 +25,7 @@ export const ProdutoCard_ = styled.li`
     flex: 0 0 25%;
     max-width: 25%;
     padding: 10px;
-    background-color: rgb(45, 48, 49);
+    background-color: white;
     border-color: rgba(202, 188, 168, 0.13);
     padding-bottom: 25px;
     animation: fadein 1s;
@@ -31,7 +34,7 @@ export const ProdutoCard_ = styled.li`
     display: flex;
     flex-direction: column;
     word-wrap: break-word;
-    background-color: #fff;
+    background-color: white;
     background-clip: border-box;
     border: 1px solid rgba(0, 0, 0, 0.125);
     border-radius: 0.25rem;

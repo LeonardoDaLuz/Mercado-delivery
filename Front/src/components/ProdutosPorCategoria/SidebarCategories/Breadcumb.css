@@ -1,0 +1,29 @@
+
+.breadcumb {
+    display: inline-block;
+    font-weight: 700;
+    font-size: 14px;
+  /*  margin: 20px 0px 0px 0px;*/
+}
+
+
+.breadcumb ul {
+margin-bottom: 5px;
+}
+
+.breadcumb li {
+    display: inline;
+    margin: 0 5px 0 5px;
+}
+
+.breadcumb li a {
+    color: rgb(1, 155, 1);
+}
+
+.breadcumb li:not(:first-child)::before {
+    content: ">";
+    font-weight: 1000;
+    left: -5px;
+    position: relative;
+    color: rgb(0, 0, 0);
+}
