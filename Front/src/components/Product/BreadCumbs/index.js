@@ -11,7 +11,7 @@ function BreadCumbs_({ product, reiniciaListaDeProdutos }) {
     var CategoriesList = categories.map(function (category, index) {
         let sliced = categories.slice(0, index + 1);
 
-        let path = '/produtos/' + sliced.join('/');
+        let path = '/SearchProducts/' + sliced.join('/');
         return (
             <li key={index}>
                 <Link to={path}>{category}</Link>
@@ -22,7 +22,7 @@ function BreadCumbs_({ product, reiniciaListaDeProdutos }) {
     return (
         <BreadcumbNav aria-label="breadcrumb">
             <ol>
-                <li><Link to='/produtos'>Todos</Link></li>
+                <li><Link to='/SearchProducts'>Todos</Link></li>
                 {CategoriesList}
             </ol>
         </BreadcumbNav>

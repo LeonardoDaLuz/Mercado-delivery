@@ -3,7 +3,7 @@ import { useHistory, withRouter } from "react-router-dom";
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import SidebarCategories from './SidebarCategories';
-import ProdutoCard from './ProdutoCard';
+import ProductCard from './ProductCard';
 import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
 
 import { Container, ListaDeProdutos } from './styles';
@@ -13,7 +13,7 @@ import { carregaMaisProdutos, reiniciaListaDeProdutos } from '../../store/action
 import { combinePathWithQuery } from '../../utils/combinePathWithQuery';
 
 
-function ProdutosPorCategoria({ produtos, carregaMaisProdutos, location, history }) {
+function SearchProduct({ produtos, carregaMaisProdutos, location, history }) {
 
 
     let query = location.search;
@@ -39,7 +39,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, location, history
         while (listaDeProdutosElem.current.clientHeight < window.innerHeight && tries > 0) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
 
             tries--;
-            await carregaMaisProdutos(path, query, 12);
+            await carregaMaisProdutos(path, query, 12); //Aqui, o location.pathname é usado pois este path é usado na especificação da busca na api.
             await window.waitForSeconds(0.5);
         }
 
@@ -57,7 +57,7 @@ function ProdutosPorCategoria({ produtos, carregaMaisProdutos, location, history
     }
 
     let produtoCards = produtos.map((p, index) => {
-        return <ProdutoCard produto={p} key={index} />
+        return <ProductCard product={p} key={index} />
     })
 
 
@@ -84,5 +84,5 @@ const mapStateToProps = store => ({
 const mapDispatchToProps = dispatch =>
     bindActionCreators({ carregaMaisProdutos, reiniciaListaDeProdutos }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(withRouter(ProdutosPorCategoria));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchProduct));
 

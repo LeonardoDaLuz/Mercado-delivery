@@ -36,7 +36,7 @@ function ProductCard__({ product, adicionarProdutoAoCarrinho }) {
         <ProdutoCard_>
 
 
-            <ProductLink to={'/produto2/' + product._id}>
+            <ProductLink to={'/product/' + product._id}>
                 <img src={configs.imgsPath + product.imgs[0]} />
             </ProductLink>
 

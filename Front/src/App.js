@@ -10,12 +10,10 @@ import {
 import Header from './components/Header';
 import BarraCategorias from './components/BarraCategorias';
 import Sidebar from './components/Sidebar';
-import Produto from './components/Produto';
-import Produtos from './components/Produtos';
-import ProdutosPorCategoria from './components/ProdutosPorCategoria';
+import Product from './components/Product';
+import SearchProducts from './components/SearchProducts';
 import Footer from './components/Footer';
 import { CategoryManager  } from './components/CategoryManager';
-import Loja from './classes/Loja';
 import { Home } from "./components/Home";
 import { CarouselManager } from "./components/CarouselManager";
 
@@ -43,23 +41,14 @@ export default withRouter(class App extends Component {
             <Route exact path="/" >
               <Home />
             </Route>
-            <Route exact path="/produto2/:id" >
-              <Produto loja={this.loja} />
-            </Route>
             <Route exact path="/product/:id" >
-              <Produto />
+              <Product />
             </Route>
             <Route exact path="/editProduct/:id" >
               <EditProduct />
             </Route>
-            <Route exact path="/produtos/all" >
-              <Produtos loja={this.loja} />
-            </Route>
-            <Route path="/produtos/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
-              <ProdutosPorCategoria loja={this.loja} />
-            </Route>
-            <Route path="/products/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
-              <ProdutosPorCategoria loja={this.loja} />
+            <Route path="/SearchProducts/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
+              <SearchProducts />
             </Route>
             <Route path="/CategoryManager" >
               <CategoryManager />

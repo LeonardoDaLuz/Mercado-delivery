@@ -60,7 +60,7 @@ function SidebarCategories({ loadCategories, carregaMaisProdutos, categories, lo
         //splitedPath.pop();
         let ultimaCategoria = splitedPath.pop();
 
-        ultimaCategoria = ultimaCategoria == "produtos" || ultimaCategoria == "products" ? "Todos" : ultimaCategoria;
+        ultimaCategoria = ultimaCategoria == "SearchProducts" ? "Todos" : ultimaCategoria;
 
         return {
             ultimaCategoria,

@@ -11,24 +11,24 @@ import { quantosDesseForamAdicionadosAoCarrinho } from '../../../store/analyzers
 import assets from '../../../assets';
 import { OfferTagSVG3 } from './OfferTagSvg3';
 
-function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
+function ProdutoCard({ product, adicionarProdutoAoCarrinho, index }) {
 
-    let addedQuantity = quantosDesseForamAdicionadosAoCarrinho(produto._id);
+    let addedQuantity = quantosDesseForamAdicionadosAoCarrinho(product._id);
 
-    function RemoverDoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, -1); animarAdicao(e, -1) }
+    function RemoverDoCarrinho(e) { adicionarProdutoAoCarrinho(product._id, -1); animarAdicao(e, -1) }
 
-    function AdicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(produto._id, 1); animarAdicao(e) }
+    function AdicionarAoCarrinho(e) { adicionarProdutoAoCarrinho(product._id, 1); animarAdicao(e) }
 
-    let offerEnabled = produto.offer.enabled;
+    let offerEnabled = product.offer.enabled;
 
     let now = new Date();
-    let offerStarts = new Date(produto.offer.time_range.starts);
-    let offerEnds = new Date(produto.offer.time_range.ends);
+    let offerStarts = new Date(product.offer.time_range.starts);
+    let offerEnds = new Date(product.offer.time_range.ends);
 
     if (isNaN(offerStarts.getTime()) ||
         isNaN(offerEnds.getTime()) ||
         !(now.getTime() > offerStarts.getTime() && now.getTime() < offerEnds.getTime()) ||
-        produto.price < produto.offer.off_price
+        product.price < product.offer.off_price
     ) {
         offerEnabled = false;
     }
@@ -37,25 +37,25 @@ function ProdutoCard({ produto, adicionarProdutoAoCarrinho, index }) {
     return (
         <ProdutoCard_ key={index}>
 
-            <ProductLink to={'/produto2/' + produto._id}>
-                <img src={configs.imgsPath + produto.imgs[0]} />
+            <ProductLink to={'/product/' + product._id}>
+                <img src={configs.imgsPath + product.imgs[0]} />
             </ProductLink>
-            <h5>{produto.title}</h5>
+            <h5>{product.title}</h5>
             {offerEnabled &&
                 <Row>
-                    {produto.offer.enabled &&
-                        <OfferTagSVG3 product={produto} />
+                    {product.offer.enabled &&
+                        <OfferTagSVG3 product={product} />
                     }
 
                     <OffPrice>
-                        <div>R$ {(produto.price).toFixed(2).replace('.', ',')}</div>
-                        <div>{produto.offer.off_price.toFixed(2).replace('.', ',')}</div>
+                        <div>R$ {(product.price).toFixed(2).replace('.', ',')}</div>
+                        <div>{product.offer.off_price.toFixed(2).replace('.', ',')}</div>
                     </OffPrice>
                 </Row>
             }
             {!offerEnabled && //casos em que o preço em oferta for maior que o preço normal, exibirá o preço normal, como se não houvesse oferta
                 <Price>
-                    <div>{produto.price.toFixed(2).replace('.', ',')}</div>
+                    <div>{product.price.toFixed(2).replace('.', ',')}</div>
                 </Price>
             }
             <AdicionarRemoverDoCarrinho>

@@ -1,6 +1,6 @@
 import configs from '@configs';
 import { useState } from 'react';
-import { PhotoFrame_, ImageViewer, ImageSelector, SlickLightBoxContainer, Center, BlackBackground, MobileView } from '../../Produto/PhotoFrame/style';
+import { PhotoFrame_, ImageViewer, ImageSelector, SlickLightBoxContainer, Center, BlackBackground, MobileView } from './style';
 
 
 import "slick-carousel/slick/slick.css";

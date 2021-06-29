@@ -54,7 +54,7 @@ function BreadCumbsSelector_({ draftProduct, carregaCategorias, categories, chan
     return (
         <BreadcumbNav aria-label="breadcrumb">
             <ol>
-                <li><Link to='/produtos'>Todos</Link></li>
+                <li><Link to='/SearchProducts'>Todos</Link></li>
                 {CategoriesSelectors}
             </ol>
         </BreadcumbNav>
