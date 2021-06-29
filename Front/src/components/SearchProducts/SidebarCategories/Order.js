@@ -3,7 +3,7 @@ import { withRouter, useHistory } from "react-router-dom";
 import { Input } from '../../../globalStyleds';
 import { OrdemSelectForm } from './styles';
 import { filtraFloat } from '../../../utils/InputFilters';
-import { carregaMaisProdutos } from '../../../store/actions/produtos';
+import { loadMoreProducts } from '../../../store/actions/products';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -32,6 +32,6 @@ function Order_({ location, carregaMaisProdutos }) {
 };
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ carregaMaisProdutos }, dispatch)
+    bindActionCreators({ carregaMaisProdutos: loadMoreProducts }, dispatch)
 
 export const Order = connect(null, mapDispatchToProps)(withRouter(Order_));

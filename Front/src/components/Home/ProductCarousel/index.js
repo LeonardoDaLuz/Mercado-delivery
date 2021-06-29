@@ -7,13 +7,13 @@ import { CenterContainer } from "../../../globalStyleds";
 import { loadHome } from '@actions/home';
 import Slider from 'react-slick';
 import { ProductCard } from "./ProductCard";
-import { carregaMaisProdutos } from '@actions/produtos';
+import { loadMoreProducts } from '@actions/products';
 import { combinePathWithQuery } from "../../../utils/combinePathWithQuery";
 
-function ProductCarousel_({ title, produtos, path, query, carregaMaisProdutos }) {
+function ProductCarousel_({ title, produtos, path, query, loadMoreProducts }) {
 
     useEffect(() => {
-        carregaMaisProdutos(path, query, 12);
+        loadMoreProducts(path, query, 12);
     }, [])
 
     produtos = produtos[combinePathWithQuery(path, query)];
@@ -50,10 +50,10 @@ function ProductCarousel_({ title, produtos, path, query, carregaMaisProdutos })
 
 
 const mapStateToProps = (store) => ({
-    produtos: store.produtos
+    produtos: store.products
 })
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ carregaMaisProdutos }, dispatch)
+    bindActionCreators({ loadMoreProducts }, dispatch)
 
 export const ProductCarousel = connect(mapStateToProps, mapDispatchToProps)(ProductCarousel_);

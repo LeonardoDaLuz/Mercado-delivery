@@ -4,12 +4,12 @@ import { connect } from 'react-redux';
 import React, { useEffect } from 'react'
 
 import { BuyFrameContainer, LikeButton, ButtonIncreaseDecrease, BotaoAzul, BotaoVerde, BlocoPreco, BlocoCalcularFrete, BlocoQuantidade } from './styles';
-import { likeProduto } from '@actions/produto';
+import { likeProduct } from '@actions/product';
 import { carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho, adicionarProdutoAoCarrinho } from '@actions/carrinho';
 import { quantosDesseForamAdicionadosAoCarrinho , custoTotalNoCarrinho } from '@analyzers/carrinho';
 import { Col, Row } from '../../../globalStyleds';
 
-function BuyFrame({ product, likeProduto, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho }) {
+function BuyFrame({ product, likeProduct, adicionarProdutoAoCarrinho, editarQuantidadeDoProdutoAoCarrinho }) {
 
     let addedQuantity = quantosDesseForamAdicionadosAoCarrinho(product._id);
     let liked = product.likes !== undefined && product.likes.includes(0);
@@ -29,7 +29,7 @@ function BuyFrame({ product, likeProduto, adicionarProdutoAoCarrinho, editarQuan
         <BuyFrameContainer>
             <Row>
                 <h1>{product.title}   </h1>
-                <LikeButton className={liked} onClick={() => likeProduto(product._id)}>♥</LikeButton>
+                <LikeButton className={liked} onClick={() => likeProduct(product._id)}>♥</LikeButton>
             </Row>
             <Row>
                 <BlocoQuantidade>
@@ -71,7 +71,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ likeProduto, adicionarProdutoAoCarrinho, carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho }, dispatch);
+    bindActionCreators({ likeProduct, adicionarProdutoAoCarrinho, carregarCarrinho, editarQuantidadeDoProdutoAoCarrinho }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(BuyFrame);

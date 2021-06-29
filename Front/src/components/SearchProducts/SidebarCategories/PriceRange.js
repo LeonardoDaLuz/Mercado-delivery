@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { withRouter, useHistory } from "react-router-dom";
 import { Input } from '@globalStyleds';
 import { FaixaDePrecoForm } from './styles';
-import { carregaMaisProdutos } from '@actions/produtos';
+import { loadMoreProducts } from '@actions/products';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
@@ -47,7 +47,7 @@ function PriceRange_({ location, carregaMaisProdutos }) {
 };
 
 const mapDispatchToProps = (dispatch) =>
-    bindActionCreators({ carregaMaisProdutos }, dispatch)
+    bindActionCreators({ carregaMaisProdutos: loadMoreProducts }, dispatch)
 
 export const PriceRange = connect(null, mapDispatchToProps)(withRouter(PriceRange_));
 

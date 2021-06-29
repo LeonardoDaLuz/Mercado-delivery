@@ -17,7 +17,7 @@ const initialState = {
     mainSearch: [],
 };
 
-const produtos = produce((draftState, action) => {
+const products = produce((draftState, action) => {
     switch (action.type) {
         case CARREGA_MAIS_PRODUTOS_SUCCESS:
             let previous = draftState[action.path + action.query];
@@ -35,4 +35,4 @@ const produtos = produce((draftState, action) => {
     }
 }, initialState);
 
-export default produtos;
+export default products;

@@ -9,8 +9,8 @@ import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
 //Others
-import { carregaProduto, updateProduct } from '@actions/produto'
-import { resetProductList } from '../../store/actions/produtos';
+import { loadProduct, updateProduct } from '@actions/product'
+import { resetProductList } from '../../store/actions/products';
 import produce from 'immer';
 import { useFormik } from 'formik';
 import { LogRender } from '@utils/logRender';
@@ -20,7 +20,7 @@ import { colorTheme } from '../../theme';
 import { Options  } from './Options';
 //import './style.css';
 
-function EditProduct({ carregaProduto, updateProduct, produto, match, resetProductList }) {
+function EditProduct({ loadProduct, updateProduct, produto, match, resetProductList }) {
 
     const [draftProduct, setDraftProductState] = useState({
 
@@ -46,7 +46,7 @@ function EditProduct({ carregaProduto, updateProduct, produto, match, resetProdu
 
     useEffect(() => {
         setDraftStatus('Loading...');
-        carregaProduto(match.params.id);
+        loadProduct(match.params.id);
     }, []);
 
 
@@ -145,11 +145,11 @@ console.log('change');
 }
 
 const mapStateToProps = store => ({
-    produto: store.produto
+    produto: store.product
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaProduto, updateProduct, resetProductList }, dispatch);
+    bindActionCreators({ loadProduct, updateProduct, resetProductList }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(EditProduct));

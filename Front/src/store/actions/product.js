@@ -18,11 +18,11 @@ import {
 } from '../types'
 
 
-export const carregaProduto = (id, callback) => {
+export const loadProduct = (id, callback) => {
 
     return dispatch => {
         dispatch({ type: CARREGA_PRODUTO_START });
-        fetch('http://localhost:3001/produto2/' + id + "")
+        fetch('http://localhost:3001/product/' + id + "")
             .then(body => body.json())
             .then(data => {
                 console.log("PRODUTO CARREGADO PELO REDUX");
@@ -35,7 +35,7 @@ export const carregaProduto = (id, callback) => {
     }
 }
 
-export const likeProduto = (id) => {
+export const likeProduct = (id) => {
 
     return dispatch => {
         dispatch({ type: LIKE_PRODUTO_START });
@@ -55,7 +55,7 @@ export const updateProduct = (editedProduct, callBackOnSuccess, callbackOnFail) 
 
         dispatch({ type: UPDATE_PRODUCT_START });
 
-        const url = 'http://localhost:3001/produto2/' + editedProduct._id;
+        const url = 'http://localhost:3001/product/' + editedProduct._id;
 
         let response = await fetch(url, {
             method: 'POST',
@@ -95,7 +95,7 @@ export const deleteProduct = (product, callBackOnSuccess, callbackOnFail) => {
 
         dispatch({ type: DELETE_PRODUCT_START });
 
-        const url = 'http://localhost:3001/produto/' + product._id;
+        const url = 'http://localhost:3001/product/' + product._id;
 
         let response = await fetch(url, { method: 'DELETE' });
 

@@ -10,15 +10,15 @@ import { PhotoFrame } from './PhotoFrame';
 import BuyFrame from './BuyFrame';
 import { ProductDescription } from './ProductDescription';
 //Others
-import { carregaProduto, deleteProduct } from '@actions/produto'
+import { loadProduct, deleteProduct } from '@actions/product'
 //import './style.css';
 import { Container, Row } from '../../globalStyleds';
 import { LogRender } from '../../utils/logRender';
 
-function Produto({ carregaProduto, produto, loja, match }) {
+function Produto({ loadProduct, produto, loja, match }) {
 
     useEffect(() => {
-        carregaProduto(match.params.id);
+        loadProduct(match.params.id);
     }, []);
 
     //LogRender({ produto }, "Produto");
@@ -40,11 +40,11 @@ function Produto({ carregaProduto, produto, loja, match }) {
 }
 
 const mapStateToProps = store => ({
-    produto: store.produto
+    produto: store.product
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaProduto, deleteProduct }, dispatch);
+    bindActionCreators({ loadProduct, deleteProduct }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Produto));

@@ -19,7 +19,7 @@ const initialState = {
 
 };
 
-const produto = (state = initialState, action) => {
+const product = (state = initialState, action) => {
     switch (action.type) {
         case CARREGA_PRODUTO_SUCCESS:
             return { ...action.payload };
@@ -32,4 +32,4 @@ const produto = (state = initialState, action) => {
     }
 }
 
-export default produto;
+export default product;

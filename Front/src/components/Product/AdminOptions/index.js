@@ -2,7 +2,7 @@
 import { AdminOptions_ } from "./styles";
 import { EditButton, DeleteButton } from "./styles";
 import assets from "../../../assets";
-import { deleteProduct } from "../../../store/actions/produto";
+import { deleteProduct } from "../../../store/actions/product";
 import { useHistory } from "react-router";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";

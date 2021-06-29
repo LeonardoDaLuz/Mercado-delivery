@@ -16,19 +16,13 @@ module.exports = (app) => {
     
     app.get("/SearchProducts/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/:to", ProductsController.listProducts);
 
-    app.put("/produto/", ProductsController.updateProduct);
+    app.get("/product/:id", ProductsController.getProduct);
 
-    app.get("/produto/:id", ProductsController.getProduct);    
+    app.delete("/product/:id", ProductsController.deleteProduct);
+
+    app.post("/product/:id", ProductsController.updateProduct);
     
-    app.put("/produto/:id", ProductsController.updateProduct);
-
-    app.delete("/produto/:id", ProductsController.deleteProduct);
-
-    app.get("/produto2/:id", ProductsController.getProduct2);
-
-    app.post("/produto2/:id", ProductsController.updateProduct);
-    
-    app.put("/produto2/:id", ProductsController.updateProduct);
+    app.put("/product/:id", ProductsController.updateProduct);
     
     app.post('/like/:conta/:objId', async (req, res) => {
 

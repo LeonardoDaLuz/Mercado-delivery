@@ -9,18 +9,18 @@ import { Row, Col, ButtonOutline, HorizontalFlexList_Lg } from '@globalStyleds';
 import { Container, ListaDeProdutos } from './styles';
 import assets from '@assets';
 import './style.css';
-import { carregaMaisProdutos, reiniciaListaDeProdutos } from '../../store/actions/produtos';
+import { loadMoreProducts, reloadProductList } from '../../store/actions/products';
 import { combinePathWithQuery } from '../../utils/combinePathWithQuery';
 
 
-function SearchProduct({ produtos, carregaMaisProdutos, location, history }) {
+function SearchProduct({ products, loadMoreProducts, location, history }) {
 
 
     let query = location.search;
     let path = location.pathname;
 
-    produtos = produtos[combinePathWithQuery(path, query)];
-    produtos = produtos === undefined ? [] : produtos;
+    products = products[combinePathWithQuery(path, query)];
+    products = products === undefined ? [] : products;
 
     const listaDeProdutosElem = useRef(null);
 
@@ -39,7 +39,7 @@ function SearchProduct({ produtos, carregaMaisProdutos, location, history }) {
         while (listaDeProdutosElem.current.clientHeight < window.innerHeight && tries > 0) { //Faz com que mais produtos sejam carregados até que preencha a tela toda.
 
             tries--;
-            await carregaMaisProdutos(path, query, 12); //Aqui, o location.pathname é usado pois este path é usado na especificação da busca na api.
+            await loadMoreProducts(path, query, 12); //Aqui, o location.pathname é usado pois este path é usado na especificação da busca na api.
             await window.waitForSeconds(0.5);
         }
 
@@ -52,11 +52,11 @@ function SearchProduct({ produtos, carregaMaisProdutos, location, history }) {
 
     async function infiniteLoadOnScroll(e) { //carrega mais produtos a medida que dá scroll (infinite loader)
         if (window.pageYOffset > document.body.clientHeight - window.innerHeight - 600) {
-            await carregaMaisProdutos(path, query, 12);
+            await loadMoreProducts(path, query, 12);
         }
     }
 
-    let produtoCards = produtos.map((p, index) => {
+    let produtoCards = products.map((p, index) => {
         return <ProductCard product={p} key={index} />
     })
 
@@ -77,12 +77,12 @@ function SearchProduct({ produtos, carregaMaisProdutos, location, history }) {
 
 
 const mapStateToProps = store => ({
-    produtos: store.produtos
+    products: store.products
 })
 
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ carregaMaisProdutos, reiniciaListaDeProdutos }, dispatch);
+    bindActionCreators({ loadMoreProducts, reloadProductList }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SearchProduct));
 

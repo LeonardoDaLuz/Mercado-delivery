@@ -1,10 +1,10 @@
 import { Link, withRouter } from "react-router-dom"
 import { BreadcumbNav } from "./styles";
-import { reiniciaListaDeProdutos } from '@actions/produtos';
+import { reloadProductList as reloadProductList } from '@actions/products';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-function BreadCumbs_({ product, reiniciaListaDeProdutos }) {
+function BreadCumbs_({ product  }) {
 
     let categories = product.categories;
 
@@ -30,6 +30,6 @@ function BreadCumbs_({ product, reiniciaListaDeProdutos }) {
 }
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ reiniciaListaDeProdutos }, dispatch);
+    bindActionCreators({  }, dispatch);
 
 export const BreadCumbs = connect(null, mapDispatchToProps)(withRouter(BreadCumbs_));

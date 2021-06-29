@@ -1,7 +1,7 @@
 import { Options_ } from "./styles";
 import { ButtonFlat } from "../../../globalStyleds";
 import { colorTheme } from "../../../theme";
-import { deleteProduct } from "../../../store/actions/produto";
+import { deleteProduct } from "../../../store/actions/product";
 import { useHistory } from "react-router";
 import { connect } from 'react-redux';
 import { bindActionCreators } from "redux";

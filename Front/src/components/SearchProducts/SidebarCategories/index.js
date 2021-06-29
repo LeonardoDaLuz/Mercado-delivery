@@ -11,7 +11,7 @@ import Breadcumbs from "./Breadcumb";
 import { CategoriasAside, FaixaDePrecoForm, ListaCategorias } from './styles';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { carregaMaisProdutos } from '../../../store/actions/produtos';
+import { loadMoreProducts } from '../../../store/actions/products';
 import { filtraFloat } from '../../../utils/InputFilters';
 import { PriceRange } from './PriceRange';
 import { Order } from './Order';
@@ -94,7 +94,7 @@ const mapStateToProps = store => ({
 })
 
 const mapDispatchToProps = dispatch =>
-    bindActionCreators({ loadCategories, carregaMaisProdutos }, dispatch);
+    bindActionCreators({ loadCategories, carregaMaisProdutos: loadMoreProducts }, dispatch);
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SidebarCategories));

@@ -8,7 +8,7 @@ import {
 
 
 
-export const carregaMaisProdutos = (path, query, quantity) => {
+export const loadMoreProducts = (path, query, quantity) => {
     return async (dispatch, getState) => {
         //se usar o location.search ou o URLSearchParams ele começa ou não com '?', então este trecho normaliza esta diferença.
 
@@ -26,7 +26,7 @@ export const carregaMaisProdutos = (path, query, quantity) => {
         if (!query.startsWith('?'))
             query = '?' + query;
 
-        let produtos = getState().produtos[path + query];
+        let produtos = getState().products[path + query];
 
         if(produtos===undefined)
             produtos = [];
@@ -56,10 +56,10 @@ export const carregaMaisProdutos = (path, query, quantity) => {
     }
 }
 
-export const reiniciaListaDeProdutos = (path, query, quantidade) => {
+export const reloadProductList = (path, query, quantidade) => {
     return async (dispatch, getState) => {
         dispatch({ type: RESETA_LISTA_PRODUTOS });
-        dispatch(carregaMaisProdutos(path, query, quantidade));
+        dispatch(loadMoreProducts(path, query, quantidade));
     }
 }
 

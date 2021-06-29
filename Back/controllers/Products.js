@@ -82,7 +82,7 @@ class ProductsController {
     static async createOffer(req, resp) {
 
     }
-    static async getProduct(req, resp) {
+   /* static async getProduct(req, resp) {
         let produto = await global.db.getProduto(req.params.id);
 
         if (produto.imgs === undefined) //Para manter a compatibilidade entre modelos.
@@ -90,9 +90,9 @@ class ProductsController {
 
         console.log(produto)
         resp.json(produto);
-    }
+    }*/
 
-    static async getProduct2(req, resp) {
+    static async getProduct(req, resp) {
         let produto = await global.db.getProdutoPorObjId(req.params.id);
 
         if (produto.imgs === undefined)  //Para manter a compatibilidade entre modelos.
