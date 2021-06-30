@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { colorTheme } from "../../theme";
 
-export const BarraCategorias_ = styled.div `
+export const BarraCategorias_ = styled.div`
 
+flex: 0 0 auto;
     @media (max-width: 992px) {
         display: none;
     }

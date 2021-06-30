@@ -23,7 +23,7 @@ function Header_({ carregarCarrinho, history, location }) {
         let query = new URLSearchParams(location.SearchBar);
         let formData = new FormData(e.target);
         query.set('busca', formData.get('busca'));
-        history.push('/products?' + query);
+        history.push('/SearchProducts?' + query);
     }
 
     return (

@@ -13,17 +13,17 @@ import Sidebar from './components/Sidebar';
 import Product from './components/Product';
 import SearchProducts from './components/SearchProducts';
 import Footer from './components/Footer';
-import { CategoryManager  } from './components/CategoryManager';
+import { CategoryManager } from './components/CategoryManager';
 import { Home } from "./components/Home";
 import { CarouselManager } from "./components/CarouselManager";
-
+import { OfferManager } from './components/OfferManager';
 //Admin Components
 import EditProduct from './components/EditProduct';
 
 //styles
 import "normalize.css";
 //import "../node_modules/bootstrap/scss/bootstrap.scss";
-import { GlobalStyle } from "./globalStyleds";
+import { GlobalStyle, FlexColumn } from "./globalStyleds";
 
 import "./utils/fetchDelay";
 
@@ -33,8 +33,8 @@ export default withRouter(class App extends Component {
     return (
       <Router>
         <GlobalStyle />
-        <div>
-          <Header loja={this.loja} />
+        <FlexColumn>
+          <Header />
           <Sidebar tooglerId='sidebar-toogler' />
           <BarraCategorias />
           <Switch>
@@ -56,10 +56,12 @@ export default withRouter(class App extends Component {
             <Route path="/CarouselManager" >
               <CarouselManager />
             </Route>
-
+            <Route path="/OfferManager" >
+              <OfferManager />
+            </Route>
           </Switch>
           <Footer />
-        </div>
+        </FlexColumn>
       </Router >
     );
   }

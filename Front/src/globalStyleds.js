@@ -119,6 +119,11 @@ export const Container = styled.div`
     margin: 0px auto;
 `;
 
+export const FlexColumn = styled.div`
+    display: flex;
+    flex-direction: column;
+`;
+
 export const CenterContainer = styled.div`
     margin: 0 auto;
     width: 100%;

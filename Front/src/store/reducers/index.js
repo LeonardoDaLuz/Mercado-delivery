@@ -6,6 +6,7 @@ import categories from './categories';
 import carousel from './carousel';
 import account from './account';
 import home from './home';
+import offers from './offers';
 
 export default combineReducers({
     products,
@@ -14,5 +15,6 @@ export default combineReducers({
     categories,
     carousel,
     account,
-    home
+    home,
+    offers
 });

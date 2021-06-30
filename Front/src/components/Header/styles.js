@@ -37,6 +37,7 @@ button {
 `;
 
 export const Header = styled.header`
+    flex: 0 0 auto;
     position: sticky;
     top: 0;
     background-color: white;

@@ -79,9 +79,7 @@ class ProductsController {
         resp.status(200).json(slicedProductList);
     }
 
-    static async createOffer(req, resp) {
 
-    }
    /* static async getProduct(req, resp) {
         let produto = await global.db.getProduto(req.params.id);
 
