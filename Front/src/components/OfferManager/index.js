@@ -1,6 +1,6 @@
 
-import { OfferManagerContainer } from './style';
-import { Container } from '@globalStyleds';
+import { OfferManager__ } from './style';
+import { Container, ButtonFlat, Center } from '@globalStyleds';
 import { useEffect } from 'react';
 import { loadOffers } from '@actions/offer';
 import { bindActionCreators } from 'redux';
@@ -15,13 +15,13 @@ function OfferManager_({ offers, loadOffers }) {
         loadOffers();
     }, []);
     return (
-        <OfferManagerContainer>
+        <OfferManager__>
             <Container >
                 <h1>Gerenciar Ofertas</h1>
                 {offers.map((offer)=> <Offer/>)}
+                <Center><ButtonFlat>Adicionar Oferta</ButtonFlat></Center>
             </Container>
-
-        </OfferManagerContainer>
+        </OfferManager__>
     );
 }
 

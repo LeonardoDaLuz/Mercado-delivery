@@ -104,6 +104,10 @@ export const GlobalStyle = createGlobalStyle`
     }
 `;
 
+export const Body = styled.div`
+    flex: 1 0 auto;
+
+`;
 //Div especial utilitária
 export const Div = styled.div`
    ${({ ChildrenFlexGrow }) => ChildrenFlexGrow && `
@@ -145,6 +149,10 @@ export const Col = styled.div`
 export const Col3 = styled.div`
     flex: 0 0 25%;
     max-width: 25%;
+`;
+
+export const Inline_block = styled.div`
+    display: inline-block;
 `;
 
 export const Button = styled.button.attrs(({ type }) => {
@@ -233,4 +241,49 @@ export const Input = styled.input.attrs({
     type: "text"
 })`
 
+`;
+
+export const CloseButton = styled.button`
+    background-color: #ff1111;
+    position: absolute;
+    width: ${({ size = "30px" }) => size};
+    height: ${({ size = "30px" }) => size};
+    right: 5px;
+    top: 5px;
+    border: none;
+    border-radius: 50%;
+    padding: 0px;
+    margin: 0px;
+    z-index: 1;
+
+    &::after {
+
+      content:"";
+      background-color: white;
+      display: block;
+      width: 63%;
+      height: 16%;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 40%;
+      left: 19.5%;
+    }
+    &::before {
+
+      content:"";
+      background-color: white;
+      display: block;
+      position: absolute;
+      width: 63%;
+      height: 16%;
+      top: 40%;
+      left: 19.5%;
+      transform: rotate(-45deg);
+    }
+`;
+
+
+export const Center = styled.div`
+    margin: 0 auto;
+    width: fit-content;
 `;

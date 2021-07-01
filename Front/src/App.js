@@ -23,7 +23,7 @@ import EditProduct from './components/EditProduct';
 //styles
 import "normalize.css";
 //import "../node_modules/bootstrap/scss/bootstrap.scss";
-import { GlobalStyle, FlexColumn } from "./globalStyleds";
+import { GlobalStyle, FlexColumn, Body } from "./globalStyleds";
 
 import "./utils/fetchDelay";
 
@@ -33,35 +33,34 @@ export default withRouter(class App extends Component {
     return (
       <Router>
         <GlobalStyle />
-        <FlexColumn>
-          <Header />
-          <Sidebar tooglerId='sidebar-toogler' />
-          <BarraCategorias />
-          <Switch>
-            <Route exact path="/" >
-              <Home />
-            </Route>
-            <Route exact path="/product/:id" >
-              <Product />
-            </Route>
-            <Route exact path="/editProduct/:id" >
-              <EditProduct />
-            </Route>
-            <Route path="/SearchProducts/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
-              <SearchProducts />
-            </Route>
-            <Route path="/CategoryManager" >
-              <CategoryManager />
-            </Route>
-            <Route path="/CarouselManager" >
-              <CarouselManager />
-            </Route>
-            <Route path="/OfferManager" >
-              <OfferManager />
-            </Route>
-          </Switch>
-          <Footer />
-        </FlexColumn>
+
+        <Header />
+        <Sidebar tooglerId='sidebar-toogler' />
+        <BarraCategorias />
+        <Switch>
+          <Route exact path="/" >
+            <Home />
+          </Route>
+          <Route exact path="/product/:id" >
+            <Product />
+          </Route>
+          <Route exact path="/editProduct/:id" >
+            <EditProduct />
+          </Route>
+          <Route path="/SearchProducts/:cat1?/:cat2?/:cat3?/:cat4?/:cat5?/" >
+            <SearchProducts />
+          </Route>
+          <Route path="/CategoryManager" >
+            <CategoryManager />
+          </Route>
+          <Route path="/CarouselManager" >
+            <CarouselManager />
+          </Route>
+          <Route path="/OfferManager" >
+            <OfferManager />
+          </Route>
+        </Switch>
+        <Footer />
       </Router >
     );
   }
