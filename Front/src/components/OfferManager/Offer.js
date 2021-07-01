@@ -21,21 +21,20 @@ export const Offer = () => {
                 <label for="endDate">Data de fim:</label>
                 <input type='date' id='endDate' name='endDate'></input>
             </div>
-        </Row>
-        <div>
-            <Inline_block>
+
+            <div style={{flexGrow: 0}}>
                 <label for="thumbnail">Thumbnail:</label>
                 <ImgInput>
                     <img src={assets.imagePlaceholder} width='200px'></img>
                 </ImgInput>
-            </Inline_block>
-            <Inline_block>
+            </div>
+            <div style={{flexGrow: 0}}>
                 <label for="banner">Banner:</label>
                 <ImgInput>
-                <img src={assets.imagePlaceholder} width='200px'></img>
+                    <img src={assets.imagePlaceholder} width='200px'></img>
                 </ImgInput>
-            </Inline_block>
-        </div>
+            </div>
+        </Row>
         <CloseButton size='30px' />
     </Offer_>
 }

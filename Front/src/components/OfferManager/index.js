@@ -34,4 +34,4 @@ const mapDispatchToProps = dispatch =>
 
 
 
-export const OfferManager = connect(mapStateToProps, mapDispatchToProps)(withRouter(OfferManager_));;
+export const OfferManager = connect(mapStateToProps, mapDispatchToProps)(withRouter(OfferManager_));

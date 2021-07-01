@@ -27,7 +27,6 @@ export const Offer_ = styled.div`
         border-radius: 5px;
     }
 
-
     label {
         display: block;
     }
