@@ -4,46 +4,36 @@ const waitForSeconds = require('../utilities/waitForSeconds');
 class OfferController {
 
 
-    static async updateOrCreateOffer(req, resp) {
+    static async saveOffers(req, resp) {
 
-        let receivedOffer = req.body;
+        let receivedOffers = req.body;
 
-        if (Object.keys(receivedOffer).length === 0) {
+        if (Object.keys(receivedOffers.list).length === 0) {
             resp.status(400).send('error, missing body')
             return;
         }
 
-        let filteredOffer = {
-            name: receivedOffer.name,
-            description: receivedOffer.description,
-            start_time: receivedOffer.start_time,
-            end_time: receivedOffer.end_time,
-            thumbnail: receivedOffer.thumbnail,
-            banner: receivedOffer.banner
+        let filteredOffers = {
+            list: receivedOffers.list.map(offer => {
+                return {
+                    name: offer.name,
+                    description: offer.description,
+                    start_time: offer.start_time,
+                    end_time: offer.end_time,
+                    thumbnail: offer.thumbnail,
+                    banner: offer.banner
+                }
+            })
         }
 
-        let result;
+        let result = await global.conn.collection('offers').updateOne({}, { $set: filteredOffers });
 
-        if (req.params.id) {
-            result = await global.conn.collection('offers').updateOne({ _id: new ObjectId(req.params.id) }, { $set: filteredOffer });
-        }
-        else {
-            result = await global.conn.collection('offers').insertOne(filteredOffer);
-        }
-
-        console.log('result', result);
-
-        let offers = await global.conn.collection('offers').find({}).toArray();
-
-        resp.json({ result, data: offers });
-    }
-
-    static async deleteOffer(req, resp) {
-
+        resp.json({ result: result.result, data: filteredOffers });
     }
 
     static async listOffers(req, resp) {
-        let offers = await global.conn.collection('offers').find({}).toArray();
+
+        let offers = await global.conn.collection('offers').findOne({});
 
         resp.json({ data: offers });
 
