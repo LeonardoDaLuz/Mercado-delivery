@@ -79,22 +79,8 @@ class ProductsController {
         resp.status(200).json(slicedProductList);
     }
 
-
-   /* static async getProduct(req, resp) {
-        let produto = await global.db.getProduto(req.params.id);
-
-        if (produto.imgs === undefined) //Para manter a compatibilidade entre modelos.
-            produto.imgs = [produto.img];
-
-        console.log(produto)
-        resp.json(produto);
-    }*/
-
     static async getProduct(req, resp) {
         let produto = await global.db.getProdutoPorObjId(req.params.id);
-
-        if (produto.imgs === undefined)  //Para manter a compatibilidade entre modelos.
-            produto.imgs = [produto.img];
 
         if (produto)
             console.log('Loaded product: ', produto.title);
