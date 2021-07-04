@@ -1,11 +1,14 @@
-export const uploadImages = () => {
+export const uploadImages = (multiple = true) => {
     return new Promise(async function (resolve, reject) {
 
         console.log('Image Uploading...');
 
         var elemento = document.createElement("input");
         elemento.type = "file";
-        elemento.setAttribute('multiple', "");
+
+        if(multiple)
+            elemento.setAttribute('multiple', "");
+
         elemento.onchange = async (e) => {
 
             let files = e.target.files;
@@ -25,7 +28,11 @@ export const uploadImages = () => {
             if (response.ok) {
                 let data = await response.json();
                 console.log("Image Upload Success");
-                resolve(data);
+
+                if(multiple)
+                    resolve(data);
+                else
+                    resolve(data[0]);
             } else {
                 console.error("Image Upload Failure");
                 reject("Image Upload Failure");

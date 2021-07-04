@@ -1,7 +1,7 @@
 
 import { OfferManager__ } from './style';
 import { Container, ButtonFlat, Center } from '@globalStyleds';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { loadOffers, addOffer } from '@actions/offer';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -9,18 +9,13 @@ import { withRouter } from 'react-router';
 import { Offer } from './Offer';
 import { nestedPropertySeletor } from '../../utils/nestedPropertySelector';
 import { useFormik } from 'formik';
+import produce from 'immer';
+import { useChangeHandler } from '../../utils/inputChangeHandler';
 
 function OfferManager_({ offers, loadOffers, addOffer }) {
 
     const [editedOffers, setEditedOffers] = useState([]);
-
-    const formik = useFormik({
-        initialValues: offers,
-        enableReinitialize: true,
-        onSubmit: values => {
-            console.log(values);
-        }
-    })
+    const [draftStatus, setDraftStatus]= useState('unmodified');
 
     useEffect(() => {
         loadOffers();
@@ -28,18 +23,21 @@ function OfferManager_({ offers, loadOffers, addOffer }) {
 
     useEffect(() => {
         setEditedOffers(offers);
-        formik.setValues(offers);
     }, [offers]);
 
-    //const handleChange= ()
-    console.log("formik.values", formik.values);
+
+    const onSubmit = () => {
+
+    }
+
+    const changeHandler = useChangeHandler(editedOffers, setEditedOffers)
 
     return (
         <OfferManager__>
             <Container >
-                <form onSubmit={formik.handleSubmit}>
+                <form onSubmit={onSubmit}>
                     <h1>Gerenciar Ofertas</h1>
-                    {formik.values.map((offer, index) => <Offer {...{ key: index, formik, offer, index }} />)}
+                    {editedOffers.map((offer, index) => <Offer {...{ offer, index, changeHandler }} />)}
                     <Center>
                         <ButtonFlat style={{ fontSize: "20px" }} onClick={addOffer}>+ Adicionar Oferta</ButtonFlat>
                     </Center>

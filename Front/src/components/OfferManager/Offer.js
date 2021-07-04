@@ -2,35 +2,34 @@ import assets from "../../assets"
 import { Row, Inline_block, CloseButton } from "../../globalStyleds"
 import { Offer_, ImgInput } from "./style"
 import configs from '@configs';
+import { uploadImages } from "../../utils/uploadImagesToServer";
 
-export const Offer = ({ formik, offer, index }) => {
+export const Offer = ({ offer, index, changeHandler }) => {
 
-    let thumbnailUrl = formik.values[index].thumbnail ? configs.imgsPath + formik.values[index].thumbnail : assets.imagePlaceholder;
+    let thumbnailUrl = offer.thumbnail ? configs.imgsPath + offer.thumbnail : assets.imagePlaceholder;
 
     return <Offer_>
         <Row>
 
             <div>
-                {formik.values[index].thumbnail}
                 <label htmlFor="name">Nome:</label>
-                <input {...formik.getFieldProps(index + '.name')}></input>
+                <input {...changeHandler.getFieldProps(index + '.name')} />
             </div>
             <div>
                 <label htmlFor="description">Descrição (opcional):</label>
-                <input {...formik.getFieldProps(index + '.description')}></input>
+                <input {...changeHandler.getFieldProps(index + '.description')} />
             </div>
             <div>
                 <label htmlFor="startDate">Data de início:</label>
-                <input type='date'{...formik.getFieldProps(index + '.start_time')}></input>
+                <input type='date' {...changeHandler.getFieldProps(index + '.start_time')} />
             </div>
             <div>
                 <label htmlFor="endDate">Data de fim:</label>
-                <input type='date' {...formik.getFieldProps(index + '.end_time')}></input>
-
+                <input type='date' {...changeHandler.getFieldProps(index + '.end_time')} />
             </div>
             <div style={{ flexGrow: 0 }}>
                 <label htmlFor="thumbnail">Thumbnail:</label>
-                <ImgInput onClick={() => formik.values[0].thumbnail = 'porra'}>
+                <ImgInput onClick={() => { uploadImages(false).then(imageUrl => {  changeHandler.setFieldValue(index + '.thumbnail', imageUrl) }) }}>
                     <img src={thumbnailUrl} width='200px'></img>
                 </ImgInput>
             </div>
