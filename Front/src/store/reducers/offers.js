@@ -2,7 +2,8 @@ import {
     LOAD_OFFERS,
     LOAD_OFFERS_START,
     LOAD_OFFERS_SUCCESS,
-    LOAD_OFFERS_FAILURE
+    LOAD_OFFERS_FAILURE,
+    SAVE_OFFERS_SUCCESS,
 } from '../types'
 
 
@@ -13,9 +14,9 @@ const initialState = {
 const offers = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_OFFERS_SUCCESS:
-            return { data: action.payload.data }
-        case "ADD_OFFER":
-            return { data: [ ...state.data, {}] }
+            return { ...state, data: action.payload }
+        case SAVE_OFFERS_SUCCESS:
+            return { ...state, ...action.payload }
         default:
             return state;
     }

@@ -1,4 +1,10 @@
-export const uploadImages = (multiple = true) => {
+/**
+ * 
+ * @param {*} multiple Indicate if will upload multiple images
+ * @param {*} onStartUploadCallback callback that fires when the upload starts
+ * @returns 
+ */
+export const uploadImages = (multiple = true, onStartUploadCallback) => {
     return new Promise(async function (resolve, reject) {
 
         console.log('Image Uploading...');
@@ -10,6 +16,9 @@ export const uploadImages = (multiple = true) => {
             elemento.setAttribute('multiple', "");
 
         elemento.onchange = async (e) => {
+
+            if(onStartUploadCallback)
+                onStartUploadCallback();
 
             let files = e.target.files;
 
@@ -29,6 +38,7 @@ export const uploadImages = (multiple = true) => {
                 let data = await response.json();
                 console.log("Image Upload Success");
 
+                console.log('data', data);
                 if(multiple)
                     resolve(data);
                 else

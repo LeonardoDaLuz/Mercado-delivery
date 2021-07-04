@@ -3,9 +3,9 @@ import {
     LOAD_OFFERS_START,
     LOAD_OFFERS_SUCCESS,
     LOAD_OFFERS_FAILURE,
-    UPDATE_OFFER_START,
-    UPDATE_OFFER_SUCCESS,
-    UPDATE_OFFER_FAILURE,
+    SAVE_OFFERS_START,
+    SAVE_OFFERS_SUCCESS,
+    SAVE_OFFERS_FAILURE,
     DELETE_OFFER,
     DELETE_OFFER_START,
     DELETE_OFFER_SUCCESS,
@@ -21,7 +21,7 @@ export const loadOffers = (id, callback) => {
         fetch('http://localhost:3001/Offers/')
             .then(body => body.json())
             .then(data => {
-                dispatch({ type: LOAD_OFFERS_SUCCESS, payload: { data }});
+                dispatch({ type: LOAD_OFFERS_SUCCESS, payload: data });
             })
             .catch(err => {
                 dispatch({ type: LOAD_OFFERS_FAILURE, payload: err.message });
@@ -29,80 +29,33 @@ export const loadOffers = (id, callback) => {
     }
 }
 
-export const addOffer = () => {
-
-    return dispatch => {
-        dispatch({ type: "ADD_OFFER" });       
-    }
-}
-
-export const updateOffer = (editedProduct, callBackOnSuccess, callbackOnFail) => {
+export const saveOffers = (offers) => {
     return async dispatch => {
 
-        dispatch({ type: UPDATE_OFFER_START });
+        dispatch({ type: SAVE_OFFERS_START });
 
-        const url = 'http://localhost:3001/product/' + editedProduct._id;
+        const url = 'http://localhost:3001/Offers/';
 
         let response = await fetch(url, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:3000',
-
+                'Access-Control-Allow-Origin': 'http://localhost:3000'
             },
-            body: JSON.stringify(editedProduct)
+            body: JSON.stringify(offers)
         });
-        if (response.ok) {
-            let data = await response.json();
-            if (data.result && data.result.ok) {
-                dispatch({ type: UPDATE_OFFER_SUCCESS, payload: data.product });
-                if (callBackOnSuccess)
-                    callBackOnSuccess();
-            } else {
-                dispatch({ type: UPDATE_OFFER_FAILURE, payload: data.product });
-                console.error(UPDATE_OFFER_FAILURE, data.result);
-                if (callBackOnSuccess)
-                    callBackOnSuccess();
-            }
-
-        } else {
-            dispatch({ type: UPDATE_OFFER_FAILURE, payload: response.status });
-            console.error(response.status);
-            if (callbackOnFail)
-                callBackOnSuccess();
-        }
-    }
-}
-
-
-export const deleteOffer = (product, callBackOnSuccess, callbackOnFail) => {
-    return async dispatch => {
-
-        dispatch({ type: DELETE_OFFER_START });
-
-        const url = 'http://localhost:3001/product/' + product._id;
-
-        let response = await fetch(url, { method: 'DELETE' });
 
         if (response.ok) {
             let data = await response.json();
             if (data.result && data.result.ok) {
-                dispatch({ type: DELETE_OFFER_SUCCESS });
-                if (callBackOnSuccess)
-                    callBackOnSuccess();
+                dispatch({ type: SAVE_OFFERS_SUCCESS, payload: data });
             } else {
-                dispatch({ type: DELETE_OFFER_FAILURE, payload: data.product });
-                console.error(DELETE_OFFER_FAILURE, data.result);
-                if (callBackOnSuccess)
-                    callBackOnSuccess();
+                dispatch({ type: SAVE_OFFERS_FAILURE, payload: data });                
             }
 
         } else {
-            dispatch({ type: DELETE_OFFER_FAILURE, payload: response.status });
-            console.error(response.status);
-            if (callbackOnFail)
-                callBackOnSuccess();
+            dispatch({ type: SAVE_OFFERS_FAILURE, payload: response.status });
         }
     }
 }
