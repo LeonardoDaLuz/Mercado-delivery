@@ -3,6 +3,8 @@ import { Row, Inline_block, CloseButton } from "../../globalStyleds"
 import { Offer_, ImgInput, Teste } from "./style"
 import configs from '@configs';
 import { uploadImages } from "../../utils/uploadImagesToServer";
+//import { useFormik } from 'formik';
+//import * as Yup from 'yup';
 
 export const Offer = ({ index, changeHandler }) => {
 
