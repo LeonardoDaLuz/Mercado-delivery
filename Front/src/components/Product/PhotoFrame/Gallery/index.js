@@ -32,7 +32,7 @@ export function Gallery({ img, imgs, selectedImageId, setSelectedImageId, setSho
                 )}
 
                 {pushImages &&
-                    <AddImgButton onClick={(e) => { uploadImages().then(images => { pushImages(e, images) }) }} />
+                    <AddImgButton onClick={(e) => { uploadImages().then(imagesURLs => { pushImages(e, imagesURLs) }) }} />
 
                 }
 

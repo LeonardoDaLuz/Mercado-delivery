@@ -21,11 +21,18 @@ export const loadOffers = (id, callback) => {
         fetch('http://localhost:3001/Offers/')
             .then(body => body.json())
             .then(data => {
-                dispatch({ type: LOAD_OFFERS_SUCCESS, payload: data });
+                dispatch({ type: LOAD_OFFERS_SUCCESS, payload: { data }});
             })
             .catch(err => {
                 dispatch({ type: LOAD_OFFERS_FAILURE, payload: err.message });
             })
+    }
+}
+
+export const addOffer = () => {
+
+    return dispatch => {
+        dispatch({ type: "ADD_OFFER" });       
     }
 }
 

@@ -24,7 +24,7 @@ function EditProduct({ loadProduct, updateProduct, produto, match, resetProductL
 
     const [draftProduct, setDraftProductState] = useState({
 
-        title: 'teste',
+        title: '',
         categories: [],
         description: '',
         imgs: [],
@@ -59,7 +59,7 @@ function EditProduct({ loadProduct, updateProduct, produto, match, resetProductL
 
 
     const handleChanges = useCallback((e) => {
-console.log('change');
+
         setDraftStatus('modified');
         setDraftProductState(produce(draftProduct, (draftState) => {
             switch (e.target.type) {
