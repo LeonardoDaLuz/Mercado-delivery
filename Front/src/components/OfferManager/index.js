@@ -8,29 +8,39 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Offer } from './Offer';
 import { useChangeHandler } from '../../utils/inputChangeHandler';
+import user from './teste';
 
 function OfferManager_({ offers, loadOffers, saveOffers }) {
+
+    const [editedOffers, setEditedOffers] = useState(offers);
 
     useEffect(() => {
         loadOffers();
     }, []);
 
+    useEffect(() => {
+        setEditedOffers(offers);
+    }, [offers])
 
-    const changeHandler = useChangeHandler(offers)
+    usuario.name = {};
+
+
+
     return (
         <OfferManager__>
+            {JSON.stringify(usuario)}
             <Container >
                 <form>
                     <h1>Gerenciar Ofertas</h1>
-                    {changeHandler.getDraftStatus()}
-                    {changeHandler.state.map((offer, index) => <Offer key={index} {...{ index, changeHandler }} />)}
+                    {editedOffers.map((offer, index) => <Offer key={index} {...{ index, offer }} />)}
                     <Center>
-                        <ButtonFlat style={{ fontSize: "20px" }} onClick={() => changeHandler.setState([...changeHandler.state, {}])}>+ Adicionar Oferta</ButtonFlat>
+                        <ButtonFlat style={{ fontSize: "20px" }}>+ Adicionar Oferta</ButtonFlat>
                     </Center>
                     <br />
                     <Center>
-                        <ButtonFlat disabled={changeHandler.getDraftStatus()==='unchanged'} onClick={() => saveOffers(changeHandler.state)}>Salvar Alterações 3</ButtonFlat>
-                        <ButtonFlat disabled={changeHandler.getDraftStatus()==='unchanged'} onClick={() => changeHandler.discardChanges()}>Descartar Alterações</ButtonFlat>
+                        <ButtonFlat disabled={false}>Salvar Alterações 3</ButtonFlat>
+                        <ButtonFlat disabled={false}>Descartar Alterações</ButtonFlat>
+                        <ButtonFlat>is valid</ButtonFlat>
                     </Center>
                 </form>
             </Container>

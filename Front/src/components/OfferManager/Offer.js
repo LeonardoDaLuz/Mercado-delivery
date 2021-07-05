@@ -3,40 +3,60 @@ import { Row, Inline_block, CloseButton } from "../../globalStyleds"
 import { Offer_, ImgInput, Teste } from "./style"
 import configs from '@configs';
 import { uploadImages } from "../../utils/uploadImagesToServer";
+import { useFormik } from "formik";
+import { useEffect } from "react";
 //import { useFormik } from 'formik';
 //import * as Yup from 'yup';
 
-export const Offer = ({ index, changeHandler }) => {
+export const Offer = ({ offer, index, changeHandler }) => {
+
+
+    const formik = useFormik({
+        initialvalues: offer,
+        enableReinitialize: true,
+        onSubmit: values => {
+            alert(values);
+        }
+    });
+
+    useEffect(()=>{
+        formik.setValues({...offer});
+    }, [offer]);
+
+    let thumbnailUrl = formik.values?.thumbnail;
+    let bannerUrl = formik.values?.banner;
 
     return <Offer_>
+        {JSON.stringify(formik.values)}
         <Row >
+
             <div>
                 <label htmlFor="name">Nome*:</label>
-                <input {...changeHandler.getFieldProps(index + '.name')} />
+                <input {...formik.getFieldProps('name')} />
                 <span>Obrigatório</span>
             </div>
             <div>
                 <label htmlFor="description">Descrição (opcional):</label>
-                <input {...changeHandler.getFieldProps(index + '.description')} />
+                <input {...formik.getFieldProps('description')}/>
             </div>
             <div>
-                <label htmlFor="startDate">Data de início *:</label>
-                <input type='date' {...changeHandler.getFieldProps(index + '.start_time')} />
+                <label htmlFor="start_time">Data de início *:</label>
+                <input type='date' {...formik.getFieldProps('start_time')}/>
             </div>
             <div>
-                <label htmlFor="endDate">Data de fim *:</label>
-                <input type='date' {...changeHandler.getFieldProps(index + '.end_time')} />
+                <label htmlFor="end_time">Data de fim *:</label>
+                <input type='date' {...formik.getFieldProps('end_time')}/>
             </div>
             <div style={{ flexGrow: 0 }}>
                 <label htmlFor="thumbnail">Thumbnail:</label>
-                <ImgInput {...changeHandler.getFieldMeta(index + '.thumbnail')}>
-                    <img {...changeHandler.getImageFieldProps(index + '.thumbnail')} width='100%' />
+                <ImgInput >
+                    <img width='100%' src={configs.imgsPath+thumbnailUrl}/>
                 </ImgInput>
             </div>
             <div style={{ flexGrow: 0 }}>
                 <label htmlFor="banner">Banner:</label>
-                <ImgInput {...changeHandler.getFieldMeta(index + '.banner')}>
-                    <img {...changeHandler.getImageFieldProps(index + '.banner')} width='100%' />
+                <ImgInput>
+                    <img width='100%'  src={configs.imgsPath+bannerUrl}/>
                 </ImgInput>
             </div>
         </Row>
