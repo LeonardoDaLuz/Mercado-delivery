@@ -1,7 +1,7 @@
 
 import { OfferManager__ } from './style';
 import { Container, ButtonFlat, Center } from '@globalStyleds';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { loadOffers, saveOffers } from '@actions/offer';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -21,18 +21,20 @@ function OfferManager_({ offers, loadOffers, saveOffers }) {
         setEditedOffers(offers);
     }, [offers])
 
+    const allFormiksValuesRef = useRef([]);
+
     return (
         <OfferManager__>
             <Container >
                 <form>
                     <h1>Gerenciar Ofertas</h1>
-                    {editedOffers.map((offer, index) => <Offer key={index} {...{ index, offer }} />)}
-                    <Center> 
-                        <ButtonFlat style={{ fontSize: "20px" }}>+ Adicionar Oferta</ButtonFlat>
+                    {editedOffers.map((offer, index) => <Offer key={index} {...{ index, offer, allFormiksValuesRef }} />)}
+                    <Center>
+                        <ButtonFlat style={{ fontSize: "20px" }} onClick={() => setEditedOffers([...editedOffers, {}],)}>+ Adicionar Oferta</ButtonFlat>
                     </Center>
                     <br />
                     <Center>
-                        <ButtonFlat disabled={false}>Salvar Alterações 3</ButtonFlat>
+                        <ButtonFlat disabled={false} onClick={() => saveOffers(allFormiksValuesRef.current)}>Salvar Alterações 3</ButtonFlat>
                         <ButtonFlat disabled={false}>Descartar Alterações</ButtonFlat>
                         <ButtonFlat>is valid</ButtonFlat>
                     </Center>
