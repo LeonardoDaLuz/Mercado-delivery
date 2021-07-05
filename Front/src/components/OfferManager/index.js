@@ -8,7 +8,6 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Offer } from './Offer';
 import { useChangeHandler } from '../../utils/inputChangeHandler';
-import user from './teste';
 
 function OfferManager_({ offers, loadOffers, saveOffers }) {
 
@@ -22,18 +21,13 @@ function OfferManager_({ offers, loadOffers, saveOffers }) {
         setEditedOffers(offers);
     }, [offers])
 
-    usuario.name = {};
-
-
-
     return (
         <OfferManager__>
-            {JSON.stringify(usuario)}
             <Container >
                 <form>
                     <h1>Gerenciar Ofertas</h1>
                     {editedOffers.map((offer, index) => <Offer key={index} {...{ index, offer }} />)}
-                    <Center>
+                    <Center> 
                         <ButtonFlat style={{ fontSize: "20px" }}>+ Adicionar Oferta</ButtonFlat>
                     </Center>
                     <br />
