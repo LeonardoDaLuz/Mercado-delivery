@@ -4,7 +4,7 @@
  * @param {*} onStartUploadCallback callback that fires when the upload starts
  * @returns 
  */
-export const uploadImages = (multiple = true, onStartUploadCallback) => {
+export const uploadImages = (multiple: boolean = true, onStartUploadCallback: Function) => {
     return new Promise(async function (resolve, reject) {
 
         console.log('Image Uploading...');
@@ -20,13 +20,13 @@ export const uploadImages = (multiple = true, onStartUploadCallback) => {
             if(onStartUploadCallback)
                 onStartUploadCallback();
 
-            let files = e.target.files;
+            let files = (e.target as HTMLInputElement).files as FileList;
 
             const formData = new FormData();
 
             const url = 'http://localhost:3001/imageUpload/';
 
-            [...files].forEach((file, index) => formData.append('file' + index, file));
+            Array.from(files).forEach((file, index) => formData.append('file' + index, file));
 
             const config = {
                 method: 'POST',
