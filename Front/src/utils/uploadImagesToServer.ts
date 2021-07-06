@@ -5,19 +5,19 @@
  * @returns 
  */
 export const uploadImages = (multiple: boolean = true, onStartUploadCallback: Function) => {
-    return new Promise(async function (resolve, reject) {
+    return new Promise<[string] | string>(async function (resolve, reject) {
 
         console.log('Image Uploading...');
 
         var elemento = document.createElement("input");
         elemento.type = "file";
 
-        if(multiple)
+        if (multiple)
             elemento.setAttribute('multiple', "");
 
         elemento.onchange = async (e) => {
 
-            if(onStartUploadCallback)
+            if (onStartUploadCallback)
                 onStartUploadCallback();
 
             let files = (e.target as HTMLInputElement).files as FileList;
@@ -39,7 +39,7 @@ export const uploadImages = (multiple: boolean = true, onStartUploadCallback: Fu
                 console.log("Image Upload Success");
 
                 console.log('data', data);
-                if(multiple)
+                if (multiple)
                     resolve(data);
                 else
                     resolve(data[0]);

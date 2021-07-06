@@ -61,6 +61,7 @@ export const Offer = ({ offer, index,  allFormiksValuesRef }) => {
             <div style={{ flexGrow: 0 }}>
                 <label htmlFor="banner">Banner:</label>
                 <ImgInput onClick={() => {
+                  
                     uploadImages(false)
                     .then((imageUrl) => formik.setValues({ ...offer, banner: imageUrl }))
                 }}>
